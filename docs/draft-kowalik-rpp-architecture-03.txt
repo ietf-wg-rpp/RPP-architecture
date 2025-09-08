@@ -5,12 +5,12 @@
 Network Working Group                                         P. Kowalik
 Internet-Draft                                                  DENIC eG
 Intended status: Informational                                M. Wullink
-Expires: 31 December 2025                                      SIDN Labs
-                                                            29 June 2025
+Expires: 12 March 2026                                         SIDN Labs
+                                                        8 September 2025
 
 
                             RPP Architecture
-                   draft-kowalik-rpp-architecture-02
+                   draft-kowalik-rpp-architecture-03
 
 Abstract
 
@@ -47,15 +47,15 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 31 December 2025.
+   This Internet-Draft will expire on 12 March 2026.
 
 
 
 
 
-Kowalik & Wullink       Expires 31 December 2025                [Page 1]
+Kowalik & Wullink         Expires 12 March 2026                 [Page 1]
 
-Internet-Draft              rpp-architecture                   June 2025
+Internet-Draft              rpp-architecture              September 2025
 
 
 Copyright Notice
@@ -109,9 +109,9 @@ Table of Contents
 
 
 
-Kowalik & Wullink       Expires 31 December 2025                [Page 2]
+Kowalik & Wullink         Expires 12 March 2026                 [Page 2]
 
-Internet-Draft              rpp-architecture                   June 2025
+Internet-Draft              rpp-architecture              September 2025
 
 
        5.2.4.  Media Type definition . . . . . . . . . . . . . . . .  20
@@ -122,8 +122,9 @@ Internet-Draft              rpp-architecture                   June 2025
      5.4.  Extension mechanisms  . . . . . . . . . . . . . . . . . .  21
        5.4.1.  Name Management and Collision Avoidance . . . . . . .  22
    6.  Change History  . . . . . . . . . . . . . . . . . . . . . . .  23
-     6.1.  -01 to -02  . . . . . . . . . . . . . . . . . . . . . . .  23
-     6.2.  -00 to -01  . . . . . . . . . . . . . . . . . . . . . . .  24
+     6.1.  -02 to -03  . . . . . . . . . . . . . . . . . . . . . . .  23
+     6.2.  -01 to -02  . . . . . . . . . . . . . . . . . . . . . . .  23
+     6.3.  -00 to -01  . . . . . . . . . . . . . . . . . . . . . . .  24
    7.  References  . . . . . . . . . . . . . . . . . . . . . . . . .  24
      7.1.  Informational References  . . . . . . . . . . . . . . . .  24
    Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  26
@@ -164,10 +165,9 @@ Internet-Draft              rpp-architecture                   June 2025
 
 
 
-
-Kowalik & Wullink       Expires 31 December 2025                [Page 3]
+Kowalik & Wullink         Expires 12 March 2026                 [Page 3]
 
-Internet-Draft              rpp-architecture                   June 2025
+Internet-Draft              rpp-architecture              September 2025
 
 
 2.  Terminology
@@ -221,9 +221,9 @@ Internet-Draft              rpp-architecture                   June 2025
 
 
 
-Kowalik & Wullink       Expires 31 December 2025                [Page 4]
+Kowalik & Wullink         Expires 12 March 2026                 [Page 4]
 
-Internet-Draft              rpp-architecture                   June 2025
+Internet-Draft              rpp-architecture              September 2025
 
 
    *  *Domain-specific logic resides in data representations:* The
@@ -277,9 +277,9 @@ Internet-Draft              rpp-architecture                   June 2025
 
 
 
-Kowalik & Wullink       Expires 31 December 2025                [Page 5]
+Kowalik & Wullink         Expires 12 March 2026                 [Page 5]
 
-Internet-Draft              rpp-architecture                   June 2025
+Internet-Draft              rpp-architecture              September 2025
 
 
      +---------------------------------------------------------+
@@ -333,9 +333,9 @@ Internet-Draft              rpp-architecture                   June 2025
 
 
 
-Kowalik & Wullink       Expires 31 December 2025                [Page 6]
+Kowalik & Wullink         Expires 12 March 2026                 [Page 6]
 
-Internet-Draft              rpp-architecture                   June 2025
+Internet-Draft              rpp-architecture              September 2025
 
 
    *  *Uniform Interface:* HTTP methods (HEAD, GET, POST, PUT, DELETE,
@@ -389,9 +389,9 @@ Internet-Draft              rpp-architecture                   June 2025
 
 
 
-Kowalik & Wullink       Expires 31 December 2025                [Page 7]
+Kowalik & Wullink         Expires 12 March 2026                 [Page 7]
 
-Internet-Draft              rpp-architecture                   June 2025
+Internet-Draft              rpp-architecture              September 2025
 
 
    *  *RPP specific error codes and relation to HTTP error codes:*
@@ -445,9 +445,9 @@ Internet-Draft              rpp-architecture                   June 2025
 
 
 
-Kowalik & Wullink       Expires 31 December 2025                [Page 8]
+Kowalik & Wullink         Expires 12 March 2026                 [Page 8]
 
-Internet-Draft              rpp-architecture                   June 2025
+Internet-Draft              rpp-architecture              September 2025
 
 
 4.2.3.  Resource Definition Layer
@@ -501,9 +501,9 @@ Internet-Draft              rpp-architecture                   June 2025
 
 
 
-Kowalik & Wullink       Expires 31 December 2025                [Page 9]
+Kowalik & Wullink         Expires 12 March 2026                 [Page 9]
 
-Internet-Draft              rpp-architecture                   June 2025
+Internet-Draft              rpp-architecture              September 2025
 
 
    Specifications will define profiles for:
@@ -557,9 +557,9 @@ Internet-Draft              rpp-architecture                   June 2025
 
 
 
-Kowalik & Wullink       Expires 31 December 2025               [Page 10]
+Kowalik & Wullink         Expires 12 March 2026                [Page 10]
 
-Internet-Draft              rpp-architecture                   June 2025
+Internet-Draft              rpp-architecture              September 2025
 
 
    In case of HTTP Basic Authentication, one user-id is always bound to
@@ -613,9 +613,9 @@ Internet-Draft              rpp-architecture                   June 2025
 
 
 
-Kowalik & Wullink       Expires 31 December 2025               [Page 11]
+Kowalik & Wullink         Expires 12 March 2026                [Page 11]
 
-Internet-Draft              rpp-architecture                   June 2025
+Internet-Draft              rpp-architecture              September 2025
 
 
    RPP would not require all URLs to be hard wired to server's RPP root
@@ -669,9 +669,9 @@ Internet-Draft              rpp-architecture                   June 2025
 
 
 
-Kowalik & Wullink       Expires 31 December 2025               [Page 12]
+Kowalik & Wullink         Expires 12 March 2026                [Page 12]
 
-Internet-Draft              rpp-architecture                   June 2025
+Internet-Draft              rpp-architecture              September 2025
 
 
    *  *POST:* Create a new resource (e.g., registering a domain or
@@ -725,9 +725,9 @@ Internet-Draft              rpp-architecture                   June 2025
 
 
 
-Kowalik & Wullink       Expires 31 December 2025               [Page 13]
+Kowalik & Wullink         Expires 12 March 2026                [Page 13]
 
-Internet-Draft              rpp-architecture                   June 2025
+Internet-Draft              rpp-architecture              September 2025
 
 
    The typical interaction flow facilitated by the architecture is as
@@ -781,9 +781,9 @@ Internet-Draft              rpp-architecture                   June 2025
 
 
 
-Kowalik & Wullink       Expires 31 December 2025               [Page 14]
+Kowalik & Wullink         Expires 12 March 2026                [Page 14]
 
-Internet-Draft              rpp-architecture                   June 2025
+Internet-Draft              rpp-architecture              September 2025
 
 
    *  Definition of RPP-specific status codes, warnings or additional
@@ -837,9 +837,9 @@ Internet-Draft              rpp-architecture                   June 2025
 
 
 
-Kowalik & Wullink       Expires 31 December 2025               [Page 15]
+Kowalik & Wullink         Expires 12 March 2026                [Page 15]
 
-Internet-Draft              rpp-architecture                   June 2025
+Internet-Draft              rpp-architecture              September 2025
 
 
 5.1.9.  Protocol Versioning
@@ -893,9 +893,9 @@ Internet-Draft              rpp-architecture                   June 2025
 
 
 
-Kowalik & Wullink       Expires 31 December 2025               [Page 16]
+Kowalik & Wullink         Expires 12 March 2026                [Page 16]
 
-Internet-Draft              rpp-architecture                   June 2025
+Internet-Draft              rpp-architecture              September 2025
 
 
    purpose, therefore RPP would need to define custom preference and
@@ -949,9 +949,9 @@ Internet-Draft              rpp-architecture                   June 2025
 
 
 
-Kowalik & Wullink       Expires 31 December 2025               [Page 17]
+Kowalik & Wullink         Expires 12 March 2026                [Page 17]
 
-Internet-Draft              rpp-architecture                   June 2025
+Internet-Draft              rpp-architecture              September 2025
 
 
    *  Potential discovery of RPP server location, like IANA
@@ -1005,9 +1005,9 @@ Internet-Draft              rpp-architecture                   June 2025
 
 
 
-Kowalik & Wullink       Expires 31 December 2025               [Page 18]
+Kowalik & Wullink         Expires 12 March 2026                [Page 18]
 
-Internet-Draft              rpp-architecture                   June 2025
+Internet-Draft              rpp-architecture              September 2025
 
 
    Other future possibilities:
@@ -1061,9 +1061,9 @@ Internet-Draft              rpp-architecture                   June 2025
 
 
 
-Kowalik & Wullink       Expires 31 December 2025               [Page 19]
+Kowalik & Wullink         Expires 12 March 2026                [Page 19]
 
-Internet-Draft              rpp-architecture                   June 2025
+Internet-Draft              rpp-architecture              September 2025
 
 
 5.2.3.  Data Validation
@@ -1117,9 +1117,9 @@ Internet-Draft              rpp-architecture                   June 2025
 
 
 
-Kowalik & Wullink       Expires 31 December 2025               [Page 20]
+Kowalik & Wullink         Expires 12 March 2026                [Page 20]
 
-Internet-Draft              rpp-architecture                   June 2025
+Internet-Draft              rpp-architecture              September 2025
 
 
    *  Format and schema for primitive data elements or reference to
@@ -1173,9 +1173,9 @@ Internet-Draft              rpp-architecture                   June 2025
 
 
 
-Kowalik & Wullink       Expires 31 December 2025               [Page 21]
+Kowalik & Wullink         Expires 12 March 2026                [Page 21]
 
-Internet-Draft              rpp-architecture                   June 2025
+Internet-Draft              rpp-architecture              September 2025
 
 
    *  *Layered Design:* Each architectural layer (HTTP Transport, Data
@@ -1229,9 +1229,9 @@ Internet-Draft              rpp-architecture                   June 2025
 
 
 
-Kowalik & Wullink       Expires 31 December 2025               [Page 22]
+Kowalik & Wullink         Expires 12 March 2026                [Page 22]
 
-Internet-Draft              rpp-architecture                   June 2025
+Internet-Draft              rpp-architecture              September 2025
 
 
    Standardised RPP extensions MUST register their names in a dedicated
@@ -1252,7 +1252,9 @@ Internet-Draft              rpp-architecture                   June 2025
 
 6.  Change History
 
-6.1.  -01 to -02
+6.1.  -02 to -03
+
+6.2.  -01 to -02
 
    *  Added responses must contain links to relevant object to
       Section 5.1.2
@@ -1279,21 +1281,22 @@ Internet-Draft              rpp-architecture                   June 2025
    *  Add Data Validation (Section 5.2.3) section with schema language
       support for RPP to Section 5.2
 
+
+
+
+
+Kowalik & Wullink         Expires 12 March 2026                [Page 23]
+
+Internet-Draft              rpp-architecture              September 2025
+
+
    *  Added Name Management and Collision Avoidance section to
       Section 5.4.
-
-
-
-
-Kowalik & Wullink       Expires 31 December 2025               [Page 23]
-
-Internet-Draft              rpp-architecture                   June 2025
-
 
    *  Added Section about dereferenced related object representation to
       Section 5.1.11.
 
-6.2.  -00 to -01
+6.3.  -00 to -01
 
    *  Removed requirements and replaced with a reference to RPP WG
 
@@ -1332,19 +1335,21 @@ Internet-Draft              rpp-architecture                   June 2025
               BCP 69, RFC 5733, August 2009,
               <https://www.rfc-editor.org/info/rfc5733>.
 
+
+
+
+
+
+
+Kowalik & Wullink         Expires 12 March 2026                [Page 24]
+
+Internet-Draft              rpp-architecture              September 2025
+
+
    [RFC7231]  Fielding, R. and J. Reschke, "Hypertext Transfer Protocol
               (HTTP/1.1): Semantics and Content", IETF,
               DOI 10.17487/RFC7231, RFC 7231, June 2014,
               <https://www.rfc-editor.org/info/rfc7231>.
-
-
-
-
-
-Kowalik & Wullink       Expires 31 December 2025               [Page 24]
-
-Internet-Draft              rpp-architecture                   June 2025
-
 
    [REST]     "Fielding, R., "Architectural Styles and the Design of
               Network-based Software Architectures", Doctoral
@@ -1389,18 +1394,18 @@ Internet-Draft              rpp-architecture                   June 2025
               (JSON) Patch", IETF, DOI 10.17487/RFC6902, RFC 6902, April
               2013, <https://www.rfc-editor.org/info/rfc6902>.
 
+
+
+
+Kowalik & Wullink         Expires 12 March 2026                [Page 25]
+
+Internet-Draft              rpp-architecture              September 2025
+
+
    [XML]      "Bray, T., Paoli, J., Sperberg-McQueen, C., Maler, E. and
               Yergeau, F., "Extensible Markup Language (XML) 1.0 (Fifth
               Edition)", World Wide Web Consortium Recommendation REC-
               xml-20081126, November 2008, []().".
-
-
-
-
-Kowalik & Wullink       Expires 31 December 2025               [Page 25]
-
-Internet-Draft              rpp-architecture                   June 2025
-
 
    [I-D.draft-ietf-oauth-selective-disclosure-jwt]
               "Fett D., Yasuda K. and Campbell B. , "Selective
@@ -1445,17 +1450,16 @@ Authors' Addresses
    Theodor-Stern-Kai 1
    Frankfurt am Main
    Germany
+
+
+
+Kowalik & Wullink         Expires 12 March 2026                [Page 26]
+
+Internet-Draft              rpp-architecture              September 2025
+
+
    Email: pawel.kowalik@denic.de
    URI:   https://denic.de
-
-
-
-
-
-
-Kowalik & Wullink       Expires 31 December 2025               [Page 26]
-
-Internet-Draft              rpp-architecture                   June 2025
 
 
    M Wullink
@@ -1505,8 +1509,4 @@ Internet-Draft              rpp-architecture                   June 2025
 
 
 
-
-
-
-
-Kowalik & Wullink       Expires 31 December 2025               [Page 27]
+Kowalik & Wullink         Expires 12 March 2026                [Page 27]

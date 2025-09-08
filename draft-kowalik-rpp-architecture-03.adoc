@@ -170,6 +170,7 @@ It encompasses aspects such as:
 * **Data format:** Defining the specific format used to represent RPP data within the representation (e.g., JSON, XML or JWT).
 * **Media Type definition:** Defining the specific media type to be used in RPP, including any constraints on the data format and structure
 
+[[arch-layers-resource-definition-layer]]
 ==== Resource Definition Layer
 This layer defines the structure and operations for each resource type, independent of media type or representation. It ensures resources are well-defined and allows for easy extensibility and compatibility with different media types.
 
@@ -455,7 +456,7 @@ This naming mechanism ensures that new resource types, data elements, and operat
 
 * Added responses must contain links to relevant object to <<resource-addressing>> 
 * Added round trip minimisation principle to <<service-discovery>>
-* Added description of lenient versus strict request validation to <<Resource Definition Layer>>.
+* Added description of lenient versus strict request validation to <<arch-layers-resource-definition-layer>>.
 * Added description of asynchronous handling to <<http-transport-layer-overview>> and <<http-layer-details>>.
 * Added Operation Singularity to <<resource-oriented-architecture>>.
 * Added Versioning chapter to <<http-layer-details>>.
