@@ -5,12 +5,12 @@
 Network Working Group                                         P. Kowalik
 Internet-Draft                                                  DENIC eG
 Intended status: Informational                                M. Wullink
-Expires: 31 December 2025                                      SIDN Labs
-                                                            29 June 2025
+Expires: 12 March 2026                                         SIDN Labs
+                                                        8 September 2025
 
 
                             RPP Architecture
-                   draft-kowalik-rpp-architecture-02
+                   draft-kowalik-rpp-architecture-03
 
 Abstract
 
@@ -47,7 +47,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 31 December 2025.
+   This Internet-Draft will expire on 12 March 2026.
 
 Copyright Notice
 
@@ -105,8 +105,9 @@ Table of Contents
      5.4.  Extension mechanisms
        5.4.1.  Name Management and Collision Avoidance
    6.  Change History
-     6.1.  -01 to -02
-     6.2.  -00 to -01
+     6.1.  -02 to -03
+     6.2.  -01 to -02
+     6.3.  -00 to -01
    7.  References
      7.1.  Informational References
    Authors' Addresses
@@ -1025,7 +1026,9 @@ Table of Contents
 
 6.  Change History
 
-6.1.  -01 to -02
+6.1.  -02 to -03
+
+6.2.  -01 to -02
 
    *  Added responses must contain links to relevant object to
       Section 5.1.2
@@ -1058,7 +1061,7 @@ Table of Contents
    *  Added Section about dereferenced related object representation to
       Section 5.1.11.
 
-6.2.  -00 to -01
+6.3.  -00 to -01
 
    *  Removed requirements and replaced with a reference to RPP WG
 

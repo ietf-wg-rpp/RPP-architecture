@@ -28,11 +28,28 @@ fi
 
 cd ./docs
 
+# Remove the xml file if it exists
+if [ -f "../$filename.rfc.xml" ]; then
+    rm "../$filename.rfc.xml"
+fi
+
 # Run the metanorma command
 metanorma -t ietf "../$filename.adoc"
 
-# Rename and update the xml file
+# Check if the .xml file was created
+if [ ! -f "../$filename.rfc.xml" ]; then
+    echo "Error: File $filename.xml was not generated. Abort." >&2
+    exit 1
+fi
+
+# Move the xml file
 mv "../$filename.rfc.xml" "$filename.xml"
+# Clean up not needed files
+rm "../$filename.txt" 2>/dev/null || true
+rm "../$filename.html" 2>/dev/null || true
+rm "../$filename.asciidoc.log.txt" 2>/dev/null || true
+rm "../$filename.err.html" 2>/dev/null || true
+rm "../$filename.rfc.xml.err" 2>/dev/null || true
 
 # Fixup content
 sed -i 's|<stream>Legacy</stream>|<stream>IETF</stream>|g' "$filename.xml"
