@@ -5,8 +5,8 @@
 Network Working Group                                         P. Kowalik
 Internet-Draft                                                  DENIC eG
 Intended status: Informational                                M. Wullink
-Expires: 12 March 2026                                         SIDN Labs
-                                                        8 September 2025
+Expires: 13 March 2026                                         SIDN Labs
+                                                        9 September 2025
 
 
                             RPP Architecture
@@ -47,7 +47,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 12 March 2026.
+   This Internet-Draft will expire on 13 March 2026.
 
 Copyright Notice
 
@@ -996,6 +996,14 @@ Table of Contents
    *  *Status codes:* New RPP status codes can be defined and registered
       including their mapping to HTTP status codes.
 
+   RPP shall facilitate standardisation and reuse by requiring that
+   extensions be registered with IANA.  These registration requirements
+   shall be fine-grained, applying independently to protocol elements
+   such as resource types, data elements, operations, and status codes.
+   This approach promotes consistency and interoperability, avoids
+   fragmentation from conflicting definitions, and allows protocol
+   elements to evolve independently.
+
    These extensibility mechanisms ensure that RPP can evolve to meet
    future requirements, integrate with emerging technologies, and
    support a wide range of provisioning scenarios while maintaining
@@ -1027,6 +1035,9 @@ Table of Contents
 6.  Change History
 
 6.1.  -02 to -03
+
+   *  Added paragraph on promotion of standard extensions to
+      Section 5.4.
 
 6.2.  -01 to -02
 
