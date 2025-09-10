@@ -452,6 +452,8 @@ This naming mechanism ensures that new resource types, data elements, and operat
 
 === -02 to -03
 
+* Fixed broken references to non-RFC documents
+
 === -01 to -02
 
 * Added responses must contain links to relevant object to <<resource-addressing>> 
@@ -486,7 +488,6 @@ This naming mechanism ensures that new resource types, data elements, and operat
 * [[[RFC5732, RFC 5732]]] Hollenbeck, S., "Extensible Provisioning Protocol (EPP) Host Mapping", STD 69, RFC 5732, DOI 10.17487/RFC5732, August 2009, <https://www.rfc-editor.org/info/rfc5732>.
 * [[[RFC5733, RFC 5733]]] Hollenbeck, S., "Extensible Provisioning Protocol (EPP) Contact Mapping", STD 69, RFC 5733, DOI 10.17487/RFC5733, August 2009, <https://www.rfc-editor.org/info/rfc5733>.
 * [[[RFC7231, RFC 7231]]] Fielding, R., Ed., and J. Reschke, Ed., "Hypertext Transfer Protocol (HTTP/1.1): Semantics and Content", RFC 7231, DOI 10.17487/RFC7231, June 2014, <https://www.rfc-editor.org/info/rfc7231>.
-* [[[REST, REST]]] Fielding, R., "Architectural Styles and the Design of Network-based Software Architectures", Doctoral Dissertation, University of California, Irvine, September 2000, <http://roy.gbiv.com/pubs/dissertation/top.htm>.
 * [[[RFC7240, RFC 7240]]] Snell, J., "Prefer Header for HTTP", RFC 7240, DOI 10.17487/RFC7240, June 2014, <https://www.rfc-editor.org/info/rfc7240>.
 * [[[RFC8259,RFC 8259]]] Bray, T., Ed., "The JavaScript Object Notation (JSON) Data Interchange Format", STD 90, RFC 8259, DOI 10.17487/RFC8259, December 2017, <https://www.rfc-editor.org/info/rfc8259>.
 * [[[RFC6570, RFC 6570]]] Gregorio, J., Fielding, R., Hadley, M., Nottingham, M., and D. Orchard, "URI Template", RFC 6570, DOI 10.17487/RFC6570, March 2012, <https://www.rfc-editor.org/info/rfc6570>.
@@ -500,9 +501,6 @@ This naming mechanism ensures that new resource types, data elements, and operat
 * [[[RFC9205, RFC 9205]]] Nottingham, M., "Building Protocols with HTTP", BCP 56, RFC 9205, DOI 10.17487/RFC9205, June 2022, <https://www.rfc-editor.org/info/rfc9205>.
 * [[[RPPReq, RPP Requirements]]] "RPP Requirements (Work in progress 7.3.2025)", https:/ /github.com/ietf/wiki.ietf.org/blob/157294ff0fdfb2715da5a287dfba6c641a1bad67/group/rpp/requirements.md
 * [[[RFC8949, RFC 8949]]] Bormann, C. and P. Hoffman, "Concise Binary Object Representation (CBOR)", IETF, STD 94, DOI 10.17487/RFC8949, BCP 94, RFC 8949, December 2020, <https://www.rfc-editor.org/info/rfc8949>.
-* [[[OpenAPI, OpenAPI]]] "OpenAPI Specification", https://swagger.io/specification/
-* [[[W3C-VC, W3C VC]]] Verifiable Credentials Data Model v2.0, https://www.w3.org/TR/vc-data-model-2.0/
-* [[[W3C-VC2, W3C(W3C.TR.vc-data-model-2.0)]]] Terbu, O., Fett, D., and B. Campbell, "SD-JWT-based Verifiable Credentials (SD-JWT VC)", July 2025, <https://datatracker.ietf.org/doc/html/draft-ietf-oauth-sd-jwt-vc-10>.
 * [[[draft-ietf-oauth-sd-jwt-vc, IETF(I-D.draft-ietf-oauth-sd-jwt-vc-10)]]] Terbu, O., Fett, D., and B. Campbell, "SD-JWT-based Verifiable Credentials (SD-JWT VC)", July 2025, <https://datatracker.ietf.org/doc/html/draft-ietf-oauth-sd-jwt-vc-10>.
 * [[[RFC9553, RFC 9553]]] Stepanek, R. and M. Loffredo, "JSContact: A JSON Representation of Contact Data", IETF, DOI 10.17487/RFC9553, RFC 9553, May 2024, <https://www.rfc-editor.org/info/rfc9553>.
 
@@ -514,6 +512,13 @@ This naming mechanism ensures that new resource types, data elements, and operat
   <date type="published">
     <on>2008-11</on>
   </date>
+  <contributor>
+    <role type="publisher"/>
+    <organization>
+      <name>World Wide Web Consortium</name>
+      <abbreviation>W3C</abbreviation>
+    </organization>
+  </contributor>
   <contributor>
     <role type="author"/>
     <person>
@@ -560,6 +565,166 @@ This naming mechanism ensures that new resource types, data elements, and operat
       </name>
     </person>
   </contributor>
+</bibitem>
+<bibitem id="SemVer" type="standard">
+  <title format="text/plain">Semantic Versioning 2.0.0</title>
+  <uri type="src">https://semver.org/spec/v2.0.0.html</uri>
+  <docidentifier type="Misc">SemVer 2.0.0</docidentifier>
+</bibitem>
+<bibitem id="REST" type="book">
+  <title format="text/plain">Architectural Styles and the Design of Network-based Software Architectures</title>
+  <uri type="src">http://roy.gbiv.com/pubs/dissertation/top.htm</uri>
+  <docidentifier type="Doctoral Dissertation">University of California, Irvine</docidentifier>
+  <date type="published">
+    <on>2000-09</on>
+  </date>
+  <contributor>
+    <role type="author"/>
+    <person>
+      <name>
+        <surname>Fielding</surname>
+        <forename>R.</forename>
+      </name>
+    </person>
+  </contributor>
+</bibitem>
+<bibitem id="OpenAPI" type="standard">
+  <title format="text/plain">OpenAPI Specification</title>
+  <uri type="src">https://swagger.io/specification/</uri>
+  <docidentifier type="Misc">OpenAPI</docidentifier>
+</bibitem>
+<bibitem id="W3C-VC" type="standard">
+  <title format="text/plain">Verifiable Credentials Data Model v2.0</title>
+  <uri type="src">https://www.w3.org/TR/vc-data-model-2.0/</uri>
+  <docidentifier type="W3C">vc-data-model-2.0</docidentifier>
+  <contributor>
+    <role type="editor"/>
+    <person>
+      <name>
+        <surname>Sporny</surname>
+        <forename>Manu</forename>
+      </name>
+      <affiliation>
+        <organization>
+          <name>Digital Bazaar</name>
+        </organization>
+      </affiliation>
+    </person>
+  </contributor>
+  <contributor>
+    <role type="editor"/>
+    <person>
+      <name>
+        <surname>Thibodeau</surname>
+        <forename>Ted</forename>
+        <initial>Jr</initial>
+      </name>
+      <affiliation>
+        <organization>
+          <name>OpenLink Software</name>
+        </organization>
+      </affiliation>
+    </person>
+  </contributor>
+  <contributor>
+    <role type="editor"/>
+    <person>
+      <name>
+        <surname>Herman</surname>
+        <forename>Ivan</forename>
+      </name>
+      <affiliation>
+        <organization>
+          <name>W3C</name>
+        </organization>
+      </affiliation>
+    </person>
+  </contributor>
+  <contributor>
+    <role type="editor"/>
+    <person>
+      <name>
+        <surname>Cohen</surname>
+        <forename>Gabe</forename>
+      </name>
+      <affiliation>
+        <organization>
+          <name>Block</name>
+        </organization>
+      </affiliation>
+    </person>
+  </contributor>
+  <contributor>
+    <role type="editor"/>
+    <person>
+      <name>
+        <surname>Jones</surname>
+        <forename>Michael</forename>
+        <initial>B.</initial>
+      </name>
+      <affiliation>
+        <organization>
+          <name>Invited Expert</name>
+        </organization>
+      </affiliation>
+    </person>
+  </contributor>
+  <contributor>
+    <role type="author"/>
+    <person>
+      <name>
+        <surname>Sporny</surname>
+        <forename>Manu</forename>
+      </name>
+      <affiliation>
+        <organization>
+          <name>Digital Bazaar</name>
+        </organization>
+      </affiliation>
+    </person>
+  </contributor>
+  <contributor>
+    <role type="author"/>
+    <person>
+      <name>
+        <surname>Longley</surname>
+        <forename>Dave</forename>
+      </name>
+      <affiliation>
+        <organization>
+          <name>Digital Bazaar</name>
+        </organization>
+      </affiliation>
+    </person>
+  </contributor>
+  <contributor>
+    <role type="author"/>
+    <person>
+      <name>
+        <surname>Chadwick</surname>
+        <forename>David</forename>
+      </name>
+      <affiliation>
+        <organization>
+          <name>Invited Expert</name>
+        </organization>
+      </affiliation>
+    </person>
+  </contributor>
+  <contributor>
+    <role type="author"/>
+    <person>
+      <name>
+        <surname>Herman</surname>
+        <forename>Ivan</forename>
+      </name>
+      <affiliation>
+        <organization>
+          <name>W3C</name>
+        </organization>
+      </affiliation>
+    </person>
+  </contributor>
   <contributor>
     <role type="publisher"/>
     <organization>
@@ -567,11 +732,5 @@ This naming mechanism ensures that new resource types, data elements, and operat
       <abbreviation>W3C</abbreviation>
     </organization>
   </contributor>
-  <edition>Fifth Edition</edition>
-</bibitem>
-<bibitem id="SemVer" type="standard">
-  <title format="text/plain">Semantic Versioning 2.0.0</title>
-  <uri type="src">https://semver.org/spec/v2.0.0.html</uri>
-  <docidentifier type="Misc">SemVer 2.0.0</docidentifier>
 </bibitem>
 ++++
