@@ -5,8 +5,8 @@
 Network Working Group                                         P. Kowalik
 Internet-Draft                                                  DENIC eG
 Intended status: Informational                                M. Wullink
-Expires: 12 March 2026                                         SIDN Labs
-                                                        8 September 2025
+Expires: 14 March 2026                                         SIDN Labs
+                                                       10 September 2025
 
 
                             RPP Architecture
@@ -47,7 +47,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 12 March 2026.
+   This Internet-Draft will expire on 14 March 2026.
 
 Copyright Notice
 
@@ -837,7 +837,7 @@ Table of Contents
       alignment with RDAP.
 
    *  *'VC' Structure Adaptation:* Adapting to existing Verifiable
-      Credentials ([W3C-VC], [I-D.draft-ietf-oauth-sd-jwt-vc]) data
+      Credentials ([W3C-VC], [draft-ietf-oauth-sd-jwt-vc]) data
       structures, especially for representing identity or authorisation
       information, allowing for integration with external identity
       systems.
@@ -858,8 +858,8 @@ Table of Contents
       required
 
    *  *JWT-SD:* JSON data with Selective Disclosure using JWTs
-      [I-D.draft-ietf-oauth-selective-disclosure-jwt] for minimisation
-      of exposed data.
+      [draft-ietf-oauth-selective-disclosure-jwt] for minimisation of
+      exposed data.
 
    *  *CBOR:* Concise Binary Object Representation for specific use
       cases requiring compact binary encoding [RFC8949].
@@ -1028,6 +1028,8 @@ Table of Contents
 
 6.1.  -02 to -03
 
+   *  Fixed broken references to non-RFC documents
+
 6.2.  -01 to -02
 
    *  Added responses must contain links to relevant object to
@@ -1105,13 +1107,6 @@ Table of Contents
               DOI 10.17487/RFC7231, RFC 7231, June 2014,
               <https://www.rfc-editor.org/info/rfc7231>.
 
-   [REST]     "Fielding, R., "Architectural Styles and the Design of
-              Network-based Software Architectures", Doctoral
-              Dissertation, University of California, Irvine, September
-              2000, >.".
-
-   [SemVer]   ""Semantic Versioning 2.0.0",".
-
    [RFC7240]  Snell, J., "Prefer Header for HTTP", IETF,
               DOI 10.17487/RFC7240, RFC 7240, June 2014,
               <https://www.rfc-editor.org/info/rfc7240>.
@@ -1148,16 +1143,11 @@ Table of Contents
               (JSON) Patch", IETF, DOI 10.17487/RFC6902, RFC 6902, April
               2013, <https://www.rfc-editor.org/info/rfc6902>.
 
-   [XML]      "Bray, T., Paoli, J., Sperberg-McQueen, C., Maler, E. and
-              Yergeau, F., "Extensible Markup Language (XML) 1.0 (Fifth
-              Edition)", World Wide Web Consortium Recommendation REC-
-              xml-20081126, November 2008, []().".
-
-   [I-D.draft-ietf-oauth-selective-disclosure-jwt]
-              "Fett D., Yasuda K. and Campbell B. , "Selective
-              Disclosure for JWTs (SD-JWT)", Work in Progress, Internet-
-              Draft, draft-ietf-oauth-selective-disclosure-jwt, 16
-              January 2025 >".
+   [draft-ietf-oauth-selective-disclosure-jwt]
+              Fett, D., Yasuda, K., and B. Campbell, "Selective
+              Disclosure for JWTs (SD-JWT)", May 2025,
+              <https://datatracker.ietf.org/doc/html/draft-ietf-oauth-
+              selective-disclosure-jwt-22>.
 
    [RFC9396]  Lodderstedt, T., Richer, J., and B. Campbell, "OAuth 2.0
               Rich Authorization Requests", IETF, DOI 10.17487/RFC9396,
@@ -1177,17 +1167,38 @@ Table of Contents
               DOI 10.17487/RFC8949, BCP 94, RFC 8949, December 2020,
               <https://www.rfc-editor.org/info/rfc8949>.
 
-   [OpenAPI]  ""OpenAPI Specification",".
-
-   [W3C-VC]   "Verifiable Credentials Data Model v2.0,".
-
-   [I-D.draft-ietf-oauth-sd-jwt-vc]
-              "SD-JWT-based Verifiable Credentials (SD-JWT VC) >".
+   [draft-ietf-oauth-sd-jwt-vc]
+              Terbu, O., Fett, D., and B. Campbell, "SD-JWT-based
+              Verifiable Credentials (SD-JWT VC)", July 2025,
+              <https://datatracker.ietf.org/doc/html/draft-ietf-oauth-
+              sd-jwt-vc-10>.
 
    [RFC9553]  Stepanek, R. and M. Loffredo, "JSContact: A JSON
               Representation of Contact Data", IETF,
               DOI 10.17487/RFC9553, RFC 9553, May 2024,
               <https://www.rfc-editor.org/info/rfc9553>.
+
+   [XML]      Bray, T., Paoli, J., Sperberg-McQueen, C., Maler, E., and
+              F. Yergeau, "Extensible Markup Language (XML) 1.0 (Fifth
+              Edition)", REC-xml-20081126, November 2008,
+              <https://www.w3.org/TR/2008/REC-xml-20081126/>.
+
+   [SemVer]   "Semantic Versioning 2.0.0", Misc SemVer 2.0.0,
+              <https://semver.org/spec/v2.0.0.html>.
+
+   [REST]     Fielding, R., "Architectural Styles and the Design of
+              Network-based Software Architectures",
+              Doctoral Dissertation University of California, Irvine,
+              September 2000,
+              <http://roy.gbiv.com/pubs/dissertation/top.htm>.
+
+   [OpenAPI]  "OpenAPI Specification", Misc OpenAPI,
+              <https://swagger.io/specification/>.
+
+   [W3C-VC]   Sporny, M., Longley, D., Chadwick, D., Herman, I., Sporny,
+              M., Thibodeau, T., Herman, I., Cohen, G., and M. Jones,
+              "Verifiable Credentials Data Model v2.0", vc-data-model-
+              2.0, <https://www.w3.org/TR/vc-data-model-2.0/>.
 
 Authors' Addresses
 
