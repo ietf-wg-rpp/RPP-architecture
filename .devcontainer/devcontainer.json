@@ -17,7 +17,8 @@
         "asciidoctor.asciidoctor-vscode",
         "Gruntfuggly.todo-tree",
         "ms-azuretools.vscode-docker",
-        "GitHub.vscode-pull-request-github"
+        "GitHub.vscode-pull-request-github",
+        "DotJoshJohnson.xml"
     ],
 
     // Use 'forwardPorts' to make a list of ports inside the container available locally.
