@@ -5,8 +5,8 @@
 Network Working Group                                         P. Kowalik
 Internet-Draft                                                  DENIC eG
 Intended status: Informational                                M. Wullink
-Expires: 14 March 2026                                         SIDN Labs
-                                                       10 September 2025
+Expires: 15 March 2026                                         SIDN Labs
+                                                       11 September 2025
 
 
                             RPP Architecture
@@ -47,7 +47,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 14 March 2026.
+   This Internet-Draft will expire on 15 March 2026.
 
 Copyright Notice
 
@@ -850,10 +850,9 @@ Table of Contents
       alignment with RDAP.
 
    *  *'VC' Structure Adaptation:* Adapting to existing Verifiable
-      Credentials ([W3C-VC], [draft-ietf-oauth-sd-jwt-vc]) data
-      structures, especially for representing identity or authorisation
-      information, allowing for integration with external identity
-      systems.
+      Credentials ([W3C-VC], [SD-JWT]) data structures, especially for
+      representing identity or authorisation information, allowing for
+      integration with external identity systems.
 
 5.2.2.  Data format
 
@@ -871,8 +870,7 @@ Table of Contents
       required
 
    *  *JWT-SD:* JSON data with Selective Disclosure using JWTs
-      [draft-ietf-oauth-selective-disclosure-jwt] for minimisation of
-      exposed data.
+      [SelDiscJWT] for minimisation of exposed data.
 
    *  *CBOR:* Concise Binary Object Representation for specific use
       cases requiring compact binary encoding [RFC8949].
@@ -1165,12 +1163,6 @@ Table of Contents
               (JSON) Patch", IETF, DOI 10.17487/RFC6902, RFC 6902, April
               2013, <https://www.rfc-editor.org/info/rfc6902>.
 
-   [draft-ietf-oauth-selective-disclosure-jwt]
-              Fett, D., Yasuda, K., and B. Campbell, "Selective
-              Disclosure for JWTs (SD-JWT)", May 2025,
-              <https://datatracker.ietf.org/doc/html/draft-ietf-oauth-
-              selective-disclosure-jwt-22>.
-
    [RFC9396]  Lodderstedt, T., Richer, J., and B. Campbell, "OAuth 2.0
               Rich Authorization Requests", IETF, DOI 10.17487/RFC9396,
               RFC 9396, May 2023,
@@ -1180,25 +1172,31 @@ Table of Contents
               DOI 10.17487/RFC9205, BCP 56, RFC 9205, June 2022,
               <https://www.rfc-editor.org/info/rfc9205>.
 
-   [RPPReq]   ""RPP Requirements (Work in progress 7.3.2025)", https:/ /
-              github.com/ietf/wiki.ietf.org/blob/157294ff0fdfb2715da5a28
-              7dfba6c641a1bad67/group/rpp/requirements.md".
-
    [RFC8949]  Bormann, C. and P. Hoffman, "Concise Binary Object
               Representation (CBOR)", IETF, STD 94,
               DOI 10.17487/RFC8949, BCP 94, RFC 8949, December 2020,
               <https://www.rfc-editor.org/info/rfc8949>.
 
-   [draft-ietf-oauth-sd-jwt-vc]
-              Terbu, O., Fett, D., and B. Campbell, "SD-JWT-based
-              Verifiable Credentials (SD-JWT VC)", July 2025,
-              <https://datatracker.ietf.org/doc/html/draft-ietf-oauth-
-              sd-jwt-vc-10>.
-
    [RFC9553]  Stepanek, R. and M. Loffredo, "JSContact: A JSON
               Representation of Contact Data", IETF,
               DOI 10.17487/RFC9553, RFC 9553, May 2024,
               <https://www.rfc-editor.org/info/rfc9553>.
+
+   [SD-JWT]   Terbu, O., Fett, D., and B. Campbell, "SD-JWT-based
+              Verifiable Credentials (SD-JWT VC)", July 2025,
+              <https://datatracker.ietf.org/doc/html/draft-ietf-oauth-
+              sd-jwt-vc-10>.
+
+   [SelDiscJWT]
+              Fett, D., Yasuda, K., and B. Campbell, "Selective
+              Disclosure for JWTs (SD-JWT)", May 2025,
+              <https://datatracker.ietf.org/doc/html/draft-ietf-oauth-
+              selective-disclosure-jwt-22>.
+
+   [RPPReq]   Wullink, M. and P. Kowalik, "RESTful Provisioning Protocol
+              (RPP) - Requirements", June 2025,
+              <https://datatracker.ietf.org/doc/html/draft-ietf-rpp-
+              requirements-01>.
 
    [XML]      Bray, T., Paoli, J., Sperberg-McQueen, C., Maler, E., and
               F. Yergeau, "Extensible Markup Language (XML) 1.0 (Fifth
