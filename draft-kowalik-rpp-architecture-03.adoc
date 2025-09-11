@@ -453,6 +453,7 @@ This naming mechanism ensures that new resource types, data elements, and operat
 === -02 to -03
 
 * Fixed broken references to non-RFC documents
+* Explicitly stated that RPP SHOULD support client_id/password authentication for EPP compatibility in <<authentication-authorization>>.
 
 === -01 to -02
 

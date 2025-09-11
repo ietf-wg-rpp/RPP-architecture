@@ -1028,6 +1028,9 @@ Table of Contents
 
    *  Fixed broken references to non-RFC documents
 
+   *  Explicitly stated that RPP SHOULD support client_id/password
+      authentication for EPP compatibility in Section 5.1.1.
+
 6.2.  -01 to -02
 
    *  Added responses must contain links to relevant object to
