@@ -377,7 +377,7 @@ Other future possibilities:
 
 *  **'EPP' Structure Adaptation:**  Reusing or adapting to the existing EPP XML schemas, to maintain data model compatibility with EPP core objects and simplify mapping from EPP.
 *  **'JSContact' Structure Adaptation:**  Adapting to the existing JSON representation for Contact Information <<RFC9553>>, to maintain alignment with RDAP.
-*  **'VC' Structure Adaptation:**  Adapting to existing Verifiable Credentials (<<W3C-VC>>, <<draft-ietf-oauth-sd-jwt-vc>>) data structures, especially for representing identity or authorisation information, allowing for integration with external identity systems.
+*  **'VC' Structure Adaptation:**  Adapting to existing Verifiable Credentials (<<W3C-VC>>, <<SD-JWT>>) data structures, especially for representing identity or authorisation information, allowing for integration with external identity systems.
 
 ==== Data format
 The primary format for RPP data representations shall be JSON, however RPP should be able to be extended to support other formats like XML, JWT, JWT-SD or CBOR.
@@ -385,7 +385,7 @@ The primary format for RPP data representations shall be JSON, however RPP shoul
 * **JSON:** Standard JSON format <<RFC8259>>. 
 * **XML:** eXtensible Markup Language <<XML>> (considered for potential compatibility with EPP).
 * **JWT:** JSON data encapsulated within a JSON Web Token <<RFC7519>> for potential use-cases when verifiable data consistency is required 
-* **JWT-SD:** JSON data with Selective Disclosure using JWTs <<draft-ietf-oauth-selective-disclosure-jwt>> for minimisation of exposed data. 
+* **JWT-SD:** JSON data with Selective Disclosure using JWTs <<SelDiscJWT>> for minimisation of exposed data. 
 * **CBOR:** Concise Binary Object Representation for specific use cases requiring compact binary encoding <<RFC8949>>.
 
 Some data formats can be optionally represented in other encapsulations, for example JSON data can be represented also in JWT or CBOR. Change of encapsulation shall not affect the data structure. This might be beneficial if RPP is to be extended to support different data formats in the future that only require additional properties provided by encapsulation, like signing, encryption or binary representation.
@@ -492,248 +492,188 @@ This naming mechanism ensures that new resource types, data elements, and operat
 * [[[RFC5733, RFC 5733]]] Hollenbeck, S., "Extensible Provisioning Protocol (EPP) Contact Mapping", STD 69, RFC 5733, DOI 10.17487/RFC5733, August 2009, <https://www.rfc-editor.org/info/rfc5733>.
 * [[[RFC7231, RFC 7231]]] Fielding, R., Ed., and J. Reschke, Ed., "Hypertext Transfer Protocol (HTTP/1.1): Semantics and Content", RFC 7231, DOI 10.17487/RFC7231, June 2014, <https://www.rfc-editor.org/info/rfc7231>.
 * [[[RFC7240, RFC 7240]]] Snell, J., "Prefer Header for HTTP", RFC 7240, DOI 10.17487/RFC7240, June 2014, <https://www.rfc-editor.org/info/rfc7240>.
-* [[[RFC8259,RFC 8259]]] Bray, T., Ed., "The JavaScript Object Notation (JSON) Data Interchange Format", STD 90, RFC 8259, DOI 10.17487/RFC8259, December 2017, <https://www.rfc-editor.org/info/rfc8259>.
+* [[[RFC8259, RFC 8259]]] Bray, T., Ed., "The JavaScript Object Notation (JSON) Data Interchange Format", STD 90, RFC 8259, DOI 10.17487/RFC8259, December 2017, <https://www.rfc-editor.org/info/rfc8259>.
 * [[[RFC6570, RFC 6570]]] Gregorio, J., Fielding, R., Hadley, M., Nottingham, M., and D. Orchard, "URI Template", RFC 6570, DOI 10.17487/RFC6570, March 2012, <https://www.rfc-editor.org/info/rfc6570>.
-* [[[RFC6749,RFC 6749]]] Hardt, D., Ed., "The OAuth 2.0 Authorization Framework", RFC 6749, DOI 10.17487/RFC6749, October 2012, <https://www.rfc-editor.org/info/rfc6749>.
-* [[[RFC6750,RFC 6750]]] Jones, M. and D. Hardt, "The OAuth 2.0 Authorization Framework: Bearer Token Usage", RFC 6750, DOI 10.17487/RFC6750, October 2012, <https://www.rfc-editor.org/info/rfc6750>.
-* [[[RFC7519,RFC 7519]]] Jones, M., Bradley, J., and N. Sakimura, "JSON Web Token (JWT)", RFC 7519, DOI 10.17487/RFC7519, May 2015, <https://www.rfc-editor.org/info/rfc7519>.
-* [[[RFC9082,RFC 9082]]] Hollenbeck, S. and A. Newton, "Registration Data Access Protocol (RDAP) Query Format", STD 95, RFC 9082, DOI 10.17487/RFC9082, June 2021, <https://www.rfc-editor.org/info/rfc9082>.
+* [[[RFC6749, RFC 6749]]] Hardt, D., Ed., "The OAuth 2.0 Authorization Framework", RFC 6749, DOI 10.17487/RFC6749, October 2012, <https://www.rfc-editor.org/info/rfc6749>.
+* [[[RFC6750, RFC 6750]]] Jones, M. and D. Hardt, "The OAuth 2.0 Authorization Framework: Bearer Token Usage", RFC 6750, DOI 10.17487/RFC6750, October 2012, <https://www.rfc-editor.org/info/rfc6750>.
+* [[[RFC7519, RFC 7519]]] Jones, M., Bradley, J., and N. Sakimura, "JSON Web Token (JWT)", RFC 7519, DOI 10.17487/RFC7519, May 2015, <https://www.rfc-editor.org/info/rfc7519>.
+* [[[RFC9082, RFC 9082]]] Hollenbeck, S. and A. Newton, "Registration Data Access Protocol (RDAP) Query Format", STD 95, RFC 9082, DOI 10.17487/RFC9082, June 2021, <https://www.rfc-editor.org/info/rfc9082>.
 * [[[RFC6902, RFC 6902]]] Bryan, P. and M. Nottingham, "JavaScript Object Notation (JSON) Patch", IETF, DOI 10.17487/RFC6902, RFC 6902, April 2013, <https://www.rfc-editor.org/info/rfc6902>.
-* [[[draft-ietf-oauth-selective-disclosure-jwt, IETF(I-D.draft-ietf-oauth-selective-disclosure-jwt-22)]]] Fett, D., Yasuda, K., and B. Campbell, "Selective Disclosure for JWTs (SD-JWT)", May 2025, <https://datatracker.ietf.org/doc/html/draft-ietf-oauth-selective-disclosure-jwt-22>.
 * [[[RFC9396, RFC 9396]]] Lodderstedt, T., Richer, J., and B. Campbell, "OAuth 2.0 Rich Authorization Requests", RFC 9396, DOI 10.17487/RFC9396, May 2023, <https://www.rfc-editor.org/info/rfc9396>.
 * [[[RFC9205, RFC 9205]]] Nottingham, M., "Building Protocols with HTTP", BCP 56, RFC 9205, DOI 10.17487/RFC9205, June 2022, <https://www.rfc-editor.org/info/rfc9205>.
-* [[[RPPReq, RPP Requirements]]] "RPP Requirements (Work in progress 7.3.2025)", https:/ /github.com/ietf/wiki.ietf.org/blob/157294ff0fdfb2715da5a287dfba6c641a1bad67/group/rpp/requirements.md
 * [[[RFC8949, RFC 8949]]] Bormann, C. and P. Hoffman, "Concise Binary Object Representation (CBOR)", IETF, STD 94, DOI 10.17487/RFC8949, BCP 94, RFC 8949, December 2020, <https://www.rfc-editor.org/info/rfc8949>.
-* [[[draft-ietf-oauth-sd-jwt-vc, IETF(I-D.draft-ietf-oauth-sd-jwt-vc-10)]]] Terbu, O., Fett, D., and B. Campbell, "SD-JWT-based Verifiable Credentials (SD-JWT VC)", July 2025, <https://datatracker.ietf.org/doc/html/draft-ietf-oauth-sd-jwt-vc-10>.
 * [[[RFC9553, RFC 9553]]] Stepanek, R. and M. Loffredo, "JSContact: A JSON Representation of Contact Data", IETF, DOI 10.17487/RFC9553, RFC 9553, May 2024, <https://www.rfc-editor.org/info/rfc9553>.
+* [[[SD-JWT, IETF(I-D.draft-ietf-oauth-sd-jwt-vc-10)]]] Terbu, O., Fett, D., and B. Campbell, "SD-JWT-based Verifiable Credentials (SD-JWT VC)", July 2025, <https://datatracker.ietf.org/doc/html/draft-ietf-oauth-sd-jwt-vc-10>.
+* [[[SelDiscJWT, IETF(I-D.draft-ietf-oauth-selective-disclosure-jwt-22)]]] Fett, D., Yasuda, K., and B. Campbell, "Selective Disclosure for JWTs (SD-JWT)", May 2025, <https://datatracker.ietf.org/doc/html/draft-ietf-oauth-selective-disclosure-jwt-22>.
+* [[[RPPReq, IETF(I-D.draft-ietf-rpp-requirements-01)]]] Wullink, M. and P. Kowalik, "RESTful Provisioning Protocol (RPP) - Requirements", June 2025, <https://datatracker.ietf.org/doc/html/draft-ietf-rpp-requirements-01>.
 
-++++
-<bibitem id="XML" type="standard">
-  <title format="text/plain">Extensible Markup Language (XML) 1.0 (Fifth Edition)</title>
-  <uri type="src">https://www.w3.org/TR/2008/REC-xml-20081126/</uri>
-  <docidentifier type="W3C">REC-xml-20081126</docidentifier>
-  <date type="published">
-    <on>2008-11</on>
-  </date>
-  <contributor>
-    <role type="publisher"/>
-    <organization>
-      <name>World Wide Web Consortium</name>
-      <abbreviation>W3C</abbreviation>
-    </organization>
-  </contributor>
-  <contributor>
-    <role type="author"/>
-    <person>
-      <name>
-        <surname>Bray</surname>
-        <forename>T.</forename>
-      </name>
-    </person>
-  </contributor>
-  <contributor>
-    <role type="author"/>
-    <person>
-      <name>
-        <surname>Paoli</surname>
-        <forename>J.</forename>
-      </name>
-    </person>
-  </contributor>
-  <contributor>
-    <role type="author"/>
-    <person>
-      <name>
-        <surname>Sperberg-McQueen</surname>
-        <forename>C.</forename>
-        <initial>M.</initial>
-      </name>
-    </person>
-  </contributor>
-  <contributor>
-    <role type="author"/>
-    <person>
-      <name>
-        <surname>Maler</surname>
-        <forename>E.</forename>
-      </name>
-    </person>
-  </contributor>
-  <contributor>
-    <role type="author"/>
-    <person>
-      <name>
-        <surname>Yergeau</surname>
-        <forename>F.</forename>
-      </name>
-    </person>
-  </contributor>
-</bibitem>
-<bibitem id="SemVer" type="standard">
-  <title format="text/plain">Semantic Versioning 2.0.0</title>
-  <uri type="src">https://semver.org/spec/v2.0.0.html</uri>
-  <docidentifier type="Misc">SemVer 2.0.0</docidentifier>
-</bibitem>
-<bibitem id="REST" type="book">
-  <title format="text/plain">Architectural Styles and the Design of Network-based Software Architectures</title>
-  <uri type="src">http://roy.gbiv.com/pubs/dissertation/top.htm</uri>
-  <docidentifier type="Doctoral Dissertation">University of California, Irvine</docidentifier>
-  <date type="published">
-    <on>2000-09</on>
-  </date>
-  <contributor>
-    <role type="author"/>
-    <person>
-      <name>
-        <surname>Fielding</surname>
-        <forename>R.</forename>
-      </name>
-    </person>
-  </contributor>
-</bibitem>
-<bibitem id="OpenAPI" type="standard">
-  <title format="text/plain">OpenAPI Specification</title>
-  <uri type="src">https://swagger.io/specification/</uri>
-  <docidentifier type="Misc">OpenAPI</docidentifier>
-</bibitem>
-<bibitem id="W3C-VC" type="standard">
-  <title format="text/plain">Verifiable Credentials Data Model v2.0</title>
-  <uri type="src">https://www.w3.org/TR/vc-data-model-2.0/</uri>
-  <docidentifier type="W3C">vc-data-model-2.0</docidentifier>
-  <contributor>
-    <role type="editor"/>
-    <person>
-      <name>
-        <surname>Sporny</surname>
-        <forename>Manu</forename>
-      </name>
-      <affiliation>
-        <organization>
-          <name>Digital Bazaar</name>
-        </organization>
-      </affiliation>
-    </person>
-  </contributor>
-  <contributor>
-    <role type="editor"/>
-    <person>
-      <name>
-        <surname>Thibodeau</surname>
-        <forename>Ted</forename>
-        <initial>Jr</initial>
-      </name>
-      <affiliation>
-        <organization>
-          <name>OpenLink Software</name>
-        </organization>
-      </affiliation>
-    </person>
-  </contributor>
-  <contributor>
-    <role type="editor"/>
-    <person>
-      <name>
-        <surname>Herman</surname>
-        <forename>Ivan</forename>
-      </name>
-      <affiliation>
-        <organization>
-          <name>W3C</name>
-        </organization>
-      </affiliation>
-    </person>
-  </contributor>
-  <contributor>
-    <role type="editor"/>
-    <person>
-      <name>
-        <surname>Cohen</surname>
-        <forename>Gabe</forename>
-      </name>
-      <affiliation>
-        <organization>
-          <name>Block</name>
-        </organization>
-      </affiliation>
-    </person>
-  </contributor>
-  <contributor>
-    <role type="editor"/>
-    <person>
-      <name>
-        <surname>Jones</surname>
-        <forename>Michael</forename>
-        <initial>B.</initial>
-      </name>
-      <affiliation>
-        <organization>
-          <name>Invited Expert</name>
-        </organization>
-      </affiliation>
-    </person>
-  </contributor>
-  <contributor>
-    <role type="author"/>
-    <person>
-      <name>
-        <surname>Sporny</surname>
-        <forename>Manu</forename>
-      </name>
-      <affiliation>
-        <organization>
-          <name>Digital Bazaar</name>
-        </organization>
-      </affiliation>
-    </person>
-  </contributor>
-  <contributor>
-    <role type="author"/>
-    <person>
-      <name>
-        <surname>Longley</surname>
-        <forename>Dave</forename>
-      </name>
-      <affiliation>
-        <organization>
-          <name>Digital Bazaar</name>
-        </organization>
-      </affiliation>
-    </person>
-  </contributor>
-  <contributor>
-    <role type="author"/>
-    <person>
-      <name>
-        <surname>Chadwick</surname>
-        <forename>David</forename>
-      </name>
-      <affiliation>
-        <organization>
-          <name>Invited Expert</name>
-        </organization>
-      </affiliation>
-    </person>
-  </contributor>
-  <contributor>
-    <role type="author"/>
-    <person>
-      <name>
-        <surname>Herman</surname>
-        <forename>Ivan</forename>
-      </name>
-      <affiliation>
-        <organization>
-          <name>W3C</name>
-        </organization>
-      </affiliation>
-    </person>
-  </contributor>
-  <contributor>
-    <role type="publisher"/>
-    <organization>
-      <name>World Wide Web Consortium</name>
-      <abbreviation>W3C</abbreviation>
-    </organization>
-  </contributor>
-</bibitem>
-++++
+// Documentation of asciibib: https://www.relaton.org/asciibib/
+
+[[XML, XML]]
+[%bibitem]
+==== Extensible Markup Language (XML) 1.0 (Fifth Edition)
+type:: standard
+link::
+link.type:: src
+link.content:: https://www.w3.org/TR/2008/REC-xml-20081126/
+
+docid::
+docid.type:: W3C
+docid.id:: REC-xml-20081126
+
+date::
+date.type:: published
+date.on:: 2008-11
+
+contributor::
+contributor.role.type:: publisher
+contributor.organization.name:: World Wide Web Consortium
+contributor.organization.abbreviation:: W3C
+
+contributor::
+contributor.role.type:: author
+contributor.person.name.surname:: Bray
+contributor.person.name.forename:: T.
+
+contributor::
+contributor.role.type:: author
+contributor.person.name.surname:: Paoli
+contributor.person.name.forename:: J.
+
+contributor::
+contributor.role.type:: author
+contributor.person.name.surname:: Sperberg-McQueen
+contributor.person.name.forename:: C.
+contributor.person.name.initial:: M.
+
+contributor::
+contributor.role.type:: author
+contributor.person.name.surname:: Maler
+contributor.person.name.forename:: E.
+
+contributor::
+contributor.role.type:: author
+contributor.person.name.surname:: Yergeau
+contributor.person.name.forename:: F.
+
+[[SemVer, SemVer]]
+[%bibitem]
+==== Semantic Versioning 2.0.0
+type:: standard
+link::
+link.type:: src
+link.content:: https://semver.org/spec/v2.0.0.html
+
+docid::
+docid.type:: Misc
+docid.id:: SemVer 2.0.0
+
+[[REST, REST]]
+[%bibitem]
+==== Architectural Styles and the Design of Network-based Software Architectures
+type:: book
+link::
+link.type:: src
+link.content:: http://roy.gbiv.com/pubs/dissertation/top.htm
+
+date::
+date.type:: published
+date.on:: 2000-09
+
+contributor::
+contributor.role.type:: author
+contributor.person.name.surname:: Fielding
+contributor.person.name.forename:: R.
+
+contributor::
+contributor.role.type:: publisher
+contributor.organization.name:: University of California, Irvine
+
+docid::
+docid.type:: Doctoral Dissertation
+docid.id:: University of California, Irvine
+
+[[OpenAPI, OpenAPI]]
+[%bibitem]
+==== OpenAPI Specification
+type:: standard
+link::
+link.type:: src
+link.content:: https://swagger.io/specification/
+
+docid::
+docid.type:: Misc
+docid.id:: OpenAPI
+
+[[W3C-VC, W3C-VC]]
+[%bibitem]
+==== Verifiable Credentials Data Model v2.0
+type:: standard
+link::
+link.type:: src
+link.content:: https://www.w3.org/TR/vc-data-model-2.0/
+
+docid::
+docid.type:: W3C
+docid.id:: vc-data-model-2.0
+
+contributor::
+contributor.role.type:: editor
+contributor.person.name.surname:: Sporny
+contributor.person.name.forename:: Manu
+contributor.person.affiliation.organization.name:: Digital Bazaar
+
+contributor::
+contributor.role.type:: editor
+contributor.person.name.surname:: Thibodeau
+contributor.person.name.forename:: Ted
+contributor.person.name.initial:: Jr
+contributor.person.affiliation.organization.name:: OpenLink Software
+
+contributor::
+contributor.role.type:: editor
+contributor.person.name.surname:: Herman
+contributor.person.name.forename:: Ivan
+contributor.person.affiliation.organization.name:: W3C
+
+contributor::
+contributor.role.type:: editor
+contributor.person.name.surname:: Cohen
+contributor.person.name.forename:: Gabe
+contributor.person.affiliation.organization.name:: Block
+
+contributor::
+contributor.role.type:: editor
+contributor.person.name.surname:: Jones
+contributor.person.name.forename:: Michael
+contributor.person.name.initial:: B.
+contributor.person.affiliation.organization.name:: Invited Expert
+
+contributor::
+contributor.role.type:: author
+contributor.person.name.surname:: Sporny
+contributor.person.name.forename:: Manu
+contributor.person.affiliation.organization.name:: Digital Bazaar
+
+contributor::
+contributor.role.type:: author
+contributor.person.name.surname:: Longley
+contributor.person.name.forename:: Dave
+contributor.person.affiliation.organization.name:: Digital Bazaar
+
+contributor::
+contributor.role.type:: author
+contributor.person.name.surname:: Chadwick
+contributor.person.name.forename:: David
+contributor.person.affiliation.organization.name:: Invited Expert
+
+contributor::
+contributor.role.type:: author
+contributor.person.name.surname:: Herman
+contributor.person.name.forename:: Ivan
+contributor.person.affiliation.organization.name:: W3C
+
+contributor::
+contributor.role.type:: publisher
+contributor.organization.name:: World Wide Web Consortium
+contributor.organization.abbreviation:: W3C
