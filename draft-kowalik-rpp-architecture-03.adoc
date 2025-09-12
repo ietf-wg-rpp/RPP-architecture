@@ -331,12 +331,12 @@ textual content in responses to provide human-readable localised responses.
 languages will be defined, preferably using HTTP methods, like OPTIONS or HEAD requests.
 * application/rpp+json media type may support multi-language representations, especially for writing operations involving user provided content. Other media types may have different mechanisms for language representation.
 
-==== Prefer Header for Response Verbosity
+==== Client Signalling for Response Verbosity
 
 RPP may utilise the HTTP `Prefer` header <<RFC7240>> with the "return" preference to allow clients to control the verbosity of responses. For example, clients not interested in full resource representations could use `Prefer: return=minimal` to request minimal responses, reducing payload sizes and improving efficiency. The default behaviour, without the `Prefer` header, would be to return a full resource representation, similar to object info responses in EPP, especially after compound requests are completed.
 For certain use-cases it might be convenient for a client to receive also dereferenced full or partial representation of related objects. For example details about sponsoring client of domain name instead of just ID. "return" preference syntax alone is not sufficient for this purpose, therefore RPP would need to define custom preference and register it in "HTTP Preferences" IANA registry.
 
-==== Prefer Header for Request Validation
+==== Client Signalling for Request Validation
 
 RPP may utilise the HTTP `Prefer` header <<RFC7240>> for signalling the preference for either strict or lenient processing of requests. This allows clients to indicate whether they prefer strict validation of message payloads and rejection of requests with unknown properties or a more lenient approach ignoring unknown properties that may allow for additional flexibility in processing. The default behaviour, without the `Prefer` header, would be to process requests leniently.
 

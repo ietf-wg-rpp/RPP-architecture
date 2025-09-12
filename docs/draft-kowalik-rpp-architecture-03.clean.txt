@@ -86,8 +86,8 @@ Table of Contents
        5.1.6.  Content negotiation for media types
        5.1.7.  Caching
        5.1.8.  Language negotiation for textual content
-       5.1.9.  Prefer Header for Response Verbosity
-       5.1.10. Prefer Header for Request Validation
+       5.1.9.  Client Signalling for Response Verbosity
+       5.1.10. Client Signalling for Request Validation
        5.1.11. Asynchronous Operation Processing
        5.1.12. RPP specific status codes and relation to HTTP status
                codes
@@ -702,7 +702,7 @@ Table of Contents
       provided content.  Other media types may have different mechanisms
       for language representation.
 
-5.1.9.  Prefer Header for Response Verbosity
+5.1.9.  Client Signalling for Response Verbosity
 
    RPP may utilise the HTTP Prefer header [RFC7240] with the "return"
    preference to allow clients to control the verbosity of responses.
@@ -719,7 +719,7 @@ Table of Contents
    purpose, therefore RPP would need to define custom preference and
    register it in "HTTP Preferences" IANA registry.
 
-5.1.10.  Prefer Header for Request Validation
+5.1.10.  Client Signalling for Request Validation
 
    RPP may utilise the HTTP Prefer header [RFC7240] for signalling the
    preference for either strict or lenient processing of requests.  This
