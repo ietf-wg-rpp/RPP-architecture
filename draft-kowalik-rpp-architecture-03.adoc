@@ -438,6 +438,8 @@ The RPP architecture is designed to be extensible, allowing for the addition of 
 * **Discovery and Negotiation:** Service discovery endpoints and content negotiation mechanisms allow clients and servers to dynamically discover and utilise new capabilities, resource types, and representations as they are introduced.
 * **Status codes:** New RPP status codes can be defined and registered including their mapping to HTTP status codes.
 
+RPP shall facilitate standardisation and reuse by requiring that extensions be registered with IANA. These registration requirements shall be fine-grained, applying independently to protocol elements such as resource types, data elements, operations, and status codes. This approach promotes consistency and interoperability, avoids fragmentation from conflicting definitions, and allows protocol elements to evolve independently.
+
 These extensibility mechanisms ensure that RPP can evolve to meet future requirements, integrate with emerging technologies, and support a wide range of provisioning scenarios while maintaining interoperability and stability.
 
 ==== Name Management and Collision Avoidance
@@ -452,6 +454,7 @@ This naming mechanism ensures that new resource types, data elements, and operat
 
 === -02 to -03
 
+* Added paragraph on promotion of standard extensions to <<extension-mechanisms>>.
 * Fixed broken references to non-RFC documents
 
 === -01 to -02
