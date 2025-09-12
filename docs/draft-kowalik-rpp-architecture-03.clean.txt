@@ -810,10 +810,24 @@ Table of Contents
    client side and server side with use of client provided identifiers
    and server provided identifiers.  This will allow for tracking of
    requests and responses in case of errors, and for idempotency of
-   requests.  This should be defined outside of the Data Representation
-   Layer (e.g. as HTTP Headers), to assure clear separation of resource
-   representation from performed actions.  If possible existing
-   mechanisms of HTTP shall be employed.
+   requests.
+
+   Client provided identifier shall be returned in the corresponding
+   synchronous response and shall be included in the asynchronous
+   responses.  This identifier shall be also used as idempotency
+   identifier to allow clients to retry requests without risk of
+   duplicate processing.  The client provided identifier shall be unique
+   for the client and the lifetime of the identifier shall be defined by
+   the server, typically for a limited time after the request was
+   processed.
+
+   Server shall always generate own unique trasaction identifier,
+   regardless of nature of the transaction (reading or changing).
+
+   The transmission of transaction identifiers should be defined outside
+   of the Data Representation Layer (e.g. as HTTP Headers), to assure
+   clear separation of resource representation from performed actions.
+   If possible existing mechanisms of HTTP shall be employed.
 
 5.1.14.  Protocol Versioning
 

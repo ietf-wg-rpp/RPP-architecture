@@ -364,7 +364,13 @@ RPP utilises HTTP headers for transferring HTTP and RPP status codes, using the 
 * Categorisation of RPP status codes as temporary or permanent to guide client retry behaviour.
 
 ==== Transaction tracing and idempotency
-RPP shall support identification of requests and responses on both client side and server side with use of client provided identifiers and server provided identifiers. This will allow for tracking of requests and responses in case of errors, and for idempotency of requests. This should be defined outside of the Data Representation Layer (e.g. as HTTP Headers), to assure clear separation of resource representation from performed actions. If possible existing mechanisms of HTTP shall be employed.
+RPP shall support identification of requests and responses on both client side and server side with use of client provided identifiers and server provided identifiers. This will allow for tracking of requests and responses in case of errors, and for idempotency of requests.
+
+Client provided identifier shall be returned in the corresponding synchronous response and shall be included in the asynchronous responses. This identifier shall be also used as idempotency identifier to allow clients to retry requests without risk of duplicate processing. The client provided identifier shall be unique for the client and the lifetime of the identifier shall be defined by the server, typically for a limited time after the request was processed.
+
+Server shall always generate own unique trasaction identifier, regardless of nature of the transaction (reading or changing).
+
+The transmission of transaction identifiers should be defined outside of the Data Representation Layer (e.g. as HTTP Headers), to assure clear separation of resource representation from performed actions. If possible existing mechanisms of HTTP shall be employed.
 
 ==== Protocol Versioning
 RPP will define a versioning schema for the protocol itself, the extensions and other protocol elements such as profiles as appropriate. The versioning schema shall on one side allow for independent introduction of new features in a non-breaking manner on both client and server side, and on the other side allow the opposite party of the communication to determine if the version is compatible or not.
