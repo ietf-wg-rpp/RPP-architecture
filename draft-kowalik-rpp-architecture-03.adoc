@@ -269,7 +269,10 @@ uniform interface and RESTful principles:
 *  **HEAD:**  Retrieve resource state (e.g., retrieving domain existence information). This may be a candidate for equivalence of EPP check command, however it may come with a few caveats to consider:
     -  EPP check is intended to check whether (future) resource provisioning is possible. This is not semantically the same as resource state. Overloading HEAD with EPP semantics may lead to confusion, especially as some frameworks implicitly implement HEAD out of GET handling.
     -  a better equivalence of EPP check would be a POST with Expect header, however this header being a reserved header in browsers it may not be availble to all client implementations
-    - the conclusion would be that RPP should not overload HTTP HEAD with own semantics, and support HEAD as it is defined in HTTP
+
++
+The conclusion is that RPP should not overload HTTP HEAD with own semantics, and support HEAD as it is defined in HTTP.
+
 *  **OPTIONS** RPP shall not define any new semantics for OPTIONS however the specifications should make implementers aware of its role in CORS and pre-flight requests typically made by web browsers
 *  **GET:**  Retrieve resource state (e.g., retrieving domain or contact information) - EPP info command
 *  **POST:** Create a new resource (e.g., registering a domain or create contact object) - EPP create command

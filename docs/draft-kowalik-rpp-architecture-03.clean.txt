@@ -5,8 +5,8 @@
 Network Working Group                                         P. Kowalik
 Internet-Draft                                                  DENIC eG
 Intended status: Informational                                M. Wullink
-Expires: 15 March 2026                                         SIDN Labs
-                                                       11 September 2025
+Expires: 16 March 2026                                         SIDN Labs
+                                                       12 September 2025
 
 
                             RPP Architecture
@@ -47,7 +47,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 15 March 2026.
+   This Internet-Draft will expire on 16 March 2026.
 
 Copyright Notice
 
@@ -571,8 +571,8 @@ Table of Contents
          header, however this header being a reserved header in browsers
          it may not be availble to all client implementations
 
-      -  the conclusion would be that RPP should not overload HTTP HEAD
-         with own semantics, and support HEAD as it is defined in HTTP
+      The conclusion would be that RPP should not overload HTTP HEAD
+      with own semantics, and support HEAD as it is defined in HTTP
 
    *  *OPTIONS* RPP shall not define any new semantics for OPTIONS
       however the specifications should make implementers aware of its
