@@ -571,8 +571,8 @@ Table of Contents
          header, however this header being a reserved header in browsers
          it may not be availble to all client implementations
 
-      The conclusion would be that RPP should not overload HTTP HEAD
-      with own semantics, and support HEAD as it is defined in HTTP
+      The conclusion is that RPP should not overload HTTP HEAD with own
+      semantics, and support HEAD as it is defined in HTTP.
 
    *  *OPTIONS* RPP shall not define any new semantics for OPTIONS
       however the specifications should make implementers aware of its
@@ -626,9 +626,12 @@ Table of Contents
 
    In order to minimise name collisions between process names and other
    kind of sub-resources, a distinct path segment shall be dedicated to
-   processes, e.g. /process/{process-name} or /operations/{operation-
-   name} (e.g. /domains/{domain-name}/processes/renewal for domain renew
-   operation).
+   processes, e.g. /processes/{process-name} or /operations/{operation-
+   name}.
+
+   The path segments shall be appended to the resource path to create
+   full URI of such processing resource (e.g. /domains/{domain-
+   name}/processes/renewal for domain renew operation).
 
    As discussed in Section 5.1.3 EPP check command may not be
    appropriate to be mapped directly to the HTTP uniform interface of

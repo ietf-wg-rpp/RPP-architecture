@@ -291,7 +291,9 @@ Other transform operations like renew, or restore which are not directly address
 
 This pattern can be further applied to object operations not defined in the core protocol or EPP, allowing easy and uniform extension of allowed operations.
 
-In order to minimise name collisions between process names and other kind of sub-resources, a distinct path segment shall be dedicated to processes, e.g. `/process/{process-name}` or `/operations/{operation-name}` (e.g. `/domains/{domain-name}/processes/renewal` for domain renew operation).
+In order to minimise name collisions between process names and other kind of sub-resources, a distinct path segment shall be dedicated to processes, e.g. `/processes/{process-name}` or `/operations/{operation-name}`.
+
+The path segments shall be appended to the resource path to create full URI of such processing resource (e.g. `/domains/{domain-name}/processes/renewal` for domain renew operation).
 
 As discussed in <<http-layer-detail-mapping-basic-ops>> EPP check command may not be appropriate to be mapped directly to the HTTP uniform interface of the resource itself. EPP check command will be therefore modelled as sub-resource such as `/availability` offering both HEAD operation for quick yes/no response and GET operation for more detailed response allowing for example to extend on the dataset provided (e.g. pricing information).  
 
