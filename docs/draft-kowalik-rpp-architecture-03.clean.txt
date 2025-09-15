@@ -5,8 +5,8 @@
 Network Working Group                                         P. Kowalik
 Internet-Draft                                                  DENIC eG
 Intended status: Informational                                M. Wullink
-Expires: 15 March 2026                                         SIDN Labs
-                                                       11 September 2025
+Expires: 19 March 2026                                         SIDN Labs
+                                                       15 September 2025
 
 
                             RPP Architecture
@@ -47,7 +47,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 15 March 2026.
+   This Internet-Draft will expire on 19 March 2026.
 
 Copyright Notice
 
@@ -637,6 +637,11 @@ Table of Contents
    *  RPP-specific status codes, transmitted in a dedicated HTTP header,
       must be used to provide granular, application-level information
       about the operation's result.
+
+   *  RPP responses must include both an HTTP status code and an RPP-
+      specific status code, however in some cases request handling may
+      be terminated already on HTTP level, for example due malformed
+      HTTP message, in such cases only HTTP status code will be present.
 
    *  RPP-specific status codes should be mapped to the most
       semantically appropriate HTTP status code.  For example, an RPP
