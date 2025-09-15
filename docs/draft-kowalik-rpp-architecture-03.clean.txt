@@ -398,12 +398,12 @@ Table of Contents
 5.1.1.  Authentication and Authorisation
 
    RPP is aimed to leverage scalable and modern authorisation standards,
-   with a focus on OAuth 2.0 [RFC6749] and related frameworks, however
-   it should also support other authentication schemes defined for HTTP,
-   an example would be HTTP Basic Authentication which might be required
-   for compatibility with existing EPP systems.  RPP should be able to
-   support future authentication and authorisation standards defined for
-   HTTP.
+   with a focus on OAuth 2.0 [RFC6749] and related frameworks.  However,
+   to maintain functional equivalence with EPP client authentication,
+   RPP SHOULD also support authentication schemes that can carry a
+   client identifier and a password, such as HTTP Basic Authentication.
+   RPP should be able to support future authentication and authorisation
+   standards defined for HTTP.
 
    Specifications will define profiles for:
 
@@ -1038,6 +1038,9 @@ Table of Contents
       Section 5.4.
 
    *  Fixed broken references to non-RFC documents
+
+   *  Explicitly stated that RPP SHOULD support client_id/password
+      authentication for EPP compatibility in Section 5.1.1.
 
 6.2.  -01 to -02
 
