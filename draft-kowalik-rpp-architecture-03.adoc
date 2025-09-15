@@ -194,7 +194,7 @@ The RPP architecture uses the best practices described in <<RFC9205>> for the HT
 [[authentication-authorization]]
 ==== Authentication and Authorisation
 
-RPP is aimed to leverage scalable and modern authorisation standards, with a focus on OAuth 2.0 <<RFC6749>> and related frameworks, however it should also support other authentication schemes defined for HTTP, an example would be HTTP Basic Authentication which might be required for compatibility with existing EPP systems. RPP should be able to support future authentication and authorisation standards defined for HTTP.
+RPP is aimed to leverage scalable and modern authorisation standards, with a focus on OAuth 2.0 <<RFC6749>> and related frameworks. However, to maintain functional equivalence with EPP client authentication, RPP SHOULD also support authentication schemes that can carry a client identifier and a password, such as HTTP Basic Authentication. RPP should be able to support future authentication and authorisation standards defined for HTTP.
 
 Specifications will define profiles for:
 
@@ -441,6 +441,8 @@ The RPP architecture is designed to be extensible, allowing for the addition of 
 * **Discovery and Negotiation:** Service discovery endpoints and content negotiation mechanisms allow clients and servers to dynamically discover and utilise new capabilities, resource types, and representations as they are introduced.
 * **Status codes:** New RPP status codes can be defined and registered including their mapping to HTTP status codes.
 
+RPP shall facilitate standardisation and reuse by requiring that extensions be registered with IANA. These registration requirements shall be fine-grained, applying independently to protocol elements such as resource types, data elements, operations, and status codes. This approach promotes consistency and interoperability, avoids fragmentation from conflicting definitions, and allows protocol elements to evolve independently.
+
 These extensibility mechanisms ensure that RPP can evolve to meet future requirements, integrate with emerging technologies, and support a wide range of provisioning scenarios while maintaining interoperability and stability.
 
 ==== Name Management and Collision Avoidance
@@ -456,7 +458,9 @@ This naming mechanism ensures that new resource types, data elements, and operat
 === -02 to -03
 
 * Clarified the relationship and mapping between HTTP status codes and RPP-specific status codes in <<http-layer-detail-status-codes>>.
+* Added paragraph on promotion of standard extensions to <<extension-mechanisms>>.
 * Fixed broken references to non-RFC documents
+* Explicitly stated that RPP SHOULD support client_id/password authentication for EPP compatibility in <<authentication-authorization>>.
 
 === -01 to -02
 
