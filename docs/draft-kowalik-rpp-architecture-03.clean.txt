@@ -5,8 +5,8 @@
 Network Working Group                                         P. Kowalik
 Internet-Draft                                                  DENIC eG
 Intended status: Informational                                M. Wullink
-Expires: 19 March 2026                                         SIDN Labs
-                                                       15 September 2025
+Expires: 9 April 2026                                          SIDN Labs
+                                                          6 October 2025
 
 
                             RPP Architecture
@@ -47,7 +47,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 19 March 2026.
+   This Internet-Draft will expire on 9 April 2026.
 
 Copyright Notice
 
@@ -80,19 +80,22 @@ Table of Contents
        5.1.2.  Resource Addressing
        5.1.3.  Mapping of basic operations to HTTP uniform interface
                (verbs)
-       5.1.4.  Asynchronous Operation Processing
-       5.1.5.  RPP specific status codes and relation to HTTP status
-               codes
-       5.1.6.  Transaction tracing and idempotency
+       5.1.4.  Mapping of operations beyond HTTP uniform interface to
+               URLs and verbs
+       5.1.5.  HTTP response codes
+       5.1.6.  Content negotiation for media types
        5.1.7.  Caching
-       5.1.8.  Content negotiation for media types
-       5.1.9.  Protocol Versioning
-       5.1.10. Profiles
-       5.1.11. Prefer Header for Response Verbosity
-       5.1.12. Language negotiation for textual content
-       5.1.13. Prefer Header for Request Validation
-       5.1.14. Definition of special resources
-       5.1.15. Service discovery mechanisms
+       5.1.8.  Language negotiation for textual content
+       5.1.9.  Client Signalling for Response Verbosity
+       5.1.10. Client Signalling for Request Validation
+       5.1.11. Asynchronous Operation Processing
+       5.1.12. RPP specific status codes and relation to HTTP status
+               codes
+       5.1.13. Transaction tracing and idempotency
+       5.1.14. Protocol Versioning
+       5.1.15. Profiles
+       5.1.16. Definition of special resources
+       5.1.17. Service discovery mechanisms
      5.2.  Data Representation Layer
        5.2.1.  Data structure
        5.2.2.  Data format
@@ -290,6 +293,14 @@ Table of Contents
    This layer defines the transport mechanism for RPP messages,
    utilising HTTP as the underlying protocol.
 
+   The HTTP Transport Layer consists of two sub-layers:
+
+4.2.1.1.  Built-in HTTP Features
+
+   These are features that are fully specified by the HTTP standard
+   itself.  RPP leverages these features directly, specifying their use
+   within the protocol without redefining their behaviour.
+
    It encompasses aspects such as:
 
    *  *Authentication and Authorisation:* Mechanisms for verifying the
@@ -307,6 +318,39 @@ Table of Contents
       verbs:* Handling more complex operations through appropriate URL
       structures and HTTP methods.
 
+   *  *HTTP response codes:* Utilising standard HTTP status codes to
+      indicate the outcome of requests.
+
+   *  *Content negotiation for media types:* Supporting multiple data
+      representation formats and using content negotiation to select the
+      appropriate format.
+
+   *  *Caching:* Leveraging HTTP caching mechanisms to improve
+      performance.
+
+   *  *Language negotiation for textual content:* Supporting multiple
+      languages for textual content and using language negotiation to
+      select the appropriate language.
+
+   *  *Representation preferences:* The client may define whether a full
+      representation of an object or only a limited representations is
+      preferred as a response
+
+   *  *Validation preferences:* Defining the approach to the input data
+      validation that shall be applied by the server.  The server may
+      apply lenient validation where the server makes best effort to
+      process the understood part of the request as opposed to strict
+      processing where the server would reject a request where part of
+      the data is not understood
+
+4.2.1.2.  RPP-Specific Extensions
+
+   These are protocol features where HTTP provides the necessary
+   building blocks, but RPP defines additional rules, conventions, or
+   mechanisms to address protocol-specific requirements.
+
+   It encompasses aspects such as:
+
    *  *Asynchronous Operation Management:* Facilitating the handling of
       operations that are not completed immediately, by defining an
       HTTP-based interaction pattern for status checking and deferred
@@ -319,20 +363,9 @@ Table of Contents
    *  *Transaction tracing and idempotency:* Mechanisms for tracking
       requests and ensuring idempotent operations where appropriate.
 
-   *  *Caching:* Leveraging HTTP caching mechanisms to improve
-      performance.
-
-   *  *Content negotiation for media types:* Supporting multiple data
-      representation formats and using content negotiation to select the
-      appropriate format.
-
    *  *Versions and profiles:* Support signalling of versions of RPP
       protocol and other protocol elements as well as defining sets of
       protocol elements and their versions in the form of profiles.
-
-   *  *Language negotiation for textual content:* Supporting multiple
-      languages for textual content and using language negotiation to
-      select the appropriate language.
 
    *  *Definition of special resources:* Defining specific resources for
       service discovery, metadata retrieval, etc.
@@ -529,14 +562,23 @@ Table of Contents
       information).  This may be a candidate for equivalence of EPP
       check command, however it may come with a few caveats to consider:
 
-      -  EPP check is intended to check whether domain registration is
-         possible.  This is not semantically the same as resource state.
-         Overloading HEAD with EPP semantics may lead to confusion,
-         especially as some frameworks implicitly implement HEAD out of
-         GET handling.
+      -  EPP check is intended to check whether (future) resource
+         provisioning is possible.  This is not semantically the same as
+         resource state.  Overloading HEAD with EPP semantics may lead
+         to confusion, especially as some frameworks implicitly
+         implement HEAD out of GET handling.
 
       -  a better equivalence of EPP check would be a POST with Expect
-         header
+         header, however this header being a reserved header in browsers
+         it may not be availble to all client implementations
+
+      The conclusion is that RPP should not overload HTTP HEAD with own
+      semantics, and support HEAD as it is defined in HTTP.
+
+   *  *OPTIONS* RPP shall not define any new semantics for OPTIONS
+      however the specifications should make implementers aware of its
+      role in CORS and pre-flight requests typically made by web
+      browsers
 
    *  *GET:* Retrieve resource state (e.g., retrieving domain or contact
       information) - EPP info command
@@ -554,29 +596,141 @@ Table of Contents
    *  *PATCH:* Partially modify a resource (e.g., updating specific
       attributes of a domain or contact) - EPP update command
 
-   EPP transfer commands (query and transform), being in fact a
-   representation of a running process, may be modelled by a subresource
-   /transfer of the resource being transferred, with a PUT operation to
-   initiate the transfer, GET operation to query the transfer status and
-   POST operation to approve or reject the transfer.  The same approach
-   may apply when adding any other process to the resource, like domain
-   restore.
+5.1.4.  Mapping of operations beyond HTTP uniform interface to URLs and
+        verbs
 
-   EPP check command may be modelled either as a GET operation with a
-   dedicated media type, a POST operation with Expect header or a HEAD
-   verb - depending on the specific requirements of the check operation.
+   Many of EPP commands do not map directly to the HTTP uniform
+   interface.  RPP will define how to handle these operations using
+   appropriate URL structures and HTTP methods.  In order to model
+   additional operations RPP will define an abstraction of process, this
+   being either a transient or a long running operations with state.  In
+   both cases such process may accept additional input data as well as
+   have an outcome or result not being part of the resource state
+   itself.  Processes shall therefore be modelled as separate sub-
+   resources of the resource being processed, with own uniform interface
+   and set of operations (CRUD).
+
+   EPP transfer commands (query and transform), may be modelled by a
+   subresource /transfer of the resource being transferred, or a
+   collection /transfers with a PUT/POST operation correspondingly to
+   initiate the transfer, GET operation to query the transfer status and
+   POST operation to approve or reject the transfer.
 
    Other transform operations like renew, or restore which are not
-   addressable resources in terms of REST may be either also modelled as
-   POST requests with a dedicated media type, or be a convention of URLs
-   with processing resources with only POST interface starting with
-   underscore, e.g. /domains/{domain-name}/_renew.
+   directly addressable resources in terms of REST will modelled as a
+   convention of URLs with processing resources with only POST
+   interface, e.g. /renewal.
+
+   This pattern can be further applied to object operations not defined
+   in the core protocol or EPP, allowing easy and uniform extension of
+   allowed operations.
+
+   In order to minimise name collisions between process names and other
+   kind of sub-resources, a distinct path segment shall be dedicated to
+   processes, e.g. /processes/{process-name} or /operations/{operation-
+   name}.
+
+   The path segments shall be appended to the resource path to create
+   full URI of such processing resource (e.g. /domains/{domain-
+   name}/processes/renewal for domain renew operation).
+
+   As discussed in Section 5.1.3 EPP check command may not be
+   appropriate to be mapped directly to the HTTP uniform interface of
+   the resource itself.  EPP check command will be therefore modelled as
+   sub-resource such as /availability offering both HEAD operation for
+   quick yes/no response and GET operation for more detailed response
+   allowing for example to extend on the dataset provided (e.g. pricing
+   information).
 
    This basic set of rules and guidelines will be further refined in the
    RPP specifications and give a universal toolset for extending RPP
    with new resources and commands.
 
-5.1.4.  Asynchronous Operation Processing
+5.1.5.  HTTP response codes
+
+   In general RPP shall make use of HTTP status codes to indicate
+   general response status categories (e.g., 2xx success responses, 4xx
+   for client errors, 5xx for server errors) [RFC7231] as opposed to
+   responding always 200 if the request was understood even if the
+   operation itself failed.  This allows clients and intermediaries to
+   make first level of determination of the requests outcome based on
+   the status code alone, without needing to parse the response body.
+
+   RPP shall use as specific HTTP codes as possible, using generic codes
+   like 400 Bad Request or 500 Internal Server Error only if no
+   corresponsing specific code exists (e.g. 404 for not existing
+   resource or 401 for unauthenticated request).
+
+   More specific RPP codes are elaborated in Section 5.1.12.
+
+5.1.6.  Content negotiation for media types
+
+   RPP supports content negotiation to allow clients to specify
+   preferred media types for request and response payloads using the
+   HTTP 'Accept' and 'Content-Type' headers [RFC7231].
+
+   *  'application/rpp+json' as the primary media type.
+
+   *  potential media type parameters for versioning, profiles, and
+      other protocol elements.
+
+   *  Potential support for other media types defined in the Section 5.2
+
+5.1.7.  Caching
+
+   RPP shall benefit from HTTP standard caching mechanisms to enable
+   standard components like proxies and caches to improve performance
+   and reduce load on servers.  RPP shall define caching policies for
+   different resources and operations, including cache-control headers
+   and ETag support.
+
+5.1.8.  Language negotiation for textual content
+
+   RPP shall support language negotiation to enable clients to request
+   responses in a preferred language using the HTTP 'Accept-Language'
+   header [RFC7231].
+
+   *  Server implementations MAY support multiple languages for textual
+      content in responses to provide human-readable localised
+      responses.
+
+   *  The default language and mechanisms for indicating supported
+      languages will be defined, preferably using HTTP methods, like
+      OPTIONS or HEAD requests.
+
+   *  application/rpp+json media type may support multi-language
+      representations, especially for writing operations involving user
+      provided content.  Other media types may have different mechanisms
+      for language representation.
+
+5.1.9.  Client Signalling for Response Verbosity
+
+   RPP may utilise the HTTP Prefer header [RFC7240] with the "return"
+   preference to allow clients to control the verbosity of responses.
+   For example, clients not interested in full resource representations
+   could use Prefer: return=minimal to request minimal responses,
+   reducing payload sizes and improving efficiency.  The default
+   behaviour, without the Prefer header, would be to return a full
+   resource representation, similar to object info responses in EPP,
+   especially after compound requests are completed.  For certain use-
+   cases it might be convenient for a client to receive also
+   dereferenced full or partial representation of related objects.  For
+   example details about sponsoring client of domain name instead of
+   just ID. "return" preference syntax alone is not sufficient for this
+   purpose, therefore RPP would need to define custom preference and
+   register it in "HTTP Preferences" IANA registry.
+
+5.1.10.  Client Signalling for Request Validation
+
+   RPP may utilise the HTTP Prefer header [RFC7240] for signalling the
+   preference for either strict or lenient processing of requests.  This
+   allows clients to indicate whether they prefer strict validation of
+   message payloads and rejection of requests with unknown properties or
+   a more lenient approach ignoring unknown properties that may allow
+   for additional flexibility in processing.  The default behaviour,
+   without the Prefer header, would be to process requests leniently.
+
+5.1.11.  Asynchronous Operation Processing
 
    The RPP architecture accommodates operations that are potentially
    long-running or cannot be completed synchronously due to their nature
@@ -621,7 +775,7 @@ Table of Contents
    operations intended for asynchronous execution will be designed to
    utilise this pattern.
 
-5.1.5.  RPP specific status codes and relation to HTTP status codes
+5.1.12.  RPP specific status codes and relation to HTTP status codes
 
    RPP uses a dual-layer approach for signaling operation outcomes,
    leveraging both standard HTTP status codes and RPP-specific status
@@ -668,37 +822,32 @@ Table of Contents
    *  RPP should also use other standardised HTTP signaling mechanisms
       where appropriate, for example for rate limiting.
 
-5.1.6.  Transaction tracing and idempotency
+5.1.13.  Transaction tracing and idempotency
 
    RPP shall support identification of requests and responses on both
    client side and server side with use of client provided identifiers
    and server provided identifiers.  This will allow for tracking of
    requests and responses in case of errors, and for idempotency of
-   requests.  This should be defined outside of the Data Representation
-   Layer (e.g. as HTTP Headers), to assure clear separation of resource
-   representation from performed actions.  If possible existing
-   mechanisms of HTTP shall be employed.
+   requests.
 
-5.1.7.  Caching
+   Client provided identifier shall be returned in the corresponding
+   synchronous response and shall be included in the asynchronous
+   responses.  This identifier shall be also used as idempotency
+   identifier to allow clients to retry requests without risk of
+   duplicate processing.  The client provided identifier shall be unique
+   for the client and the lifetime of the identifier shall be defined by
+   the server, typically for a limited time after the request was
+   processed.
 
-   RPP shall benefit from HTTP standard caching mechanisms to enable
-   standard components like proxies and caches to improve performance
-   and reduce load on servers.  RPP shall define caching policies for
-   different resources and operations, including cache-control headers
-   and ETag support.
+   Server shall always generate own unique trasaction identifier,
+   regardless of nature of the transaction (reading or changing).
 
-5.1.8.  Content negotiation for media types
+   The transmission of transaction identifiers should be defined outside
+   of the Data Representation Layer (e.g. as HTTP Headers), to assure
+   clear separation of resource representation from performed actions.
+   If possible existing mechanisms of HTTP shall be employed.
 
-   RPP supports content negotiation to allow clients to specify
-   preferred media types for request and response payloads using the
-   HTTP 'Accept' and 'Content-Type' headers [RFC7231].
-
-   *  Support for 'application/rpp+json' as the primary media type.
-
-   *  Potential support for other media types defined in the Data
-      Representation Layer
-
-5.1.9.  Protocol Versioning
+5.1.14.  Protocol Versioning
 
    RPP will define a versioning schema for the protocol itself, the
    extensions and other protocol elements such as profiles as
@@ -713,7 +862,7 @@ Table of Contents
    Signalling of the versions will be preferably realised using
    parameters of the media type.
 
-5.1.10.  Profiles
+5.1.15.  Profiles
 
    In real operational conditions different RPP server operators may
    have different requirements regarding set of protocol elements and
@@ -732,64 +881,18 @@ Table of Contents
    Signalling of the profiles will be preferably realised using
    parameters of the media type.
 
-5.1.11.  Prefer Header for Response Verbosity
-
-   RPP may utilise the HTTP Prefer header [RFC7240] with the "return"
-   preference to allow clients to control the verbosity of responses.
-   For example, clients not interested in full resource representations
-   could use Prefer: return=minimal to request minimal responses,
-   reducing payload sizes and improving efficiency.  The default
-   behaviour, without the Prefer header, would be to return a full
-   resource representation, similar to object info responses in EPP,
-   especially after compound requests are completed.  For certain use-
-   cases it might be convenient for a client to receive also
-   dereferenced full or partial representation of related objects.  For
-   example details about sponsoring client of domain name instead of
-   just ID. "return" preference syntax alone is not sufficient for this
-   purpose, therefore RPP would need to define custom preference and
-   register it in "HTTP Preferences" IANA registry.
-
-5.1.12.  Language negotiation for textual content
-
-   RPP shall support language negotiation to enable clients to request
-   responses in a preferred language using the HTTP 'Accept-Language'
-   header [RFC7231].
-
-   *  Server implementations MAY support multiple languages for textual
-      content in responses to provide human-readable localised
-      responses.
-
-   *  The default language and mechanisms for indicating supported
-      languages will be defined, preferably using HTTP methods, like
-      OPTIONS or HEAD requests.
-
-   *  application/rpp+json media type may support multi-language
-      representations, especially for writing operations involving user
-      provided content.  Other media types may have different mechanisms
-      for language representation.
-
-5.1.13.  Prefer Header for Request Validation
-
-   RPP may utilise the HTTP Prefer header [RFC7240] for signalling the
-   preference for either strict or lenient processing of requests.  This
-   allows clients to indicate whether they prefer strict validation of
-   message payloads and rejection of requests with unknown properties or
-   a more lenient approach ignoring unknown properties that may allow
-   for additional flexibility in processing.  The default behaviour,
-   without the Prefer header, would be to process requests leniently.
-
-5.1.14.  Definition of special resources
+5.1.16.  Definition of special resources
 
    RPP may define special resources for specific purposes:
 
    *  Service Discovery endpoints to advertise protocol capabilities and
-      supported features (see Section 5.1.15).
+      supported features (see Section 5.1.17).
 
    *  Metadata endpoints to provide schema information or other
       protocol-level metadata, potentially including OpenAPI definitions
       for documentation and code generation.
 
-5.1.15.  Service discovery mechanisms
+5.1.17.  Service discovery mechanisms
 
    RPP will define mechanisms for service discovery, allowing clients to
    dynamically discover RPP service endpoints and capabilities, reducing
@@ -1052,8 +1155,12 @@ Table of Contents
 
 6.1.  -02 to -03
 
+   *  split into HTTP built-ins and custom RPP in Section 4.2.1.
+      Reorganised Section 5.1 to reflect that and added/rewritten some
+      parts to cover all aspects.
+
    *  Clarified the relationship and mapping between HTTP status codes
-      and RPP-specific status codes in Section 5.1.5.
+      and RPP-specific status codes in Section 5.1.12.
 
    *  Added paragraph on promotion of standard extensions to
       Section 5.4.
@@ -1068,7 +1175,7 @@ Table of Contents
    *  Added responses must contain links to relevant object to
       Section 5.1.2
 
-   *  Added round trip minimisation principle to Section 5.1.15
+   *  Added round trip minimisation principle to Section 5.1.17
 
    *  Added description of lenient versus strict request validation to
       Section 4.2.3.
@@ -1094,7 +1201,7 @@ Table of Contents
       Section 5.4.
 
    *  Added Section about dereferenced related object representation to
-      Section 5.1.11.
+      Section 5.1.16.
 
 6.3.  -00 to -01
 
