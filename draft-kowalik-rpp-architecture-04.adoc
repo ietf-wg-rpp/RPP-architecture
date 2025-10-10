@@ -34,6 +34,7 @@
 :toc: auto
 :toclevels: 4
 :xrefstyle: short
+:date: 2025-10-10
 
 
 Advancements in development, integration, deployment environments and operational paradigms have led to a desire for an alternative for the Extensible Provisioning Protocol (EPP). 
