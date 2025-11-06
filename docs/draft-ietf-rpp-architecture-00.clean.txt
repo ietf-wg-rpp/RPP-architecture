@@ -5,12 +5,12 @@
 Network Working Group                                         P. Kowalik
 Internet-Draft                                                  DENIC eG
 Intended status: Informational                                M. Wullink
-Expires: 13 April 2026                                         SIDN Labs
-                                                         10 October 2025
+Expires: 10 May 2026                                           SIDN Labs
+                                                         6 November 2025
 
 
                             RPP Architecture
-                   draft-kowalik-rpp-architecture-03
+                     draft-ietf-rpp-architecture-00
 
 Abstract
 
@@ -47,7 +47,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 13 April 2026.
+   This Internet-Draft will expire on 10 May 2026.
 
 Copyright Notice
 
@@ -108,9 +108,10 @@ Table of Contents
      5.4.  Extension mechanisms
        5.4.1.  Name Management and Collision Avoidance
    6.  Change History
-     6.1.  -02 to -03
-     6.2.  -01 to -02
-     6.3.  -00 to -01
+     6.1.  -03 to draft-ietf-rpp-architecture-00
+     6.2.  -02 to -03
+     6.3.  -01 to -02
+     6.4.  -00 to -01
    7.  References
      7.1.  Normative References
      7.2.  Informational References
@@ -1153,7 +1154,11 @@ Table of Contents
 
 6.  Change History
 
-6.1.  -02 to -03
+6.1.  -03 to draft-ietf-rpp-architecture-00
+
+   *  No changes.  Document adopted by RPP WG.
+
+6.2.  -02 to -03
 
    *  split into HTTP built-ins and custom RPP in Section 4.2.1.
       Reorganised Section 5.1 to reflect that and added/rewritten some
@@ -1170,7 +1175,7 @@ Table of Contents
    *  Explicitly stated that RPP SHOULD support client_id/password
       authentication for EPP compatibility in Section 5.1.1.
 
-6.2.  -01 to -02
+6.3.  -01 to -02
 
    *  Added responses must contain links to relevant object to
       Section 5.1.2
@@ -1203,7 +1208,7 @@ Table of Contents
    *  Added Section about dereferenced related object representation to
       Section 5.1.16.
 
-6.3.  -00 to -01
+6.4.  -00 to -01
 
    *  Removed requirements and replaced with a reference to RPP WG
 

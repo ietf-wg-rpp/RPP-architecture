@@ -8,10 +8,10 @@
 <?rfc tocdepth="4"?>
 <?rfc symrefs="yes"?>
 <?rfc sortrefs="yes"?>
-<rfc xmlns:xi="http://www.w3.org/2001/XInclude" docName="draft-kowalik-rpp-architecture-03" category="info" ipr="trust200902" submissionType="IETF" xml:lang="en" version="3" >
+<rfc xmlns:xi="http://www.w3.org/2001/XInclude" docName="draft-ietf-rpp-architecture-00" category="info" ipr="trust200902" submissionType="IETF" xml:lang="en" version="3" >
   <front>
     <title abbrev="rpp-architecture">RPP Architecture</title>
-    <seriesInfo value="draft-kowalik-rpp-architecture-03" status="Informational" stream="IETF" name="Internet-Draft" asciiName="Internet-Draft"></seriesInfo>
+    <seriesInfo value="draft-ietf-rpp-architecture-00" status="Informational" stream="IETF" name="Internet-Draft" asciiName="Internet-Draft"></seriesInfo>
     <seriesInfo name="" value="" status="informational"></seriesInfo>
     <author initials="P" surname="Kowalik">
       <organization>DENIC eG</organization>
@@ -35,7 +35,7 @@
         <uri>https://sidn.nl/</uri>
       </address>
     </author>
-    <date day="10" year="2025" month="October"></date>
+    <date day="6" year="2025" month="November"></date>
     <area>Applications and Real-Time</area>
     <abstract>
 
@@ -544,11 +544,17 @@
 </section>
 </section>
 </section>
-    <section anchor="_1eaaf465-5b46-d7dc-1a75-9d2c8c333303"><name>Change History</name>
+    <section anchor="_e16ce0ee-9f55-203d-3f4c-de356cbe9e87"><name>Change History</name>
 
-<section anchor="_8e7b459e-f3d2-31f1-f619-7597b63758cc"><name>-02 to -03</name>
+<section anchor="_f955bfc6-f52c-6e59-2efb-b1f4f112dd34"><name>-03 to draft-ietf-rpp-architecture-00</name>
 
-<ul anchor="_ba4dbbdb-383c-2c99-d772-a605894f3193"><li>split into HTTP built-ins and custom RPP in <xref target="http-transport-layer-overview"></xref>. Reorganised <xref target="http-layer-details"></xref> to reflect that and added/rewritten some parts to cover all aspects.</li>
+<ul anchor="_6f6348eb-4560-e303-16f4-5d845758ae0c"><li>No changes. Document adopted by RPP WG.</li>
+</ul>
+</section>
+
+<section anchor="_43768723-9e7e-d94d-7038-28e6c601e2e8"><name>-02 to -03</name>
+
+<ul anchor="_003f0578-0ae6-35fa-d42c-c99c77c2b80b"><li>split into HTTP built-ins and custom RPP in <xref target="http-transport-layer-overview"></xref>. Reorganised <xref target="http-layer-details"></xref> to reflect that and added/rewritten some parts to cover all aspects.</li>
 <li>Clarified the relationship and mapping between HTTP status codes and RPP-specific status codes in <xref target="http-layer-detail-rpp-status-codes"></xref>.</li>
 <li>Added paragraph on promotion of standard extensions to <xref target="extension-mechanisms"></xref>.</li>
 <li>Fixed broken references to non-RFC documents</li>
@@ -556,9 +562,9 @@
 </ul>
 </section>
 
-<section anchor="_e21cf2eb-51b0-7f16-dd8b-6d51d54c6340"><name>-01 to -02</name>
+<section anchor="_26539c22-e5e8-4232-c49a-62863e89ec12"><name>-01 to -02</name>
 
-<ul anchor="_dcdf1620-69aa-996a-aa06-06b1caf319dc"><li>Added responses must contain links to relevant object to <xref target="resource-addressing"></xref></li>
+<ul anchor="_4895f1d9-f9a1-8917-fe71-93e447aa8e20"><li>Added responses must contain links to relevant object to <xref target="resource-addressing"></xref></li>
 <li>Added round trip minimisation principle to <xref target="service-discovery"></xref></li>
 <li>Added description of lenient versus strict request validation to <xref target="arch-layers-resource-definition-layer"></xref>.</li>
 <li>Added description of asynchronous handling to <xref target="http-transport-layer-overview"></xref> and <xref target="http-layer-details"></xref>.</li>
@@ -573,9 +579,9 @@
 </ul>
 </section>
 
-<section anchor="_2740866a-2e9e-8503-92db-ef8daca8ab16"><name>-00 to -01</name>
+<section anchor="_8effd294-58a8-bed8-32ef-98898239b1ef"><name>-00 to -01</name>
 
-<ul anchor="_dc640e02-0b83-97c5-2f87-833255cb2ea8"><li>Removed requirements and replaced with a reference to RPP WG</li>
+<ul anchor="_0b625fe0-bf8d-7318-7172-0f4476a95bb5"><li>Removed requirements and replaced with a reference to RPP WG</li>
 <li>Encapsulation removed as a primary extension point and part of architecture</li>
 <li>Added reference to JSContact as a possible contact representation</li>
 <li>Added HEAD verb to basic operations</li>

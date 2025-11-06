@@ -5,12 +5,12 @@
 Network Working Group                                         P. Kowalik
 Internet-Draft                                                  DENIC eG
 Intended status: Informational                                M. Wullink
-Expires: 13 April 2026                                         SIDN Labs
-                                                         10 October 2025
+Expires: 10 May 2026                                           SIDN Labs
+                                                         6 November 2025
 
 
                             RPP Architecture
-                   draft-kowalik-rpp-architecture-03
+                     draft-ietf-rpp-architecture-00
 
 Abstract
 
@@ -47,15 +47,15 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 13 April 2026.
+   This Internet-Draft will expire on 10 May 2026.
 
 
 
 
 
-Kowalik & Wullink         Expires 13 April 2026                 [Page 1]
+Kowalik & Wullink          Expires 10 May 2026                  [Page 1]
 
-Internet-Draft              rpp-architecture                October 2025
+Internet-Draft              rpp-architecture               November 2025
 
 
 Copyright Notice
@@ -77,7 +77,7 @@ Table of Contents
    1.  Introduction  . . . . . . . . . . . . . . . . . . . . . . . .   3
    2.  Terminology . . . . . . . . . . . . . . . . . . . . . . . . .   4
    3.  Requirements  . . . . . . . . . . . . . . . . . . . . . . . .   4
-   4.  Architectural Overview  . . . . . . . . . . . . . . . . . . .   5
+   4.  Architectural Overview  . . . . . . . . . . . . . . . . . . .   4
      4.1.  Resource Oriented Architecture  . . . . . . . . . . . . .   6
      4.2.  Architecture Layers . . . . . . . . . . . . . . . . . . .   7
        4.2.1.  HTTP Transport Layer  . . . . . . . . . . . . . . . .   7
@@ -109,9 +109,9 @@ Table of Contents
 
 
 
-Kowalik & Wullink         Expires 13 April 2026                 [Page 2]
+Kowalik & Wullink          Expires 10 May 2026                  [Page 2]
 
-Internet-Draft              rpp-architecture                October 2025
+Internet-Draft              rpp-architecture               November 2025
 
 
        5.2.1.  Data structure  . . . . . . . . . . . . . . . . . . .  21
@@ -125,9 +125,10 @@ Internet-Draft              rpp-architecture                October 2025
      5.4.  Extension mechanisms  . . . . . . . . . . . . . . . . . .  24
        5.4.1.  Name Management and Collision Avoidance . . . . . . .  25
    6.  Change History  . . . . . . . . . . . . . . . . . . . . . . .  26
-     6.1.  -02 to -03  . . . . . . . . . . . . . . . . . . . . . . .  26
-     6.2.  -01 to -02  . . . . . . . . . . . . . . . . . . . . . . .  26
-     6.3.  -00 to -01  . . . . . . . . . . . . . . . . . . . . . . .  27
+     6.1.  -03 to draft-ietf-rpp-architecture-00 . . . . . . . . . .  26
+     6.2.  -02 to -03  . . . . . . . . . . . . . . . . . . . . . . .  26
+     6.3.  -01 to -02  . . . . . . . . . . . . . . . . . . . . . . .  26
+     6.4.  -00 to -01  . . . . . . . . . . . . . . . . . . . . . . .  27
    7.  References  . . . . . . . . . . . . . . . . . . . . . . . . .  27
      7.1.  Normative References  . . . . . . . . . . . . . . . . . .  27
      7.2.  Informational References  . . . . . . . . . . . . . . . .  27
@@ -154,22 +155,6 @@ Internet-Draft              rpp-architecture                October 2025
    also facilitates direct browser and mobile application integration
    including modern security mechanisms such as OAuth2.0.
 
-
-
-
-
-
-
-
-
-
-
-
-Kowalik & Wullink         Expires 13 April 2026                 [Page 3]
-
-Internet-Draft              rpp-architecture                October 2025
-
-
    This architecture document serves as a foundation for a series of
    specifications that will collectively define RPP.  It details the
    layered approach, core components, and design considerations for
@@ -177,6 +162,14 @@ Internet-Draft              rpp-architecture                October 2025
    is intended to coexist with EPP, offering an alternative for
    implementers seeking a RESTful approach without aiming to replace EPP
    or define migration paths from EPP.  RPP aims for data model
+
+
+
+Kowalik & Wullink          Expires 10 May 2026                  [Page 3]
+
+Internet-Draft              rpp-architecture               November 2025
+
+
    compatibility with EPP core objects to allow automatic and mechanical
    mapping and conversion, especially for core objects (domain, contact,
    host).
@@ -215,17 +208,6 @@ Internet-Draft              rpp-architecture                October 2025
    The actual state of the requirements is present on WG Wiki
    https://wiki.ietf.org/en/group/rpp/requirements.
 
-
-
-
-
-
-
-Kowalik & Wullink         Expires 13 April 2026                 [Page 4]
-
-Internet-Draft              rpp-architecture                October 2025
-
-
 4.  Architectural Overview
 
    This chapter provides an overview of the RESTful Provisioning
@@ -235,6 +217,14 @@ Internet-Draft              rpp-architecture                October 2025
    to the well-established infrastructure and semantics of the web,
    focusing its own definitions on the specific domain of object
    provisioning.  Therefore, we assume:
+
+
+
+
+Kowalik & Wullink          Expires 10 May 2026                  [Page 4]
+
+Internet-Draft              rpp-architecture               November 2025
+
 
    *  *HTTP and RESTful principles are foundational:* RPP leverages HTTP
       for transport and adheres to RESTful principles for resource
@@ -277,9 +267,19 @@ Internet-Draft              rpp-architecture                October 2025
 
 
 
-Kowalik & Wullink         Expires 13 April 2026                 [Page 5]
+
+
+
+
+
+
+
+
+
+
+Kowalik & Wullink          Expires 10 May 2026                  [Page 5]
 
-Internet-Draft              rpp-architecture                October 2025
+Internet-Draft              rpp-architecture               November 2025
 
 
      +---------------------------------------------------------+
@@ -333,9 +333,9 @@ Internet-Draft              rpp-architecture                October 2025
 
 
 
-Kowalik & Wullink         Expires 13 April 2026                 [Page 6]
+Kowalik & Wullink          Expires 10 May 2026                  [Page 6]
 
-Internet-Draft              rpp-architecture                October 2025
+Internet-Draft              rpp-architecture               November 2025
 
 
    *  *Uniform Interface:* HTTP methods (HEAD, GET, POST, PUT, DELETE,
@@ -389,9 +389,9 @@ Internet-Draft              rpp-architecture                October 2025
 
 
 
-Kowalik & Wullink         Expires 13 April 2026                 [Page 7]
+Kowalik & Wullink          Expires 10 May 2026                  [Page 7]
 
-Internet-Draft              rpp-architecture                October 2025
+Internet-Draft              rpp-architecture               November 2025
 
 
    *  *Mapping of operations beyond HTTP uniform interface to URLs and
@@ -445,9 +445,9 @@ Internet-Draft              rpp-architecture                October 2025
 
 
 
-Kowalik & Wullink         Expires 13 April 2026                 [Page 8]
+Kowalik & Wullink          Expires 10 May 2026                  [Page 8]
 
-Internet-Draft              rpp-architecture                October 2025
+Internet-Draft              rpp-architecture               November 2025
 
 
    *  *Versions and profiles:* Support signalling of versions of RPP
@@ -501,9 +501,9 @@ Internet-Draft              rpp-architecture                October 2025
 
 
 
-Kowalik & Wullink         Expires 13 April 2026                 [Page 9]
+Kowalik & Wullink          Expires 10 May 2026                  [Page 9]
 
-Internet-Draft              rpp-architecture                October 2025
+Internet-Draft              rpp-architecture               November 2025
 
 
    *  *Mapping of data elements to media types:* Defining how the data
@@ -557,9 +557,9 @@ Internet-Draft              rpp-architecture                October 2025
 
 
 
-Kowalik & Wullink         Expires 13 April 2026                [Page 10]
+Kowalik & Wullink          Expires 10 May 2026                 [Page 10]
 
-Internet-Draft              rpp-architecture                October 2025
+Internet-Draft              rpp-architecture               November 2025
 
 
 5.1.1.2.  Fine-Grained Authorisation
@@ -613,9 +613,9 @@ Internet-Draft              rpp-architecture                October 2025
 
 
 
-Kowalik & Wullink         Expires 13 April 2026                [Page 11]
+Kowalik & Wullink          Expires 10 May 2026                 [Page 11]
 
-Internet-Draft              rpp-architecture                October 2025
+Internet-Draft              rpp-architecture               November 2025
 
 
 5.1.1.5.  Object level authorisation
@@ -669,9 +669,9 @@ Internet-Draft              rpp-architecture                October 2025
 
 
 
-Kowalik & Wullink         Expires 13 April 2026                [Page 12]
+Kowalik & Wullink          Expires 10 May 2026                 [Page 12]
 
-Internet-Draft              rpp-architecture                October 2025
+Internet-Draft              rpp-architecture               November 2025
 
 
 5.1.2.1.  Internationalised Domain Names (IDN)
@@ -725,9 +725,9 @@ Internet-Draft              rpp-architecture                October 2025
 
 
 
-Kowalik & Wullink         Expires 13 April 2026                [Page 13]
+Kowalik & Wullink          Expires 10 May 2026                 [Page 13]
 
-Internet-Draft              rpp-architecture                October 2025
+Internet-Draft              rpp-architecture               November 2025
 
 
    *  *DELETE:* Delete a resource (e.g., deleting a domain registration)
@@ -781,9 +781,9 @@ Internet-Draft              rpp-architecture                October 2025
 
 
 
-Kowalik & Wullink         Expires 13 April 2026                [Page 14]
+Kowalik & Wullink          Expires 10 May 2026                 [Page 14]
 
-Internet-Draft              rpp-architecture                October 2025
+Internet-Draft              rpp-architecture               November 2025
 
 
    quick yes/no response and GET operation for more detailed response
@@ -837,9 +837,9 @@ Internet-Draft              rpp-architecture                October 2025
 
 
 
-Kowalik & Wullink         Expires 13 April 2026                [Page 15]
+Kowalik & Wullink          Expires 10 May 2026                 [Page 15]
 
-Internet-Draft              rpp-architecture                October 2025
+Internet-Draft              rpp-architecture               November 2025
 
 
 5.1.8.  Language negotiation for textual content
@@ -893,9 +893,9 @@ Internet-Draft              rpp-architecture                October 2025
 
 
 
-Kowalik & Wullink         Expires 13 April 2026                [Page 16]
+Kowalik & Wullink          Expires 10 May 2026                 [Page 16]
 
-Internet-Draft              rpp-architecture                October 2025
+Internet-Draft              rpp-architecture               November 2025
 
 
 5.1.11.  Asynchronous Operation Processing
@@ -949,9 +949,9 @@ Internet-Draft              rpp-architecture                October 2025
 
 
 
-Kowalik & Wullink         Expires 13 April 2026                [Page 17]
+Kowalik & Wullink          Expires 10 May 2026                 [Page 17]
 
-Internet-Draft              rpp-architecture                October 2025
+Internet-Draft              rpp-architecture               November 2025
 
 
 5.1.12.  RPP specific status codes and relation to HTTP status codes
@@ -1005,9 +1005,9 @@ Internet-Draft              rpp-architecture                October 2025
 
 
 
-Kowalik & Wullink         Expires 13 April 2026                [Page 18]
+Kowalik & Wullink          Expires 10 May 2026                 [Page 18]
 
-Internet-Draft              rpp-architecture                October 2025
+Internet-Draft              rpp-architecture               November 2025
 
 
 5.1.13.  Transaction tracing and idempotency
@@ -1061,9 +1061,9 @@ Internet-Draft              rpp-architecture                October 2025
 
 
 
-Kowalik & Wullink         Expires 13 April 2026                [Page 19]
+Kowalik & Wullink          Expires 10 May 2026                 [Page 19]
 
-Internet-Draft              rpp-architecture                October 2025
+Internet-Draft              rpp-architecture               November 2025
 
 
    configuration of protocol version, extensions and their versions.
@@ -1117,9 +1117,9 @@ Internet-Draft              rpp-architecture                October 2025
 
 
 
-Kowalik & Wullink         Expires 13 April 2026                [Page 20]
+Kowalik & Wullink          Expires 10 May 2026                 [Page 20]
 
-Internet-Draft              rpp-architecture                October 2025
+Internet-Draft              rpp-architecture               November 2025
 
 
    *  Service discovery shall utilise standardised methods, like URI
@@ -1173,9 +1173,9 @@ Internet-Draft              rpp-architecture                October 2025
 
 
 
-Kowalik & Wullink         Expires 13 April 2026                [Page 21]
+Kowalik & Wullink          Expires 10 May 2026                 [Page 21]
 
-Internet-Draft              rpp-architecture                October 2025
+Internet-Draft              rpp-architecture               November 2025
 
 
 5.2.2.  Data format
@@ -1229,9 +1229,9 @@ Internet-Draft              rpp-architecture                October 2025
 
 
 
-Kowalik & Wullink         Expires 13 April 2026                [Page 22]
+Kowalik & Wullink          Expires 10 May 2026                 [Page 22]
 
-Internet-Draft              rpp-architecture                October 2025
+Internet-Draft              rpp-architecture               November 2025
 
 
 5.2.4.  Media Type definition
@@ -1285,9 +1285,9 @@ Internet-Draft              rpp-architecture                October 2025
 
 
 
-Kowalik & Wullink         Expires 13 April 2026                [Page 23]
+Kowalik & Wullink          Expires 10 May 2026                 [Page 23]
 
-Internet-Draft              rpp-architecture                October 2025
+Internet-Draft              rpp-architecture               November 2025
 
 
 5.3.2.  Mapping
@@ -1341,9 +1341,9 @@ Internet-Draft              rpp-architecture                October 2025
 
 
 
-Kowalik & Wullink         Expires 13 April 2026                [Page 24]
+Kowalik & Wullink          Expires 10 May 2026                 [Page 24]
 
-Internet-Draft              rpp-architecture                October 2025
+Internet-Draft              rpp-architecture               November 2025
 
 
    *  *Resource and Operation Extension:* New resource types and
@@ -1397,9 +1397,9 @@ Internet-Draft              rpp-architecture                October 2025
 
 
 
-Kowalik & Wullink         Expires 13 April 2026                [Page 25]
+Kowalik & Wullink          Expires 10 May 2026                 [Page 25]
 
-Internet-Draft              rpp-architecture                October 2025
+Internet-Draft              rpp-architecture               November 2025
 
 
    This naming mechanism ensures that new resource types, data elements,
@@ -1409,7 +1409,11 @@ Internet-Draft              rpp-architecture                October 2025
 
 6.  Change History
 
-6.1.  -02 to -03
+6.1.  -03 to draft-ietf-rpp-architecture-00
+
+   *  No changes.  Document adopted by RPP WG.
+
+6.2.  -02 to -03
 
    *  split into HTTP built-ins and custom RPP in Section 4.2.1.
       Reorganised Section 5.1 to reflect that and added/rewritten some
@@ -1426,7 +1430,7 @@ Internet-Draft              rpp-architecture                October 2025
    *  Explicitly stated that RPP SHOULD support client_id/password
       authentication for EPP compatibility in Section 5.1.1.
 
-6.2.  -01 to -02
+6.3.  -01 to -02
 
    *  Added responses must contain links to relevant object to
       Section 5.1.2
@@ -1447,16 +1451,15 @@ Internet-Draft              rpp-architecture                October 2025
 
    *  Added Security section to Section 5.1.1.
 
+
+
+Kowalik & Wullink          Expires 10 May 2026                 [Page 26]
+
+Internet-Draft              rpp-architecture               November 2025
+
+
    *  Added Relationship between clients and authentication credentials
       to Section 5.1.1.
-
-
-
-
-Kowalik & Wullink         Expires 13 April 2026                [Page 26]
-
-Internet-Draft              rpp-architecture                October 2025
-
 
    *  Add Data Validation (Section 5.2.3) section with schema language
       support for RPP to Section 5.2
@@ -1467,7 +1470,7 @@ Internet-Draft              rpp-architecture                October 2025
    *  Added Section about dereferenced related object representation to
       Section 5.1.16.
 
-6.3.  -00 to -01
+6.4.  -00 to -01
 
    *  Removed requirements and replaced with a reference to RPP WG
 
@@ -1502,17 +1505,19 @@ Internet-Draft              rpp-architecture                October 2025
               BCP 69, RFC 5731, August 2009,
               <https://www.rfc-editor.org/info/rfc5731>.
 
+
+
+
+
+Kowalik & Wullink          Expires 10 May 2026                 [Page 27]
+
+Internet-Draft              rpp-architecture               November 2025
+
+
    [RFC5732]  Hollenbeck, S., "Extensible Provisioning Protocol (EPP)
               Host Mapping", IETF, STD 69, DOI 10.17487/RFC5732, BCP 69,
               RFC 5732, August 2009,
               <https://www.rfc-editor.org/info/rfc5732>.
-
-
-
-Kowalik & Wullink         Expires 13 April 2026                [Page 27]
-
-Internet-Draft              rpp-architecture                October 2025
-
 
    [RFC5733]  Hollenbeck, S., "Extensible Provisioning Protocol (EPP)
               Contact Mapping", IETF, STD 69, DOI 10.17487/RFC5733,
@@ -1556,19 +1561,18 @@ Internet-Draft              rpp-architecture                October 2025
               DOI 10.17487/RFC9082, BCP 95, RFC 9082, June 2021,
               <https://www.rfc-editor.org/info/rfc9082>.
 
+
+
+
+
+Kowalik & Wullink          Expires 10 May 2026                 [Page 28]
+
+Internet-Draft              rpp-architecture               November 2025
+
+
    [RFC6902]  Bryan, P. and M. Nottingham, "JavaScript Object Notation
               (JSON) Patch", IETF, DOI 10.17487/RFC6902, RFC 6902, April
               2013, <https://www.rfc-editor.org/info/rfc6902>.
-
-
-
-
-
-
-Kowalik & Wullink         Expires 13 April 2026                [Page 28]
-
-Internet-Draft              rpp-architecture                October 2025
-
 
    [RFC9396]  Lodderstedt, T., Richer, J., and B. Campbell, "OAuth 2.0
               Rich Authorization Requests", IETF, DOI 10.17487/RFC9396,
@@ -1613,18 +1617,20 @@ Internet-Draft              rpp-architecture                October 2025
    [SemVer]   "Semantic Versioning 2.0.0", Misc SemVer 2.0.0,
               <https://semver.org/spec/v2.0.0.html>.
 
+
+
+
+
+Kowalik & Wullink          Expires 10 May 2026                 [Page 29]
+
+Internet-Draft              rpp-architecture               November 2025
+
+
    [REST]     Fielding, R., "Architectural Styles and the Design of
               Network-based Software Architectures",
               Doctoral Dissertation University of California, Irvine,
               September 2000,
               <http://roy.gbiv.com/pubs/dissertation/top.htm>.
-
-
-
-Kowalik & Wullink         Expires 13 April 2026                [Page 29]
-
-Internet-Draft              rpp-architecture                October 2025
-
 
    [OpenAPI]  "OpenAPI Specification", Misc OpenAPI,
               <https://swagger.io/specification/>.
@@ -1671,10 +1677,4 @@ Authors' Addresses
 
 
 
-
-
-
-
-
-
-Kowalik & Wullink         Expires 13 April 2026                [Page 30]
+Kowalik & Wullink          Expires 10 May 2026                 [Page 30]
