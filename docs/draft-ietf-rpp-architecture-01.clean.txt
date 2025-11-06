@@ -10,7 +10,7 @@ Expires: 10 May 2026                                           SIDN Labs
 
 
                             RPP Architecture
-                     draft-ietf-rpp-architecture-00
+                     draft-ietf-rpp-architecture-01
 
 Abstract
 
@@ -108,10 +108,11 @@ Table of Contents
      5.4.  Extension mechanisms
        5.4.1.  Name Management and Collision Avoidance
    6.  Change History
-     6.1.  -03 to draft-ietf-rpp-architecture-00
-     6.2.  -02 to -03
-     6.3.  -01 to -02
-     6.4.  -00 to -01
+     6.1.  -00 to -01
+     6.2.  -03 to draft-ietf-rpp-architecture-00
+     6.3.  -02 to -03
+     6.4.  -01 to -02
+     6.5.  -00 to -01
    7.  References
      7.1.  Normative References
      7.2.  Informational References
@@ -1154,11 +1155,13 @@ Table of Contents
 
 6.  Change History
 
-6.1.  -03 to draft-ietf-rpp-architecture-00
+6.1.  -00 to -01
+
+6.2.  -03 to draft-ietf-rpp-architecture-00
 
    *  No changes.  Document adopted by RPP WG.
 
-6.2.  -02 to -03
+6.3.  -02 to -03
 
    *  split into HTTP built-ins and custom RPP in Section 4.2.1.
       Reorganised Section 5.1 to reflect that and added/rewritten some
@@ -1175,7 +1178,7 @@ Table of Contents
    *  Explicitly stated that RPP SHOULD support client_id/password
       authentication for EPP compatibility in Section 5.1.1.
 
-6.3.  -01 to -02
+6.4.  -01 to -02
 
    *  Added responses must contain links to relevant object to
       Section 5.1.2
@@ -1208,7 +1211,7 @@ Table of Contents
    *  Added Section about dereferenced related object representation to
       Section 5.1.16.
 
-6.4.  -00 to -01
+6.5.  -00 to -01
 
    *  Removed requirements and replaced with a reference to RPP WG
 

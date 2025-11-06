@@ -5,7 +5,7 @@
 :abbrev: rpp-architecture
 :intended-series: informational
 :submission-type: IETF
-:docnumber: draft-ietf-rpp-architecture-00
+:docnumber: draft-ietf-rpp-architecture-01
 :status: informational
 :ipr: trust200902
 :area: Applications and Real-Time
@@ -500,6 +500,9 @@ Standardised RPP extensions MUST register their names in a dedicated IANA regist
 This naming mechanism ensures that new resource types, data elements, and operations can be introduced independently and safely, supporting the extensibility goals of the RPP architecture while maintaining interoperability and clarity across implementations.
 
 == Change History
+
+=== -00 to -01
+
 
 === -03 to draft-ietf-rpp-architecture-00
 * No changes. Document adopted by RPP WG.

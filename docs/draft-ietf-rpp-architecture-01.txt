@@ -10,7 +10,7 @@ Expires: 10 May 2026                                           SIDN Labs
 
 
                             RPP Architecture
-                     draft-ietf-rpp-architecture-00
+                     draft-ietf-rpp-architecture-01
 
 Abstract
 
@@ -125,10 +125,11 @@ Internet-Draft              rpp-architecture               November 2025
      5.4.  Extension mechanisms  . . . . . . . . . . . . . . . . . .  24
        5.4.1.  Name Management and Collision Avoidance . . . . . . .  25
    6.  Change History  . . . . . . . . . . . . . . . . . . . . . . .  26
-     6.1.  -03 to draft-ietf-rpp-architecture-00 . . . . . . . . . .  26
-     6.2.  -02 to -03  . . . . . . . . . . . . . . . . . . . . . . .  26
-     6.3.  -01 to -02  . . . . . . . . . . . . . . . . . . . . . . .  26
-     6.4.  -00 to -01  . . . . . . . . . . . . . . . . . . . . . . .  27
+     6.1.  -00 to -01  . . . . . . . . . . . . . . . . . . . . . . .  26
+     6.2.  -03 to draft-ietf-rpp-architecture-00 . . . . . . . . . .  26
+     6.3.  -02 to -03  . . . . . . . . . . . . . . . . . . . . . . .  26
+     6.4.  -01 to -02  . . . . . . . . . . . . . . . . . . . . . . .  26
+     6.5.  -00 to -01  . . . . . . . . . . . . . . . . . . . . . . .  27
    7.  References  . . . . . . . . . . . . . . . . . . . . . . . . .  27
      7.1.  Normative References  . . . . . . . . . . . . . . . . . .  27
      7.2.  Informational References  . . . . . . . . . . . . . . . .  27
@@ -161,7 +162,6 @@ Internet-Draft              rpp-architecture               November 2025
    building an interoperable and extensible provisioning protocol.  RPP
    is intended to coexist with EPP, offering an alternative for
    implementers seeking a RESTful approach without aiming to replace EPP
-   or define migration paths from EPP.  RPP aims for data model
 
 
 
@@ -170,6 +170,7 @@ Kowalik & Wullink          Expires 10 May 2026                  [Page 3]
 Internet-Draft              rpp-architecture               November 2025
 
 
+   or define migration paths from EPP.  RPP aims for data model
    compatibility with EPP core objects to allow automatic and mechanical
    mapping and conversion, especially for core objects (domain, contact,
    host).
@@ -217,7 +218,6 @@ Internet-Draft              rpp-architecture               November 2025
    to the well-established infrastructure and semantics of the web,
    focusing its own definitions on the specific domain of object
    provisioning.  Therefore, we assume:
-
 
 
 
@@ -1409,11 +1409,13 @@ Internet-Draft              rpp-architecture               November 2025
 
 6.  Change History
 
-6.1.  -03 to draft-ietf-rpp-architecture-00
+6.1.  -00 to -01
+
+6.2.  -03 to draft-ietf-rpp-architecture-00
 
    *  No changes.  Document adopted by RPP WG.
 
-6.2.  -02 to -03
+6.3.  -02 to -03
 
    *  split into HTTP built-ins and custom RPP in Section 4.2.1.
       Reorganised Section 5.1 to reflect that and added/rewritten some
@@ -1430,7 +1432,7 @@ Internet-Draft              rpp-architecture               November 2025
    *  Explicitly stated that RPP SHOULD support client_id/password
       authentication for EPP compatibility in Section 5.1.1.
 
-6.3.  -01 to -02
+6.4.  -01 to -02
 
    *  Added responses must contain links to relevant object to
       Section 5.1.2
@@ -1449,14 +1451,14 @@ Internet-Draft              rpp-architecture               November 2025
 
    *  Added Profiles chapter to Section 5.1.
 
-   *  Added Security section to Section 5.1.1.
-
 
 
 Kowalik & Wullink          Expires 10 May 2026                 [Page 26]
 
 Internet-Draft              rpp-architecture               November 2025
 
+
+   *  Added Security section to Section 5.1.1.
 
    *  Added Relationship between clients and authentication credentials
       to Section 5.1.1.
@@ -1470,7 +1472,7 @@ Internet-Draft              rpp-architecture               November 2025
    *  Added Section about dereferenced related object representation to
       Section 5.1.16.
 
-6.4.  -00 to -01
+6.5.  -00 to -01
 
    *  Removed requirements and replaced with a reference to RPP WG
 
@@ -1504,8 +1506,6 @@ Internet-Draft              rpp-architecture               November 2025
               Domain Name Mapping", IETF, STD 69, DOI 10.17487/RFC5731,
               BCP 69, RFC 5731, August 2009,
               <https://www.rfc-editor.org/info/rfc5731>.
-
-
 
 
 
