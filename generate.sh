@@ -14,7 +14,7 @@ display_help() {
 
 # Check if a parameter is provided
 if [ -z "$1" ]; then
-    filename=`echo draft-kowalik-rpp-architecture-*.adoc | sed 's/.adoc$//'`
+    filename=`echo draft-ietf-rpp-architecture-*.adoc | sed 's/.adoc$//'`
     echo "warning: using default filename: $filename" >&2
 else
     filename="$1"
