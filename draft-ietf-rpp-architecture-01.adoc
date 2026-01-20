@@ -1,12 +1,13 @@
 = RPP Architecture
+:abbrev: ietf-rpp-architecture
 :mn-document-class: ietf
 :mn-output-extensions: rfc,txt,html
 :doctype: internet-draft
 :abbrev: rpp-architecture
 :intended-series: informational
-:submission-type: IETF
-:docnumber: draft-ietf-rpp-architecture-01
 :status: informational
+:workgroup: RPP (RESTful Provisioning Protocol) Working Group:submission-type: IETF
+:docnumber: draft-ietf-rpp-architecture-01
 :ipr: trust200902
 :area: Applications and Real-Time
 :keyword: rpp, epp, rest, json, provisioning, domain, host, contact
@@ -33,7 +34,7 @@
 :toc: auto
 :toclevels: 4
 :xrefstyle: short
-:date: 2025-10-10
+:published-date: 2025-11-06
 
 Advancements in development, integration, deployment environments and operational paradigms have led to a desire for an alternative for the Extensible Provisioning Protocol (EPP). 
 This document defines the architecture for the RESTful Provisioning Protocol (RPP) an HTTP based provisioning protocol leveraging the REST architectural style and JSON data-interchange format, aiming to standardize a RESTful protocol for provisioning database objects. The architecture includes support for extensibility, allowing for multiple possible use cases. RPP is intended to co-exist with EPP, offering an alternative protocol including data model compatibility with EPP core objects and the benefits associated with the REST architectural style and widely adopted HTTP-based technologies. 
@@ -567,7 +568,7 @@ This naming mechanism ensures that new resource types, data elements, and operat
 * [[[RFC9553, RFC 9553]]] Stepanek, R. and M. Loffredo, "JSContact: A JSON Representation of Contact Data", IETF, DOI 10.17487/RFC9553, RFC 9553, May 2024, <https://www.rfc-editor.org/info/rfc9553>.
 * [[[SD-JWT, IETF(I-D.draft-ietf-oauth-sd-jwt-vc-10)]]] Terbu, O., Fett, D., and B. Campbell, "SD-JWT-based Verifiable Credentials (SD-JWT VC)", July 2025, <https://datatracker.ietf.org/doc/html/draft-ietf-oauth-sd-jwt-vc-10>.
 * [[[SelDiscJWT, IETF(I-D.draft-ietf-oauth-selective-disclosure-jwt-22)]]] Fett, D., Yasuda, K., and B. Campbell, "Selective Disclosure for JWTs (SD-JWT)", May 2025, <https://datatracker.ietf.org/doc/html/draft-ietf-oauth-selective-disclosure-jwt-22>.
-* [[[RPPReq, IETF(I-D.draft-ietf-rpp-requirements-01)]]] Wullink, M. and P. Kowalik, "RESTful Provisioning Protocol (RPP) - Requirements", June 2025, <https://datatracker.ietf.org/doc/html/draft-ietf-rpp-requirements-01>.
+* [[[RPPReq, IETF(I-D.draft-ietf-rpp-requirements-03)]]] Wullink, M. and P. Kowalik, "RESTful Provisioning Protocol (RPP) - Requirements", June 2025, <https://datatracker.ietf.org/doc/html/draft-ietf-rpp-requirements-03>.
 
 // Documentation of asciibib: https://www.relaton.org/asciibib/
 

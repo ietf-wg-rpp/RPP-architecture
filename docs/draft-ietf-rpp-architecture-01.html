@@ -10,22 +10,21 @@
 <meta content="
        Advancements in development, integration, deployment environments and operational paradigms have led to a desire for an alternative for the Extensible Provisioning Protocol (EPP). This document defines the architecture for the RESTful Provisioning Protocol (RPP) an HTTP based provisioning protocol leveraging the REST architectural style and JSON data-interchange format, aiming to standardize a RESTful protocol for provisioning database objects. The architecture includes support for extensibility, allowing for multiple possible use cases. RPP is intended to co-exist with EPP, offering an alternative protocol including data model compatibility with EPP core objects and the benefits associated with the REST architectural style and widely adopted HTTP-based technologies. 
     " name="description">
-<meta content="xml2rfc 3.30.2" name="generator">
+<meta content="xml2rfc 3.31.0" name="generator">
 <meta content="draft-ietf-rpp-architecture-01" name="ietf.draft">
 <!-- Generator version information:
-  xml2rfc 3.30.2
+  xml2rfc 3.31.0
     Python 3.12.3
     ConfigArgParse 1.7.1
     google-i18n-address 3.1.1
-    intervaltree 3.1.0
+    intervaltree 3.2.1
     Jinja2 3.1.6
     lxml 6.0.2
-    platformdirs 4.4.0
+    platformdirs 4.5.1
     pycountry 24.6.1
-    PyYAML 6.0.2
+    PyYAML 6.0.3
     requests 2.32.5
-    setuptools 80.9.0
-    wcwidth 0.2.13
+    wcwidth 0.2.14
     weasyprint 65.0
 -->
 <link href="draft-ietf-rpp-architecture-01.xml" rel="alternate" type="application/rfc+xml">
@@ -44,9 +43,9 @@
 */
 
 /* fonts */
-@import url('https://fonts.googleapis.com/css?family=Noto+Sans'); /* Sans-serif */
-@import url('https://fonts.googleapis.com/css?family=Noto+Serif'); /* Serif (print) */
-@import url('https://fonts.googleapis.com/css?family=Roboto+Mono'); /* Monospace */
+@import url('https://static.ietf.org/fonts/noto-sans/import.css'); /* Sans-serif */
+@import url('https://static.ietf.org/fonts/noto-serif/import.css'); /* Serif (print) */
+@import url('https://static.ietf.org/fonts/roboto-mono/import.css'); /* Monospace */
 
 :root {
   --font-sans: 'Noto Sans', Arial, Helvetica, sans-serif;
@@ -1228,7 +1227,7 @@ li > p:last-of-type:only-child {
 <div id="internal-metadata" class="document-information">
 <dl id="identifiers">
 <dt class="label-workgroup">Workgroup:</dt>
-<dd class="workgroup">Network Working Group</dd>
+<dd class="workgroup">RPP (RESTful Provisioning Protocol) Working Group:submission-type: IETF</dd>
 <dt class="label-internet-draft">Internet-Draft:</dt>
 <dd class="internet-draft">draft-ietf-rpp-architecture-01</dd>
 <dt class="label-">:</dt>
@@ -1486,28 +1485,28 @@ li > p:last-of-type:only-child {
 </nav>
 </section>
 </div>
-<div id="_fbfd654b-ca8a-a1ed-42c0-63ba571deb60">
+<div id="_00c07319-b6f9-d11c-610d-f10606b3be8c">
 <section id="section-1">
       <h2 id="name-introduction">
 <a href="#section-1" class="section-number selfRef">1. </a><a href="#name-introduction" class="section-name selfRef">Introduction</a>
       </h2>
-<div id="_5f605ad7-6a5f-fd3e-545f-0ba377599158">
+<div id="_c7e99cbf-eee5-fba0-7671-77cd9bcde6ce">
 <p id="section-1-1">This document outlines the architecture of the RESTful Provisioning Protocol (RPP). RPP aims to provide a modern, standardised, and developer-friendly protocol for provisioning and managing objects in a shared database or registry, initially focusing on functional equivalents of EPP object mappings for domain names <span>[<a href="#RFC5731" class="cite xref">RFC5731</a>]</span>, hosts <span>[<a href="#RFC5732" class="cite xref">RFC5732</a>]</span>, and contacts <span>[<a href="#RFC5733" class="cite xref">RFC5733</a>]</span>. RPP also considers provisioning of other objects as a potential use case, aiming for a uniform API layer for various registry operations.<a href="#section-1-1" class="pilcrow">¶</a></p>
 </div>
-<div id="_198bc076-8073-b0ec-12a3-56de8858bee6">
+<div id="_da99a54b-a6b4-72f0-60d2-cc5bf32aa236">
 <p id="section-1-2">RPP is designed to leverage the benefits of REST (REpresentational State Transfer), including statelessness, ease of integration, and compatibility with existing web infrastructure and tooling such as OpenAPI, API gateways, and web application firewalls. By adopting JSON as the data-interchange format, RPP seeks to align with current development practices and the successful deployment patterns observed in protocols such as RDAP <span>[<a href="#RFC9082" class="cite xref">RFC9082</a>]</span>. The choice of REST and JSON also facilitates direct browser and mobile application integration including modern security mechanisms such as OAuth2.0.<a href="#section-1-2" class="pilcrow">¶</a></p>
 </div>
-<div id="_b46ec568-e176-ef0c-96fa-20d60d475a55">
+<div id="_8506c5a3-b243-7444-75c6-9001d29728bc">
 <p id="section-1-3">This architecture document serves as a foundation for a series of specifications that will collectively define RPP. It details the layered approach, core components, and design considerations for building an interoperable and extensible provisioning protocol. RPP is intended to coexist with EPP, offering an alternative for implementers seeking a RESTful approach without aiming to replace EPP or define migration paths from EPP. RPP aims for data model compatibility with EPP core objects to allow automatic and mechanical mapping and conversion, especially for core objects (domain, contact, host).<a href="#section-1-3" class="pilcrow">¶</a></p>
 </div>
 </section>
 </div>
-<div id="_6afb2711-f083-634f-c734-08ecf1c5a178">
+<div id="_ac16e9d1-59b2-d778-61b6-938116e69b94">
 <section id="section-2">
       <h2 id="name-terminology">
 <a href="#section-2" class="section-number selfRef">2. </a><a href="#name-terminology" class="section-name selfRef">Terminology</a>
       </h2>
-<div id="_1ff46392-63d4-6c8b-d67c-78c470102be2">
+<div id="_5fc8299b-18c8-f461-c422-35b49f4911d0">
 <p id="section-2-1">This document uses terminology from RFC5730 <span>[<a href="#RFC5730" class="cite xref">RFC5730</a>]</span> and broadly adopts the REST architectural principles as defined in [REST] and related RFCs.<a href="#section-2-1" class="pilcrow">¶</a></p>
 </div>
 <ul class="normal">
@@ -1535,25 +1534,25 @@ li > p:last-of-type:only-child {
       </ul>
 </section>
 </div>
-<div id="_ab5e7351-dccc-8d20-c1f0-f9e81d073257">
+<div id="_d053034f-32f8-cf4f-5258-3d7027f600f6">
 <section id="section-3">
       <h2 id="name-requirements">
 <a href="#section-3" class="section-number selfRef">3. </a><a href="#name-requirements" class="section-name selfRef">Requirements</a>
       </h2>
-<div id="_2a136300-9ab0-ba2d-ba89-3b61b13f5728">
+<div id="_fb48cbe0-c2a3-5138-0c5e-b7198b46e882">
 <p id="section-3-1">This document is based on the requirements defined by RPP WG in state from 7.3.2025 <span>[<a href="#RPPReq" class="cite xref">RPPReq</a>]</span>.<a href="#section-3-1" class="pilcrow">¶</a></p>
 </div>
-<div id="_32b34168-6ab3-6f44-5ad6-808170b3e927">
+<div id="_74299032-a584-c733-e308-f6a11281327a">
 <p id="section-3-2">The actual state of the requirements is present on WG Wiki <span><a href="https://wiki.ietf.org/en/group/rpp/requirements">https://wiki.ietf.org/en/group/rpp/requirements</a></span>.<a href="#section-3-2" class="pilcrow">¶</a></p>
 </div>
 </section>
 </div>
-<div id="_cfefa492-f4ba-f5a9-ca8c-f6a75166648f">
+<div id="_52658d79-55a9-6c99-87d4-6c25f6df9b66">
 <section id="section-4">
       <h2 id="name-architectural-overview">
 <a href="#section-4" class="section-number selfRef">4. </a><a href="#name-architectural-overview" class="section-name selfRef">Architectural Overview</a>
       </h2>
-<div id="_db4db913-db84-8378-4cad-0eb22fc8cb8d">
+<div id="_f1458ee3-32f1-eb6a-34f5-135b0718420f">
 <p id="section-4-1">This chapter provides an overview of the RESTful Provisioning Protocol (RPP) architecture. A key design principle is to leverage existing web standards and principles, particularly HTTP and REST principles. This allows RPP to delegate functionality and features to the well-established infrastructure and semantics of the web, focusing its own definitions on the specific domain of object provisioning. Therefore, we assume:<a href="#section-4-1" class="pilcrow">¶</a></p>
 </div>
 <ul class="normal">
@@ -1567,16 +1566,16 @@ li > p:last-of-type:only-child {
           <strong>Layered architecture for modularity:</strong> The architecture is layered to promote modularity, separation of concerns, and independent evolution of different aspects of the protocol.<a href="#section-4-2.3" class="pilcrow">¶</a>
 </li>
       </ul>
-<div id="_7f9968cf-4a82-ddb1-dd89-e505aeb7eb47">
+<div id="_7d901666-fd96-b961-0873-cd87be6959e0">
 <p id="section-4-3">The architecture is divided into three main layers: <strong>HTTP Transport</strong>, <strong>Data Representation</strong>, and <strong>Resource Definition</strong>. Each layer defines specific aspects of the protocol. This layered approach allows for clear separation of concerns.<a href="#section-4-3" class="pilcrow">¶</a></p>
 </div>
-<div id="_9c9f0e89-805f-fc1c-8c1d-86d9db505cc7">
+<div id="_27450bb4-9697-8b58-b1b5-6ebf20e22eaa">
 <p id="section-4-4"><strong>Data Structure</strong> is a sub-layer of Data Representation and described later in this document. It focuses on the structure of RPP messages.<a href="#section-4-4" class="pilcrow">¶</a></p>
 </div>
-<div id="_193c6244-d992-200a-00d0-456335bea81f">
+<div id="_6182dddd-fd49-d464-f7f9-c181a94f6d82">
 <p id="section-4-5">Similarly <strong>Data Elements</strong>, their <strong>Mapping</strong> onto Data Structure and <strong>Operations</strong> are elements of Resource Definition. They focus on the semantic structure of RPP resources and transformation of those resources.<a href="#section-4-5" class="pilcrow">¶</a></p>
 </div>
-<div id="_18ef9dd4-3147-8787-ddd6-7059246fb480">
+<div id="_7910eb0a-7874-1598-c379-a0b6813472c2">
 <div class="sourcecode" id="section-4-6">
 <pre>  +---------------------------------------------------------+
   |                      HTTP Transport                     |
@@ -1617,7 +1616,7 @@ li > p:last-of-type:only-child {
         <h3 id="name-resource-oriented-architect">
 <a href="#section-4.1" class="section-number selfRef">4.1. </a><a href="#name-resource-oriented-architect" class="section-name selfRef">Resource Oriented Architecture</a>
         </h3>
-<div id="_452e5d79-1866-b0bf-40b4-4f903591598d">
+<div id="_89b304ea-aaca-69ef-d7d1-aef422a9bc3a">
 <p id="section-4.1-1">RPP adopts a Resource Oriented Architecture (ROA), aligning with RESTful principles. This approach defines all manageable entities as "resources," identified by unique URLs. Operations on these resources are performed through a uniform interface using the standard HTTP methods and their semantics. This contrasts with RPC-style protocols, which often define new and specific operations with custom parameters. ROA promotes a more standardised and interoperable approach, leveraging the existing web infrastructure and its well-defined semantics. Key aspects of ROA within RPP include:<a href="#section-4.1-1" class="pilcrow">¶</a></p>
 </div>
 <ul class="normal">
@@ -1642,7 +1641,7 @@ li > p:last-of-type:only-child {
         </ul>
 </section>
 </div>
-<div id="_52cd0346-b175-1022-f56f-00d353e40cd0">
+<div id="_69e8545a-0747-23d7-7fd8-54d418b753a5">
 <section id="section-4.2">
         <h3 id="name-architecture-layers">
 <a href="#section-4.2" class="section-number selfRef">4.2. </a><a href="#name-architecture-layers" class="section-name selfRef">Architecture Layers</a>
@@ -1652,21 +1651,21 @@ li > p:last-of-type:only-child {
           <h4 id="name-http-transport-layer">
 <a href="#section-4.2.1" class="section-number selfRef">4.2.1. </a><a href="#name-http-transport-layer" class="section-name selfRef">HTTP Transport Layer</a>
           </h4>
-<div id="_7be9fe8e-51ac-4729-6823-507384b15ce0">
+<div id="_eb200f48-11fb-7ea1-77aa-4218c149ac04">
 <p id="section-4.2.1-1">This layer defines the transport mechanism for RPP messages, utilising HTTP as the underlying protocol.<a href="#section-4.2.1-1" class="pilcrow">¶</a></p>
 </div>
-<div id="_57fe7583-8758-736b-639d-9ca059d4a558">
+<div id="_848fb936-c4aa-0b45-d998-a38c165070bb">
 <p id="section-4.2.1-2">The HTTP Transport Layer consists of two sub-layers:<a href="#section-4.2.1-2" class="pilcrow">¶</a></p>
 </div>
-<div id="_b3830f2a-2666-7cef-8147-ed3c0b1df18c">
+<div id="_8b6a1f7b-574c-998d-98f1-d7a0d00c722c">
 <section id="section-4.2.1.1">
             <h5 id="name-built-in-http-features">
 <a href="#section-4.2.1.1" class="section-number selfRef">4.2.1.1. </a><a href="#name-built-in-http-features" class="section-name selfRef">Built-in HTTP Features</a>
             </h5>
-<div id="_7ea3f1ff-1140-1630-c5e8-fc09c2058489">
+<div id="_e30d14d8-03b1-6c15-41a0-5bfdfa3fd755">
 <p id="section-4.2.1.1-1">These are features that are fully specified by the HTTP standard itself. RPP leverages these features directly, specifying their use within the protocol without redefining their behaviour.<a href="#section-4.2.1.1-1" class="pilcrow">¶</a></p>
 </div>
-<div id="_b255647a-52dc-ae08-dd8a-f13fe7cfa655">
+<div id="_ccdf8507-a0dd-793e-b450-cd299578d60f">
 <p id="section-4.2.1.1-2">It encompasses aspects such as:<a href="#section-4.2.1.1-2" class="pilcrow">¶</a></p>
 </div>
 <ul class="normal">
@@ -1703,15 +1702,15 @@ li > p:last-of-type:only-child {
             </ul>
 </section>
 </div>
-<div id="_db73978f-bb1a-4ec6-c983-25158c0f63a3">
+<div id="_37754dff-2893-ad62-adb4-ea12274d6c92">
 <section id="section-4.2.1.2">
             <h5 id="name-rpp-specific-extensions">
 <a href="#section-4.2.1.2" class="section-number selfRef">4.2.1.2. </a><a href="#name-rpp-specific-extensions" class="section-name selfRef">RPP-Specific Extensions</a>
             </h5>
-<div id="_ac0128bb-4bc7-c198-a039-779b2023a74d">
+<div id="_1ce47285-5595-f644-3f8d-b52a4e08604d">
 <p id="section-4.2.1.2-1">These are protocol features where HTTP provides the necessary building blocks, but RPP defines additional rules, conventions, or mechanisms to address protocol-specific requirements.<a href="#section-4.2.1.2-1" class="pilcrow">¶</a></p>
 </div>
-<div id="_f1d276f6-d944-ab8a-bb66-6401eecb8a75">
+<div id="_4f102bed-dc33-fa26-2934-455802828f52">
 <p id="section-4.2.1.2-2">It encompasses aspects such as:<a href="#section-4.2.1.2-2" class="pilcrow">¶</a></p>
 </div>
 <ul class="normal">
@@ -1738,15 +1737,15 @@ li > p:last-of-type:only-child {
 </div>
 </section>
 </div>
-<div id="_66a6c799-7f9f-62c6-7bfb-cb1ce54fe941">
+<div id="_697778ad-0ab4-d313-7e3d-694371ded7eb">
 <section id="section-4.2.2">
           <h4 id="name-data-representation-layer">
 <a href="#section-4.2.2" class="section-number selfRef">4.2.2. </a><a href="#name-data-representation-layer" class="section-name selfRef">Data Representation Layer</a>
           </h4>
-<div id="_dca5b3c7-f4c0-542c-296d-e224fe3408b4">
+<div id="_739c2863-3738-f05f-463a-53321fde6e93">
 <p id="section-4.2.2-1">This layer focuses on the data representation of RPP messages. It defines the media type used to carry RPP data and supports various data representation formats.<a href="#section-4.2.2-1" class="pilcrow">¶</a></p>
 </div>
-<div id="_893667b2-378a-3b18-4ab9-1d149c8a5e29">
+<div id="_5d58db99-d377-00ce-0b6c-ce8540f24413">
 <p id="section-4.2.2-2">It encompasses aspects such as:<a href="#section-4.2.2-2" class="pilcrow">¶</a></p>
 </div>
 <ul class="normal">
@@ -1767,10 +1766,10 @@ li > p:last-of-type:only-child {
           <h4 id="name-resource-definition-layer">
 <a href="#section-4.2.3" class="section-number selfRef">4.2.3. </a><a href="#name-resource-definition-layer" class="section-name selfRef">Resource Definition Layer</a>
           </h4>
-<div id="_b24a4b7c-06b5-d73d-e9bb-60eaee1466cc">
+<div id="_5a6397ed-4716-901c-68ec-67444a50323f">
 <p id="section-4.2.3-1">This layer defines the structure and operations for each resource type, independent of media type or representation. It ensures resources are well-defined and allows for easy extensibility and compatibility with different media types.<a href="#section-4.2.3-1" class="pilcrow">¶</a></p>
 </div>
-<div id="_d93dc8e8-e7d9-83c5-4380-dcd7828e933b">
+<div id="_048827df-fa79-672a-a6c2-776f09659cd0">
 <p id="section-4.2.3-2">It encompasses aspects such as:<a href="#section-4.2.3-2" class="pilcrow">¶</a></p>
 </div>
 <ul class="normal">
@@ -1796,12 +1795,12 @@ li > p:last-of-type:only-child {
 </div>
 </section>
 </div>
-<div id="_82273aa3-c83c-c131-b854-3f33b6457354">
+<div id="_37e46709-9f39-4dcd-ba53-dab125237e1c">
 <section id="section-5">
       <h2 id="name-protocol-details">
 <a href="#section-5" class="section-number selfRef">5. </a><a href="#name-protocol-details" class="section-name selfRef">Protocol Details</a>
       </h2>
-<div id="_191b49af-0fef-57bb-0781-333751916059">
+<div id="_258b3fe6-6525-0317-3cb7-1b42072bd9cf">
 <p id="section-5-1">This section provides further details on each layer of the RPP architecture.<a href="#section-5-1" class="pilcrow">¶</a></p>
 </div>
 <div id="http-layer-details">
@@ -1809,7 +1808,7 @@ li > p:last-of-type:only-child {
         <h3 id="name-http-transport-layer-detail">
 <a href="#section-5.1" class="section-number selfRef">5.1. </a><a href="#name-http-transport-layer-detail" class="section-name selfRef">HTTP Transport Layer Details</a>
         </h3>
-<div id="_dbd2d8e8-f81a-0398-cc59-2da345a3c640">
+<div id="_c03b1932-d98d-f6c5-488c-b2cfbf861fea">
 <p id="section-5.1-1">The RPP architecture uses the best practices described in <span>[<a href="#RFC9205" class="cite xref">RFC9205</a>]</span> for the HTTP transport layer.<a href="#section-5.1-1" class="pilcrow">¶</a></p>
 </div>
 <div id="authentication-authorization">
@@ -1817,10 +1816,10 @@ li > p:last-of-type:only-child {
           <h4 id="name-authentication-and-authoris">
 <a href="#section-5.1.1" class="section-number selfRef">5.1.1. </a><a href="#name-authentication-and-authoris" class="section-name selfRef">Authentication and Authorisation</a>
           </h4>
-<div id="_fcfde2ed-58f9-09cd-12dd-3de1e223e9d0">
+<div id="_89a553ef-2ab2-99d2-727d-92220e97bf8e">
 <p id="section-5.1.1-1">RPP is aimed to leverage scalable and modern authorisation standards, with a focus on OAuth 2.0 <span>[<a href="#RFC6749" class="cite xref">RFC6749</a>]</span> and related frameworks. However, to maintain functional equivalence with EPP client authentication, RPP SHOULD also support authentication schemes that can carry a client identifier and a password, such as HTTP Basic Authentication. RPP should be able to support future authentication and authorisation standards defined for HTTP.<a href="#section-5.1.1-1" class="pilcrow">¶</a></p>
 </div>
-<div id="_fa0717e6-51fd-9465-45bd-5ac3f6714148">
+<div id="_647d200d-1ef7-f890-5a35-4999b25c3692">
 <p id="section-5.1.1-2">Specifications will define profiles for:<a href="#section-5.1.1-2" class="pilcrow">¶</a></p>
 </div>
 <ul class="normal">
@@ -1829,61 +1828,61 @@ li > p:last-of-type:only-child {
             <li class="normal" id="section-5.1.1-3.2">Authorisation frameworks (e.g., OAuth 2.0 <span>[<a href="#RFC6749" class="cite xref">RFC6749</a>]</span>)<a href="#section-5.1.1-3.2" class="pilcrow">¶</a>
 </li>
           </ul>
-<div id="_8624ceb1-dd36-e300-b361-9e0849af8181">
+<div id="_55e0df01-1af1-e0a5-4655-30e10c59854a">
 <p id="section-5.1.1-4">Implementations will be able to choose authentication and authorisation methods appropriate for their security requirements.<a href="#section-5.1.1-4" class="pilcrow">¶</a></p>
 </div>
-<div id="_bc515ee1-b8db-b669-f62d-080fb3ce5cf3">
+<div id="_a614e2d6-328f-e6f0-d20f-50ed1f088fac">
 <section id="section-5.1.1.1">
             <h5 id="name-authorisation-scopes">
 <a href="#section-5.1.1.1" class="section-number selfRef">5.1.1.1. </a><a href="#name-authorisation-scopes" class="section-name selfRef">Authorisation Scopes</a>
             </h5>
-<div id="_dcf6551f-1e19-af6b-af76-5f673410f1fa">
+<div id="_322c23c8-6f34-0cc0-624d-e5453f6c1b96">
 <p id="section-5.1.1.1-1">RPP specifications will standardise authorisation scopes (like rpp:read or rpp:write) to define granular access control for different usage scenarios. These scopes will be defined for various operations and resource types, ensuring that clients can be granted only the necessary permissions.<a href="#section-5.1.1.1-1" class="pilcrow">¶</a></p>
 </div>
 </section>
 </div>
-<div id="_359db6ab-e2ab-f5b5-1795-5b635ce764c6">
+<div id="_8d419db4-29f9-8465-bff5-b6df02b168cb">
 <section id="section-5.1.1.2">
             <h5 id="name-fine-grained-authorisation">
 <a href="#section-5.1.1.2" class="section-number selfRef">5.1.1.2. </a><a href="#name-fine-grained-authorisation" class="section-name selfRef">Fine-Grained Authorisation</a>
             </h5>
-<div id="_6254b98c-e895-0e5e-a83e-1c3927fe26cf">
+<div id="_9cb0c5eb-0ed5-3604-5b28-1afc2a25e3f8">
 <p id="section-5.1.1.2-1">RPP authorisation models may become fine-grained, extending beyond simple auth-code based models used in EPP. Authorisation decisions will be able to consider the specific operation being performed (e.g., update vs. read), the resource being accessed (e.g., a specific domain name), and potentially even attributes within the resource.<a href="#section-5.1.1.2-1" class="pilcrow">¶</a></p>
 </div>
-<div id="_ac302653-474b-3a4f-bcd2-91a05993df29">
+<div id="_5f01284b-b6bc-73da-0ec1-9fe169624b89">
 <p id="section-5.1.1.2-2">Here solutions like OAuth2 RAR <span>[<a href="#RFC9396" class="cite xref">RFC9396</a>]</span> could be considered to provide fine-grained access control.<a href="#section-5.1.1.2-2" class="pilcrow">¶</a></p>
 </div>
 </section>
 </div>
-<div id="_02facde3-4c03-69c8-3d09-a2e2c6ca92ac">
+<div id="_9dc33ee7-2d9b-0142-5c95-c63d87fe738e">
 <section id="section-5.1.1.3">
             <h5 id="name-relationship-between-client">
 <a href="#section-5.1.1.3" class="section-number selfRef">5.1.1.3. </a><a href="#name-relationship-between-client" class="section-name selfRef">Relationship between clients and authentication credentials</a>
             </h5>
-<div id="_c98e2421-89db-c08f-2ad8-cec436621a06">
+<div id="_441369e1-01c2-747d-3a93-ae883ad11447">
 <p id="section-5.1.1.3-1">RPP authentication and authorisation model will make a clear distinction between the login credentials and the authorisation to act in context of a given RPP client. More than one credential might be authorised to act on behalf of the same RPP client. The same credential however must always be assigned to one and only one RPP client context.<a href="#section-5.1.1.3-1" class="pilcrow">¶</a></p>
 </div>
-<div id="_c5dd3882-e012-adeb-2499-4f65f57a550f">
+<div id="_0e8925af-0565-8ab4-7004-bf43f7556f0e">
 <p id="section-5.1.1.3-2">In case of HTTP Basic Authentication, one user-id is always bound to at most one RPP client. For OAuth, the issued token is bound to the context of at most one RPP client, even though the OAuth client itself might have access to multiple RPP clients. The assignment of tokens to specific RPP clients can be controlled through the authorisation flow using the OAuth scope parameter. For example, if an OAuth client has access to two RPP clients (Client A and Client B), the scope parameter can specify which client the token applies to. A scope value like <code>scope=rpp:clientA</code> would ensure the token is valid only for Client A, while <code>scope=rpp:clientB</code> would apply to Client B.<a href="#section-5.1.1.3-2" class="pilcrow">¶</a></p>
 </div>
 </section>
 </div>
-<div id="_af05bf66-98cc-9269-feba-9b802bfaec0b">
+<div id="_b0e1eb7e-b6ef-21dd-6112-66a1656d19a3">
 <section id="section-5.1.1.4">
             <h5 id="name-security">
 <a href="#section-5.1.1.4" class="section-number selfRef">5.1.1.4. </a><a href="#name-security" class="section-name selfRef">Security</a>
             </h5>
-<div id="_a878d280-9916-16a9-debc-aacd7f9ddfe1">
+<div id="_351e088d-4de8-56ce-668a-d699f0a47c44">
 <p id="section-5.1.1.4-1">RPP will not explicitly define security related policies related to authentication or authorisation (such as password complexity, token lifetime or cryptography used) on the protocol level. Instead, these properties will be delegated to the best practices of the chosen authentication schemes, which may evolve over time and would have to be independent of the protocol itself.<a href="#section-5.1.1.4-1" class="pilcrow">¶</a></p>
 </div>
 </section>
 </div>
-<div id="_a41342f6-cb24-842e-d422-75a580a87647">
+<div id="_d345a9da-e07f-7dc6-bc6f-58b8149635be">
 <section id="section-5.1.1.5">
             <h5 id="name-object-level-authorisation">
 <a href="#section-5.1.1.5" class="section-number selfRef">5.1.1.5. </a><a href="#name-object-level-authorisation" class="section-name selfRef">Object level authorisation</a>
             </h5>
-<div id="_596a2682-ba3c-a806-a01b-24b22328be98">
+<div id="_613eef23-9e41-4eb1-35a6-b77c651d7c25">
 <p id="section-5.1.1.5-1">RPP will define a mechanism for object-level authorisation, preventing unauthorised access to specific objects or resources. Each object will have an associated sponsor or owner with full control over an object, and the protocol will allow for the specification of which clients are authorised to access or modify non-sponsored/owned objects. This could be achieved through state-of-the-art standards like OAuth authorisation tokens, scopes, and resource-specific permissions but also shared secrets for backward compatibility with EPP password-based authorisation information.<a href="#section-5.1.1.5-1" class="pilcrow">¶</a></p>
 </div>
 </section>
@@ -1895,7 +1894,7 @@ li > p:last-of-type:only-child {
           <h4 id="name-resource-addressing">
 <a href="#section-5.1.2" class="section-number selfRef">5.1.2. </a><a href="#name-resource-addressing" class="section-name selfRef">Resource Addressing</a>
           </h4>
-<div id="_86428674-5747-5425-4b56-da47a7f7f5e1">
+<div id="_f0c0173e-31f4-6de0-0a05-d29ad82854fc">
 <p id="section-5.1.2-1">RPP resources are addressed using URLs. Considerations include:<a href="#section-5.1.2-1" class="pilcrow">¶</a></p>
 </div>
 <ul class="normal">
@@ -1904,24 +1903,24 @@ li > p:last-of-type:only-child {
             <li class="normal" id="section-5.1.2-2.2">URL structure to represent list of related resources (e.g., <code>/domains/{domain-name}/contacts/</code>)<a href="#section-5.1.2-2.2" class="pilcrow">¶</a>
 </li>
           </ul>
-<div id="_77ff411f-e73e-ed7f-74e3-4f866f2f8e5d">
+<div id="_75286185-8753-6d69-46f3-3512f01fa49f">
 <p id="section-5.1.2-3">RPP URL structure will be designed to be human-readable, intuitive, and RESTful, allowing clients to easily navigate and interact with resources.<a href="#section-5.1.2-3" class="pilcrow">¶</a></p>
 </div>
-<div id="_672acb15-00ae-a0fb-a38f-74681f606ad3">
+<div id="_bf71e2bd-927b-c1dc-02e9-0b467f8bd2e3">
 <p id="section-5.1.2-4">RPP would not require all URLs to be hard wired to server's RPP root URL. Instead, it would allow for relative URLs to be defined and discovered by the client. This would allow servers to distribute resources across multiple servers and URLs and allow for easier scaling as described in <span>[<a href="#RFC9205" class="cite xref">RFC9205</a>]</span>. At the same time the URLs shall be deterministic for the duration of the client session in order to minimise round trips and streamline the interaction.<a href="#section-5.1.2-4" class="pilcrow">¶</a></p>
 </div>
-<div id="_48cb9f3f-b7a9-02f5-e1f2-ee7ddc9d1f24">
+<div id="_706503bb-6b44-307e-7d88-f87553abd820">
 <p id="section-5.1.2-5">As a matter of extensibility consideration RPP should allow for additional path segments to be added to the URLs and be discoverable by clients.<a href="#section-5.1.2-5" class="pilcrow">¶</a></p>
 </div>
-<div id="_413181a9-b513-19b8-0e7e-2ed083819d4a">
+<div id="_5c5ef08c-e427-843a-5db7-27013a6bde73">
 <p id="section-5.1.2-6">RPP responses will include URLs for related resources, allowing clients to navigate newly created resources easily. This is similar to the "links" concept in RESTful APIs, where related resources are linked together.<a href="#section-5.1.2-6" class="pilcrow">¶</a></p>
 </div>
-<div id="_46f7dec2-e1ed-90b2-748b-65eb10fc575c">
+<div id="_d54250b8-b1c3-30a1-438a-ea560b902035">
 <section id="section-5.1.2.1">
             <h5 id="name-internationalised-domain-na">
 <a href="#section-5.1.2.1" class="section-number selfRef">5.1.2.1. </a><a href="#name-internationalised-domain-na" class="section-name selfRef">Internationalised Domain Names (IDN)</a>
             </h5>
-<div id="_0d88a59f-67de-6c89-9b03-b8c0e5645d99">
+<div id="_c644f2d2-4c2a-e9d2-85ef-6e9cad9d7851">
 <p id="section-5.1.2.1-1">RPP will address the handling of Internationalised Domain Names (IDNs) in resource addressing. Specifications will define whether to use IDN or UTF-8 encoding directly in URLs and whether to employ redirects to canonical URLs or "see-also" linking for alternative representations. For example,  a "see-also" link could point from a UTF-8 encoded URL to an IDN URL and vice versa, allowing clients to use either URL. Another way would be to always redirect to the canonical URL, which would be the IDN URL.<a href="#section-5.1.2.1-1" class="pilcrow">¶</a></p>
 </div>
 </section>
@@ -1933,12 +1932,12 @@ li > p:last-of-type:only-child {
           <h4 id="name-mapping-of-basic-operations">
 <a href="#section-5.1.3" class="section-number selfRef">5.1.3. </a><a href="#name-mapping-of-basic-operations" class="section-name selfRef">Mapping of basic operations to HTTP uniform interface (verbs)</a>
           </h4>
-<div id="_a9be748a-80f1-a5e9-fd50-f26be3597427">
+<div id="_a30e83cf-3a36-fb31-9646-9b06a1224f48">
 <p id="section-5.1.3-1">RPP operations are mapped to standard HTTP methods to leverage the uniform interface and RESTful principles:<a href="#section-5.1.3-1" class="pilcrow">¶</a></p>
 </div>
 <ul class="normal">
 <li class="normal" id="section-5.1.3-2.1">
-              <div id="_ebefa0f2-fca3-48ac-a2bc-7d448a4068f9">
+              <div id="_3452d3b2-f457-5a05-e28d-fb97980b4d2a">
 <p id="section-5.1.3-2.1.1"><strong>HEAD:</strong>  Retrieve resource state (e.g., retrieving domain existence information). This may be a candidate for equivalence of EPP check command, however it may come with a few caveats to consider:<a href="#section-5.1.3-2.1.1" class="pilcrow">¶</a></p>
 </div>
 <ul class="normal">
@@ -1947,7 +1946,7 @@ li > p:last-of-type:only-child {
                 <li class="normal" id="section-5.1.3-2.1.2.2">a better equivalence of EPP check would be a POST with Expect header, however this header being a reserved header in browsers it may not be availble to all client implementations<a href="#section-5.1.3-2.1.2.2" class="pilcrow">¶</a>
 </li>
               </ul>
-<div id="_2e524a22-79ac-5410-f872-ebfad5c4e3a4">
+<div id="_57a5816b-115f-1007-2c0d-796d551c3ae5">
 <p id="section-5.1.3-2.1.3">The conclusion is that RPP should not overload HTTP HEAD with own semantics, and support HEAD as it is defined in HTTP.<a href="#section-5.1.3-2.1.3" class="pilcrow">¶</a></p>
 </div>
 </li>
@@ -1972,59 +1971,59 @@ li > p:last-of-type:only-child {
           </ul>
 </section>
 </div>
-<div id="_8f134986-ba73-e43f-0b27-4a2d889645c8">
+<div id="_80759877-49f2-c665-84c0-9407a49e2b3e">
 <section id="section-5.1.4">
           <h4 id="name-mapping-of-operations-beyon">
 <a href="#section-5.1.4" class="section-number selfRef">5.1.4. </a><a href="#name-mapping-of-operations-beyon" class="section-name selfRef">Mapping of operations beyond HTTP uniform interface to URLs and verbs</a>
           </h4>
-<div id="_db6dc717-ab09-5d49-3e0e-82efca88f32e">
+<div id="_12e432c1-04b2-81c0-6256-74226ad2b1c5">
 <p id="section-5.1.4-1">Many of EPP commands do not map directly to the HTTP uniform interface. RPP will define how to handle these operations using appropriate URL structures and HTTP methods. In order to model additional operations RPP will define an abstraction of process, this being either a transient or a long running operations with state. In both cases such process may accept additional input data as well as have an outcome or result not being part of the resource state itself. Processes shall therefore be modelled as separate sub-resources of the resource being processed, with own uniform interface and set of operations (CRUD).<a href="#section-5.1.4-1" class="pilcrow">¶</a></p>
 </div>
-<div id="_0512fa0d-b684-e76b-9ee7-e0d93f645c4e">
+<div id="_43ff2283-2ea8-55e7-de1f-7e691dfbb8b9">
 <p id="section-5.1.4-2">EPP transfer commands (query and transform), may be modelled by a subresource <code>/transfer</code> of the resource being transferred, or a collection <code>/transfers</code> with a PUT/POST operation correspondingly to initiate the transfer, GET operation to query the transfer status and POST operation to approve or reject the transfer.<a href="#section-5.1.4-2" class="pilcrow">¶</a></p>
 </div>
-<div id="_8c377d92-aed1-4e90-def2-c0f70d661cf6">
+<div id="_ef46e922-0d53-3dd3-8ee4-bfbe42297e35">
 <p id="section-5.1.4-3">Other transform operations like renew, or restore which are not directly addressable resources in terms of REST will modelled as a convention of URLs with processing resources with only POST interface, e.g. <code>/renewal</code>.<a href="#section-5.1.4-3" class="pilcrow">¶</a></p>
 </div>
-<div id="_f53412c1-8bae-ffcc-7e2d-e3121c8b9d59">
+<div id="_26e81dc3-32c9-5797-dfd8-cf5e3d46b9e6">
 <p id="section-5.1.4-4">This pattern can be further applied to object operations not defined in the core protocol or EPP, allowing easy and uniform extension of allowed operations.<a href="#section-5.1.4-4" class="pilcrow">¶</a></p>
 </div>
-<div id="_a0c8cc78-48e0-4285-5f9e-a597eacfd94f">
+<div id="_bdd61eec-5729-436d-ff74-b87895f35827">
 <p id="section-5.1.4-5">In order to minimise name collisions between process names and other kind of sub-resources, a distinct path segment shall be dedicated to processes, e.g. <code>/processes/{process-name}</code> or <code>/operations/{operation-name}</code>.<a href="#section-5.1.4-5" class="pilcrow">¶</a></p>
 </div>
-<div id="_4fdac72c-5b65-8066-e294-0b6e978c7ef1">
+<div id="_3ac4a426-f10f-30a7-ea9b-0a22acc27fb8">
 <p id="section-5.1.4-6">The path segments shall be appended to the resource path to create full URI of such processing resource (e.g. <code>/domains/{domain-name}/processes/renewal</code> for domain renew operation).<a href="#section-5.1.4-6" class="pilcrow">¶</a></p>
 </div>
-<div id="_340dfa6f-f777-87ab-108d-d0bfd4a55d2f">
+<div id="_cf160031-e338-29a3-962f-344f8ddf3c52">
 <p id="section-5.1.4-7">As discussed in <a href="#http-layer-detail-mapping-basic-ops" class="auto internal xref">Section 5.1.3</a> EPP check command may not be appropriate to be mapped directly to the HTTP uniform interface of the resource itself. EPP check command will be therefore modelled as sub-resource such as <code>/availability</code> offering both HEAD operation for quick yes/no response and GET operation for more detailed response allowing for example to extend on the dataset provided (e.g. pricing information).<a href="#section-5.1.4-7" class="pilcrow">¶</a></p>
 </div>
-<div id="_47e6b5a6-c3c4-cd98-07be-15490e11c3a7">
+<div id="_9e9734b7-088e-7c49-44d3-6d7c0640e8fe">
 <p id="section-5.1.4-8">This basic set of rules and guidelines will be further refined in the RPP specifications and give a universal toolset for extending RPP with new resources and commands.<a href="#section-5.1.4-8" class="pilcrow">¶</a></p>
 </div>
 </section>
 </div>
-<div id="_61c6fff1-433b-c1cd-c21c-614017eb6144">
+<div id="_8ca91a41-69ed-50a8-b42d-e1f47476c8b6">
 <section id="section-5.1.5">
           <h4 id="name-http-response-codes">
 <a href="#section-5.1.5" class="section-number selfRef">5.1.5. </a><a href="#name-http-response-codes" class="section-name selfRef">HTTP response codes</a>
           </h4>
-<div id="_807adc0a-e8c6-0f34-4c1b-4b3d7db6415a">
+<div id="_3894ba02-67d6-9986-cad2-24b4820f75d7">
 <p id="section-5.1.5-1">In general RPP shall make use of HTTP status codes to indicate general response status categories (e.g., 2xx success responses, 4xx for client errors, 5xx for server errors) <span>[<a href="#RFC7231" class="cite xref">RFC7231</a>]</span> as opposed to responding always 200 if the request was understood even if the operation itself failed. This allows clients and intermediaries to make first level of determination of the requests outcome based on the status code alone, without needing to parse the response body.<a href="#section-5.1.5-1" class="pilcrow">¶</a></p>
 </div>
-<div id="_72e25eed-862e-341d-ec2a-c1e1f1f2394a">
+<div id="_6c8f5b83-b6c5-21f8-df52-956cbbac2d99">
 <p id="section-5.1.5-2">RPP shall use as specific HTTP codes as possible, using generic codes like 400 Bad Request or 500 Internal Server Error only if no corresponsing specific code exists (e.g. 404 for not existing resource or 401 for unauthenticated request).<a href="#section-5.1.5-2" class="pilcrow">¶</a></p>
 </div>
-<div id="_7957f240-3986-2202-0558-3b84093fad5f">
+<div id="_435663bb-d599-16ad-b7c9-b8ff6a8b9ab1">
 <p id="section-5.1.5-3">More specific RPP codes are elaborated in <a href="#http-layer-detail-rpp-status-codes" class="auto internal xref">Section 5.1.12</a>.<a href="#section-5.1.5-3" class="pilcrow">¶</a></p>
 </div>
 </section>
 </div>
-<div id="_9e26c46c-230a-fe15-d3b5-bbd7e4f18a8b">
+<div id="_bb6e96c4-a2b0-bfb5-f597-be30bf6a33b1">
 <section id="section-5.1.6">
           <h4 id="name-content-negotiation-for-med">
 <a href="#section-5.1.6" class="section-number selfRef">5.1.6. </a><a href="#name-content-negotiation-for-med" class="section-name selfRef">Content negotiation for media types</a>
           </h4>
-<div id="_d1f9373e-804a-ac64-4d84-529be0a00ef9">
+<div id="_02869015-cbf5-7f73-d7bc-81f94acbcadb">
 <p id="section-5.1.6-1">RPP supports content negotiation to allow clients to specify preferred media types for request and response payloads using the HTTP 'Accept' and 'Content-Type' headers <span>[<a href="#RFC7231" class="cite xref">RFC7231</a>]</span>.<a href="#section-5.1.6-1" class="pilcrow">¶</a></p>
 </div>
 <ul class="normal">
@@ -2037,22 +2036,22 @@ li > p:last-of-type:only-child {
           </ul>
 </section>
 </div>
-<div id="_b09b5c05-c70c-552d-3ceb-2a20347e255f">
+<div id="_6bf9c0a2-7682-35aa-a62f-f0fcd0843ba5">
 <section id="section-5.1.7">
           <h4 id="name-caching">
 <a href="#section-5.1.7" class="section-number selfRef">5.1.7. </a><a href="#name-caching" class="section-name selfRef">Caching</a>
           </h4>
-<div id="_b1147400-eea8-df53-20a5-87d727dc07b2">
+<div id="_443c4fa6-1a97-00b6-2d50-def891ae0d4f">
 <p id="section-5.1.7-1">RPP shall benefit from HTTP standard caching mechanisms to enable standard components like proxies and caches to improve performance and reduce load on servers. RPP shall define caching policies for different resources and operations, including cache-control headers and ETag support.<a href="#section-5.1.7-1" class="pilcrow">¶</a></p>
 </div>
 </section>
 </div>
-<div id="_e92de3a9-3a4f-5aeb-1cab-ef2653b86348">
+<div id="_293a4a15-b180-d5e9-25e8-05d7df9a7f17">
 <section id="section-5.1.8">
           <h4 id="name-language-negotiation-for-te">
 <a href="#section-5.1.8" class="section-number selfRef">5.1.8. </a><a href="#name-language-negotiation-for-te" class="section-name selfRef">Language negotiation for textual content</a>
           </h4>
-<div id="_f2419a9f-63fb-a0ad-5cc2-2b4e48fcce4d">
+<div id="_841b7327-a0c6-040d-19f4-75a3cca8dac2">
 <p id="section-5.1.8-1">RPP shall support language negotiation to enable clients to request responses in a preferred language using the HTTP 'Accept-Language' header  <span>[<a href="#RFC7231" class="cite xref">RFC7231</a>]</span>.<a href="#section-5.1.8-1" class="pilcrow">¶</a></p>
 </div>
 <ul class="normal">
@@ -2065,38 +2064,38 @@ li > p:last-of-type:only-child {
           </ul>
 </section>
 </div>
-<div id="_dac084df-dcf0-fdf7-fd2c-a98f85eedecb">
+<div id="_4934142e-18e7-c178-4dac-ab3f491e3a00">
 <section id="section-5.1.9">
           <h4 id="name-client-signalling-for-respo">
 <a href="#section-5.1.9" class="section-number selfRef">5.1.9. </a><a href="#name-client-signalling-for-respo" class="section-name selfRef">Client Signalling for Response Verbosity</a>
           </h4>
-<div id="_3c3387b2-1e35-8be0-9741-9f4c78edc414">
+<div id="_7b3d039a-50ef-6d7a-befe-1a74a6dd6950">
 <p id="section-5.1.9-1">RPP may utilise the HTTP <code>Prefer</code> header <span>[<a href="#RFC7240" class="cite xref">RFC7240</a>]</span> with the "return" preference to allow clients to control the verbosity of responses. For example, clients not interested in full resource representations could use <code>Prefer: return=minimal</code> to request minimal responses, reducing payload sizes and improving efficiency. The default behaviour, without the <code>Prefer</code> header, would be to return a full resource representation, similar to object info responses in EPP, especially after compound requests are completed. For certain use-cases it might be convenient for a client to receive also dereferenced full or partial representation of related objects. For example details about sponsoring client of domain name instead of just ID. "return" preference syntax alone is not sufficient for this purpose, therefore RPP would need to define custom preference and register it in "HTTP Preferences" IANA registry.<a href="#section-5.1.9-1" class="pilcrow">¶</a></p>
 </div>
 </section>
 </div>
-<div id="_0224df17-b9a9-5bca-fc58-d9a8a8ebc84b">
+<div id="_1a0a64a8-c3e4-040d-4299-fceed6a78689">
 <section id="section-5.1.10">
           <h4 id="name-client-signalling-for-reque">
 <a href="#section-5.1.10" class="section-number selfRef">5.1.10. </a><a href="#name-client-signalling-for-reque" class="section-name selfRef">Client Signalling for Request Validation</a>
           </h4>
-<div id="_c07e305d-df8a-cf6d-583b-61ad6f933bf5">
+<div id="_ba78f0be-8229-d872-16f4-3b661a88cd0e">
 <p id="section-5.1.10-1">RPP may utilise the HTTP <code>Prefer</code> header <span>[<a href="#RFC7240" class="cite xref">RFC7240</a>]</span> for signalling the preference for either strict or lenient processing of requests. This allows clients to indicate whether they prefer strict validation of message payloads and rejection of requests with unknown properties or a more lenient approach ignoring unknown properties that may allow for additional flexibility in processing. The default behaviour, without the <code>Prefer</code> header, would be to process requests leniently.<a href="#section-5.1.10-1" class="pilcrow">¶</a></p>
 </div>
 </section>
 </div>
-<div id="_ef0cdfd0-4355-a4e8-1169-dcf04506b025">
+<div id="_1753fd8c-7dd1-e545-2a08-8a0267b927ce">
 <section id="section-5.1.11">
           <h4 id="name-asynchronous-operation-proc">
 <a href="#section-5.1.11" class="section-number selfRef">5.1.11. </a><a href="#name-asynchronous-operation-proc" class="section-name selfRef">Asynchronous Operation Processing</a>
           </h4>
-<div id="_aa98b444-59fb-9e95-a7dc-22dddf30f950">
+<div id="_c41bf7da-2d30-40b9-c26a-4c3ec74db9c0">
 <p id="section-5.1.11-1">The RPP architecture accommodates operations that are potentially long-running or cannot be completed synchronously due to their nature (e.g., acting on multiple objects, resource-intensive tasks, or processes involving manual steps). This is achieved by leveraging standard HTTP mechanisms to provide an asynchronous interaction pattern. This pattern allows a client to initiate an operation and receive an immediate acknowledgement, with the means to check the operation's status and retrieve its outcome at a later point.<a href="#section-5.1.11-1" class="pilcrow">¶</a></p>
 </div>
-<div id="_e59e7e6a-f038-1968-e2e1-8169527fd10b">
+<div id="_518e58b7-666c-ee4b-c22b-02b534c03e6e">
 <p id="section-5.1.11-2">The typical interaction flow facilitated by the architecture is as follows: 1.  A client initiates an operation via an HTTP request. 2.  For operations processed asynchronously, the server typically responds immediately with an appropriate HTTP status code and an indication of a status resource where the client would be able to obtain result of the operation. The resource may be dedicated to the specific performed operation, be a subresource of the resource being processed, or be a separate message queue resource with a stream of operation results. 3.  The server may also provide additional signalling in the response to indicate the expected time for completion or other relevant information using standard HTTP mechanisms. 4.  The representation of the status resource reflects the operation's progress. Once the operation concludes, this representation indicates the final outcome, providing either the results directly, links to the results, or detailed error information in line with RPP's error reporting principles. It shall remain up to protocol design for certain operation and server policy which granularity of status information shall be offered. In some cases it might be sufficient to have one final message, in other cases intermediate statuses might be required. The lifetime of these resources might also be differentiated. Messages in the queue would exist until they are read out by the RPP client. Other status resources might exist for a specific time defined by the server after the processing reached its final state. Finally resources might virtually exist forever or require an explicit delete operation from the client.<a href="#section-5.1.11-2" class="pilcrow">¶</a></p>
 </div>
-<div id="_9f23a9a9-a141-8ec3-3205-7f75a6a380c8">
+<div id="_494edd3b-9b71-c974-fc0a-23353f929718">
 <p id="section-5.1.11-3">This architectural approach to asynchronous operations allows client applications to remain responsive and manage extended processing times effectively, contributing to the overall scalability and robustness of interactions within the RPP ecosystem. Specific RPP operations intended for asynchronous execution will be designed to utilise this pattern.<a href="#section-5.1.11-3" class="pilcrow">¶</a></p>
 </div>
 </section>
@@ -2106,7 +2105,7 @@ li > p:last-of-type:only-child {
           <h4 id="name-rpp-specific-status-codes-a">
 <a href="#section-5.1.12" class="section-number selfRef">5.1.12. </a><a href="#name-rpp-specific-status-codes-a" class="section-name selfRef">RPP specific status codes and relation to HTTP status codes</a>
           </h4>
-<div id="_b6589e81-a6e5-315d-5a23-66271c299054">
+<div id="_6bb10a3b-1478-0172-dee7-6e49de92835c">
 <p id="section-5.1.12-1">RPP uses a dual-layer approach for signaling operation outcomes, leveraging both standard HTTP status codes and RPP-specific status codes. This allows for compatibility with generic HTTP components while providing detailed, application-level feedback for RPP clients.<a href="#section-5.1.12-1" class="pilcrow">¶</a></p>
 </div>
 <ul class="normal">
@@ -2129,50 +2128,50 @@ li > p:last-of-type:only-child {
           </ul>
 </section>
 </div>
-<div id="_096b54e5-e403-77f2-d534-ccd1652c568c">
+<div id="_f9a5bab3-985c-f488-c0fe-0d15ed1ca65c">
 <section id="section-5.1.13">
           <h4 id="name-transaction-tracing-and-ide">
 <a href="#section-5.1.13" class="section-number selfRef">5.1.13. </a><a href="#name-transaction-tracing-and-ide" class="section-name selfRef">Transaction tracing and idempotency</a>
           </h4>
-<div id="_ea34d676-6d88-c7e0-ac63-283235cc012b">
+<div id="_13b97832-614f-9ab8-4fce-39e25ca2e651">
 <p id="section-5.1.13-1">RPP shall support identification of requests and responses on both client side and server side with use of client provided identifiers and server provided identifiers. This will allow for tracking of requests and responses in case of errors, and for idempotency of requests.<a href="#section-5.1.13-1" class="pilcrow">¶</a></p>
 </div>
-<div id="_bf84a443-1eff-6f0e-6680-70474d030b55">
+<div id="_6e30d9b6-5280-ae24-70e8-0c8e8007a4ea">
 <p id="section-5.1.13-2">Client provided identifier shall be returned in the corresponding synchronous response and shall be included in the asynchronous responses. This identifier shall be also used as idempotency identifier to allow clients to retry requests without risk of duplicate processing. The client provided identifier shall be unique for the client and the lifetime of the identifier shall be defined by the server, typically for a limited time after the request was processed.<a href="#section-5.1.13-2" class="pilcrow">¶</a></p>
 </div>
-<div id="_b39af74c-1159-4b68-21a1-09b1d51adf56">
+<div id="_2649859f-b340-5dc7-cef7-22ade660ace7">
 <p id="section-5.1.13-3">Server shall always generate own unique trasaction identifier, regardless of nature of the transaction (reading or changing).<a href="#section-5.1.13-3" class="pilcrow">¶</a></p>
 </div>
-<div id="_444501a3-88bc-beba-83d6-d9d020a4f2f6">
+<div id="_1df3d270-3eb0-5e7c-3f1c-16c1f926b2ac">
 <p id="section-5.1.13-4">The transmission of transaction identifiers should be defined outside of the Data Representation Layer (e.g. as HTTP Headers), to assure clear separation of resource representation from performed actions. If possible existing mechanisms of HTTP shall be employed.<a href="#section-5.1.13-4" class="pilcrow">¶</a></p>
 </div>
 </section>
 </div>
-<div id="_86ab8a2d-d51e-5c24-33d3-72c345025236">
+<div id="_72346461-2fd4-2d73-01d0-6aeb4fd97fac">
 <section id="section-5.1.14">
           <h4 id="name-protocol-versioning">
 <a href="#section-5.1.14" class="section-number selfRef">5.1.14. </a><a href="#name-protocol-versioning" class="section-name selfRef">Protocol Versioning</a>
           </h4>
-<div id="_0a62ad02-c9f4-7874-2605-d6a48503cd80">
+<div id="_ff8939a5-2023-7259-c54e-4d17159f57be">
 <p id="section-5.1.14-1">RPP will define a versioning schema for the protocol itself, the extensions and other protocol elements such as profiles as appropriate. The versioning schema shall on one side allow for independent introduction of new features in a non-breaking manner on both client and server side, and on the other side allow the opposite party of the communication to determine if the version is compatible or not. One of potential approaches having this property might be use of Semantic Versioning  <span>[<a href="#SemVer" class="cite xref">SemVer</a>]</span>, but also other versioning schema shall be possible.<a href="#section-5.1.14-1" class="pilcrow">¶</a></p>
 </div>
-<div id="_b496982c-ae98-81a0-494f-509944b0910c">
+<div id="_4d78797f-1f77-d79c-7c6e-7148ce51f716">
 <p id="section-5.1.14-2">Signalling of the versions will be preferably realised using parameters of the media type.<a href="#section-5.1.14-2" class="pilcrow">¶</a></p>
 </div>
 </section>
 </div>
-<div id="_a8e941a3-35aa-9aa0-575a-a604fd56defa">
+<div id="_ae765586-ece4-495d-2532-fc8606811eda">
 <section id="section-5.1.15">
           <h4 id="name-profiles">
 <a href="#section-5.1.15" class="section-number selfRef">5.1.15. </a><a href="#name-profiles" class="section-name selfRef">Profiles</a>
           </h4>
-<div id="_f7b7bcc4-1f2d-b536-6c44-88199aafc3d2">
+<div id="_cc5c3976-0e0c-b65c-05c5-6e0b12bd711f">
 <p id="section-5.1.15-1">In real operational conditions different RPP server operators may have different requirements regarding set of protocol elements and their versions necessary to be supported by the client to enable reliable communication. Such requirements may also be defined by external policies. For this purpose RPP will define a concept of profiles, being identifiers translated into a certain minimum configuration of protocol version, extensions and their versions. The profiles themselves will be versioned in the same way as other protocol elements.<a href="#section-5.1.15-1" class="pilcrow">¶</a></p>
 </div>
-<div id="_6a559d8d-297c-b911-88f0-72f45fe7e0e8">
+<div id="_c2bb6863-78c6-6167-ab3b-0a70bf907220">
 <p id="section-5.1.15-2">RPP may define a machine-readable definition of profiles to allow automatic processing by the clients, but may also refer to other forms of profile specification.<a href="#section-5.1.15-2" class="pilcrow">¶</a></p>
 </div>
-<div id="_eefdfd7f-0878-1276-3eaf-8b9d2539c614">
+<div id="_871625cb-1d45-8f03-8771-46b9e2789493">
 <p id="section-5.1.15-3">Signalling of the profiles will be preferably realised using parameters of the media type.<a href="#section-5.1.15-3" class="pilcrow">¶</a></p>
 </div>
 </section>
@@ -2182,7 +2181,7 @@ li > p:last-of-type:only-child {
           <h4 id="name-definition-of-special-resou">
 <a href="#section-5.1.16" class="section-number selfRef">5.1.16. </a><a href="#name-definition-of-special-resou" class="section-name selfRef">Definition of special resources</a>
           </h4>
-<div id="_37663836-1673-905d-243c-d6c5e530d8f1">
+<div id="_071b1652-e2c5-71be-c49d-4a7f28f111ee">
 <p id="section-5.1.16-1">RPP may define special resources for specific purposes:<a href="#section-5.1.16-1" class="pilcrow">¶</a></p>
 </div>
 <ul class="normal">
@@ -2198,7 +2197,7 @@ li > p:last-of-type:only-child {
           <h4 id="name-service-discovery-mechanism">
 <a href="#section-5.1.17" class="section-number selfRef">5.1.17. </a><a href="#name-service-discovery-mechanism" class="section-name selfRef">Service discovery mechanisms</a>
           </h4>
-<div id="_742e02dc-c129-c239-8d47-ead61f0a8df8">
+<div id="_655ed6b8-e596-144a-d25e-961fab3157ac">
 <p id="section-5.1.17-1">RPP will define mechanisms for service discovery, allowing clients to dynamically discover RPP service endpoints and capabilities, reducing coupling between clients and servers.<a href="#section-5.1.17-1" class="pilcrow">¶</a></p>
 </div>
 <ul class="normal">
@@ -2224,15 +2223,15 @@ li > p:last-of-type:only-child {
         <h3 id="name-data-representation-layer-2">
 <a href="#section-5.2" class="section-number selfRef">5.2. </a><a href="#name-data-representation-layer-2" class="section-name selfRef">Data Representation Layer</a>
         </h3>
-<div id="_dcfbe20a-4170-eee6-046d-98e1c8b01c3f">
+<div id="_85c873be-00a5-98f7-29bf-27518a20df2b">
 <p id="section-5.2-1">This layer focuses on the data representation of RPP messages. It defines the media type used to carry RPP data and supports various data representation formats.<a href="#section-5.2-1" class="pilcrow">¶</a></p>
 </div>
-<div id="_bb435ede-999a-9bae-6803-0f86dcd5d35a">
+<div id="_31aaa293-71fb-51b9-ddce-9eb4ae66b54e">
 <section id="section-5.2.1">
           <h4 id="name-data-structure">
 <a href="#section-5.2.1" class="section-number selfRef">5.2.1. </a><a href="#name-data-structure" class="section-name selfRef">Data structure</a>
           </h4>
-<div id="_37cb31db-72b0-2a81-c1e7-b947b760c211">
+<div id="_bf30b998-e952-a2df-046c-29681c0be955">
 <p id="section-5.2.1-1">RPP will define the overall structure of the message payload carried by the chosen media type. By default one data structure will be defined, however RPP should be able to support multiple data structures, especially for compatibility with EPP and other standards.<a href="#section-5.2.1-1" class="pilcrow">¶</a></p>
 </div>
 <ul class="normal">
@@ -2240,7 +2239,7 @@ li > p:last-of-type:only-child {
               <strong>'RPP' Structure:</strong>  Defining a new, dedicated data structure specifically for RPP messages. This would be the default in core specifications.<a href="#section-5.2.1-2.1" class="pilcrow">¶</a>
 </li>
           </ul>
-<div id="_d9ff5d17-2839-59aa-2ca1-9ab0fadc02fa">
+<div id="_47a6f3a4-947e-bd13-b6c0-e8b2953c99e9">
 <p id="section-5.2.1-3">Other future possibilities:<a href="#section-5.2.1-3" class="pilcrow">¶</a></p>
 </div>
 <ul class="normal">
@@ -2256,12 +2255,12 @@ li > p:last-of-type:only-child {
           </ul>
 </section>
 </div>
-<div id="_12e71afb-8da2-a71e-086d-b1fa47cb8518">
+<div id="_f3f32d0d-a839-7e1f-c22f-da41d61da7ee">
 <section id="section-5.2.2">
           <h4 id="name-data-format">
 <a href="#section-5.2.2" class="section-number selfRef">5.2.2. </a><a href="#name-data-format" class="section-name selfRef">Data format</a>
           </h4>
-<div id="_52953852-c98d-9df5-ea7c-a72eed8a796e">
+<div id="_a1cf3ff3-108d-bfcb-2481-816cdac05344">
 <p id="section-5.2.2-1">The primary format for RPP data representations shall be JSON, however RPP should be able to be extended to support other formats like XML, JWT, JWT-SD or CBOR.<a href="#section-5.2.2-1" class="pilcrow">¶</a></p>
 </div>
 <ul class="normal">
@@ -2281,7 +2280,7 @@ li > p:last-of-type:only-child {
               <strong>CBOR:</strong> Concise Binary Object Representation for specific use cases requiring compact binary encoding <span>[<a href="#RFC8949" class="cite xref">RFC8949</a>]</span>.<a href="#section-5.2.2-2.5" class="pilcrow">¶</a>
 </li>
           </ul>
-<div id="_ba067061-e85a-e60a-fa74-fe171921b9eb">
+<div id="_158c8556-505e-3cef-0580-9abbce600e64">
 <p id="section-5.2.2-3">Some data formats can be optionally represented in other encapsulations, for example JSON data can be represented also in JWT or CBOR. Change of encapsulation shall not affect the data structure. This might be beneficial if RPP is to be extended to support different data formats in the future that only require additional properties provided by encapsulation, like signing, encryption or binary representation.<a href="#section-5.2.2-3" class="pilcrow">¶</a></p>
 </div>
 </section>
@@ -2291,40 +2290,40 @@ li > p:last-of-type:only-child {
           <h4 id="name-data-validation">
 <a href="#section-5.2.3" class="section-number selfRef">5.2.3. </a><a href="#name-data-validation" class="section-name selfRef">Data Validation</a>
           </h4>
-<div id="_6d896a5a-b7a8-cc21-d6c1-14f08db0852a">
+<div id="_08aec8e6-9d6e-76bd-705f-dfa24c83710e">
 <p id="section-5.2.3-1">Data structures and formats will be described using a schema language, such as JSON Schema, OpenAPI, CDDL or other appropriate stable and open standard for JSON data structures. It will enable data validation to be performed by both client and servers on received requests and responses. For example, JSON Schema can define the expected structure of a domain object, including required fields and data types, allowing clients to validate their requests before sending them and servers to ensure incoming data conforms to the expected format. The schemas must support both strict and lenient processing of requests and responses and support protocol extensibility.<a href="#section-5.2.3-1" class="pilcrow">¶</a></p>
 </div>
 </section>
 </div>
-<div id="_9520c7cd-ba64-244c-6f3c-e99584995968">
+<div id="_d48c0adf-2bd6-e4b4-9d28-daa589168930">
 <section id="section-5.2.4">
           <h4 id="name-media-type-definition">
 <a href="#section-5.2.4" class="section-number selfRef">5.2.4. </a><a href="#name-media-type-definition" class="section-name selfRef">Media Type definition</a>
           </h4>
-<div id="_9f9d3423-d9ae-3132-0db5-9cb46d73158e">
+<div id="_1061c333-c4ee-6fdf-b05e-dd51942ed3c9">
 <p id="section-5.2.4-1">Together data structure and data format would define the whole media type. So application/rpp+json would be the primary media type with "rpp" payloads in plain json format. application/epp+xml would be epp payload as per <span>[<a href="#RFC5730" class="cite xref">RFC5730</a>]</span>.<a href="#section-5.2.4-1" class="pilcrow">¶</a></p>
 </div>
 </section>
 </div>
 </section>
 </div>
-<div id="_7f452e58-648c-7119-1b75-38c62c75358c">
+<div id="_f3f4e41f-d6e1-f06b-3a42-d27bf5273ac2">
 <section id="section-5.3">
         <h3 id="name-resource-definition-layer-2">
 <a href="#section-5.3" class="section-number selfRef">5.3. </a><a href="#name-resource-definition-layer-2" class="section-name selfRef">Resource Definition Layer</a>
         </h3>
-<div id="_34c8337d-70ef-5b6a-e1a3-37ece2e7b74e">
+<div id="_9d096003-6f94-6333-5c40-4167a231cb9b">
 <p id="section-5.3-1">Each resource type, no matter if on a top level, being an independent provisioning object, or a subresource, being a part of another resource, shall be well defined including data elements and possible operations. A resource definition shall on the first level of abstraction be composable out of data elements, without any reference to the media type or representation. This will allow for easy extensibility and compatibility with different media types.<a href="#section-5.3-1" class="pilcrow">¶</a></p>
 </div>
-<div id="_269a2cac-43a7-c413-f18f-e951994fcc55">
+<div id="_abf6c88f-8dc6-ae49-a8bd-cb65725cc9f7">
 <p id="section-5.3-2">All resource types shall be defined in IANA registry in a way that allows fully automated processing of the resource definition, including data elements, operations and media type representation.<a href="#section-5.3-2" class="pilcrow">¶</a></p>
 </div>
-<div id="_0c712199-f3b9-6c06-58dc-ed2db0fe3a01">
+<div id="_d57d39cd-3422-69c7-c761-e8d14d449209">
 <section id="section-5.3.1">
           <h4 id="name-data-elements">
 <a href="#section-5.3.1" class="section-number selfRef">5.3.1. </a><a href="#name-data-elements" class="section-name selfRef">Data Elements</a>
           </h4>
-<div id="_e059a477-a09d-6ff0-97e0-5fe4c86ff036">
+<div id="_00e70eff-6045-e952-6516-7c9be9d9e11d">
 <p id="section-5.3.1-1">This part defines logical data elements for each resource type, which can also be re-used across resource types. It is abstracted from the actual transport and media type, focusing on the structure and constraints of data elements. Data element definition includes:<a href="#section-5.3.1-1" class="pilcrow">¶</a></p>
 </div>
 <ul class="normal">
@@ -2339,36 +2338,36 @@ li > p:last-of-type:only-child {
             <li class="normal" id="section-5.3.1-2.5">Mechanisms for extensibility, if applicable<a href="#section-5.3.1-2.5" class="pilcrow">¶</a>
 </li>
           </ul>
-<div id="_916d2015-e858-ed30-61c4-acb76858f26d">
+<div id="_57bafeee-6d80-0e1a-9c71-2133df7e1290">
 <p id="section-5.3.1-3">Data elements shall be defined in IANA registry in a way that allows for automated processing of the data element definition, including constraints and references to other data elements.<a href="#section-5.3.1-3" class="pilcrow">¶</a></p>
 </div>
 </section>
 </div>
-<div id="_f76ec2f2-e1ec-d039-8dc7-06ea52fc2c62">
+<div id="_a78face8-c549-1d14-16d4-eb30d21c606c">
 <section id="section-5.3.2">
           <h4 id="name-mapping">
 <a href="#section-5.3.2" class="section-number selfRef">5.3.2. </a><a href="#name-mapping" class="section-name selfRef">Mapping</a>
           </h4>
-<div id="_87bbb653-a74e-02fe-3a8d-86886adc8a30">
+<div id="_de403764-fe2b-94fa-9973-3c6c3b343c02">
 <p id="section-5.3.2-1">This layer defines the mapping of Data Elements onto the Data Representation Layer. For example in case of application/rpp+json media type, the mapping layer would define how the logical data units are represented in JSON format.<a href="#section-5.3.2-1" class="pilcrow">¶</a></p>
 </div>
-<div id="_dc84fead-27c0-67be-a2e8-8c5b2ac05a1b">
+<div id="_648d0c17-cbbf-0cd6-b898-66f886ac43ce">
 <p id="section-5.3.2-2">This additional level of indirection would allow usage of data formats defined outside of rpp specifications - for example usage of Verifiable Credentials or Verifiable Presentations as first class resource types for contacts in RPP, and mapping appropriate data elements.<a href="#section-5.3.2-2" class="pilcrow">¶</a></p>
 </div>
-<div id="_81956c2b-36fb-a02a-74d8-12b5d7917938">
+<div id="_428d96cb-0b40-c3c9-5804-23a392da44df">
 <p id="section-5.3.2-3">The mapping layer shall be defined in IANA registry in a way that allows for automated processing of the mapping definition, including reading and writing operations. Mechanisms, such as defined for JavaScript Object Notation (JSON) Patch <span>[<a href="#RFC6902" class="cite xref">RFC6902</a>]</span>, may be used to define the mapping.<a href="#section-5.3.2-3" class="pilcrow">¶</a></p>
 </div>
 </section>
 </div>
-<div id="_8426d8a6-ed65-7c67-4aaa-b0ffed7be2f3">
+<div id="_bd8de150-0f4f-b36b-8f2b-c3e12980b68a">
 <section id="section-5.3.3">
           <h4 id="name-operations">
 <a href="#section-5.3.3" class="section-number selfRef">5.3.3. </a><a href="#name-operations" class="section-name selfRef">Operations</a>
           </h4>
-<div id="_4106ecf5-d573-74dd-394c-051e44557b19">
+<div id="_9d6b4e15-94fc-dc34-ffab-c97159456269">
 <p id="section-5.3.3-1">Each resource type shall define operations possible on this resource type. This may encompass any of the mechanisms defined on the HTTP transport layer and be constrained by those extensibility rules.<a href="#section-5.3.3-1" class="pilcrow">¶</a></p>
 </div>
-<div id="_a5b67f1d-5911-9328-75d5-380bef3655f2">
+<div id="_b1fca34d-8ac7-3d33-ca47-5e5ddda45855">
 <p id="section-5.3.3-2">Operations shall be defined in IANA registry in a way that allows for automated processing of the operation definition, including constraints and references to other resource types.<a href="#section-5.3.3-2" class="pilcrow">¶</a></p>
 </div>
 </section>
@@ -2380,7 +2379,7 @@ li > p:last-of-type:only-child {
         <h3 id="name-extension-mechanisms">
 <a href="#section-5.4" class="section-number selfRef">5.4. </a><a href="#name-extension-mechanisms" class="section-name selfRef">Extension mechanisms</a>
         </h3>
-<div id="_54e612c4-c5b3-a841-0877-f5ed0ff86fc3">
+<div id="_db1ca414-146c-e456-b98c-0f3eef194501">
 <p id="section-5.4-1">The RPP architecture is designed to be extensible, allowing for the addition of new resource types, data elements, and operations without breaking existing implementations. This extensibility is achieved through:<a href="#section-5.4-1" class="pilcrow">¶</a></p>
 </div>
 <ul class="normal">
@@ -2403,24 +2402,24 @@ li > p:last-of-type:only-child {
             <strong>Status codes:</strong> New RPP status codes can be defined and registered including their mapping to HTTP status codes.<a href="#section-5.4-2.6" class="pilcrow">¶</a>
 </li>
         </ul>
-<div id="_d209bfc3-65c0-da06-a462-e57707864e81">
+<div id="_e4667a4e-d287-86de-3be5-f0c5dd34efb4">
 <p id="section-5.4-3">RPP shall facilitate standardisation and reuse by requiring that extensions be registered with IANA. These registration requirements shall be fine-grained, applying independently to protocol elements such as resource types, data elements, operations, and status codes. This approach promotes consistency and interoperability, avoids fragmentation from conflicting definitions, and allows protocol elements to evolve independently.<a href="#section-5.4-3" class="pilcrow">¶</a></p>
 </div>
-<div id="_6460b8ee-b6c4-4535-169a-e2e2c426764d">
+<div id="_debfcb2b-b50a-2c33-4a75-319386e9442e">
 <p id="section-5.4-4">These extensibility mechanisms ensure that RPP can evolve to meet future requirements, integrate with emerging technologies, and support a wide range of provisioning scenarios while maintaining interoperability and stability.<a href="#section-5.4-4" class="pilcrow">¶</a></p>
 </div>
-<div id="_030edd87-fb9d-9494-d41c-4b920182c62a">
+<div id="_96e5350d-e377-28be-75f5-ab94556af4fe">
 <section id="section-5.4.1">
           <h4 id="name-name-management-and-collisi">
 <a href="#section-5.4.1" class="section-number selfRef">5.4.1. </a><a href="#name-name-management-and-collisi" class="section-name selfRef">Name Management and Collision Avoidance</a>
           </h4>
-<div id="_dd42f428-52be-fbc8-78bf-c4a4f3e65c8b">
+<div id="_07253e80-05fb-2f5c-9cb6-59fcd595c66a">
 <p id="section-5.4.1-1">RPP extensions MUST define unique names for all extension elements to prevent conflicts with other extensions and with core protocol elements. These names are used consistently in resource identifiers, data element identifiers, and URL path segments.<a href="#section-5.4.1-1" class="pilcrow">¶</a></p>
 </div>
-<div id="_11553301-4557-29df-9694-747d17243e51">
+<div id="_8287ca1e-af38-b462-d4c5-a928841f70bc">
 <p id="section-5.4.1-2">Standardised RPP extensions MUST register their names in a dedicated IANA registry for RPP extensions to ensure global uniqueness and avoid collisions. Private (non-standardised) extensions are also required to use unique names, but are not required to register with IANA. This allows private extensions to be developed and used within specific implementations or organisations without impacting the global RPP ecosystem. Private extensions should use names that are unlikely to conflict with other extensions or with RPP core elements, for example by using reverse domain notation as a prefix (e.g., <code>org.example.rpp</code>).<a href="#section-5.4.1-2" class="pilcrow">¶</a></p>
 </div>
-<div id="_4ee34611-7fa5-3f82-6f3b-5990fbda3025">
+<div id="_9ac2ed13-1b15-2419-ec51-454d0818879a">
 <p id="section-5.4.1-3">This naming mechanism ensures that new resource types, data elements, and operations can be introduced independently and safely, supporting the extensibility goals of the RPP architecture while maintaining interoperability and clarity across implementations.<a href="#section-5.4.1-3" class="pilcrow">¶</a></p>
 </div>
 </section>
@@ -2429,19 +2428,19 @@ li > p:last-of-type:only-child {
 </div>
 </section>
 </div>
-<div id="_473085d9-77d9-01f4-cc69-a7de06c00bf4">
+<div id="_c55cf983-193e-cb05-e06e-1f9ba9250240">
 <section id="section-6">
       <h2 id="name-change-history">
 <a href="#section-6" class="section-number selfRef">6. </a><a href="#name-change-history" class="section-name selfRef">Change History</a>
       </h2>
-<div id="_7fc5e66b-1d9f-4213-f78f-c5852be0fc6b">
+<div id="_7a15c360-117b-2567-ecdc-a2833b979365">
 <section id="section-6.1">
         <h3 id="name-00-to-01">
 <a href="#section-6.1" class="section-number selfRef">6.1. </a><a href="#name-00-to-01" class="section-name selfRef">-00 to -01</a>
       </h3>
 </section>
 </div>
-<div id="_2f531e9b-597d-41d8-fa22-edd6f63ebc54">
+<div id="_f707dc54-23c5-01f2-0325-e27c9fde4010">
 <section id="section-6.2">
         <h3 id="name-03-to-draft-ietf-rpp-archit">
 <a href="#section-6.2" class="section-number selfRef">6.2. </a><a href="#name-03-to-draft-ietf-rpp-archit" class="section-name selfRef">-03 to draft-ietf-rpp-architecture-00</a>
@@ -2452,7 +2451,7 @@ li > p:last-of-type:only-child {
         </ul>
 </section>
 </div>
-<div id="_998c5be5-7b79-16fd-0e28-f7fa2f8bee66">
+<div id="_ea8235d5-7f1c-bac5-7e25-78b3f32b32a9">
 <section id="section-6.3">
         <h3 id="name-02-to-03">
 <a href="#section-6.3" class="section-number selfRef">6.3. </a><a href="#name-02-to-03" class="section-name selfRef">-02 to -03</a>
@@ -2471,7 +2470,7 @@ li > p:last-of-type:only-child {
         </ul>
 </section>
 </div>
-<div id="_4692a8e1-d1d0-07b5-af4e-4aaba3b84e7d">
+<div id="_92c943b6-ecd5-394d-d95f-fcc7872f6549">
 <section id="section-6.4">
         <h3 id="name-01-to-02">
 <a href="#section-6.4" class="section-number selfRef">6.4. </a><a href="#name-01-to-02" class="section-name selfRef">-01 to -02</a>
@@ -2504,7 +2503,7 @@ li > p:last-of-type:only-child {
         </ul>
 </section>
 </div>
-<div id="_c4524fc3-c713-d113-9827-858ea56d1532">
+<div id="_4ff6eadf-8fb4-0dfd-5866-0a822b96cde6">
 <section id="section-6.5">
         <h3 id="name-00-to-01-2">
 <a href="#section-6.5" class="section-number selfRef">6.5. </a><a href="#name-00-to-01-2" class="section-name selfRef">-00 to -01</a>
@@ -2527,12 +2526,12 @@ li > p:last-of-type:only-child {
 </div>
 </section>
 </div>
-<div id="_75f96b63-3655-8c98-fa07-bb3261139e42">
+<div id="_d41083cc-35eb-ebd5-fe52-9a5336274b47">
 <section id="section-7">
       <h2 id="name-references">
 <a href="#section-7" class="section-number selfRef">7. </a><a href="#name-references" class="section-name selfRef">References</a>
       </h2>
-<div id="_df20543e-1301-9b21-efc9-6f41346ba933">
+<div id="_1737475f-1704-31cc-f9a8-dfeffc236cda">
 <section id="section-7.1">
         <h3 id="name-normative-references">
 <a href="#section-7.1" class="section-number selfRef">7.1. </a><a href="#name-normative-references" class="section-name selfRef">Normative References</a>
@@ -2545,7 +2544,7 @@ li > p:last-of-type:only-child {
 </dl>
 </section>
 </div>
-<div id="_6a6465d5-242a-228c-3c5d-2311508ffaf2">
+<div id="_87f44d5a-6723-7e31-4bc7-a35c6ac04d5a">
 <section id="section-7.2">
         <h3 id="name-informational-references">
 <a href="#section-7.2" class="section-number selfRef">7.2. </a><a href="#name-informational-references" class="section-name selfRef">Informational References</a>
@@ -2553,19 +2552,19 @@ li > p:last-of-type:only-child {
 <dl class="references">
 <dt id="RFC5730">[RFC5730]</dt>
         <dd>
-<span class="refAuthor">Hollenbeck, S.</span>, <span class="refTitle">"Extensible Provisioning Protocol (EPP)"</span>, <span class="stream">IETF</span>, <span class="seriesInfo">STD 69</span>, <span class="seriesInfo">DOI 10.17487/RFC5730</span>, <span class="seriesInfo">BCP 69</span>, <span class="seriesInfo">RFC 5730</span>, <time datetime="2009-08" class="refDate">August 2009</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc5730">https://www.rfc-editor.org/info/rfc5730</a>&gt;</span>. </dd>
+<span class="refAuthor">Hollenbeck, S.</span>, <span class="refTitle">"Extensible Provisioning Protocol (EPP)"</span>, <span class="stream">IETF</span>, <span class="seriesInfo">DOI 10.17487/RFC5730</span>, <span class="seriesInfo">BCP 69</span>, <span class="seriesInfo">RFC 5730</span>, <time datetime="2009-08" class="refDate">August 2009</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc5730">https://www.rfc-editor.org/info/rfc5730</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="RFC5731">[RFC5731]</dt>
         <dd>
-<span class="refAuthor">Hollenbeck, S.</span>, <span class="refTitle">"Extensible Provisioning Protocol (EPP) Domain Name Mapping"</span>, <span class="stream">IETF</span>, <span class="seriesInfo">STD 69</span>, <span class="seriesInfo">DOI 10.17487/RFC5731</span>, <span class="seriesInfo">BCP 69</span>, <span class="seriesInfo">RFC 5731</span>, <time datetime="2009-08" class="refDate">August 2009</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc5731">https://www.rfc-editor.org/info/rfc5731</a>&gt;</span>. </dd>
+<span class="refAuthor">Hollenbeck, S.</span>, <span class="refTitle">"Extensible Provisioning Protocol (EPP) Domain Name Mapping"</span>, <span class="stream">IETF</span>, <span class="seriesInfo">DOI 10.17487/RFC5731</span>, <span class="seriesInfo">BCP 69</span>, <span class="seriesInfo">RFC 5731</span>, <time datetime="2009-08" class="refDate">August 2009</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc5731">https://www.rfc-editor.org/info/rfc5731</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="RFC5732">[RFC5732]</dt>
         <dd>
-<span class="refAuthor">Hollenbeck, S.</span>, <span class="refTitle">"Extensible Provisioning Protocol (EPP) Host Mapping"</span>, <span class="stream">IETF</span>, <span class="seriesInfo">STD 69</span>, <span class="seriesInfo">DOI 10.17487/RFC5732</span>, <span class="seriesInfo">BCP 69</span>, <span class="seriesInfo">RFC 5732</span>, <time datetime="2009-08" class="refDate">August 2009</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc5732">https://www.rfc-editor.org/info/rfc5732</a>&gt;</span>. </dd>
+<span class="refAuthor">Hollenbeck, S.</span>, <span class="refTitle">"Extensible Provisioning Protocol (EPP) Host Mapping"</span>, <span class="stream">IETF</span>, <span class="seriesInfo">DOI 10.17487/RFC5732</span>, <span class="seriesInfo">BCP 69</span>, <span class="seriesInfo">RFC 5732</span>, <time datetime="2009-08" class="refDate">August 2009</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc5732">https://www.rfc-editor.org/info/rfc5732</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="RFC5733">[RFC5733]</dt>
         <dd>
-<span class="refAuthor">Hollenbeck, S.</span>, <span class="refTitle">"Extensible Provisioning Protocol (EPP) Contact Mapping"</span>, <span class="stream">IETF</span>, <span class="seriesInfo">STD 69</span>, <span class="seriesInfo">DOI 10.17487/RFC5733</span>, <span class="seriesInfo">BCP 69</span>, <span class="seriesInfo">RFC 5733</span>, <time datetime="2009-08" class="refDate">August 2009</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc5733">https://www.rfc-editor.org/info/rfc5733</a>&gt;</span>. </dd>
+<span class="refAuthor">Hollenbeck, S.</span>, <span class="refTitle">"Extensible Provisioning Protocol (EPP) Contact Mapping"</span>, <span class="stream">IETF</span>, <span class="seriesInfo">DOI 10.17487/RFC5733</span>, <span class="seriesInfo">BCP 69</span>, <span class="seriesInfo">RFC 5733</span>, <time datetime="2009-08" class="refDate">August 2009</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc5733">https://www.rfc-editor.org/info/rfc5733</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="RFC7231">[RFC7231]</dt>
         <dd>
@@ -2577,7 +2576,7 @@ li > p:last-of-type:only-child {
 <dd class="break"></dd>
 <dt id="RFC8259">[RFC8259]</dt>
         <dd>
-<span class="refAuthor">Bray, T.</span>, <span class="refTitle">"The JavaScript Object Notation (JSON) Data Interchange Format"</span>, <span class="stream">IETF</span>, <span class="seriesInfo">STD 90</span>, <span class="seriesInfo">DOI 10.17487/RFC8259</span>, <span class="seriesInfo">BCP 90</span>, <span class="seriesInfo">RFC 8259</span>, <time datetime="2017-12" class="refDate">December 2017</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc8259">https://www.rfc-editor.org/info/rfc8259</a>&gt;</span>. </dd>
+<span class="refAuthor">Bray, T.</span>, <span class="refTitle">"The JavaScript Object Notation (JSON) Data Interchange Format"</span>, <span class="stream">IETF</span>, <span class="seriesInfo">DOI 10.17487/RFC8259</span>, <span class="seriesInfo">BCP 90</span>, <span class="seriesInfo">RFC 8259</span>, <time datetime="2017-12" class="refDate">December 2017</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc8259">https://www.rfc-editor.org/info/rfc8259</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="RFC6570">[RFC6570]</dt>
         <dd>
@@ -2597,7 +2596,7 @@ li > p:last-of-type:only-child {
 <dd class="break"></dd>
 <dt id="RFC9082">[RFC9082]</dt>
         <dd>
-<span class="refAuthor">Hollenbeck, S.</span> and <span class="refAuthor">A. Newton</span>, <span class="refTitle">"Registration Data Access Protocol (RDAP) Query Format"</span>, <span class="stream">IETF</span>, <span class="seriesInfo">STD 95</span>, <span class="seriesInfo">DOI 10.17487/RFC9082</span>, <span class="seriesInfo">BCP 95</span>, <span class="seriesInfo">RFC 9082</span>, <time datetime="2021-06" class="refDate">June 2021</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc9082">https://www.rfc-editor.org/info/rfc9082</a>&gt;</span>. </dd>
+<span class="refAuthor">Hollenbeck, S.</span> and <span class="refAuthor">A. Newton</span>, <span class="refTitle">"Registration Data Access Protocol (RDAP) Query Format"</span>, <span class="stream">IETF</span>, <span class="seriesInfo">DOI 10.17487/RFC9082</span>, <span class="seriesInfo">BCP 95</span>, <span class="seriesInfo">RFC 9082</span>, <time datetime="2021-06" class="refDate">June 2021</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc9082">https://www.rfc-editor.org/info/rfc9082</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="RFC6902">[RFC6902]</dt>
         <dd>
@@ -2613,7 +2612,7 @@ li > p:last-of-type:only-child {
 <dd class="break"></dd>
 <dt id="RFC8949">[RFC8949]</dt>
         <dd>
-<span class="refAuthor">Bormann, C.</span> and <span class="refAuthor">P. Hoffman</span>, <span class="refTitle">"Concise Binary Object Representation (CBOR)"</span>, <span class="stream">IETF</span>, <span class="seriesInfo">STD 94</span>, <span class="seriesInfo">DOI 10.17487/RFC8949</span>, <span class="seriesInfo">BCP 94</span>, <span class="seriesInfo">RFC 8949</span>, <time datetime="2020-12" class="refDate">December 2020</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc8949">https://www.rfc-editor.org/info/rfc8949</a>&gt;</span>. </dd>
+<span class="refAuthor">Bormann, C.</span> and <span class="refAuthor">P. Hoffman</span>, <span class="refTitle">"Concise Binary Object Representation (CBOR)"</span>, <span class="stream">IETF</span>, <span class="seriesInfo">DOI 10.17487/RFC8949</span>, <span class="seriesInfo">BCP 94</span>, <span class="seriesInfo">RFC 8949</span>, <time datetime="2020-12" class="refDate">December 2020</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc8949">https://www.rfc-editor.org/info/rfc8949</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="RFC9553">[RFC9553]</dt>
         <dd>
@@ -2629,7 +2628,7 @@ li > p:last-of-type:only-child {
 <dd class="break"></dd>
 <dt id="RPPReq">[RPPReq]</dt>
         <dd>
-<span class="refAuthor">Wullink, M.</span> and <span class="refAuthor">P. Kowalik</span>, <span class="refTitle">"RESTful Provisioning Protocol (RPP) - Requirements"</span>, <time datetime="2025-06" class="refDate">June 2025</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-rpp-requirements-01">https://datatracker.ietf.org/doc/html/draft-ietf-rpp-requirements-01</a>&gt;</span>. </dd>
+<span class="refAuthor">Wullink, M.</span> and <span class="refAuthor">P. Kowalik</span>, <span class="refTitle">"RESTful Provisioning Protocol (RPP) - Requirements"</span>, <time datetime="2025-12" class="refDate">December 2025</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-rpp-requirements-03">https://datatracker.ietf.org/doc/html/draft-ietf-rpp-requirements-03</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="XML">[XML]</dt>
         <dd>
