@@ -1,12 +1,13 @@
 = RPP Architecture
+:abbrev: ietf-rpp-architecture
 :mn-document-class: ietf
 :mn-output-extensions: rfc,txt,html
 :doctype: internet-draft
-:abbrev: rpp-architecture
 :intended-series: informational
+:status: informational
+:workgroup: RPP (RESTful Provisioning Protocol) Working Group
 :submission-type: IETF
 :docnumber: draft-ietf-rpp-architecture-01
-:status: informational
 :ipr: trust200902
 :area: Applications and Real-Time
 :keyword: rpp, epp, rest, json, provisioning, domain, host, contact
@@ -33,7 +34,7 @@
 :toc: auto
 :toclevels: 4
 :xrefstyle: short
-:date: 2025-10-10
+:published-date: 2025-11-06
 
 Advancements in development, integration, deployment environments and operational paradigms have led to a desire for an alternative for the Extensible Provisioning Protocol (EPP). 
 This document defines the architecture for the RESTful Provisioning Protocol (RPP) an HTTP based provisioning protocol leveraging the REST architectural style and JSON data-interchange format, aiming to standardize a RESTful protocol for provisioning database objects. The architecture includes support for extensibility, allowing for multiple possible use cases. RPP is intended to co-exist with EPP, offering an alternative protocol including data model compatibility with EPP core objects and the benefits associated with the REST architectural style and widely adopted HTTP-based technologies. 
@@ -232,9 +233,10 @@ RPP authentication and authorisation model will make a clear distinction between
 
 In case of HTTP Basic Authentication, one user-id is always bound to at most one RPP client. For OAuth, the issued token is bound to the context of at most one RPP client, even though the OAuth client itself might have access to multiple RPP clients. The assignment of tokens to specific RPP clients can be controlled through the authorisation flow using the OAuth scope parameter. For example, if an OAuth client has access to two RPP clients (Client A and Client B), the scope parameter can specify which client the token applies to. A scope value like `scope=rpp:clientA` would ensure the token is valid only for Client A, while `scope=rpp:clientB` would apply to Client B.
 
+[[http-layer-details-security]]
 ===== Security
 
-RPP will not explicitly define security related policies related to authentication or authorisation (such as password complexity, token lifetime or cryptography used) on the protocol level. Instead, these properties will be delegated to the best practices of the chosen authentication schemes, which may evolve over time and would have to be independent of the protocol itself.
+RPP will not explicitly define security related policies related to authentication or authorisation (such as password complexity, token lifetime, cryptography used, or additional measures to verify the client) on the protocol level. Instead, these properties will be delegated to the best practices of the chosen authentication schemes, which may evolve over time and would have to be independent of the protocol itself.
 
 ===== Object level authorisation
 RPP will define a mechanism for object-level authorisation, preventing unauthorised access to specific objects or resources. Each object will have an associated sponsor or owner with full control over an object, and the protocol will allow for the specification of which clients are authorised to access or modify non-sponsored/owned objects. This could be achieved through state-of-the-art standards like OAuth authorisation tokens, scopes, and resource-specific permissions but also shared secrets for backward compatibility with EPP password-based authorisation information.
@@ -502,7 +504,7 @@ This naming mechanism ensures that new resource types, data elements, and operat
 == Change History
 
 === -00 to -01
-
+* Added "additional measures to verify the client" to <<http-layer-details-security>> (Issue #76).
 
 === -03 to draft-ietf-rpp-architecture-00
 * No changes. Document adopted by RPP WG.
@@ -567,7 +569,7 @@ This naming mechanism ensures that new resource types, data elements, and operat
 * [[[RFC9553, RFC 9553]]] Stepanek, R. and M. Loffredo, "JSContact: A JSON Representation of Contact Data", IETF, DOI 10.17487/RFC9553, RFC 9553, May 2024, <https://www.rfc-editor.org/info/rfc9553>.
 * [[[SD-JWT, IETF(I-D.draft-ietf-oauth-sd-jwt-vc-10)]]] Terbu, O., Fett, D., and B. Campbell, "SD-JWT-based Verifiable Credentials (SD-JWT VC)", July 2025, <https://datatracker.ietf.org/doc/html/draft-ietf-oauth-sd-jwt-vc-10>.
 * [[[SelDiscJWT, IETF(I-D.draft-ietf-oauth-selective-disclosure-jwt-22)]]] Fett, D., Yasuda, K., and B. Campbell, "Selective Disclosure for JWTs (SD-JWT)", May 2025, <https://datatracker.ietf.org/doc/html/draft-ietf-oauth-selective-disclosure-jwt-22>.
-* [[[RPPReq, IETF(I-D.draft-ietf-rpp-requirements-01)]]] Wullink, M. and P. Kowalik, "RESTful Provisioning Protocol (RPP) - Requirements", June 2025, <https://datatracker.ietf.org/doc/html/draft-ietf-rpp-requirements-01>.
+* [[[RPPReq, IETF(I-D.draft-ietf-rpp-requirements-03)]]] Wullink, M. and P. Kowalik, "RESTful Provisioning Protocol (RPP) - Requirements", June 2025, <https://datatracker.ietf.org/doc/html/draft-ietf-rpp-requirements-03>.
 
 // Documentation of asciibib: https://www.relaton.org/asciibib/
 
