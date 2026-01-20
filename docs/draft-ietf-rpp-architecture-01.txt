@@ -2,7 +2,7 @@
 
 
 
-Network Working Group                                         P. Kowalik
+RPP (RESTful Provisioning Protocol) Working Group             P. Kowalik
 Internet-Draft                                                  DENIC eG
 Intended status: Informational                                M. Wullink
 Expires: 10 May 2026                                           SIDN Labs
@@ -1499,12 +1499,12 @@ Internet-Draft              rpp-architecture               November 2025
 7.2.  Informational References
 
    [RFC5730]  Hollenbeck, S., "Extensible Provisioning Protocol (EPP)",
-              IETF, STD 69, DOI 10.17487/RFC5730, BCP 69, RFC 5730,
-              August 2009, <https://www.rfc-editor.org/info/rfc5730>.
+              IETF, DOI 10.17487/RFC5730, BCP 69, RFC 5730, August 2009,
+              <https://www.rfc-editor.org/info/rfc5730>.
 
    [RFC5731]  Hollenbeck, S., "Extensible Provisioning Protocol (EPP)
-              Domain Name Mapping", IETF, STD 69, DOI 10.17487/RFC5731,
-              BCP 69, RFC 5731, August 2009,
+              Domain Name Mapping", IETF, DOI 10.17487/RFC5731, BCP 69,
+              RFC 5731, August 2009,
               <https://www.rfc-editor.org/info/rfc5731>.
 
 
@@ -1515,13 +1515,13 @@ Internet-Draft              rpp-architecture               November 2025
 
 
    [RFC5732]  Hollenbeck, S., "Extensible Provisioning Protocol (EPP)
-              Host Mapping", IETF, STD 69, DOI 10.17487/RFC5732, BCP 69,
+              Host Mapping", IETF, DOI 10.17487/RFC5732, BCP 69,
               RFC 5732, August 2009,
               <https://www.rfc-editor.org/info/rfc5732>.
 
    [RFC5733]  Hollenbeck, S., "Extensible Provisioning Protocol (EPP)
-              Contact Mapping", IETF, STD 69, DOI 10.17487/RFC5733,
-              BCP 69, RFC 5733, August 2009,
+              Contact Mapping", IETF, DOI 10.17487/RFC5733, BCP 69,
+              RFC 5733, August 2009,
               <https://www.rfc-editor.org/info/rfc5733>.
 
    [RFC7231]  Fielding, R. and J. Reschke, "Hypertext Transfer Protocol
@@ -1534,8 +1534,8 @@ Internet-Draft              rpp-architecture               November 2025
               <https://www.rfc-editor.org/info/rfc7240>.
 
    [RFC8259]  Bray, T., "The JavaScript Object Notation (JSON) Data
-              Interchange Format", IETF, STD 90, DOI 10.17487/RFC8259,
-              BCP 90, RFC 8259, December 2017,
+              Interchange Format", IETF, DOI 10.17487/RFC8259, BCP 90,
+              RFC 8259, December 2017,
               <https://www.rfc-editor.org/info/rfc8259>.
 
    [RFC6570]  Gregorio, J., Fielding, R., Hadley, M., Nottingham, M.,
@@ -1557,8 +1557,8 @@ Internet-Draft              rpp-architecture               November 2025
               <https://www.rfc-editor.org/info/rfc7519>.
 
    [RFC9082]  Hollenbeck, S. and A. Newton, "Registration Data Access
-              Protocol (RDAP) Query Format", IETF, STD 95,
-              DOI 10.17487/RFC9082, BCP 95, RFC 9082, June 2021,
+              Protocol (RDAP) Query Format", IETF, DOI 10.17487/RFC9082,
+              BCP 95, RFC 9082, June 2021,
               <https://www.rfc-editor.org/info/rfc9082>.
 
 
@@ -1584,8 +1584,8 @@ Internet-Draft              rpp-architecture               November 2025
               <https://www.rfc-editor.org/info/rfc9205>.
 
    [RFC8949]  Bormann, C. and P. Hoffman, "Concise Binary Object
-              Representation (CBOR)", IETF, STD 94,
-              DOI 10.17487/RFC8949, BCP 94, RFC 8949, December 2020,
+              Representation (CBOR)", IETF, DOI 10.17487/RFC8949,
+              BCP 94, RFC 8949, December 2020,
               <https://www.rfc-editor.org/info/rfc8949>.
 
    [RFC9553]  Stepanek, R. and M. Loffredo, "JSContact: A JSON
@@ -1605,9 +1605,9 @@ Internet-Draft              rpp-architecture               November 2025
               selective-disclosure-jwt-22>.
 
    [RPPReq]   Wullink, M. and P. Kowalik, "RESTful Provisioning Protocol
-              (RPP) - Requirements", June 2025,
+              (RPP) - Requirements", December 2025,
               <https://datatracker.ietf.org/doc/html/draft-ietf-rpp-
-              requirements-01>.
+              requirements-03>.
 
    [XML]      Bray, T., Paoli, J., Sperberg-McQueen, C., Maler, E., and
               F. Yergeau, "Extensible Markup Language (XML) 1.0 (Fifth
