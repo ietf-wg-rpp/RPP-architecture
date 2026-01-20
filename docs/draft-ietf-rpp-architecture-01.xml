@@ -10,7 +10,7 @@
 <?rfc sortrefs="yes"?>
 <rfc xmlns:xi="http://www.w3.org/2001/XInclude" docName="draft-ietf-rpp-architecture-01" category="info" ipr="trust200902" submissionType="IETF" xml:lang="en" version="3" >
   <front>
-    <title abbrev="rpp-architecture">RPP Architecture</title>
+    <title abbrev="ietf-rpp-architecture">RPP Architecture</title>
     <seriesInfo value="draft-ietf-rpp-architecture-01" status="Informational" stream="IETF" name="Internet-Draft" asciiName="Internet-Draft"></seriesInfo>
     <seriesInfo name="" value="" status="informational"></seriesInfo>
     <author initials="P" surname="Kowalik">
@@ -209,7 +209,7 @@
 </section>
 </section>
 </section>
-    <section anchor="_37e46709-9f39-4dcd-ba53-dab125237e1c"><name>Protocol Details</name>
+    <section anchor="_55462d90-5fd2-568f-538b-55044195397f"><name>Protocol Details</name>
 
 <t anchor="_258b3fe6-6525-0317-3cb7-1b42072bd9cf">This section provides further details on each layer of the RPP architecture.</t>
 
@@ -248,9 +248,9 @@
 <t anchor="_0e8925af-0565-8ab4-7004-bf43f7556f0e">In case of HTTP Basic Authentication, one user-id is always bound to at most one RPP client. For OAuth, the issued token is bound to the context of at most one RPP client, even though the OAuth client itself might have access to multiple RPP clients. The assignment of tokens to specific RPP clients can be controlled through the authorisation flow using the OAuth scope parameter. For example, if an OAuth client has access to two RPP clients (Client A and Client B), the scope parameter can specify which client the token applies to. A scope value like <tt>scope=rpp:clientA</tt> would ensure the token is valid only for Client A, while <tt>scope=rpp:clientB</tt> would apply to Client B.</t>
 </section>
 
-<section anchor="_b0e1eb7e-b6ef-21dd-6112-66a1656d19a3"><name>Security</name>
+<section anchor="http-layer-details-security"><name>Security</name>
 
-<t anchor="_351e088d-4de8-56ce-668a-d699f0a47c44">RPP will not explicitly define security related policies related to authentication or authorisation (such as password complexity, token lifetime or cryptography used) on the protocol level. Instead, these properties will be delegated to the best practices of the chosen authentication schemes, which may evolve over time and would have to be independent of the protocol itself.</t>
+<t anchor="_68fe35db-6011-13f0-5457-5394621de9b0">RPP will not explicitly define security related policies related to authentication or authorisation (such as password complexity, token lifetime, cryptography used, or additional measures to verify the client) on the protocol level. Instead, these properties will be delegated to the best practices of the chosen authentication schemes, which may evolve over time and would have to be independent of the protocol itself.</t>
 </section>
 
 <section anchor="_d345a9da-e07f-7dc6-bc6f-58b8149635be"><name>Object level authorisation</name>
@@ -545,10 +545,12 @@
 </section>
 </section>
 </section>
-    <section anchor="_c55cf983-193e-cb05-e06e-1f9ba9250240"><name>Change History</name>
+    <section anchor="_8b85fa50-49f8-6c2d-9fbb-3dba71a0e8c1"><name>Change History</name>
 
-<section anchor="_7a15c360-117b-2567-ecdc-a2833b979365"><name>-00 to -01</name>
+<section anchor="_91207754-3d97-5026-fa96-b1ab8425473e"><name>-00 to -01</name>
 
+<ul anchor="_a2700819-fa6f-758c-e1e9-5174ba546dad"><li>Added "additional measures to verify the client" to <xref target="http-layer-details-security"></xref> (Issue #76).</li>
+</ul>
 </section>
 
 <section anchor="_f707dc54-23c5-01f2-0325-e27c9fde4010"><name>-03 to draft-ietf-rpp-architecture-00</name>

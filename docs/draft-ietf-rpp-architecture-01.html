@@ -1214,7 +1214,7 @@ li > p:last-of-type:only-child {
 <table class="ears">
 <thead><tr>
 <td class="left">Internet-Draft</td>
-<td class="center">rpp-architecture</td>
+<td class="center">ietf-rpp-architecture</td>
 <td class="right">November 2025</td>
 </tr></thead>
 <tfoot><tr>
@@ -1795,7 +1795,7 @@ li > p:last-of-type:only-child {
 </div>
 </section>
 </div>
-<div id="_37e46709-9f39-4dcd-ba53-dab125237e1c">
+<div id="_55462d90-5fd2-568f-538b-55044195397f">
 <section id="section-5">
       <h2 id="name-protocol-details">
 <a href="#section-5" class="section-number selfRef">5. </a><a href="#name-protocol-details" class="section-name selfRef">Protocol Details</a>
@@ -1867,13 +1867,13 @@ li > p:last-of-type:only-child {
 </div>
 </section>
 </div>
-<div id="_b0e1eb7e-b6ef-21dd-6112-66a1656d19a3">
+<div id="http-layer-details-security">
 <section id="section-5.1.1.4">
             <h5 id="name-security">
 <a href="#section-5.1.1.4" class="section-number selfRef">5.1.1.4. </a><a href="#name-security" class="section-name selfRef">Security</a>
             </h5>
-<div id="_351e088d-4de8-56ce-668a-d699f0a47c44">
-<p id="section-5.1.1.4-1">RPP will not explicitly define security related policies related to authentication or authorisation (such as password complexity, token lifetime or cryptography used) on the protocol level. Instead, these properties will be delegated to the best practices of the chosen authentication schemes, which may evolve over time and would have to be independent of the protocol itself.<a href="#section-5.1.1.4-1" class="pilcrow">¶</a></p>
+<div id="_68fe35db-6011-13f0-5457-5394621de9b0">
+<p id="section-5.1.1.4-1">RPP will not explicitly define security related policies related to authentication or authorisation (such as password complexity, token lifetime, cryptography used, or additional measures to verify the client) on the protocol level. Instead, these properties will be delegated to the best practices of the chosen authentication schemes, which may evolve over time and would have to be independent of the protocol itself.<a href="#section-5.1.1.4-1" class="pilcrow">¶</a></p>
 </div>
 </section>
 </div>
@@ -2428,16 +2428,20 @@ li > p:last-of-type:only-child {
 </div>
 </section>
 </div>
-<div id="_c55cf983-193e-cb05-e06e-1f9ba9250240">
+<div id="_8b85fa50-49f8-6c2d-9fbb-3dba71a0e8c1">
 <section id="section-6">
       <h2 id="name-change-history">
 <a href="#section-6" class="section-number selfRef">6. </a><a href="#name-change-history" class="section-name selfRef">Change History</a>
       </h2>
-<div id="_7a15c360-117b-2567-ecdc-a2833b979365">
+<div id="_91207754-3d97-5026-fa96-b1ab8425473e">
 <section id="section-6.1">
         <h3 id="name-00-to-01">
 <a href="#section-6.1" class="section-number selfRef">6.1. </a><a href="#name-00-to-01" class="section-name selfRef">-00 to -01</a>
-      </h3>
+        </h3>
+<ul class="normal">
+<li class="normal" id="section-6.1-1.1">Added "additional measures to verify the client" to <a href="#http-layer-details-security" class="auto internal xref">Section 5.1.1.4</a> (Issue #76).<a href="#section-6.1-1.1" class="pilcrow">¶</a>
+</li>
+        </ul>
 </section>
 </div>
 <div id="_f707dc54-23c5-01f2-0325-e27c9fde4010">
