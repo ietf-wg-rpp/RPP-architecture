@@ -6,7 +6,8 @@
 :abbrev: rpp-architecture
 :intended-series: informational
 :status: informational
-:workgroup: RPP (RESTful Provisioning Protocol) Working Group:submission-type: IETF
+:workgroup: RPP (RESTful Provisioning Protocol) Working Group
+:submission-type: IETF
 :docnumber: draft-ietf-rpp-architecture-01
 :ipr: trust200902
 :area: Applications and Real-Time

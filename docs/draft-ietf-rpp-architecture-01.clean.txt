@@ -2,7 +2,7 @@
 
 
 
-RPP (RESTful Provisioning Protocol) Working Group:submission-type: IETFP. Kowalik
+RPP (RESTful Provisioning Protocol) Working Group             P. Kowalik
 Internet-Draft                                                  DENIC eG
 Intended status: Informational                                M. Wullink
 Expires: 10 May 2026                                           SIDN Labs

@@ -37,7 +37,7 @@
     </author>
     <date day="6" year="2025" month="November"></date>
     <area>Applications and Real-Time</area>
-    <workgroup>RPP (RESTful Provisioning Protocol) Working Group:submission-type: IETF</workgroup>
+    <workgroup>RPP (RESTful Provisioning Protocol) Working Group</workgroup>
     <abstract>
 
 <t anchor="_ac44b653-a95e-8347-ede7-a598155b4a5c">Advancements in development, integration, deployment environments and operational paradigms have led to a desire for an alternative for the Extensible Provisioning Protocol (EPP). This document defines the architecture for the RESTful Provisioning Protocol (RPP) an HTTP based provisioning protocol leveraging the REST architectural style and JSON data-interchange format, aiming to standardize a RESTful protocol for provisioning database objects. The architecture includes support for extensibility, allowing for multiple possible use cases. RPP is intended to co-exist with EPP, offering an alternative protocol including data model compatibility with EPP core objects and the benefits associated with the REST architectural style and widely adopted HTTP-based technologies.</t>
