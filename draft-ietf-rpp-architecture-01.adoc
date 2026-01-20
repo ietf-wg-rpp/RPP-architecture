@@ -512,7 +512,7 @@ This naming mechanism ensures that new resource types, data elements, and operat
 == Change History
 
 === -00 to -01
-
+* Added TLS mandatory to <<transport-security>> (Issue #78).
 
 === -03 to draft-ietf-rpp-architecture-00
 * No changes. Document adopted by RPP WG.
