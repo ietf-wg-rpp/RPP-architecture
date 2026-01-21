@@ -272,7 +272,7 @@ uniform interface and RESTful principles:
     -  a better equivalence of EPP check would be a POST with Expect header, however this header being a reserved header in browsers it may not be availble to all client implementations
 
 +
-The conclusion is that RPP should not overload HTTP HEAD with own semantics, and support HEAD as it is defined in HTTP.
+The conclusion is that RPP should not overload HTTP HEAD with own semantics, and support HEAD as it is defined in HTTP. This includes an empty message body for RPP responses for requests using the HEAD method.
 
 *  **OPTIONS** RPP shall not define any new semantics for OPTIONS however the specifications should make implementers aware of its role in CORS and pre-flight requests typically made by web browsers
 *  **GET:**  Retrieve resource state (e.g., retrieving domain or contact information) - EPP info command
@@ -449,6 +449,10 @@ The schemas must support both strict and lenient processing of requests and resp
 
 ==== Media Type definition
 Together data structure and data format would define the whole media type. So application/rpp+json would be the primary media type with "rpp" payloads in plain json format. application/epp+xml would be epp payload as per <<RFC5730>>. 
+
+==== Optionality
+The result of a RPP operation may result in an empty HTTP message body when mapped to a representation, for example a check for existence is allowed return only HTTP and RPP headers to indicate the result of the executed operation.
+
 
 === Resource Definition Layer
 Each resource type, no matter if on a top level, being an independent provisioning object, or a subresource, being a part of another resource, shall be well defined including data elements and possible operations. A resource definition shall on the first level of abstraction be composable out of data elements, without any reference to the media type or representation. This will allow for easy extensibility and compatibility with different media types.
