@@ -513,10 +513,11 @@ Table of Contents
 
    RPP will not explicitly define security related policies related to
    authentication or authorisation (such as password complexity, token
-   lifetime or cryptography used) on the protocol level.  Instead, these
-   properties will be delegated to the best practices of the chosen
-   authentication schemes, which may evolve over time and would have to
-   be independent of the protocol itself.
+   lifetime, cryptography used, or additional measures to verify the
+   client) on the protocol level.  Instead, these properties will be
+   delegated to the best practices of the chosen authentication schemes,
+   which may evolve over time and would have to be independent of the
+   protocol itself.
 
 5.1.2.5.  Object level authorisation
 
@@ -1173,6 +1174,9 @@ Table of Contents
 6.  Change History
 
 6.1.  -00 to -01
+
+   *  Added "additional measures to verify the client" to
+      Section 5.1.2.4 (Issue #76).
 
    *  Added TLS mandatory to Section 5.1.1 (Issue #78).
 

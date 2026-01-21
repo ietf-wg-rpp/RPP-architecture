@@ -3,7 +3,6 @@
 :mn-document-class: ietf
 :mn-output-extensions: rfc,txt,html
 :doctype: internet-draft
-:abbrev: rpp-architecture
 :intended-series: informational
 :status: informational
 :workgroup: RPP (RESTful Provisioning Protocol) Working Group
@@ -242,9 +241,10 @@ RPP authentication and authorisation model will make a clear distinction between
 
 In case of HTTP Basic Authentication, one user-id is always bound to at most one RPP client. For OAuth, the issued token is bound to the context of at most one RPP client, even though the OAuth client itself might have access to multiple RPP clients. The assignment of tokens to specific RPP clients can be controlled through the authorisation flow using the OAuth scope parameter. For example, if an OAuth client has access to two RPP clients (Client A and Client B), the scope parameter can specify which client the token applies to. A scope value like `scope=rpp:clientA` would ensure the token is valid only for Client A, while `scope=rpp:clientB` would apply to Client B.
 
+[[http-layer-details-security]]
 ===== Security
 
-RPP will not explicitly define security related policies related to authentication or authorisation (such as password complexity, token lifetime or cryptography used) on the protocol level. Instead, these properties will be delegated to the best practices of the chosen authentication schemes, which may evolve over time and would have to be independent of the protocol itself.
+RPP will not explicitly define security related policies related to authentication or authorisation (such as password complexity, token lifetime, cryptography used, or additional measures to verify the client) on the protocol level. Instead, these properties will be delegated to the best practices of the chosen authentication schemes, which may evolve over time and would have to be independent of the protocol itself.
 
 ===== Object level authorisation
 RPP will define a mechanism for object-level authorisation, preventing unauthorised access to specific objects or resources. Each object will have an associated sponsor or owner with full control over an object, and the protocol will allow for the specification of which clients are authorised to access or modify non-sponsored/owned objects. This could be achieved through state-of-the-art standards like OAuth authorisation tokens, scopes, and resource-specific permissions but also shared secrets for backward compatibility with EPP password-based authorisation information.
@@ -512,6 +512,7 @@ This naming mechanism ensures that new resource types, data elements, and operat
 == Change History
 
 === -00 to -01
+* Added "additional measures to verify the client" to <<http-layer-details-security>> (Issue #76).
 * Added TLS mandatory to <<transport-security>> (Issue #78).
 
 === -03 to draft-ietf-rpp-architecture-00
