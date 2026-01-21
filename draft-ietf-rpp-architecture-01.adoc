@@ -151,6 +151,7 @@ These are features that are fully specified by the HTTP standard itself. RPP lev
 
 It encompasses aspects such as:
 
+* **Transport security:** Mechanisms to secure message transmission
 * **Authentication and Authorisation:** Mechanisms for verifying the identity of clients and controlling access to resources.
 * **Resource Addressing using URLs:** Consistent and meaningful URL structures for identifying, accessing resources and enabling request routing.
 * **Mapping of basic operations to HTTP uniform interface (verbs):** Mapping CRUD (Create, Read, Update, Delete) operations to POST, HEAD/GET, PUT/PATCH, and DELETE respectively.
@@ -204,6 +205,13 @@ This section provides further details on each layer of the RPP architecture.
 === HTTP Transport Layer Details
 
 The RPP architecture uses the best practices described in <<RFC9205>> for the HTTP transport layer.
+
+[[transport-security]]
+==== Transport Security
+
+RPP communication relies on HTTPS with TLS to provide protection for data in transit. This addresses threats including eavesdropping, tampering, and man-in-the-middle attacks on provisioning operations, authentication credentials, and sensitive registry data exchanged between clients and servers.
+
+The architecture leverages HTTP's built-in transport security mechanisms and delegates specific security policy details to TLS standards and best practices. This approach allows implementations to adapt to evolving security requirements without requiring changes to the protocol specifications.
 
 [[authentication-authorization]]
 ==== Authentication and Authorisation
@@ -505,6 +513,7 @@ This naming mechanism ensures that new resource types, data elements, and operat
 
 === -00 to -01
 * Added "additional measures to verify the client" to <<http-layer-details-security>> (Issue #76).
+* Added TLS mandatory to <<transport-security>> (Issue #78).
 
 === -03 to draft-ietf-rpp-architecture-00
 * No changes. Document adopted by RPP WG.
