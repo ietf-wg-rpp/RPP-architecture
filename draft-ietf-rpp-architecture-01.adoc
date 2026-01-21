@@ -488,6 +488,7 @@ The RPP architecture is designed to be extensible, allowing for the addition of 
 * **Profile and Compatibility Layers:** Compatibility profiles can be defined to support subsets of RPP for specific use cases (such as EPP compatibility)
 * **Discovery and Negotiation:** Service discovery endpoints and content negotiation mechanisms allow clients and servers to dynamically discover and utilise new capabilities, resource types, and representations as they are introduced.
 * **Status codes:** New RPP status codes can be defined and registered including their mapping to HTTP status codes.
+* **Authenticaton Extension:** Functionality for updating client credentials, to support situations where management of authentication credentials is not delegated to a separate identity provider.
 
 RPP shall facilitate standardisation and reuse by requiring that extensions be registered with IANA. These registration requirements shall be fine-grained, applying independently to protocol elements such as resource types, data elements, operations, and status codes. This approach promotes consistency and interoperability, avoids fragmentation from conflicting definitions, and allows protocol elements to evolve independently.
 
@@ -504,6 +505,8 @@ This naming mechanism ensures that new resource types, data elements, and operat
 == Change History
 
 === -00 to -01
+
+* Added "Authenticaton Extension" to section "Extension mechanisms"
 
 
 === -03 to draft-ietf-rpp-architecture-00
