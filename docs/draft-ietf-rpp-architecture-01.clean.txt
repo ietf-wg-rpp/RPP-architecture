@@ -454,9 +454,9 @@ Table of Contents
    with a focus on OAuth 2.0 [RFC6749] and related frameworks.  However,
    to maintain functional equivalence with EPP client authentication,
    RPP SHOULD also support authentication schemes that can carry a
-   client identifier and a password, such as HTTP Basic Authentication.
-   RPP should be able to support future authentication and authorisation
-   standards defined for HTTP.
+   client identifier and a password, such as HTTP Basic Authentication
+   [RFC7617].  RPP should be able to support future authentication and
+   authorisation standards defined for HTTP.
 
    Specifications will define profiles for:
 
@@ -1338,6 +1338,10 @@ Table of Contents
               Representation of Contact Data", IETF,
               DOI 10.17487/RFC9553, RFC 9553, May 2024,
               <https://www.rfc-editor.org/info/rfc9553>.
+
+   [RFC7617]  Reschke, J., "The 'Basic' HTTP Authentication Scheme",
+              IETF, DOI 10.17487/RFC7617, RFC 7617, September 2015,
+              <https://www.rfc-editor.org/info/rfc7617>.
 
    [SD-JWT]   Terbu, O., Fett, D., and B. Campbell, "SD-JWT-based
               Verifiable Credentials (SD-JWT VC)", July 2025,
