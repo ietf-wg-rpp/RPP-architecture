@@ -298,6 +298,8 @@ The path segments shall be appended to the resource path to create full URI of s
 
 As discussed in <<http-layer-detail-mapping-basic-ops>> EPP check command may not be appropriate to be mapped directly to the HTTP uniform interface of the resource itself. EPP check command will be therefore modelled as sub-resource such as `/availability` offering both HEAD operation for quick yes/no response and GET operation for more detailed response allowing for example to extend on the dataset provided (e.g. pricing information).  
 
+All parties involved in a running or completed process, such as the Sponsoring Client and the Gaining Client for a transfer operation, must be allowed to query the status of the proces using the same process resource. 
+
 This basic set of rules and guidelines will be further refined in the RPP specifications and give a universal toolset for extending RPP with new resources and commands.
 
 ==== HTTP response codes
@@ -505,6 +507,7 @@ This naming mechanism ensures that new resource types, data elements, and operat
 
 === -00 to -01
 
+* Explicitly state that all parties involved in a process are allowed to retrieve the process status.
 
 === -03 to draft-ietf-rpp-architecture-00
 * No changes. Document adopted by RPP WG.
