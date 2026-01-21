@@ -210,7 +210,7 @@
 </section>
 </section>
 </section>
-    <section anchor="_9dff1150-6c26-27f7-147f-9f04b703a961"><name>Protocol Details</name>
+    <section anchor="_326e7303-8db4-e41c-252f-ca63f1615172"><name>Protocol Details</name>
 
 <t anchor="_258b3fe6-6525-0317-3cb7-1b42072bd9cf">This section provides further details on each layer of the RPP architecture.</t>
 
@@ -381,11 +381,40 @@
 <t anchor="_295387d7-f15b-5f0c-d8e9-17b1302659b7">This architectural approach to asynchronous operations allows client applications to remain responsive and manage extended processing times effectively, contributing to the overall scalability and robustness of interactions within the RPP ecosystem. Specific RPP operations intended for asynchronous execution will be designed to utilise this pattern.</t>
 </section>
 
+<section anchor="service-messages"><name>Service Messages</name>
+
+<t anchor="_c588dad0-5550-26c7-e2ce-c4b01fab3b4e">RPP provides a mechanism for servers to communicate service messages to clients, offering a functional equivalent to the EPP Poll command described in <xref target="RFC5730" section="" relative=""></xref>. Service messages may include notifications about events affecting client resources (such as transfer requests, expiration warnings, or administrative actions), system announcements, or other server-initiated communications.</t>
+
+<t anchor="_4ee3b02f-d0b4-9bd8-b00e-77a201268bc7">At minimum, RPP defines a single message queue resource that clients can access to discover and retrieve pending service messages. The baseline interaction pattern follows a read-first/acknowledge-delete approach:</t>
+
+<ol anchor="_213d7b7d-3114-4d16-a5aa-2a13d1af7033" type="1"><li>The client queries the message queue resource to retrieve the first available message.</li>
+<li>The client processes the message content.</li>
+<li>The client explicitly acknowledges the message through a DELETE operation, removing it from the queue.</li>
+</ol>
+
+<t anchor="_ae80a114-7449-4c6c-90f7-f5ace33285da">In order to assure idempotency and proper processing in case of concurrent clients, each service message must carry a unique message id, which allows clients to assure the correct message is acknowledged and deleted in step 3.</t>
+
+<t anchor="_ed484b97-ebcc-5b20-e324-0775687ba9af">Information about unread messages may be delivered as a custom http header with each queue response. Such header can be also added to other responses (for example with the first response after the queue state change or every n-th response or time based) in order to give a hint to the client about unread messages, however considering possible negative impact on server operation and performance.</t>
+
+<t anchor="_b2b58706-2c87-4bc6-07ba-23586e045804">The baseline mechanism may be extended through:</t>
+
+<ul anchor="_67ea6267-402c-5cfc-4dba-f88c75c5ad2c"><li>Separate queues per message type, where servers may expose distinct queue subresources for different categories of service messages, allowing clients to query specific message types independently.</li>
+<li>Message filtering, where clients may apply filters using query parameters when querying the message queue to retrieve only messages matching specific criteria.</li>
+</ul>
+
+<t anchor="_fe0a563b-55ff-1b7e-d583-065cb8d72df7">Additionally, RPP may support or be further extended with optional features for enhanced service message handling:</t>
+
+<ul anchor="_6a762b05-a6b1-a624-c2cb-c908a4b56e28"><li>Allowing clients to retrieve multiple service messages in a single request, reducing round trips for clients with many pending messages.</li>
+<li>Supporting multiple concurrent readers, allowing different client sessions or applications to access the message queue simultaneously.</li>
+<li>Supporting streaming mechanisms (such as Server-Sent Events or WebSockets) for real-time delivery of service messages to clients, as an alternative to polling-based retrieval.</li>
+</ul>
+</section>
+
 <section anchor="http-layer-detail-rpp-status-codes"><name>RPP specific status codes and relation to HTTP status codes</name>
 
-<t anchor="_05fd1cad-8c31-3a09-f4ca-a68f4d59ded3">RPP uses a dual-layer approach for signaling operation outcomes, leveraging both standard HTTP status codes and RPP-specific status codes. This allows for compatibility with generic HTTP components while providing detailed, application-level feedback for RPP clients.</t>
+<t anchor="_9d186b9d-350d-c098-cbe3-e0ff9a2da6ab">RPP uses a dual-layer approach for signaling operation outcomes, leveraging both standard HTTP status codes and RPP-specific status codes. This allows for compatibility with generic HTTP components while providing detailed, application-level feedback for RPP clients.</t>
 
-<ul anchor="_82a4c6f5-bbb1-43e9-4ede-9b240b703360"><li>The HTTP status code <xref target="RFC7231" section="" relative=""></xref> must be used to convey the overall outcome of an operation. Any HTTP-aware component, such as a proxy or monitoring tool, can determine if a request was successful (2xx), resulted in a client error (4xx), or a server error (5xx) by inspecting the HTTP status code alone.</li>
+<ul anchor="_b0cea76c-2004-45e1-6d85-8f9b16c4f884"><li>The HTTP status code <xref target="RFC7231" section="" relative=""></xref> must be used to convey the overall outcome of an operation. Any HTTP-aware component, such as a proxy or monitoring tool, can determine if a request was successful (2xx), resulted in a client error (4xx), or a server error (5xx) by inspecting the HTTP status code alone.</li>
 <li>RPP-specific status codes, transmitted in a dedicated HTTP header, must be used to provide granular, application-level information about the operation's result.</li>
 <li>RPP responses must include both an HTTP status code and an RPP-specific status code, however in some cases request handling may be terminated already on HTTP level, for example due malformed HTTP message, in such cases only HTTP status code will be present.</li>
 <li>RPP-specific status codes should be mapped to the most semantically appropriate HTTP status code. For example, an RPP status code indicating "object already exists" during a creation attempt should map to HTTP 409 (Conflict), while a code for "object does not exist" during a lookup should map to HTTP 404 (Not Found). If no specific HTTP status code is a good semantic fit, a generic code (e.g., 400 for a general client-side business rule failure, 200 for a successful operation with additional information) should be used.</li>
@@ -396,47 +425,47 @@
 </ul>
 </section>
 
-<section anchor="_dabe3b6b-ea99-6dac-4597-fb98dd1cef3c"><name>Transaction tracing and idempotency</name>
+<section anchor="_88c55fc9-3510-ede4-ba86-c18d23fe475c"><name>Transaction tracing and idempotency</name>
 
-<t anchor="_ff2dfc1c-8286-9be1-754d-6331bc6e058f">RPP shall support identification of requests and responses on both client side and server side with use of client provided identifiers and server provided identifiers. This will allow for tracking of requests and responses in case of errors, and for idempotency of requests.</t>
+<t anchor="_51c5991b-5c66-e4d2-41d3-d137f1fb0a2a">RPP shall support identification of requests and responses on both client side and server side with use of client provided identifiers and server provided identifiers. This will allow for tracking of requests and responses in case of errors, and for idempotency of requests.</t>
 
-<t anchor="_68fc8bf2-560b-328f-a00b-9ca25ee28465">Client provided identifier shall be returned in the corresponding synchronous response and shall be included in the asynchronous responses. This identifier shall be also used as idempotency identifier to allow clients to retry requests without risk of duplicate processing. The client provided identifier shall be unique for the client and the lifetime of the identifier shall be defined by the server, typically for a limited time after the request was processed.</t>
+<t anchor="_348c449f-5ae2-cba1-0ded-fd478587ce60">Client provided identifier shall be returned in the corresponding synchronous response and shall be included in the asynchronous responses. This identifier shall be also used as idempotency identifier to allow clients to retry requests without risk of duplicate processing. The client provided identifier shall be unique for the client and the lifetime of the identifier shall be defined by the server, typically for a limited time after the request was processed.</t>
 
-<t anchor="_a7ad388c-43e1-65d4-9aaa-8f0d3605fcd1">Server shall always generate own unique trasaction identifier, regardless of nature of the transaction (reading or changing).</t>
+<t anchor="_88880a42-1a1c-3fdc-75bd-c1e46b432315">Server shall always generate own unique trasaction identifier, regardless of nature of the transaction (reading or changing).</t>
 
-<t anchor="_0b92785b-68f4-96c4-45c8-7dce026f8491">The transmission of transaction identifiers should be defined outside of the Data Representation Layer (e.g. as HTTP Headers), to assure clear separation of resource representation from performed actions. If possible existing mechanisms of HTTP shall be employed.</t>
+<t anchor="_bb312dcb-9590-725a-5128-f9b9c54e0ea7">The transmission of transaction identifiers should be defined outside of the Data Representation Layer (e.g. as HTTP Headers), to assure clear separation of resource representation from performed actions. If possible existing mechanisms of HTTP shall be employed.</t>
 </section>
 
-<section anchor="_f873b9be-dbe1-7a13-b9a6-00ee2674b9da"><name>Protocol Versioning</name>
+<section anchor="_c49325ab-73ca-e32c-e502-9597cb04d865"><name>Protocol Versioning</name>
 
-<t anchor="_58b8f3a0-c0d5-476f-6d23-a554a2e7e00e">RPP will define a versioning schema for the protocol itself, the extensions and other protocol elements such as profiles as appropriate. The versioning schema shall on one side allow for independent introduction of new features in a non-breaking manner on both client and server side, and on the other side allow the opposite party of the communication to determine if the version is compatible or not. One of potential approaches having this property might be use of Semantic Versioning  <xref target="SemVer" section="" relative=""></xref>, but also other versioning schema shall be possible.</t>
+<t anchor="_a6ca8eb3-951f-2fb2-e6a4-52b00de79e17">RPP will define a versioning schema for the protocol itself, the extensions and other protocol elements such as profiles as appropriate. The versioning schema shall on one side allow for independent introduction of new features in a non-breaking manner on both client and server side, and on the other side allow the opposite party of the communication to determine if the version is compatible or not. One of potential approaches having this property might be use of Semantic Versioning  <xref target="SemVer" section="" relative=""></xref>, but also other versioning schema shall be possible.</t>
 
-<t anchor="_da97a085-db20-93d7-732e-2f72d1f783e3">Signalling of the versions will be preferably realised using parameters of the media type.</t>
+<t anchor="_c0c2cbc9-f2f8-794d-fe16-cccf9cc55a88">Signalling of the versions will be preferably realised using parameters of the media type.</t>
 </section>
 
-<section anchor="_d2159ee6-0ece-7d82-94a3-68b0e8cc4583"><name>Profiles</name>
+<section anchor="_f0024d24-4236-a8e0-0518-1156b4292d15"><name>Profiles</name>
 
-<t anchor="_c532d7d6-cedb-c2bb-a57f-c45e9888f627">In real operational conditions different RPP server operators may have different requirements regarding set of protocol elements and their versions necessary to be supported by the client to enable reliable communication. Such requirements may also be defined by external policies. For this purpose RPP will define a concept of profiles, being identifiers translated into a certain minimum configuration of protocol version, extensions and their versions. The profiles themselves will be versioned in the same way as other protocol elements.</t>
+<t anchor="_51755d84-4f29-6ef8-03a1-ca4a783cf834">In real operational conditions different RPP server operators may have different requirements regarding set of protocol elements and their versions necessary to be supported by the client to enable reliable communication. Such requirements may also be defined by external policies. For this purpose RPP will define a concept of profiles, being identifiers translated into a certain minimum configuration of protocol version, extensions and their versions. The profiles themselves will be versioned in the same way as other protocol elements.</t>
 
-<t anchor="_7436af51-0a16-7d3b-1a68-9ad578e4d7c1">RPP may define a machine-readable definition of profiles to allow automatic processing by the clients, but may also refer to other forms of profile specification.</t>
+<t anchor="_d439eb48-60e1-02e4-6db6-ac8a4abe21c1">RPP may define a machine-readable definition of profiles to allow automatic processing by the clients, but may also refer to other forms of profile specification.</t>
 
-<t anchor="_2fbbe50e-708f-147f-c0f2-d2b18d4a9386">Signalling of the profiles will be preferably realised using parameters of the media type.</t>
+<t anchor="_78ba514f-a2b8-a5bf-f3c5-518d445c97b8">Signalling of the profiles will be preferably realised using parameters of the media type.</t>
 </section>
 
 <section anchor="prefer-header"><name>Definition of special resources</name>
 
-<t anchor="_fff969b8-d955-5d64-5e9f-bba55a365477">RPP may define special resources for specific purposes:</t>
+<t anchor="_97329bc0-9124-0ab9-ac6f-0428138a24ed">RPP may define special resources for specific purposes:</t>
 
-<ul anchor="_f6d9b3f7-d6dd-9c8d-5f3d-888bde14c92e"><li>Service Discovery endpoints to advertise protocol capabilities and supported features (see  <xref target="service-discovery"></xref>).</li>
+<ul anchor="_331f2c39-7446-4f51-cf09-acf438bdf015"><li>Service Discovery endpoints to advertise protocol capabilities and supported features (see  <xref target="service-discovery"></xref>).</li>
 <li>Metadata endpoints to provide schema information or other protocol-level metadata, potentially including OpenAPI definitions for documentation and code generation.</li>
 </ul>
 </section>
 
 <section anchor="service-discovery"><name>Service discovery mechanisms</name>
 
-<t anchor="_534c1f7f-d74d-c8a4-dc79-a9f4e367c8a0">RPP will define mechanisms for service discovery, allowing clients to dynamically discover RPP service endpoints and capabilities, reducing coupling between clients and servers.</t>
+<t anchor="_949b3af6-ec09-4378-eacf-3a582885158f">RPP will define mechanisms for service discovery, allowing clients to dynamically discover RPP service endpoints and capabilities, reducing coupling between clients and servers.</t>
 
-<ul anchor="_9b73e5a1-f500-73a9-9a94-29afcdd99772"><li>Potential discovery of RPP server location, like  IANA bootstrapping document or a special DNS TXT RR with location of RPP service for the tld.</li>
+<ul anchor="_528c2988-8aeb-df68-fcee-2e1262dd1471"><li>Potential discovery of RPP server location, like  IANA bootstrapping document or a special DNS TXT RR with location of RPP service for the tld.</li>
 <li>Potential use of well-known URIs (e.g., <tt>/.well-known/rpp-capabilities</tt>) for service discovery.</li>
 <li>Advertising supported protocol versions, extensions, available resource types, authentication methods, and supported features.</li>
 <li>It may be considered for RPP to distribute service discovery for each resource type separately for better scalability and management. For example instead of having a single service discovery endpoint for the whole registry on <tt>/.well-known/rpp-capabilities</tt> there might be a separate discovery placed under <tt>/{resource-type}/.well-known/rpp-capabilities</tt> e.g. <tt>/domains/.well-known/rpp-capabilities</tt>.</li>
@@ -553,12 +582,13 @@
 </section>
 </section>
 </section>
-    <section anchor="_58dea3fc-e337-622b-5232-ec79a123ea4e"><name>Change History</name>
+    <section anchor="_88544814-345e-0406-0043-d4edcdf53b4e"><name>Change History</name>
 
-<section anchor="_9b054958-d96d-264f-c78f-cf3da51121f0"><name>-00 to -01</name>
+<section anchor="_56d78337-d4fe-cd30-4e8b-d2890ddc0c4a"><name>-00 to -01</name>
 
-<ul anchor="_05e47695-3dc6-e260-2267-6911e1047641"><li>Added "additional measures to verify the client" to <xref target="http-layer-details-security"></xref> (Issue #76).</li>
+<ul anchor="_60ccaeca-3651-4a07-4296-7cda9a50efb2"><li>Added "additional measures to verify the client" to <xref target="http-layer-details-security"></xref> (Issue #76).</li>
 <li>Added TLS mandatory to <xref target="transport-security"></xref> (Issue #78).</li>
+<li>Added Section <xref target="service-messages"></xref> to describe poll message equivalent (Issue #87).</li>
 </ul>
 </section>
 

@@ -360,6 +360,32 @@ The typical interaction flow facilitated by the architecture is as follows:
 
 This architectural approach to asynchronous operations allows client applications to remain responsive and manage extended processing times effectively, contributing to the overall scalability and robustness of interactions within the RPP ecosystem. Specific RPP operations intended for asynchronous execution will be designed to utilise this pattern.
 
+[[service-messages]]
+==== Service Messages
+
+RPP provides a mechanism for servers to communicate service messages to clients, offering a functional equivalent to the EPP Poll command described in <<RFC5730>>. Service messages may include notifications about events affecting client resources (such as transfer requests, expiration warnings, or administrative actions), system announcements, or other server-initiated communications.
+
+At minimum, RPP defines a single message queue resource that clients can access to discover and retrieve pending service messages. The baseline interaction pattern follows a read-first/acknowledge-delete approach:
+
+1.  The client queries the message queue resource to retrieve the first available message.
+2.  The client processes the message content.
+3.  The client explicitly acknowledges the message through a DELETE operation, removing it from the queue.
+
+In order to assure idempotency and proper processing in case of concurrent clients, each service message must carry a unique message id, which allows clients to assure the correct message is acknowledged and deleted in step 3.
+
+Information about unread messages may be delivered as a custom http header with each queue response. Such header can be also added to other responses (for example with the first response after the queue state change or every n-th response or time based) in order to give a hint to the client about unread messages, however considering possible negative impact on server operation and performance.
+
+The baseline mechanism may be extended through:
+
+*  Separate queues per message type, where servers may expose distinct queue subresources for different categories of service messages, allowing clients to query specific message types independently.
+*  Message filtering, where clients may apply filters using query parameters when querying the message queue to retrieve only messages matching specific criteria.
+
+Additionally, RPP may support or be further extended with optional features for enhanced service message handling:
+
+*  Allowing clients to retrieve multiple service messages in a single request, reducing round trips for clients with many pending messages.
+*  Supporting multiple concurrent readers, allowing different client sessions or applications to access the message queue simultaneously.
+*  Supporting streaming mechanisms (such as Server-Sent Events or WebSockets) for real-time delivery of service messages to clients, as an alternative to polling-based retrieval.
+
 [[http-layer-detail-rpp-status-codes]]
 ==== RPP specific status codes and relation to HTTP status codes
 
@@ -514,6 +540,7 @@ This naming mechanism ensures that new resource types, data elements, and operat
 === -00 to -01
 * Added "additional measures to verify the client" to <<http-layer-details-security>> (Issue #76).
 * Added TLS mandatory to <<transport-security>> (Issue #78).
+* Added Section <<service-messages>> to describe poll message equivalent (Issue #87).
 
 === -03 to draft-ietf-rpp-architecture-00
 * No changes. Document adopted by RPP WG.
