@@ -408,6 +408,7 @@ to dynamically discover RPP service endpoints and capabilities, reducing couplin
 *  Potential use of well-known URIs (e.g., `/.well-known/rpp-capabilities`) for service discovery.
 *  Advertising supported protocol versions,
 extensions, available resource types, authentication methods, and supported features.
+*  Enabling transparent handling of privacy requirements by advertising policies related to data privacy, including data minimisation and purpose limitation rules.
 *  It may be considered for RPP to distribute service discovery for each resource type separately for better scalability and management. For example instead of having a single service discovery endpoint for the whole registry on `/.well-known/rpp-capabilities` there might be a separate discovery placed under `/{resource-type}/.well-known/rpp-capabilities` e.g. `/domains/.well-known/rpp-capabilities`.
 *  Service discovery shall utilise standardised methods, like URI templates <<RFC6570>> to allow easy navigation of resources and avoid hard-coding of URLs, same time allowing clients to navigate directly to a known resource without additional server queries.
 *  As a matter of principle service discovery shall be used to bootstrap the communication between client and server, its capabilities and operational policies. The server configuration shall be considered static between reconfiguration of the server and not be used for any dynamic configuration, like load balancing etc. It would enable the right balance between discoverability and reduction of round trips between clients and servers.
@@ -449,6 +450,10 @@ The schemas must support both strict and lenient processing of requests and resp
 
 ==== Media Type definition
 Together data structure and data format would define the whole media type. So application/rpp+json would be the primary media type with "rpp" payloads in plain json format. application/epp+xml would be epp payload as per <<RFC5730>>. 
+
+==== Data privacy
+RPP request and response representations may contain personal data or other sensitive information subject to local privacy laws and regulations.
+The RPP core design supports data minimisation by default, including only the necessary data elements required for the intended operation.
 
 === Resource Definition Layer
 Each resource type, no matter if on a top level, being an independent provisioning object, or a subresource, being a part of another resource, shall be well defined including data elements and possible operations. A resource definition shall on the first level of abstraction be composable out of data elements, without any reference to the media type or representation. This will allow for easy extensibility and compatibility with different media types.
@@ -504,6 +509,8 @@ This naming mechanism ensures that new resource types, data elements, and operat
 == Change History
 
 === -00 to -01
+
+* Added data privacy elements to "Service discovery mechanisms" and "Data privacy" sections.
 
 
 === -03 to draft-ietf-rpp-architecture-00
