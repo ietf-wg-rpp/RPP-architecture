@@ -417,14 +417,7 @@ extensions, available resource types, authentication methods, and supported feat
 
 RPP leverages HTTP, enabling the use of standard web scalability techniques such as load balancing, horizontal scaling, and distributed caching.
 Stateless interactions allow requests to be handled independently, facilitating distribution across multiple servers and rapid scaling in response to demand.
-
-RPP can utilise existing web security and mitigation mechanisms to defend against attacks such as Distributed Denial of Service (DDoS). 
-
-* **Rate Limiting:** HTTP servers and API gateways can enforce rate limits per client or IP address, reducing the impact of abusive traffic.
-* **Traffic Filtering:** Integration with Web Application Firewalls (WAFs) and DDoS mitigation services allows for automated detection and blocking of malicious requests.
-* **Caching:** Caching of responses for read-heavy endpoints can reduce backend load during high traffic events.
-* **Resource Isolation:** Separating more important functionality such as creating new resources to dedicated infrastructure.
-* **Monitoring and Logging:** HTTP infrastructure supports detailed monitoring and logging, enabling rapid detection and response to abnormal traffic patterns.
+RPP shall enable by design existing web security and mitigation mechanisms to defend against attacks such as Denial of Service (DoS). 
 
 [[data-representation-layer]]
 === Data Representation Layer
