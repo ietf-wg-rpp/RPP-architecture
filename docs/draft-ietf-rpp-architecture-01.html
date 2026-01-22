@@ -1801,7 +1801,7 @@ li > p:last-of-type:only-child {
 </div>
 </section>
 </div>
-<div id="_9dff1150-6c26-27f7-147f-9f04b703a961">
+<div id="_e5604e57-f5e7-73e8-abd0-9cb6ceb869a2">
 <section id="section-5">
       <h2 id="name-protocol-details">
 <a href="#section-5" class="section-number selfRef">5. </a><a href="#name-protocol-details" class="section-name selfRef">Protocol Details</a>
@@ -1896,13 +1896,29 @@ li > p:last-of-type:only-child {
 </div>
 </section>
 </div>
-<div id="_75dbc62f-9b76-625d-53b2-cefe3bb42a1d">
+<div id="credential-revocation">
 <section id="section-5.1.2.5">
-            <h5 id="name-object-level-authorisation">
-<a href="#section-5.1.2.5" class="section-number selfRef">5.1.2.5. </a><a href="#name-object-level-authorisation" class="section-name selfRef">Object level authorisation</a>
+            <h5 id="name-credential-and-token-revoca">
+<a href="#section-5.1.2.5" class="section-number selfRef">5.1.2.5. </a><a href="#name-credential-and-token-revoca" class="section-name selfRef">Credential and Token Revocation</a>
             </h5>
-<div id="_0030907e-cd4d-42ed-81d6-954be7b06bf6">
-<p id="section-5.1.2.5-1">RPP will define a mechanism for object-level authorisation, preventing unauthorised access to specific objects or resources. Each object will have an associated sponsor or owner with full control over an object, and the protocol will allow for the specification of which clients are authorised to access or modify non-sponsored/owned objects. This could be achieved through state-of-the-art standards like OAuth authorisation tokens, scopes, and resource-specific permissions but also shared secrets for backward compatibility with EPP password-based authorisation information.<a href="#section-5.1.2.5-1" class="pilcrow">¶</a></p>
+<div id="_7a4505c2-f067-1849-7aff-673a5587b705">
+<p id="section-5.1.2.5-1">RPP will support mechanisms for revoking or deprecating credentials, tokens, or permissions when they are no longer needed or if they become compromised.<a href="#section-5.1.2.5-1" class="pilcrow">¶</a></p>
+</div>
+<div id="_9969a671-cbb4-2d2c-ae2a-6076cf64b5c1">
+<p id="section-5.1.2.5-2">The architecture delegates revocation mechanisms to the specific authentication method in use, following their established practices. For OAuth-based deployments, standard token revocation mechanisms as defined in <span>[<a href="#RFC7009" class="cite xref">RFC7009</a>]</span> should be utilised. For HTTP Basic Authentication revocation must be fulfilled by off-band operational practice, or using using Authenticaton Extension to rotate the credential. Protocol specifications must emphasize, that implementations should ensure that revocation takes effect promptly and that revoked credentials are consistently rejected across all RPP endpoints.<a href="#section-5.1.2.5-2" class="pilcrow">¶</a></p>
+</div>
+<div id="_d0885896-d6f9-f0e3-08b0-3e327cabdff1">
+<p id="section-5.1.2.5-3">Service discovery endpoints may advertise supported revocation mechanisms, enabling clients to discover how to revoke credentials when necessary.<a href="#section-5.1.2.5-3" class="pilcrow">¶</a></p>
+</div>
+</section>
+</div>
+<div id="_0a4ff3d5-8625-1346-0168-6c9c1ee52d27">
+<section id="section-5.1.2.6">
+            <h5 id="name-object-level-authorisation">
+<a href="#section-5.1.2.6" class="section-number selfRef">5.1.2.6. </a><a href="#name-object-level-authorisation" class="section-name selfRef">Object level authorisation</a>
+            </h5>
+<div id="_3e627d68-9017-f5d1-feaa-08d5edb3e5c6">
+<p id="section-5.1.2.6-1">RPP will define a mechanism for object-level authorisation, preventing unauthorised access to specific objects or resources. Each object will have an associated sponsor or owner with full control over an object, and the protocol will allow for the specification of which clients are authorised to access or modify non-sponsored/owned objects. This could be achieved through state-of-the-art standards like OAuth authorisation tokens, scopes, and resource-specific permissions but also shared secrets for backward compatibility with EPP password-based authorisation information.<a href="#section-5.1.2.6-1" class="pilcrow">¶</a></p>
 </div>
 </section>
 </div>
@@ -2447,12 +2463,12 @@ li > p:last-of-type:only-child {
 </div>
 </section>
 </div>
-<div id="_58dea3fc-e337-622b-5232-ec79a123ea4e">
+<div id="_47262932-707c-6c51-f32b-98870e0f4ce3">
 <section id="section-6">
       <h2 id="name-change-history">
 <a href="#section-6" class="section-number selfRef">6. </a><a href="#name-change-history" class="section-name selfRef">Change History</a>
       </h2>
-<div id="_9b054958-d96d-264f-c78f-cf3da51121f0">
+<div id="_3a22899f-b9f4-149d-bf2c-409a6d25cc69">
 <section id="section-6.1">
         <h3 id="name-00-to-01">
 <a href="#section-6.1" class="section-number selfRef">6.1. </a><a href="#name-00-to-01" class="section-name selfRef">-00 to -01</a>
@@ -2461,6 +2477,8 @@ li > p:last-of-type:only-child {
 <li class="normal" id="section-6.1-1.1">Added "additional measures to verify the client" to <a href="#http-layer-details-security" class="auto internal xref">Section 5.1.2.4</a> (Issue #76).<a href="#section-6.1-1.1" class="pilcrow">¶</a>
 </li>
           <li class="normal" id="section-6.1-1.2">Added TLS mandatory to <a href="#transport-security" class="auto internal xref">Section 5.1.1</a> (Issue #78).<a href="#section-6.1-1.2" class="pilcrow">¶</a>
+</li>
+          <li class="normal" id="section-6.1-1.3">Added Section <a href="#credential-revocation" class="auto internal xref">Section 5.1.2.5</a> for credential and token revocation mechanisms (Issue #79).<a href="#section-6.1-1.3" class="pilcrow">¶</a>
 </li>
         </ul>
 </section>
@@ -2551,7 +2569,7 @@ li > p:last-of-type:only-child {
 </div>
 </section>
 </div>
-<div id="_d41083cc-35eb-ebd5-fe52-9a5336274b47">
+<div id="_53ca9cc4-609d-2494-8c43-dbbbf2c07abf">
 <section id="section-7">
       <h2 id="name-references">
 <a href="#section-7" class="section-number selfRef">7. </a><a href="#name-references" class="section-name selfRef">References</a>
@@ -2569,7 +2587,7 @@ li > p:last-of-type:only-child {
 </dl>
 </section>
 </div>
-<div id="_87f44d5a-6723-7e31-4bc7-a35c6ac04d5a">
+<div id="_a1b70ae6-f80d-2c8a-b5fe-d643c5b364c2">
 <section id="section-7.2">
         <h3 id="name-informational-references">
 <a href="#section-7.2" class="section-number selfRef">7.2. </a><a href="#name-informational-references" class="section-name selfRef">Informational References</a>
@@ -2614,6 +2632,10 @@ li > p:last-of-type:only-child {
 <dt id="RFC6750">[RFC6750]</dt>
         <dd>
 <span class="refAuthor">Jones, M.</span> and <span class="refAuthor">D. Hardt</span>, <span class="refTitle">"The OAuth 2.0 Authorization Framework: Bearer Token Usage"</span>, <span class="stream">IETF</span>, <span class="seriesInfo">DOI 10.17487/RFC6750</span>, <span class="seriesInfo">RFC 6750</span>, <time datetime="2012-10" class="refDate">October 2012</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc6750">https://www.rfc-editor.org/info/rfc6750</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC7009">[RFC7009]</dt>
+        <dd>
+<span class="refAuthor">Dronia, S.</span>, <span class="refAuthor">Scurtescu, M.</span>, and <span class="refAuthor">T. Lodderstedt</span>, <span class="refTitle">"OAuth 2.0 Token Revocation"</span>, <span class="stream">IETF</span>, <span class="seriesInfo">DOI 10.17487/RFC7009</span>, <span class="seriesInfo">RFC 7009</span>, <time datetime="2013-08" class="refDate">August 2013</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc7009">https://www.rfc-editor.org/info/rfc7009</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="RFC7519">[RFC7519]</dt>
         <dd>

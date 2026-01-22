@@ -519,7 +519,28 @@ Table of Contents
    which may evolve over time and would have to be independent of the
    protocol itself.
 
-5.1.2.5.  Object level authorisation
+5.1.2.5.  Credential and Token Revocation
+
+   RPP will support mechanisms for revoking or deprecating credentials,
+   tokens, or permissions when they are no longer needed or if they
+   become compromised.
+
+   The architecture delegates revocation mechanisms to the specific
+   authentication method in use, following their established practices.
+   For OAuth-based deployments, standard token revocation mechanisms as
+   defined in [RFC7009] should be utilised.  For HTTP Basic
+   Authentication revocation must be fulfilled by off-band operational
+   practice, or using using Authenticaton Extension to rotate the
+   credential.  Protocol specifications must emphasize, that
+   implementations should ensure that revocation takes effect promptly
+   and that revoked credentials are consistently rejected across all RPP
+   endpoints.
+
+   Service discovery endpoints may advertise supported revocation
+   mechanisms, enabling clients to discover how to revoke credentials
+   when necessary.
+
+5.1.2.6.  Object level authorisation
 
    RPP will define a mechanism for object-level authorisation,
    preventing unauthorised access to specific objects or resources.
@@ -1180,6 +1201,9 @@ Table of Contents
 
    *  Added TLS mandatory to Section 5.1.1 (Issue #78).
 
+   *  Added Section Section 5.1.2.5 for credential and token revocation
+      mechanisms (Issue #79).
+
 6.2.  -03 to draft-ietf-rpp-architecture-00
 
    *  No changes.  Document adopted by RPP WG.
@@ -1306,6 +1330,10 @@ Table of Contents
               Framework: Bearer Token Usage", IETF,
               DOI 10.17487/RFC6750, RFC 6750, October 2012,
               <https://www.rfc-editor.org/info/rfc6750>.
+
+   [RFC7009]  Dronia, S., Scurtescu, M., and T. Lodderstedt, "OAuth 2.0
+              Token Revocation", IETF, DOI 10.17487/RFC7009, RFC 7009,
+              August 2013, <https://www.rfc-editor.org/info/rfc7009>.
 
    [RFC7519]  Jones, M., Bradley, J., and N. Sakimura, "JSON Web Token
               (JWT)", IETF, DOI 10.17487/RFC7519, RFC 7519, May 2015,
