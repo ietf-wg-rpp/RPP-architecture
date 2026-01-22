@@ -257,6 +257,11 @@ As a matter of extensibility consideration RPP should allow for additional path 
 
 RPP responses will include URLs for related resources, allowing clients to navigate newly created resources easily. This is similar to the "links" concept in RESTful APIs, where related resources are linked together.
 
+[[collection-representation]]
+===== Collection Representation
+
+RPP supports retrieval of collections of resources via dedicated collection endpoints (e.g., `/domains/` for listing domains). For collections that may contain large numbers of resources, RPP supports pagination using established mechanisms such as HTTP Link headers as defined in <<RFC8288>>. Items within a collection may be returned as partial representations rather than full resource details, reducing payload size. Clients can retrieve full details by following links to individual resources. RPP may also support query parameters for filtering and sorting collection results.
+
 ===== Internationalised Domain Names (IDN)
 
 RPP will address the handling of Internationalised Domain Names (IDNs) in resource addressing. Specifications will define whether to use IDN or UTF-8 encoding directly in URLs and whether to employ redirects to canonical URLs or "see-also" linking for alternative representations. For example,  a "see-also" link could point from a UTF-8 encoded URL to an IDN URL and vice versa, allowing clients to use either URL. Another way would be to always redirect to the canonical URL, which would be the IDN URL.
@@ -455,13 +460,14 @@ Each resource type, no matter if on a top level, being an independent provisioni
 
 All resource types shall be defined in IANA registry in a way that allows fully automated processing of the resource definition, including data elements, operations and media type representation.
 
+[[data-elements]]
 ==== Data Elements
 This part defines logical data elements for each resource type, which can also be re-used across resource types. It is abstracted from the actual transport and media type, focusing on the structure and constraints of data elements. Data element definition includes:
 
 *  Identification of logical data units (e.g. a stable identifier of a data element, which is independent of the representation)
 *  Definition of logical data units (e.g., domain name, contact details)
 *  Format and schema for primitive data elements or reference to other resource type definitions
-*  Definition of container elements, which are logical groupings that can encapsulate zero or more data elements or other containers ( e.g. map or list).
+*  Definition of container elements, which are logical groupings that can encapsulate zero or more data elements or other containers. Container types include ordered lists (e.g., a sequence of nameservers) and maps (e.g., key-value pairs for extension data). The representation of container elements in specific data formats is defined by the mapping layer.
 *  Constraints on data elements (e.g., data type, length, allowed values)
 *  Mechanisms for extensibility, if applicable
 
@@ -506,7 +512,7 @@ This naming mechanism ensures that new resource types, data elements, and operat
 
 === -00 to -01
 
-* Added text about collection representation. (Issue #85)
+* Added Section <<collection-representation, format=title>> for API-level collection retrieval and expanded container element description in <<data-elements, format=title>> Section. (Issue #85)
 
 === -03 to draft-ietf-rpp-architecture-00
 * No changes. Document adopted by RPP WG.
@@ -559,6 +565,7 @@ This naming mechanism ensures that new resource types, data elements, and operat
 * [[[RFC7231, RFC 7231]]] Fielding, R., Ed., and J. Reschke, Ed., "Hypertext Transfer Protocol (HTTP/1.1): Semantics and Content", RFC 7231, DOI 10.17487/RFC7231, June 2014, <https://www.rfc-editor.org/info/rfc7231>.
 * [[[RFC7240, RFC 7240]]] Snell, J., "Prefer Header for HTTP", RFC 7240, DOI 10.17487/RFC7240, June 2014, <https://www.rfc-editor.org/info/rfc7240>.
 * [[[RFC8259, RFC 8259]]] Bray, T., Ed., "The JavaScript Object Notation (JSON) Data Interchange Format", STD 90, RFC 8259, DOI 10.17487/RFC8259, December 2017, <https://www.rfc-editor.org/info/rfc8259>.
+* [[[RFC8288, RFC 8288]]] Nottingham, M., "Web Linking", IETF, DOI 10.17487/RFC8288, RFC 8288, October 2017, <https://www.rfc-editor.org/info/rfc8288>.
 * [[[RFC6570, RFC 6570]]] Gregorio, J., Fielding, R., Hadley, M., Nottingham, M., and D. Orchard, "URI Template", RFC 6570, DOI 10.17487/RFC6570, March 2012, <https://www.rfc-editor.org/info/rfc6570>.
 * [[[RFC6749, RFC 6749]]] Hardt, D., Ed., "The OAuth 2.0 Authorization Framework", RFC 6749, DOI 10.17487/RFC6749, October 2012, <https://www.rfc-editor.org/info/rfc6749>.
 * [[[RFC6750, RFC 6750]]] Jones, M. and D. Hardt, "The OAuth 2.0 Authorization Framework: Bearer Token Usage", RFC 6750, DOI 10.17487/RFC6750, October 2012, <https://www.rfc-editor.org/info/rfc6750>.

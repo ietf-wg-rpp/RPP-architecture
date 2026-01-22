@@ -544,7 +544,19 @@ Table of Contents
    to the "links" concept in RESTful APIs, where related resources are
    linked together.
 
-5.1.2.1.  Internationalised Domain Names (IDN)
+5.1.2.1.  Collection Representation
+
+   RPP supports retrieval of collections of resources via dedicated
+   collection endpoints (e.g., /domains/ for listing domains).  For
+   collections that may contain large numbers of resources, RPP supports
+   pagination using established mechanisms such as HTTP Link headers as
+   defined in [RFC8288].  Items within a collection may be returned as
+   partial representations rather than full resource details, reducing
+   payload size.  Clients can retrieve full details by following links
+   to individual resources.  RPP may also support query parameters for
+   filtering and sorting collection results.
+
+5.1.2.2.  Internationalised Domain Names (IDN)
 
    RPP will address the handling of Internationalised Domain Names
    (IDNs) in resource addressing.  Specifications will define whether to
@@ -1044,6 +1056,13 @@ Table of Contents
    *  Format and schema for primitive data elements or reference to
       other resource type definitions
 
+   *  Definition of container elements, which are logical groupings that
+      can encapsulate zero or more data elements or other containers.
+      Container types include ordered lists (e.g., a sequence of
+      nameservers) and maps (e.g., key-value pairs for extension data).
+      The representation of container elements in specific data formats
+      is defined by the mapping layer.
+
    *  Constraints on data elements (e.g., data type, length, allowed
       values)
 
@@ -1157,6 +1176,10 @@ Table of Contents
 
 6.1.  -00 to -01
 
+   *  Added Section Collection Representation for API-level collection
+      retrieval and expanded container element description in Data
+      Elements Section.  (Issue #85)
+
 6.2.  -03 to draft-ietf-rpp-architecture-00
 
    *  No changes.  Document adopted by RPP WG.
@@ -1269,6 +1292,10 @@ Table of Contents
               Interchange Format", IETF, DOI 10.17487/RFC8259, BCP 90,
               RFC 8259, December 2017,
               <https://www.rfc-editor.org/info/rfc8259>.
+
+   [RFC8288]  Nottingham, M., "Web Linking", IETF, DOI 10.17487/RFC8288,
+              RFC 8288, October 2017,
+              <https://www.rfc-editor.org/info/rfc8288>.
 
    [RFC6570]  Gregorio, J., Fielding, R., Hadley, M., Nottingham, M.,
               and D. Orchard, "URI Template", IETF,

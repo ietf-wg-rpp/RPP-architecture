@@ -93,19 +93,19 @@ Table of Contents
                URLs and verbs  . . . . . . . . . . . . . . . . . . .  14
        5.1.5.  HTTP response codes . . . . . . . . . . . . . . . . .  15
        5.1.6.  Content negotiation for media types . . . . . . . . .  15
-       5.1.7.  Caching . . . . . . . . . . . . . . . . . . . . . . .  15
+       5.1.7.  Caching . . . . . . . . . . . . . . . . . . . . . . .  16
        5.1.8.  Language negotiation for textual content  . . . . . .  16
        5.1.9.  Client Signalling for Response Verbosity  . . . . . .  16
-       5.1.10. Client Signalling for Request Validation  . . . . . .  16
+       5.1.10. Client Signalling for Request Validation  . . . . . .  17
        5.1.11. Asynchronous Operation Processing . . . . . . . . . .  17
        5.1.12. RPP specific status codes and relation to HTTP status
                codes . . . . . . . . . . . . . . . . . . . . . . . .  18
        5.1.13. Transaction tracing and idempotency . . . . . . . . .  19
-       5.1.14. Protocol Versioning . . . . . . . . . . . . . . . . .  19
-       5.1.15. Profiles  . . . . . . . . . . . . . . . . . . . . . .  19
-       5.1.16. Definition of special resources . . . . . . . . . . .  20
-       5.1.17. Service discovery mechanisms  . . . . . . . . . . . .  20
-     5.2.  Data Representation Layer . . . . . . . . . . . . . . . .  21
+       5.1.14. Protocol Versioning . . . . . . . . . . . . . . . . .  20
+       5.1.15. Profiles  . . . . . . . . . . . . . . . . . . . . . .  20
+       5.1.16. Definition of special resources . . . . . . . . . . .  21
+       5.1.17. Service discovery mechanisms  . . . . . . . . . . . .  21
+     5.2.  Data Representation Layer . . . . . . . . . . . . . . . .  22
 
 
 
@@ -114,26 +114,26 @@ Kowalik & Wullink          Expires 10 May 2026                  [Page 2]
 Internet-Draft              rpp-architecture               November 2025
 
 
-       5.2.1.  Data structure  . . . . . . . . . . . . . . . . . . .  21
+       5.2.1.  Data structure  . . . . . . . . . . . . . . . . . . .  22
        5.2.2.  Data format . . . . . . . . . . . . . . . . . . . . .  22
-       5.2.3.  Data Validation . . . . . . . . . . . . . . . . . . .  22
+       5.2.3.  Data Validation . . . . . . . . . . . . . . . . . . .  23
        5.2.4.  Media Type definition . . . . . . . . . . . . . . . .  23
-     5.3.  Resource Definition Layer . . . . . . . . . . . . . . . .  23
-       5.3.1.  Data Elements . . . . . . . . . . . . . . . . . . . .  23
-       5.3.2.  Mapping . . . . . . . . . . . . . . . . . . . . . . .  24
-       5.3.3.  Operations  . . . . . . . . . . . . . . . . . . . . .  24
-     5.4.  Extension mechanisms  . . . . . . . . . . . . . . . . . .  24
-       5.4.1.  Name Management and Collision Avoidance . . . . . . .  25
-   6.  Change History  . . . . . . . . . . . . . . . . . . . . . . .  26
-     6.1.  -00 to -01  . . . . . . . . . . . . . . . . . . . . . . .  26
-     6.2.  -03 to draft-ietf-rpp-architecture-00 . . . . . . . . . .  26
-     6.3.  -02 to -03  . . . . . . . . . . . . . . . . . . . . . . .  26
-     6.4.  -01 to -02  . . . . . . . . . . . . . . . . . . . . . . .  26
-     6.5.  -00 to -01  . . . . . . . . . . . . . . . . . . . . . . .  27
-   7.  References  . . . . . . . . . . . . . . . . . . . . . . . . .  27
-     7.1.  Normative References  . . . . . . . . . . . . . . . . . .  27
-     7.2.  Informational References  . . . . . . . . . . . . . . . .  27
-   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  30
+     5.3.  Resource Definition Layer . . . . . . . . . . . . . . . .  24
+       5.3.1.  Data Elements . . . . . . . . . . . . . . . . . . . .  24
+       5.3.2.  Mapping . . . . . . . . . . . . . . . . . . . . . . .  25
+       5.3.3.  Operations  . . . . . . . . . . . . . . . . . . . . .  25
+     5.4.  Extension mechanisms  . . . . . . . . . . . . . . . . . .  25
+       5.4.1.  Name Management and Collision Avoidance . . . . . . .  26
+   6.  Change History  . . . . . . . . . . . . . . . . . . . . . . .  27
+     6.1.  -00 to -01  . . . . . . . . . . . . . . . . . . . . . . .  27
+     6.2.  -03 to draft-ietf-rpp-architecture-00 . . . . . . . . . .  27
+     6.3.  -02 to -03  . . . . . . . . . . . . . . . . . . . . . . .  27
+     6.4.  -01 to -02  . . . . . . . . . . . . . . . . . . . . . . .  27
+     6.5.  -00 to -01  . . . . . . . . . . . . . . . . . . . . . . .  28
+   7.  References  . . . . . . . . . . . . . . . . . . . . . . . . .  28
+     7.1.  Normative References  . . . . . . . . . . . . . . . . . .  28
+     7.2.  Informational References  . . . . . . . . . . . . . . . .  28
+   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  31
 
 1.  Introduction
 
@@ -674,7 +674,19 @@ Kowalik & Wullink          Expires 10 May 2026                 [Page 12]
 Internet-Draft              rpp-architecture               November 2025
 
 
-5.1.2.1.  Internationalised Domain Names (IDN)
+5.1.2.1.  Collection Representation
+
+   RPP supports retrieval of collections of resources via dedicated
+   collection endpoints (e.g., /domains/ for listing domains).  For
+   collections that may contain large numbers of resources, RPP supports
+   pagination using established mechanisms such as HTTP Link headers as
+   defined in [RFC8288].  Items within a collection may be returned as
+   partial representations rather than full resource details, reducing
+   payload size.  Clients can retrieve full details by following links
+   to individual resources.  RPP may also support query parameters for
+   filtering and sorting collection results.
+
+5.1.2.2.  Internationalised Domain Names (IDN)
 
    RPP will address the handling of Internationalised Domain Names
    (IDNs) in resource addressing.  Specifications will define whether to
@@ -707,6 +719,17 @@ Internet-Draft              rpp-architecture               November 2025
       The conclusion is that RPP should not overload HTTP HEAD with own
       semantics, and support HEAD as it is defined in HTTP.
 
+
+
+
+
+
+
+Kowalik & Wullink          Expires 10 May 2026                 [Page 13]
+
+Internet-Draft              rpp-architecture               November 2025
+
+
    *  *OPTIONS* RPP shall not define any new semantics for OPTIONS
       however the specifications should make implementers aware of its
       role in CORS and pre-flight requests typically made by web
@@ -721,14 +744,6 @@ Internet-Draft              rpp-architecture               November 2025
    *  *PUT:* Update an existing resource in its entirety (e.g., updating
       domain registration details) - not 100% equivalent of EPP update
       command
-
-
-
-
-Kowalik & Wullink          Expires 10 May 2026                 [Page 13]
-
-Internet-Draft              rpp-architecture               November 2025
-
 
    *  *DELETE:* Delete a resource (e.g., deleting a domain registration)
       - EPP delete command
@@ -761,6 +776,16 @@ Internet-Draft              rpp-architecture               November 2025
    convention of URLs with processing resources with only POST
    interface, e.g. /renewal.
 
+
+
+
+
+
+Kowalik & Wullink          Expires 10 May 2026                 [Page 14]
+
+Internet-Draft              rpp-architecture               November 2025
+
+
    This pattern can be further applied to object operations not defined
    in the core protocol or EPP, allowing easy and uniform extension of
    allowed operations.
@@ -778,14 +803,6 @@ Internet-Draft              rpp-architecture               November 2025
    appropriate to be mapped directly to the HTTP uniform interface of
    the resource itself.  EPP check command will be therefore modelled as
    sub-resource such as /availability offering both HEAD operation for
-
-
-
-Kowalik & Wullink          Expires 10 May 2026                 [Page 14]
-
-Internet-Draft              rpp-architecture               November 2025
-
-
    quick yes/no response and GET operation for more detailed response
    allowing for example to extend on the dataset provided (e.g. pricing
    information).
@@ -817,6 +834,14 @@ Internet-Draft              rpp-architecture               November 2025
    preferred media types for request and response payloads using the
    HTTP 'Accept' and 'Content-Type' headers [RFC7231].
 
+
+
+
+Kowalik & Wullink          Expires 10 May 2026                 [Page 15]
+
+Internet-Draft              rpp-architecture               November 2025
+
+
    *  'application/rpp+json' as the primary media type.
 
    *  potential media type parameters for versioning, profiles, and
@@ -831,16 +856,6 @@ Internet-Draft              rpp-architecture               November 2025
    and reduce load on servers.  RPP shall define caching policies for
    different resources and operations, including cache-control headers
    and ETag support.
-
-
-
-
-
-
-Kowalik & Wullink          Expires 10 May 2026                 [Page 15]
-
-Internet-Draft              rpp-architecture               November 2025
-
 
 5.1.8.  Language negotiation for textual content
 
@@ -875,6 +890,14 @@ Internet-Draft              rpp-architecture               November 2025
    dereferenced full or partial representation of related objects.  For
    example details about sponsoring client of domain name instead of
    just ID. "return" preference syntax alone is not sufficient for this
+
+
+
+Kowalik & Wullink          Expires 10 May 2026                 [Page 16]
+
+Internet-Draft              rpp-architecture               November 2025
+
+
    purpose, therefore RPP would need to define custom preference and
    register it in "HTTP Preferences" IANA registry.
 
@@ -888,16 +911,6 @@ Internet-Draft              rpp-architecture               November 2025
    for additional flexibility in processing.  The default behaviour,
    without the Prefer header, would be to process requests leniently.
 
-
-
-
-
-
-Kowalik & Wullink          Expires 10 May 2026                 [Page 16]
-
-Internet-Draft              rpp-architecture               November 2025
-
-
 5.1.11.  Asynchronous Operation Processing
 
    The RPP architecture accommodates operations that are potentially
@@ -908,6 +921,38 @@ Internet-Draft              rpp-architecture               November 2025
    pattern.  This pattern allows a client to initiate an operation and
    receive an immediate acknowledgement, with the means to check the
    operation's status and retrieve its outcome at a later point.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Kowalik & Wullink          Expires 10 May 2026                 [Page 17]
+
+Internet-Draft              rpp-architecture               November 2025
+
 
    The typical interaction flow facilitated by the architecture is as
    follows: 1.  A client initiates an operation via an HTTP request. 2.
@@ -943,17 +988,6 @@ Internet-Draft              rpp-architecture               November 2025
    operations intended for asynchronous execution will be designed to
    utilise this pattern.
 
-
-
-
-
-
-
-Kowalik & Wullink          Expires 10 May 2026                 [Page 17]
-
-Internet-Draft              rpp-architecture               November 2025
-
-
 5.1.12.  RPP specific status codes and relation to HTTP status codes
 
    RPP uses a dual-layer approach for signaling operation outcomes,
@@ -966,6 +1000,15 @@ Internet-Draft              rpp-architecture               November 2025
       proxy or monitoring tool, can determine if a request was
       successful (2xx), resulted in a client error (4xx), or a server
       error (5xx) by inspecting the HTTP status code alone.
+
+
+
+
+
+Kowalik & Wullink          Expires 10 May 2026                 [Page 18]
+
+Internet-Draft              rpp-architecture               November 2025
+
 
    *  RPP-specific status codes, transmitted in a dedicated HTTP header,
       must be used to provide granular, application-level information
@@ -1001,15 +1044,6 @@ Internet-Draft              rpp-architecture               November 2025
    *  RPP should also use other standardised HTTP signaling mechanisms
       where appropriate, for example for rate limiting.
 
-
-
-
-
-Kowalik & Wullink          Expires 10 May 2026                 [Page 18]
-
-Internet-Draft              rpp-architecture               November 2025
-
-
 5.1.13.  Transaction tracing and idempotency
 
    RPP shall support identification of requests and responses on both
@@ -1017,6 +1051,20 @@ Internet-Draft              rpp-architecture               November 2025
    and server provided identifiers.  This will allow for tracking of
    requests and responses in case of errors, and for idempotency of
    requests.
+
+
+
+
+
+
+
+
+
+
+Kowalik & Wullink          Expires 10 May 2026                 [Page 19]
+
+Internet-Draft              rpp-architecture               November 2025
+
 
    Client provided identifier shall be returned in the corresponding
    synchronous response and shall be included in the asynchronous
@@ -1058,14 +1106,6 @@ Internet-Draft              rpp-architecture               November 2025
    reliable communication.  Such requirements may also be defined by
    external policies.  For this purpose RPP will define a concept of
    profiles, being identifiers translated into a certain minimum
-
-
-
-Kowalik & Wullink          Expires 10 May 2026                 [Page 19]
-
-Internet-Draft              rpp-architecture               November 2025
-
-
    configuration of protocol version, extensions and their versions.
    The profiles themselves will be versioned in the same way as other
    protocol elements.
@@ -1073,6 +1113,14 @@ Internet-Draft              rpp-architecture               November 2025
    RPP may define a machine-readable definition of profiles to allow
    automatic processing by the clients, but may also refer to other
    forms of profile specification.
+
+
+
+
+Kowalik & Wullink          Expires 10 May 2026                 [Page 20]
+
+Internet-Draft              rpp-architecture               November 2025
+
 
    Signalling of the profiles will be preferably realised using
    parameters of the media type.
@@ -1112,20 +1160,23 @@ Internet-Draft              rpp-architecture               November 2025
       /{resource-type}/.well-known/rpp-capabilities e.g. /domains/.well-
       known/rpp-capabilities.
 
-
-
-
-
-
-Kowalik & Wullink          Expires 10 May 2026                 [Page 20]
-
-Internet-Draft              rpp-architecture               November 2025
-
-
    *  Service discovery shall utilise standardised methods, like URI
       templates [RFC6570] to allow easy navigation of resources and
       avoid hard-coding of URLs, same time allowing clients to navigate
       directly to a known resource without additional server queries.
+
+
+
+
+
+
+
+
+
+Kowalik & Wullink          Expires 10 May 2026                 [Page 21]
+
+Internet-Draft              rpp-architecture               November 2025
+
 
    *  As a matter of principle service discovery shall be used to
       bootstrap the communication between client and server, its
@@ -1168,16 +1219,6 @@ Internet-Draft              rpp-architecture               November 2025
       representing identity or authorisation information, allowing for
       integration with external identity systems.
 
-
-
-
-
-
-Kowalik & Wullink          Expires 10 May 2026                 [Page 21]
-
-Internet-Draft              rpp-architecture               November 2025
-
-
 5.2.2.  Data format
 
    The primary format for RPP data representations shall be JSON,
@@ -1185,6 +1226,13 @@ Internet-Draft              rpp-architecture               November 2025
    like XML, JWT, JWT-SD or CBOR.
 
    *  *JSON:* Standard JSON format [RFC8259].
+
+
+
+Kowalik & Wullink          Expires 10 May 2026                 [Page 22]
+
+Internet-Draft              rpp-architecture               November 2025
+
 
    *  *XML:* eXtensible Markup Language [XML] (considered for potential
       compatibility with EPP).
@@ -1221,25 +1269,26 @@ Internet-Draft              rpp-architecture               November 2025
    processing of requests and responses and support protocol
    extensibility.
 
-
-
-
-
-
-
-
-
-Kowalik & Wullink          Expires 10 May 2026                 [Page 22]
-
-Internet-Draft              rpp-architecture               November 2025
-
-
 5.2.4.  Media Type definition
 
    Together data structure and data format would define the whole media
    type.  So application/rpp+json would be the primary media type with
    "rpp" payloads in plain json format. application/epp+xml would be epp
    payload as per [RFC5730].
+
+
+
+
+
+
+
+
+
+
+Kowalik & Wullink          Expires 10 May 2026                 [Page 23]
+
+Internet-Draft              rpp-architecture               November 2025
+
 
 5.3.  Resource Definition Layer
 
@@ -1271,6 +1320,13 @@ Internet-Draft              rpp-architecture               November 2025
    *  Format and schema for primitive data elements or reference to
       other resource type definitions
 
+   *  Definition of container elements, which are logical groupings that
+      can encapsulate zero or more data elements or other containers.
+      Container types include ordered lists (e.g., a sequence of
+      nameservers) and maps (e.g., key-value pairs for extension data).
+      The representation of container elements in specific data formats
+      is defined by the mapping layer.
+
    *  Constraints on data elements (e.g., data type, length, allowed
       values)
 
@@ -1285,7 +1341,7 @@ Internet-Draft              rpp-architecture               November 2025
 
 
 
-Kowalik & Wullink          Expires 10 May 2026                 [Page 23]
+Kowalik & Wullink          Expires 10 May 2026                 [Page 24]
 
 Internet-Draft              rpp-architecture               November 2025
 
@@ -1341,7 +1397,7 @@ Internet-Draft              rpp-architecture               November 2025
 
 
 
-Kowalik & Wullink          Expires 10 May 2026                 [Page 24]
+Kowalik & Wullink          Expires 10 May 2026                 [Page 25]
 
 Internet-Draft              rpp-architecture               November 2025
 
@@ -1397,7 +1453,7 @@ Internet-Draft              rpp-architecture               November 2025
 
 
 
-Kowalik & Wullink          Expires 10 May 2026                 [Page 25]
+Kowalik & Wullink          Expires 10 May 2026                 [Page 26]
 
 Internet-Draft              rpp-architecture               November 2025
 
@@ -1410,6 +1466,10 @@ Internet-Draft              rpp-architecture               November 2025
 6.  Change History
 
 6.1.  -00 to -01
+
+   *  Added Section Collection Representation for API-level collection
+      retrieval and expanded container element description in Data
+      Elements Section.  (Issue #85)
 
 6.2.  -03 to draft-ietf-rpp-architecture-00
 
@@ -1447,16 +1507,16 @@ Internet-Draft              rpp-architecture               November 2025
 
    *  Added Operation Singularity to Section 4.1.
 
-   *  Added Versioning chapter to Section 5.1.
-
-   *  Added Profiles chapter to Section 5.1.
 
 
-
-Kowalik & Wullink          Expires 10 May 2026                 [Page 26]
+Kowalik & Wullink          Expires 10 May 2026                 [Page 27]
 
 Internet-Draft              rpp-architecture               November 2025
 
+
+   *  Added Versioning chapter to Section 5.1.
+
+   *  Added Profiles chapter to Section 5.1.
 
    *  Added Security section to Section 5.1.1.
 
@@ -1502,17 +1562,18 @@ Internet-Draft              rpp-architecture               November 2025
               IETF, DOI 10.17487/RFC5730, BCP 69, RFC 5730, August 2009,
               <https://www.rfc-editor.org/info/rfc5730>.
 
+
+
+
+Kowalik & Wullink          Expires 10 May 2026                 [Page 28]
+
+Internet-Draft              rpp-architecture               November 2025
+
+
    [RFC5731]  Hollenbeck, S., "Extensible Provisioning Protocol (EPP)
               Domain Name Mapping", IETF, DOI 10.17487/RFC5731, BCP 69,
               RFC 5731, August 2009,
               <https://www.rfc-editor.org/info/rfc5731>.
-
-
-
-Kowalik & Wullink          Expires 10 May 2026                 [Page 27]
-
-Internet-Draft              rpp-architecture               November 2025
-
 
    [RFC5732]  Hollenbeck, S., "Extensible Provisioning Protocol (EPP)
               Host Mapping", IETF, DOI 10.17487/RFC5732, BCP 69,
@@ -1538,6 +1599,10 @@ Internet-Draft              rpp-architecture               November 2025
               RFC 8259, December 2017,
               <https://www.rfc-editor.org/info/rfc8259>.
 
+   [RFC8288]  Nottingham, M., "Web Linking", IETF, DOI 10.17487/RFC8288,
+              RFC 8288, October 2017,
+              <https://www.rfc-editor.org/info/rfc8288>.
+
    [RFC6570]  Gregorio, J., Fielding, R., Hadley, M., Nottingham, M.,
               and D. Orchard, "URI Template", IETF,
               DOI 10.17487/RFC6570, RFC 6570, March 2012,
@@ -1552,6 +1617,15 @@ Internet-Draft              rpp-architecture               November 2025
               DOI 10.17487/RFC6750, RFC 6750, October 2012,
               <https://www.rfc-editor.org/info/rfc6750>.
 
+
+
+
+
+Kowalik & Wullink          Expires 10 May 2026                 [Page 29]
+
+Internet-Draft              rpp-architecture               November 2025
+
+
    [RFC7519]  Jones, M., Bradley, J., and N. Sakimura, "JSON Web Token
               (JWT)", IETF, DOI 10.17487/RFC7519, RFC 7519, May 2015,
               <https://www.rfc-editor.org/info/rfc7519>.
@@ -1560,15 +1634,6 @@ Internet-Draft              rpp-architecture               November 2025
               Protocol (RDAP) Query Format", IETF, DOI 10.17487/RFC9082,
               BCP 95, RFC 9082, June 2021,
               <https://www.rfc-editor.org/info/rfc9082>.
-
-
-
-
-
-Kowalik & Wullink          Expires 10 May 2026                 [Page 28]
-
-Internet-Draft              rpp-architecture               November 2025
-
 
    [RFC6902]  Bryan, P. and M. Nottingham, "JavaScript Object Notation
               (JSON) Patch", IETF, DOI 10.17487/RFC6902, RFC 6902, April
@@ -1609,6 +1674,14 @@ Internet-Draft              rpp-architecture               November 2025
               <https://datatracker.ietf.org/doc/html/draft-ietf-rpp-
               requirements-03>.
 
+
+
+
+Kowalik & Wullink          Expires 10 May 2026                 [Page 30]
+
+Internet-Draft              rpp-architecture               November 2025
+
+
    [XML]      Bray, T., Paoli, J., Sperberg-McQueen, C., Maler, E., and
               F. Yergeau, "Extensible Markup Language (XML) 1.0 (Fifth
               Edition)", REC-xml-20081126, November 2008,
@@ -1616,15 +1689,6 @@ Internet-Draft              rpp-architecture               November 2025
 
    [SemVer]   "Semantic Versioning 2.0.0", Misc SemVer 2.0.0,
               <https://semver.org/spec/v2.0.0.html>.
-
-
-
-
-
-Kowalik & Wullink          Expires 10 May 2026                 [Page 29]
-
-Internet-Draft              rpp-architecture               November 2025
-
 
    [REST]     Fielding, R., "Architectural Styles and the Design of
               Network-based Software Architectures",
@@ -1669,12 +1733,4 @@ Authors' Addresses
 
 
 
-
-
-
-
-
-
-
-
-Kowalik & Wullink          Expires 10 May 2026                 [Page 30]
+Kowalik & Wullink          Expires 10 May 2026                 [Page 31]
