@@ -73,6 +73,10 @@ This document uses terminology from RFC5730 <<RFC5730>> and broadly adopts the R
 
 * **RPP client:** An entity or application that interacts with the RPP server to perform provisioning operations, such as creating, updating, or deleting resources.
 
+* **Sponsoring Client:** The RPP Client that currently has sponsorship of the object.
+
+* **Gaining Client:** The client seeking to gain sponsorship of the object in a Transfer Operation.
+
 == Requirements
 This document is based on the requirements defined by RPP WG in state from 7.3.2025 <<RPPReq>>.
 
@@ -240,6 +244,7 @@ RPP will not explicitly define security related policies related to authenticati
 
 ===== Object level authorisation
 RPP will define a mechanism for object-level authorisation, preventing unauthorised access to specific objects or resources. Each object will have an associated sponsor or owner with full control over an object, and the protocol will allow for the specification of which clients are authorised to access or modify non-sponsored/owned objects. This could be achieved through state-of-the-art standards like OAuth authorisation tokens, scopes, and resource-specific permissions but also shared secrets for backward compatibility with EPP password-based authorisation information.
+All parties involved in a running or completed process, such as the Sponsoring Client and the Gaining Client for a transfer operation, must be allowed to query the status of the proces using the same process resource. 
 
 [[resource-addressing]]
 ==== Resource Addressing
@@ -297,8 +302,6 @@ In order to minimise name collisions between process names and other kind of sub
 The path segments shall be appended to the resource path to create full URI of such processing resource (e.g. `/domains/{domain-name}/processes/renewal` for domain renew operation).
 
 As discussed in <<http-layer-detail-mapping-basic-ops>> EPP check command may not be appropriate to be mapped directly to the HTTP uniform interface of the resource itself. EPP check command will be therefore modelled as sub-resource such as `/availability` offering both HEAD operation for quick yes/no response and GET operation for more detailed response allowing for example to extend on the dataset provided (e.g. pricing information).  
-
-All parties involved in a running or completed process, such as the Sponsoring Client and the Gaining Client for a transfer operation, must be allowed to query the status of the proces using the same process resource. 
 
 This basic set of rules and guidelines will be further refined in the RPP specifications and give a universal toolset for extending RPP with new resources and commands.
 
@@ -507,7 +510,7 @@ This naming mechanism ensures that new resource types, data elements, and operat
 
 === -00 to -01
 
-* Explicitly state that all parties involved in a process are allowed to retrieve the process status.
+* Explicitly state that all parties involved in a process are allowed to retrieve the process status. (Issue #98)
 
 === -03 to draft-ietf-rpp-architecture-00
 * No changes. Document adopted by RPP WG.
