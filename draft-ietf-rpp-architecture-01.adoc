@@ -406,8 +406,8 @@ to dynamically discover RPP service endpoints and capabilities, reducing couplin
 
 *  Potential discovery of RPP server location, like  IANA bootstrapping document or a special DNS TXT RR with location of RPP service for the tld.
 *  Potential use of well-known URIs (e.g., `/.well-known/rpp-capabilities`) for service discovery.
-*  Advertising supported protocol versions,
-extensions, available resource types, authentication methods, and supported features.
+*  Advertising supported protocol versions, extensions, available resource types, authentication methods, and supported features.
+*  Advertising of maintenance notices, informing clients about future unavailability of the service due to scheduled maintenance.
 *  It may be considered for RPP to distribute service discovery for each resource type separately for better scalability and management. For example instead of having a single service discovery endpoint for the whole registry on `/.well-known/rpp-capabilities` there might be a separate discovery placed under `/{resource-type}/.well-known/rpp-capabilities` e.g. `/domains/.well-known/rpp-capabilities`.
 *  Service discovery shall utilise standardised methods, like URI templates <<RFC6570>> to allow easy navigation of resources and avoid hard-coding of URLs, same time allowing clients to navigate directly to a known resource without additional server queries.
 *  As a matter of principle service discovery shall be used to bootstrap the communication between client and server, its capabilities and operational policies. The server configuration shall be considered static between reconfiguration of the server and not be used for any dynamic configuration, like load balancing etc. It would enable the right balance between discoverability and reduction of round trips between clients and servers.
@@ -505,6 +505,7 @@ This naming mechanism ensures that new resource types, data elements, and operat
 
 === -00 to -01
 
+* Added Advertising of maintenance notices to "Service Discovery" section. (Issue #88)
 
 === -03 to draft-ietf-rpp-architecture-00
 * No changes. Document adopted by RPP WG.
