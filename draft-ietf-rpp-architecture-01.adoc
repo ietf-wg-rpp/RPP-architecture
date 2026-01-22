@@ -237,6 +237,7 @@ In case of HTTP Basic Authentication, one user-id is always bound to at most one
 ===== Security
 
 RPP will not explicitly define security related policies related to authentication or authorisation (such as password complexity, token lifetime or cryptography used) on the protocol level. Instead, these properties will be delegated to the best practices of the chosen authentication schemes, which may evolve over time and would have to be independent of the protocol itself.
+All RPP specifications shall support the operational practices desribed in <<RFC9154>>, such as not allowing long-term storage of EPP style auth-codes used for object transfer operations.   
 
 ===== Object level authorisation
 RPP will define a mechanism for object-level authorisation, preventing unauthorised access to specific objects or resources. Each object will have an associated sponsor or owner with full control over an object, and the protocol will allow for the specification of which clients are authorised to access or modify non-sponsored/owned objects. This could be achieved through state-of-the-art standards like OAuth authorisation tokens, scopes, and resource-specific permissions but also shared secrets for backward compatibility with EPP password-based authorisation information.
@@ -505,6 +506,7 @@ This naming mechanism ensures that new resource types, data elements, and operat
 
 === -00 to -01
 
+* Added reference to RFC9154 in the "Security" section. (Issue #89)
 
 === -03 to draft-ietf-rpp-architecture-00
 * No changes. Document adopted by RPP WG.
