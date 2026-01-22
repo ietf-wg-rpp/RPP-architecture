@@ -77,7 +77,7 @@ Table of Contents
    1.  Introduction  . . . . . . . . . . . . . . . . . . . . . . . .   3
    2.  Terminology . . . . . . . . . . . . . . . . . . . . . . . . .   4
    3.  Requirements  . . . . . . . . . . . . . . . . . . . . . . . .   4
-   4.  Architectural Overview  . . . . . . . . . . . . . . . . . . .   4
+   4.  Architectural Overview  . . . . . . . . . . . . . . . . . . .   5
      4.1.  Resource Oriented Architecture  . . . . . . . . . . . . .   6
      4.2.  Architecture Layers . . . . . . . . . . . . . . . . . . .   7
        4.2.1.  HTTP Transport Layer  . . . . . . . . . . . . . . . .   7
@@ -124,16 +124,18 @@ Internet-Draft              rpp-architecture               November 2025
        5.3.3.  Operations  . . . . . . . . . . . . . . . . . . . . .  24
      5.4.  Extension mechanisms  . . . . . . . . . . . . . . . . . .  24
        5.4.1.  Name Management and Collision Avoidance . . . . . . .  25
+       5.4.2.  Extension Security  . . . . . . . . . . . . . . . . .  26
+       5.4.3.  Extension Review  . . . . . . . . . . . . . . . . . .  26
    6.  Change History  . . . . . . . . . . . . . . . . . . . . . . .  26
      6.1.  -00 to -01  . . . . . . . . . . . . . . . . . . . . . . .  26
      6.2.  -03 to draft-ietf-rpp-architecture-00 . . . . . . . . . .  26
      6.3.  -02 to -03  . . . . . . . . . . . . . . . . . . . . . . .  26
-     6.4.  -01 to -02  . . . . . . . . . . . . . . . . . . . . . . .  26
+     6.4.  -01 to -02  . . . . . . . . . . . . . . . . . . . . . . .  27
      6.5.  -00 to -01  . . . . . . . . . . . . . . . . . . . . . . .  27
-   7.  References  . . . . . . . . . . . . . . . . . . . . . . . . .  27
-     7.1.  Normative References  . . . . . . . . . . . . . . . . . .  27
-     7.2.  Informational References  . . . . . . . . . . . . . . . .  27
-   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  30
+   7.  References  . . . . . . . . . . . . . . . . . . . . . . . . .  28
+     7.1.  Normative References  . . . . . . . . . . . . . . . . . .  28
+     7.2.  Informational References  . . . . . . . . . . . . . . . .  28
+   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  31
 
 1.  Introduction
 
@@ -160,8 +162,6 @@ Internet-Draft              rpp-architecture               November 2025
    specifications that will collectively define RPP.  It details the
    layered approach, core components, and design considerations for
    building an interoperable and extensible provisioning protocol.  RPP
-   is intended to coexist with EPP, offering an alternative for
-   implementers seeking a RESTful approach without aiming to replace EPP
 
 
 
@@ -170,6 +170,8 @@ Kowalik & Wullink          Expires 10 May 2026                  [Page 3]
 Internet-Draft              rpp-architecture               November 2025
 
 
+   is intended to coexist with EPP, offering an alternative for
+   implementers seeking a RESTful approach without aiming to replace EPP
    or define migration paths from EPP.  RPP aims for data model
    compatibility with EPP core objects to allow automatic and mechanical
    mapping and conversion, especially for core objects (domain, contact,
@@ -209,6 +211,21 @@ Internet-Draft              rpp-architecture               November 2025
    The actual state of the requirements is present on WG Wiki
    https://wiki.ietf.org/en/group/rpp/requirements.
 
+
+
+
+
+
+
+
+
+
+
+Kowalik & Wullink          Expires 10 May 2026                  [Page 4]
+
+Internet-Draft              rpp-architecture               November 2025
+
+
 4.  Architectural Overview
 
    This chapter provides an overview of the RESTful Provisioning
@@ -218,13 +235,6 @@ Internet-Draft              rpp-architecture               November 2025
    to the well-established infrastructure and semantics of the web,
    focusing its own definitions on the specific domain of object
    provisioning.  Therefore, we assume:
-
-
-
-Kowalik & Wullink          Expires 10 May 2026                  [Page 4]
-
-Internet-Draft              rpp-architecture               November 2025
-
 
    *  *HTTP and RESTful principles are foundational:* RPP leverages HTTP
       for transport and adheres to RESTful principles for resource
@@ -250,16 +260,6 @@ Internet-Draft              rpp-architecture               November 2025
    *Operations* are elements of Resource Definition.  They focus on the
    semantic structure of RPP resources and transformation of those
    resources.
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -1407,9 +1407,34 @@ Internet-Draft              rpp-architecture               November 2025
    the extensibility goals of the RPP architecture while maintaining
    interoperability and clarity across implementations.
 
+5.4.2.  Extension Security
+
+   Extensions operate within the same security architecture as the core
+   protocol.  Security, authentication, and authorisation mechanisms
+   defined at the HTTP Transport Layer (see Section 5.1.1) apply
+   uniformly to both core protocol operations and all extensions.  This
+   "security by design" approach is aimed to ensure that extensions
+   cannot bypass or weaken the security posture established by the core
+   protocol.  Extensions must not introduce new authentication or
+   authorisation mechanisms that circumvent or conflict with those
+   defined by the core specifications.
+
+5.4.3.  Extension Review
+
+   Before any extension is accepted by IANA, a review by an RPP expert
+   must be performed.  This review includes verification that the
+   extension does not violate any of the RPP security considerations and
+   that it correctly integrates with the protocol's security framework.
+   The complete review criteria will be included in the "IANA
+   Considerations" section of any document describing RPP extension
+   mechanisms, according to the BCP described in [RFC8126].
+
 6.  Change History
 
 6.1.  -00 to -01
+
+   *  Added Extension Security and Extension Review Sections to
+      Section 5.4 (Issue #91).
 
 6.2.  -03 to draft-ietf-rpp-architecture-00
 
@@ -1423,6 +1448,15 @@ Internet-Draft              rpp-architecture               November 2025
 
    *  Clarified the relationship and mapping between HTTP status codes
       and RPP-specific status codes in Section 5.1.12.
+
+
+
+
+
+Kowalik & Wullink          Expires 10 May 2026                 [Page 26]
+
+Internet-Draft              rpp-architecture               November 2025
+
 
    *  Added paragraph on promotion of standard extensions to
       Section 5.4.
@@ -1451,13 +1485,6 @@ Internet-Draft              rpp-architecture               November 2025
 
    *  Added Profiles chapter to Section 5.1.
 
-
-
-Kowalik & Wullink          Expires 10 May 2026                 [Page 26]
-
-Internet-Draft              rpp-architecture               November 2025
-
-
    *  Added Security section to Section 5.1.1.
 
    *  Added Relationship between clients and authentication credentials
@@ -1478,6 +1505,14 @@ Internet-Draft              rpp-architecture               November 2025
 
    *  Encapsulation removed as a primary extension point and part of
       architecture
+
+
+
+
+Kowalik & Wullink          Expires 10 May 2026                 [Page 27]
+
+Internet-Draft              rpp-architecture               November 2025
+
 
    *  Added reference to JSContact as a possible contact representation
 
@@ -1507,13 +1542,6 @@ Internet-Draft              rpp-architecture               November 2025
               RFC 5731, August 2009,
               <https://www.rfc-editor.org/info/rfc5731>.
 
-
-
-Kowalik & Wullink          Expires 10 May 2026                 [Page 27]
-
-Internet-Draft              rpp-architecture               November 2025
-
-
    [RFC5732]  Hollenbeck, S., "Extensible Provisioning Protocol (EPP)
               Host Mapping", IETF, DOI 10.17487/RFC5732, BCP 69,
               RFC 5732, August 2009,
@@ -1532,6 +1560,15 @@ Internet-Draft              rpp-architecture               November 2025
    [RFC7240]  Snell, J., "Prefer Header for HTTP", IETF,
               DOI 10.17487/RFC7240, RFC 7240, June 2014,
               <https://www.rfc-editor.org/info/rfc7240>.
+
+
+
+
+
+Kowalik & Wullink          Expires 10 May 2026                 [Page 28]
+
+Internet-Draft              rpp-architecture               November 2025
+
 
    [RFC8259]  Bray, T., "The JavaScript Object Notation (JSON) Data
               Interchange Format", IETF, DOI 10.17487/RFC8259, BCP 90,
@@ -1561,15 +1598,6 @@ Internet-Draft              rpp-architecture               November 2025
               BCP 95, RFC 9082, June 2021,
               <https://www.rfc-editor.org/info/rfc9082>.
 
-
-
-
-
-Kowalik & Wullink          Expires 10 May 2026                 [Page 28]
-
-Internet-Draft              rpp-architecture               November 2025
-
-
    [RFC6902]  Bryan, P. and M. Nottingham, "JavaScript Object Notation
               (JSON) Patch", IETF, DOI 10.17487/RFC6902, RFC 6902, April
               2013, <https://www.rfc-editor.org/info/rfc6902>.
@@ -1588,10 +1616,25 @@ Internet-Draft              rpp-architecture               November 2025
               BCP 94, RFC 8949, December 2020,
               <https://www.rfc-editor.org/info/rfc8949>.
 
+
+
+
+
+
+Kowalik & Wullink          Expires 10 May 2026                 [Page 29]
+
+Internet-Draft              rpp-architecture               November 2025
+
+
    [RFC9553]  Stepanek, R. and M. Loffredo, "JSContact: A JSON
               Representation of Contact Data", IETF,
               DOI 10.17487/RFC9553, RFC 9553, May 2024,
               <https://www.rfc-editor.org/info/rfc9553>.
+
+   [RFC8126]  Cotton, M., Leiba, B., and T. Narten, "Guidelines for
+              Writing an IANA Considerations Section in RFCs", IETF,
+              DOI 10.17487/RFC8126, BCP 26, RFC 8126, June 2017,
+              <https://www.rfc-editor.org/info/rfc8126>.
 
    [SD-JWT]   Terbu, O., Fett, D., and B. Campbell, "SD-JWT-based
               Verifiable Credentials (SD-JWT VC)", July 2025,
@@ -1617,15 +1660,6 @@ Internet-Draft              rpp-architecture               November 2025
    [SemVer]   "Semantic Versioning 2.0.0", Misc SemVer 2.0.0,
               <https://semver.org/spec/v2.0.0.html>.
 
-
-
-
-
-Kowalik & Wullink          Expires 10 May 2026                 [Page 29]
-
-Internet-Draft              rpp-architecture               November 2025
-
-
    [REST]     Fielding, R., "Architectural Styles and the Design of
               Network-based Software Architectures",
               Doctoral Dissertation University of California, Irvine,
@@ -1639,6 +1673,14 @@ Internet-Draft              rpp-architecture               November 2025
               M., Thibodeau, T., Herman, I., Cohen, G., and M. Jones,
               "Verifiable Credentials Data Model v2.0", vc-data-model-
               2.0, <https://www.w3.org/TR/vc-data-model-2.0/>.
+
+
+
+
+Kowalik & Wullink          Expires 10 May 2026                 [Page 30]
+
+Internet-Draft              rpp-architecture               November 2025
+
 
 Authors' Addresses
 
@@ -1677,4 +1719,18 @@ Authors' Addresses
 
 
 
-Kowalik & Wullink          Expires 10 May 2026                 [Page 30]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Kowalik & Wullink          Expires 10 May 2026                 [Page 31]

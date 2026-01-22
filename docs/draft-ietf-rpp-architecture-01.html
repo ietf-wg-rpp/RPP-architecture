@@ -1443,6 +1443,12 @@ li > p:last-of-type:only-child {
 <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5.2.4.2.1">
                     <p id="section-toc.1-1.5.2.4.2.1.1"><a href="#section-5.4.1" class="auto internal xref">5.4.1</a>.  <a href="#name-name-management-and-collisi" class="internal xref">Name Management and Collision Avoidance</a></p>
 </li>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5.2.4.2.2">
+                    <p id="section-toc.1-1.5.2.4.2.2.1"><a href="#section-5.4.2" class="auto internal xref">5.4.2</a>.  <a href="#name-extension-security" class="internal xref">Extension Security</a></p>
+</li>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5.2.4.2.3">
+                    <p id="section-toc.1-1.5.2.4.2.3.1"><a href="#section-5.4.3" class="auto internal xref">5.4.3</a>.  <a href="#name-extension-review" class="internal xref">Extension Review</a></p>
+</li>
                 </ul>
 </li>
             </ul>
@@ -1795,7 +1801,7 @@ li > p:last-of-type:only-child {
 </div>
 </section>
 </div>
-<div id="_37e46709-9f39-4dcd-ba53-dab125237e1c">
+<div id="_3c1cae5b-e35a-f986-de07-049b6e0ddeb5">
 <section id="section-5">
       <h2 id="name-protocol-details">
 <a href="#section-5" class="section-number selfRef">5. </a><a href="#name-protocol-details" class="section-name selfRef">Protocol Details</a>
@@ -2408,36 +2414,60 @@ li > p:last-of-type:only-child {
 <div id="_debfcb2b-b50a-2c33-4a75-319386e9442e">
 <p id="section-5.4-4">These extensibility mechanisms ensure that RPP can evolve to meet future requirements, integrate with emerging technologies, and support a wide range of provisioning scenarios while maintaining interoperability and stability.<a href="#section-5.4-4" class="pilcrow">¶</a></p>
 </div>
-<div id="_96e5350d-e377-28be-75f5-ab94556af4fe">
+<div id="_b40c24b0-bd97-0f6a-e2c3-4581b40bc90b">
 <section id="section-5.4.1">
           <h4 id="name-name-management-and-collisi">
 <a href="#section-5.4.1" class="section-number selfRef">5.4.1. </a><a href="#name-name-management-and-collisi" class="section-name selfRef">Name Management and Collision Avoidance</a>
           </h4>
-<div id="_07253e80-05fb-2f5c-9cb6-59fcd595c66a">
+<div id="_acecdc24-c3a7-4d7e-178d-5bbb78479f44">
 <p id="section-5.4.1-1">RPP extensions MUST define unique names for all extension elements to prevent conflicts with other extensions and with core protocol elements. These names are used consistently in resource identifiers, data element identifiers, and URL path segments.<a href="#section-5.4.1-1" class="pilcrow">¶</a></p>
 </div>
-<div id="_8287ca1e-af38-b462-d4c5-a928841f70bc">
+<div id="_4d667800-d34a-ec5d-b7c3-8ce11d50e54e">
 <p id="section-5.4.1-2">Standardised RPP extensions MUST register their names in a dedicated IANA registry for RPP extensions to ensure global uniqueness and avoid collisions. Private (non-standardised) extensions are also required to use unique names, but are not required to register with IANA. This allows private extensions to be developed and used within specific implementations or organisations without impacting the global RPP ecosystem. Private extensions should use names that are unlikely to conflict with other extensions or with RPP core elements, for example by using reverse domain notation as a prefix (e.g., <code>org.example.rpp</code>).<a href="#section-5.4.1-2" class="pilcrow">¶</a></p>
 </div>
-<div id="_9ac2ed13-1b15-2419-ec51-454d0818879a">
+<div id="_64315132-8cb7-107d-e6d0-ad55dd956428">
 <p id="section-5.4.1-3">This naming mechanism ensures that new resource types, data elements, and operations can be introduced independently and safely, supporting the extensibility goals of the RPP architecture while maintaining interoperability and clarity across implementations.<a href="#section-5.4.1-3" class="pilcrow">¶</a></p>
 </div>
 </section>
 </div>
+<div id="extension-security">
+<section id="section-5.4.2">
+          <h4 id="name-extension-security">
+<a href="#section-5.4.2" class="section-number selfRef">5.4.2. </a><a href="#name-extension-security" class="section-name selfRef">Extension Security</a>
+          </h4>
+<div id="_a3a0ec7f-cf31-385d-31fb-d2e5353b856c">
+<p id="section-5.4.2-1">Extensions operate within the same security architecture as the core protocol. Security, authentication, and authorisation mechanisms defined at the HTTP Transport Layer (see <a href="#authentication-authorization" class="auto internal xref">Section 5.1.1</a>) apply uniformly to both core protocol operations and all extensions. This "security by design" approach is aimed to ensure that extensions cannot bypass or weaken the security posture established by the core protocol. Extensions must not introduce new authentication or authorisation mechanisms that circumvent or conflict with those defined by the core specifications.<a href="#section-5.4.2-1" class="pilcrow">¶</a></p>
+</div>
+</section>
+</div>
+<div id="extension-review">
+<section id="section-5.4.3">
+          <h4 id="name-extension-review">
+<a href="#section-5.4.3" class="section-number selfRef">5.4.3. </a><a href="#name-extension-review" class="section-name selfRef">Extension Review</a>
+          </h4>
+<div id="_ac60170d-9674-53ee-a195-5e4eed8b2aeb">
+<p id="section-5.4.3-1">Before any extension is accepted by IANA, a review by an RPP expert must be performed. This review includes verification that the extension does not violate any of the RPP security considerations and that it correctly integrates with the protocol's security framework. The complete review criteria will be included in the "IANA Considerations" section of any document describing RPP extension mechanisms, according to the BCP described in <span>[<a href="#RFC8126" class="cite xref">RFC8126</a>]</span>.<a href="#section-5.4.3-1" class="pilcrow">¶</a></p>
+</div>
+</section>
+</div>
 </section>
 </div>
 </section>
 </div>
-<div id="_c55cf983-193e-cb05-e06e-1f9ba9250240">
+<div id="_50ed2084-d6f6-6b3a-9c7c-8e6100e41dfd">
 <section id="section-6">
       <h2 id="name-change-history">
 <a href="#section-6" class="section-number selfRef">6. </a><a href="#name-change-history" class="section-name selfRef">Change History</a>
       </h2>
-<div id="_7a15c360-117b-2567-ecdc-a2833b979365">
+<div id="_9ab4acc8-4bab-e594-49e3-a0952bafb29d">
 <section id="section-6.1">
         <h3 id="name-00-to-01">
 <a href="#section-6.1" class="section-number selfRef">6.1. </a><a href="#name-00-to-01" class="section-name selfRef">-00 to -01</a>
-      </h3>
+        </h3>
+<ul class="normal">
+<li class="normal" id="section-6.1-1.1">Added <a href="#extension-security" class="internal xref">Extension Security</a> and <a href="#extension-review" class="internal xref">Extension Review</a> Sections to <a href="#extension-mechanisms" class="auto internal xref">Section 5.4</a> (Issue #91).<a href="#section-6.1-1.1" class="pilcrow">¶</a>
+</li>
+        </ul>
 </section>
 </div>
 <div id="_f707dc54-23c5-01f2-0325-e27c9fde4010">
@@ -2526,7 +2556,7 @@ li > p:last-of-type:only-child {
 </div>
 </section>
 </div>
-<div id="_d41083cc-35eb-ebd5-fe52-9a5336274b47">
+<div id="_dde68522-67a5-b99a-1cab-239a2d3fa134">
 <section id="section-7">
       <h2 id="name-references">
 <a href="#section-7" class="section-number selfRef">7. </a><a href="#name-references" class="section-name selfRef">References</a>
@@ -2544,7 +2574,7 @@ li > p:last-of-type:only-child {
 </dl>
 </section>
 </div>
-<div id="_87f44d5a-6723-7e31-4bc7-a35c6ac04d5a">
+<div id="_732037af-5e45-46d2-bd3f-8c10196af5dd">
 <section id="section-7.2">
         <h3 id="name-informational-references">
 <a href="#section-7.2" class="section-number selfRef">7.2. </a><a href="#name-informational-references" class="section-name selfRef">Informational References</a>
@@ -2617,6 +2647,10 @@ li > p:last-of-type:only-child {
 <dt id="RFC9553">[RFC9553]</dt>
         <dd>
 <span class="refAuthor">Stepanek, R.</span> and <span class="refAuthor">M. Loffredo</span>, <span class="refTitle">"JSContact: A JSON Representation of Contact Data"</span>, <span class="stream">IETF</span>, <span class="seriesInfo">DOI 10.17487/RFC9553</span>, <span class="seriesInfo">RFC 9553</span>, <time datetime="2024-05" class="refDate">May 2024</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc9553">https://www.rfc-editor.org/info/rfc9553</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC8126">[RFC8126]</dt>
+        <dd>
+<span class="refAuthor">Cotton, M.</span>, <span class="refAuthor">Leiba, B.</span>, and <span class="refAuthor">T. Narten</span>, <span class="refTitle">"Guidelines for Writing an IANA Considerations Section in RFCs"</span>, <span class="stream">IETF</span>, <span class="seriesInfo">DOI 10.17487/RFC8126</span>, <span class="seriesInfo">BCP 26</span>, <span class="seriesInfo">RFC 8126</span>, <time datetime="2017-06" class="refDate">June 2017</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc8126">https://www.rfc-editor.org/info/rfc8126</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="SD-JWT">[SD-JWT]</dt>
         <dd>

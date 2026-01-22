@@ -107,6 +107,8 @@ Table of Contents
        5.3.3.  Operations
      5.4.  Extension mechanisms
        5.4.1.  Name Management and Collision Avoidance
+       5.4.2.  Extension Security
+       5.4.3.  Extension Review
    6.  Change History
      6.1.  -00 to -01
      6.2.  -03 to draft-ietf-rpp-architecture-00
@@ -1153,9 +1155,34 @@ Table of Contents
    the extensibility goals of the RPP architecture while maintaining
    interoperability and clarity across implementations.
 
+5.4.2.  Extension Security
+
+   Extensions operate within the same security architecture as the core
+   protocol.  Security, authentication, and authorisation mechanisms
+   defined at the HTTP Transport Layer (see Section 5.1.1) apply
+   uniformly to both core protocol operations and all extensions.  This
+   "security by design" approach is aimed to ensure that extensions
+   cannot bypass or weaken the security posture established by the core
+   protocol.  Extensions must not introduce new authentication or
+   authorisation mechanisms that circumvent or conflict with those
+   defined by the core specifications.
+
+5.4.3.  Extension Review
+
+   Before any extension is accepted by IANA, a review by an RPP expert
+   must be performed.  This review includes verification that the
+   extension does not violate any of the RPP security considerations and
+   that it correctly integrates with the protocol's security framework.
+   The complete review criteria will be included in the "IANA
+   Considerations" section of any document describing RPP extension
+   mechanisms, according to the BCP described in [RFC8126].
+
 6.  Change History
 
 6.1.  -00 to -01
+
+   *  Added Extension Security and Extension Review Sections to
+      Section 5.4 (Issue #91).
 
 6.2.  -03 to draft-ietf-rpp-architecture-00
 
@@ -1315,6 +1342,11 @@ Table of Contents
               Representation of Contact Data", IETF,
               DOI 10.17487/RFC9553, RFC 9553, May 2024,
               <https://www.rfc-editor.org/info/rfc9553>.
+
+   [RFC8126]  Cotton, M., Leiba, B., and T. Narten, "Guidelines for
+              Writing an IANA Considerations Section in RFCs", IETF,
+              DOI 10.17487/RFC8126, BCP 26, RFC 8126, June 2017,
+              <https://www.rfc-editor.org/info/rfc8126>.
 
    [SD-JWT]   Terbu, O., Fett, D., and B. Campbell, "SD-JWT-based
               Verifiable Credentials (SD-JWT VC)", July 2025,
