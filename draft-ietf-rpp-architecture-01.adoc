@@ -3,7 +3,6 @@
 :mn-document-class: ietf
 :mn-output-extensions: rfc,txt,html
 :doctype: internet-draft
-:abbrev: rpp-architecture
 :intended-series: informational
 :status: informational
 :workgroup: RPP (RESTful Provisioning Protocol) Working Group
@@ -154,6 +153,7 @@ These are features that are fully specified by the HTTP standard itself. RPP lev
 
 It encompasses aspects such as:
 
+* **Transport security:** Mechanisms to secure message transmission
 * **Authentication and Authorisation:** Mechanisms for verifying the identity of clients and controlling access to resources.
 * **Resource Addressing using URLs:** Consistent and meaningful URL structures for identifying, accessing resources and enabling request routing.
 * **Mapping of basic operations to HTTP uniform interface (verbs):** Mapping CRUD (Create, Read, Update, Delete) operations to POST, HEAD/GET, PUT/PATCH, and DELETE respectively.
@@ -208,6 +208,13 @@ This section provides further details on each layer of the RPP architecture.
 
 The RPP architecture uses the best practices described in <<RFC9205>> for the HTTP transport layer.
 
+[[transport-security]]
+==== Transport Security
+
+RPP communication relies on HTTPS with TLS to provide protection for data in transit. This addresses threats including eavesdropping, tampering, and man-in-the-middle attacks on provisioning operations, authentication credentials, and sensitive registry data exchanged between clients and servers.
+
+The architecture leverages HTTP's built-in transport security mechanisms and delegates specific security policy details to TLS standards and best practices. This approach allows implementations to adapt to evolving security requirements without requiring changes to the protocol specifications.
+
 [[authentication-authorization]]
 ==== Authentication and Authorisation
 
@@ -236,9 +243,10 @@ RPP authentication and authorisation model will make a clear distinction between
 
 In case of HTTP Basic Authentication, one user-id is always bound to at most one RPP client. For OAuth, the issued token is bound to the context of at most one RPP client, even though the OAuth client itself might have access to multiple RPP clients. The assignment of tokens to specific RPP clients can be controlled through the authorisation flow using the OAuth scope parameter. For example, if an OAuth client has access to two RPP clients (Client A and Client B), the scope parameter can specify which client the token applies to. A scope value like `scope=rpp:clientA` would ensure the token is valid only for Client A, while `scope=rpp:clientB` would apply to Client B.
 
+[[http-layer-details-security]]
 ===== Security
 
-RPP will not explicitly define security related policies related to authentication or authorisation (such as password complexity, token lifetime or cryptography used) on the protocol level. Instead, these properties will be delegated to the best practices of the chosen authentication schemes, which may evolve over time and would have to be independent of the protocol itself.
+RPP will not explicitly define security related policies related to authentication or authorisation (such as password complexity, token lifetime, cryptography used, or additional measures to verify the client) on the protocol level. Instead, these properties will be delegated to the best practices of the chosen authentication schemes, which may evolve over time and would have to be independent of the protocol itself.
 
 ===== Object level authorisation
 RPP will define a mechanism for object-level authorisation, preventing unauthorised access to specific objects or resources. Each object will have an associated sponsor or owner with full control over an object, and the protocol will allow for the specification of which clients are authorised to access or modify non-sponsored/owned objects. This could be achieved through state-of-the-art standards like OAuth authorisation tokens, scopes, and resource-specific permissions but also shared secrets for backward compatibility with EPP password-based authorisation information.
@@ -507,8 +515,11 @@ This naming mechanism ensures that new resource types, data elements, and operat
 === -00 to -01
 
 * Added IDN to "Terminology" and "Service discovery mechanisms" sections
+* Added "additional measures to verify the client" to <<http-layer-details-security>> (Issue #76).
+* Added TLS mandatory to <<transport-security>> (Issue #78).
 
 === -03 to draft-ietf-rpp-architecture-00
+
 * No changes. Document adopted by RPP WG.
 
 === -02 to -03
