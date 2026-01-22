@@ -461,6 +461,7 @@ This part defines logical data elements for each resource type, which can also b
 *  Identification of logical data units (e.g. a stable identifier of a data element, which is independent of the representation)
 *  Definition of logical data units (e.g., domain name, contact details)
 *  Format and schema for primitive data elements or reference to other resource type definitions
+*  Definition of container elements, which are logical groupings that can encapsulate zero or more data elements or other containers ( e.g. map or list).
 *  Constraints on data elements (e.g., data type, length, allowed values)
 *  Mechanisms for extensibility, if applicable
 
@@ -505,6 +506,7 @@ This naming mechanism ensures that new resource types, data elements, and operat
 
 === -00 to -01
 
+* Added text about collection representation. (Issue #85)
 
 === -03 to draft-ietf-rpp-architecture-00
 * No changes. Document adopted by RPP WG.
