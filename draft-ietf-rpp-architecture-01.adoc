@@ -72,6 +72,8 @@ This document uses terminology from RFC5730 <<RFC5730>> and broadly adopts the R
 
 * **RPP client:** An entity or application that interacts with the RPP server to perform provisioning operations, such as creating, updating, or deleting resources.
 
+* **IDN:** Internationalised Domain Names as defined in <<RFC5890>>
+
 == Requirements
 This document is based on the requirements defined by RPP WG in state from 7.3.2025 <<RPPReq>>.
 
@@ -267,7 +269,7 @@ RPP responses will include URLs for related resources, allowing clients to navig
 
 ===== Internationalised Domain Names (IDN)
 
-RPP will address the handling of Internationalised Domain Names (IDNs) in resource addressing. Specifications will define whether to use IDN or UTF-8 encoding directly in URLs and whether to employ redirects to canonical URLs or "see-also" linking for alternative representations. For example,  a "see-also" link could point from a UTF-8 encoded URL to an IDN URL and vice versa, allowing clients to use either URL. Another way would be to always redirect to the canonical URL, which would be the IDN URL.
+RPP will address the handling of IDNs in resource addressing. Specifications will define whether to use IDN or UTF-8 encoding directly in URLs and whether to employ redirects to canonical URLs or "see-also" linking for alternative representations. For example,  a "see-also" link could point from a UTF-8 encoded URL to an IDN URL and vice versa, allowing clients to use either URL. Another way would be to always redirect to the canonical URL, which would be the IDN URL.
 
 [[http-layer-detail-mapping-basic-ops]]
 ==== Mapping of basic operations to HTTP uniform interface (verbs)
@@ -414,8 +416,7 @@ to dynamically discover RPP service endpoints and capabilities, reducing couplin
 
 *  Potential discovery of RPP server location, like  IANA bootstrapping document or a special DNS TXT RR with location of RPP service for the tld.
 *  Potential use of well-known URIs (e.g., `/.well-known/rpp-capabilities`) for service discovery.
-*  Advertising supported protocol versions,
-extensions, available resource types, authentication methods, and supported features.
+*  Advertising supported protocol versions, extensions, available resource types, authentication methods, IDN policies and supported features.
 *  It may be considered for RPP to distribute service discovery for each resource type separately for better scalability and management. For example instead of having a single service discovery endpoint for the whole registry on `/.well-known/rpp-capabilities` there might be a separate discovery placed under `/{resource-type}/.well-known/rpp-capabilities` e.g. `/domains/.well-known/rpp-capabilities`.
 *  Service discovery shall utilise standardised methods, like URI templates <<RFC6570>> to allow easy navigation of resources and avoid hard-coding of URLs, same time allowing clients to navigate directly to a known resource without additional server queries.
 *  As a matter of principle service discovery shall be used to bootstrap the communication between client and server, its capabilities and operational policies. The server configuration shall be considered static between reconfiguration of the server and not be used for any dynamic configuration, like load balancing etc. It would enable the right balance between discoverability and reduction of round trips between clients and servers.
@@ -512,10 +513,13 @@ This naming mechanism ensures that new resource types, data elements, and operat
 == Change History
 
 === -00 to -01
+
+* Added IDN to "Terminology" and "Service discovery mechanisms" sections
 * Added "additional measures to verify the client" to <<http-layer-details-security>> (Issue #76).
 * Added TLS mandatory to <<transport-security>> (Issue #78).
 
 === -03 to draft-ietf-rpp-architecture-00
+
 * No changes. Document adopted by RPP WG.
 
 === -02 to -03
