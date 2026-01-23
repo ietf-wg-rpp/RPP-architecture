@@ -30,7 +30,7 @@ Abstract
 Contributing
 
    When contributing to this document, please use the following GitHub
-   project: https://github.com/pawel-kow/RPP-architecture.
+   project: https://github.com/ietf-wg-rpp/RPP-architecture.
 
 Status of This Memo
 
