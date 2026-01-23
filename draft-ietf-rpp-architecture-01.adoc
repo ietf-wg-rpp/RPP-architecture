@@ -427,6 +427,13 @@ to dynamically discover RPP service endpoints and capabilities, reducing couplin
 *  Service discovery shall utilise standardised methods, like URI templates <<RFC6570>> to allow easy navigation of resources and avoid hard-coding of URLs, same time allowing clients to navigate directly to a known resource without additional server queries.
 *  As a matter of principle service discovery shall be used to bootstrap the communication between client and server, its capabilities and operational policies. The server configuration shall be considered static between reconfiguration of the server and not be used for any dynamic configuration, like load balancing etc. It would enable the right balance between discoverability and reduction of round trips between clients and servers.
 
+[[scalability]]
+==== Scalability
+
+RPP leverages HTTP, enabling the use of standard web scalability techniques such as load balancing, horizontal scaling, and distributed caching.
+Stateless interactions allow requests to be handled independently, facilitating distribution across multiple servers and rapid scaling in response to demand.
+RPP shall enable by design existing web security and mitigation mechanisms to defend against attacks such as Denial of Service (DoS). 
+
 [[data-representation-layer]]
 === Data Representation Layer
 
@@ -520,6 +527,7 @@ This naming mechanism ensures that new resource types, data elements, and operat
 
 === -00 to -01
 
+* Added "Scalability" section. (Issue #92)
 * Explicitly state that all parties involved in a process are allowed to retrieve the process status. (Issue #98)
 * Added IDN to "Terminology" and "Service discovery mechanisms" sections
 * Added "additional measures to verify the client" to <<http-layer-details-security>> (Issue #76).
