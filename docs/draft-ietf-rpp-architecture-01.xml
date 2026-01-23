@@ -210,7 +210,7 @@
 </section>
 </section>
 </section>
-    <section anchor="_e5604e57-f5e7-73e8-abd0-9cb6ceb869a2"><name>Protocol Details</name>
+    <section anchor="_bc67e8de-b687-e935-9a25-540b71d61741"><name>Protocol Details</name>
 
 <t anchor="_258b3fe6-6525-0317-3cb7-1b42072bd9cf">This section provides further details on each layer of the RPP architecture.</t>
 
@@ -261,9 +261,9 @@
 <t anchor="_4532122c-c111-0dd0-d8df-2a088ed05aca">RPP will not explicitly define security related policies related to authentication or authorisation (such as password complexity, token lifetime, cryptography used, or additional measures to verify the client) on the protocol level. Instead, these properties will be delegated to the best practices of the chosen authentication schemes, which may evolve over time and would have to be independent of the protocol itself.</t>
 </section>
 
-<section anchor="credential-revocation"><name>Credential and Token Revocation</name>
+<section anchor="credential-lifecycle"><name>Credential and Token Lifecycle</name>
 
-<t anchor="_7a4505c2-f067-1849-7aff-673a5587b705">RPP will support mechanisms for revoking or deprecating credentials, tokens, or permissions when they are no longer needed or if they become compromised.</t>
+<t anchor="_aebf7a8e-1775-b878-5970-f7ed2b1a92b1">RPP will support mechanisms for revoking, rotating or deprecating credentials, tokens, or permissions when they are no longer needed or if they become compromised.</t>
 
 <t anchor="_9969a671-cbb4-2d2c-ae2a-6076cf64b5c1">The architecture delegates revocation mechanisms to the specific authentication method in use, following their established practices. For OAuth-based deployments, standard token revocation mechanisms as defined in <xref target="RFC7009" section="" relative=""></xref> should be utilised. For HTTP Basic Authentication revocation must be fulfilled by off-band operational practice, or using using Authenticaton Extension to rotate the credential. Protocol specifications must emphasize, that implementations should ensure that revocation takes effect promptly and that revoked credentials are consistently rejected across all RPP endpoints.</t>
 
@@ -562,13 +562,13 @@
 </section>
 </section>
 </section>
-    <section anchor="_47262932-707c-6c51-f32b-98870e0f4ce3"><name>Change History</name>
+    <section anchor="_9e84a756-3958-9e46-689f-fbd74bbd7d77"><name>Change History</name>
 
-<section anchor="_3a22899f-b9f4-149d-bf2c-409a6d25cc69"><name>-00 to -01</name>
+<section anchor="_51c5d164-33fe-f32e-9572-071f2687f22d"><name>-00 to -01</name>
 
-<ul anchor="_7c41a991-5502-1066-fab4-cf9c23dfa0e3"><li>Added "additional measures to verify the client" to <xref target="http-layer-details-security"></xref> (Issue #76).</li>
+<ul anchor="_6523e27e-714e-2eb5-4af4-5571ce9ce61e"><li>Added "additional measures to verify the client" to <xref target="http-layer-details-security"></xref> (Issue #76).</li>
 <li>Added TLS mandatory to <xref target="transport-security"></xref> (Issue #78).</li>
-<li>Added Section <xref target="credential-revocation"></xref> for credential and token revocation mechanisms (Issue #79).</li>
+<li>Added Section <xref target="credential-lifecycle"></xref> for credential and token revocation/replacement mechanisms (Issue #79).</li>
 </ul>
 </section>
 

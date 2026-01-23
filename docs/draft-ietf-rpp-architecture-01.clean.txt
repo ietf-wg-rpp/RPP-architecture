@@ -519,11 +519,11 @@ Table of Contents
    which may evolve over time and would have to be independent of the
    protocol itself.
 
-5.1.2.5.  Credential and Token Revocation
+5.1.2.5.  Credential and Token Lifecycle
 
-   RPP will support mechanisms for revoking or deprecating credentials,
-   tokens, or permissions when they are no longer needed or if they
-   become compromised.
+   RPP will support mechanisms for revoking, rotating or deprecating
+   credentials, tokens, or permissions when they are no longer needed or
+   if they become compromised.
 
    The architecture delegates revocation mechanisms to the specific
    authentication method in use, following their established practices.
@@ -1201,8 +1201,8 @@ Table of Contents
 
    *  Added TLS mandatory to Section 5.1.1 (Issue #78).
 
-   *  Added Section Section 5.1.2.5 for credential and token revocation
-      mechanisms (Issue #79).
+   *  Added Section Section 5.1.2.5 for credential and token revocation/
+      replacement mechanisms (Issue #79).
 
 6.2.  -03 to draft-ietf-rpp-architecture-00
 

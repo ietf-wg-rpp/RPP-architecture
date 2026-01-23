@@ -246,10 +246,10 @@ In case of HTTP Basic Authentication, one user-id is always bound to at most one
 
 RPP will not explicitly define security related policies related to authentication or authorisation (such as password complexity, token lifetime, cryptography used, or additional measures to verify the client) on the protocol level. Instead, these properties will be delegated to the best practices of the chosen authentication schemes, which may evolve over time and would have to be independent of the protocol itself.
 
-[[credential-revocation]]
-===== Credential and Token Revocation
+[[credential-lifecycle]]
+===== Credential and Token Lifecycle
 
-RPP will support mechanisms for revoking or deprecating credentials, tokens, or permissions when they are no longer needed or if they become compromised. 
+RPP will support mechanisms for revoking, rotating or deprecating credentials, tokens, or permissions when they are no longer needed or if they become compromised. 
 
 The architecture delegates revocation mechanisms to the specific authentication method in use, following their established practices. For OAuth-based deployments, standard token revocation mechanisms as defined in <<RFC7009>> should be utilised.
 For HTTP Basic Authentication revocation must be fulfilled by off-band operational practice, or using using Authenticaton Extension to rotate the credential.
@@ -526,7 +526,7 @@ This naming mechanism ensures that new resource types, data elements, and operat
 === -00 to -01
 * Added "additional measures to verify the client" to <<http-layer-details-security>> (Issue #76).
 * Added TLS mandatory to <<transport-security>> (Issue #78).
-* Added Section <<credential-revocation>> for credential and token revocation mechanisms (Issue #79).
+* Added Section <<credential-lifecycle>> for credential and token revocation/replacement mechanisms (Issue #79).
 
 === -03 to draft-ietf-rpp-architecture-00
 * No changes. Document adopted by RPP WG.
