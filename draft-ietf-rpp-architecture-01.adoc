@@ -272,7 +272,7 @@ uniform interface and RESTful principles:
     -  a better equivalence of EPP check would be a POST with Expect header, however this header being a reserved header in browsers it may not be availble to all client implementations
 
 +
-The conclusion is that RPP should not overload HTTP HEAD with own semantics, and support HEAD as it is defined in HTTP. This includes an empty message body for RPP responses for requests using the HEAD method.
+The conclusion is that RPP should not overload HTTP HEAD with own semantics, and support HEAD as it is defined in HTTP.
 
 *  **OPTIONS** RPP shall not define any new semantics for OPTIONS however the specifications should make implementers aware of its role in CORS and pre-flight requests typically made by web browsers
 *  **GET:**  Retrieve resource state (e.g., retrieving domain or contact information) - EPP info command
