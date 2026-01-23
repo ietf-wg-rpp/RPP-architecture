@@ -488,7 +488,7 @@ The RPP architecture is designed to be extensible, allowing for the addition of 
 * **Profile and Compatibility Layers:** Compatibility profiles can be defined to support subsets of RPP for specific use cases (such as EPP compatibility)
 * **Discovery and Negotiation:** Service discovery endpoints and content negotiation mechanisms allow clients and servers to dynamically discover and utilise new capabilities, resource types, and representations as they are introduced.
 * **Status codes:** New RPP status codes can be defined and registered including their mapping to HTTP status codes.
-* **HTTP Headers:** New HTTP headers can be defined and used as a target when mapping RPP data structures to a response. 
+* **HTTP Headers:** New HTTP headers can be defined and used when mapping RPP data structures or control signals to requests and responses. 
 
 RPP shall facilitate standardisation and reuse by requiring that extensions be registered with IANA. These registration requirements shall be fine-grained, applying independently to protocol elements such as resource types, data elements, operations, and status codes. This approach promotes consistency and interoperability, avoids fragmentation from conflicting definitions, and allows protocol elements to evolve independently.
 
