@@ -97,6 +97,7 @@ Table of Contents
        5.1.16. Profiles
        5.1.17. Definition of special resources
        5.1.18. Service discovery mechanisms
+       5.1.19. Scalability
      5.2.  Data Representation Layer
        5.2.1.  Data structure
        5.2.2.  Data format
@@ -108,6 +109,8 @@ Table of Contents
        5.3.3.  Operations
      5.4.  Extension mechanisms
        5.4.1.  Name Management and Collision Avoidance
+       5.4.2.  Extension Security
+       5.4.3.  Extension Review
    6.  Change History
      6.1.  -00 to -01
      6.2.  -03 to draft-ietf-rpp-architecture-00
@@ -176,6 +179,14 @@ Table of Contents
    *  *RPP client:* An entity or application that interacts with the RPP
       server to perform provisioning operations, such as creating,
       updating, or deleting resources.
+
+   *  *Sponsoring Client:* The RPP Client that currently has sponsorship
+      of the object.
+
+   *  *Gaining Client:* The client seeking to gain sponsorship of the
+      object in a Transfer Operation.
+
+   *  *IDN:* Internationalised Domain Names as defined in [RFC5890]
 
 3.  Requirements
 
@@ -529,7 +540,11 @@ Table of Contents
    non-sponsored/owned objects.  This could be achieved through state-
    of-the-art standards like OAuth authorisation tokens, scopes, and
    resource-specific permissions but also shared secrets for backward
-   compatibility with EPP password-based authorisation information.
+   compatibility with EPP password-based authorisation information.  All
+   parties involved in a running or completed process, such as the
+   Sponsoring Client and the Gaining Client for a transfer operation,
+   must be allowed to query the status of the proces using the same
+   process resource.
 
 5.1.3.  Resource Addressing
 
@@ -564,14 +579,14 @@ Table of Contents
 
 5.1.3.1.  Internationalised Domain Names (IDN)
 
-   RPP will address the handling of Internationalised Domain Names
-   (IDNs) in resource addressing.  Specifications will define whether to
-   use IDN or UTF-8 encoding directly in URLs and whether to employ
-   redirects to canonical URLs or "see-also" linking for alternative
-   representations.  For example, a "see-also" link could point from a
-   UTF-8 encoded URL to an IDN URL and vice versa, allowing clients to
-   use either URL.  Another way would be to always redirect to the
-   canonical URL, which would be the IDN URL.
+   RPP will address the handling of IDNs in resource addressing.
+   Specifications will define whether to use IDN or UTF-8 encoding
+   directly in URLs and whether to employ redirects to canonical URLs or
+   "see-also" linking for alternative representations.  For example, a
+   "see-also" link could point from a UTF-8 encoded URL to an IDN URL
+   and vice versa, allowing clients to use either URL.  Another way
+   would be to always redirect to the canonical URL, which would be the
+   IDN URL.
 
 5.1.4.  Mapping of basic operations to HTTP uniform interface (verbs)
 
@@ -926,7 +941,11 @@ Table of Contents
       capabilities) for service discovery.
 
    *  Advertising supported protocol versions, extensions, available
-      resource types, authentication methods, and supported features.
+      resource types, authentication methods, IDN policies and supported
+      features.
+
+   *  Advertising of maintenance notices, informing clients about future
+      unavailability of the service due to scheduled maintenance.
 
    *  It may be considered for RPP to distribute service discovery for
       each resource type separately for better scalability and
@@ -948,6 +967,16 @@ Table of Contents
       and not be used for any dynamic configuration, like load balancing
       etc.  It would enable the right balance between discoverability
       and reduction of round trips between clients and servers.
+
+5.1.19.  Scalability
+
+   RPP leverages HTTP, enabling the use of standard web scalability
+   techniques such as load balancing, horizontal scaling, and
+   distributed caching.  Stateless interactions allow requests to be
+   handled independently, facilitating distribution across multiple
+   servers and rapid scaling in response to demand.  RPP shall enable by
+   design existing web security and mitigation mechanisms to defend
+   against attacks such as Denial of Service (DoS).
 
 5.2.  Data Representation Layer
 
@@ -1171,9 +1200,45 @@ Table of Contents
    the extensibility goals of the RPP architecture while maintaining
    interoperability and clarity across implementations.
 
+5.4.2.  Extension Security
+
+   Extensions operate within the same security architecture as the core
+   protocol.  Security, authentication, and authorisation mechanisms
+   defined at the HTTP Transport Layer (see Section 5.1.2) apply
+   uniformly to both core protocol operations and all extensions.  This
+   "security by design" approach is aimed to ensure that extensions
+   cannot bypass or weaken the security posture established by the core
+   protocol.  Extensions must not introduce new authentication or
+   authorisation mechanisms that circumvent or conflict with those
+   defined by the core specifications.
+
+5.4.3.  Extension Review
+
+   Before any extension is accepted by IANA, a review by an RPP expert
+   must be performed.  This review includes verification that the
+   extension does not violate any of the RPP security considerations and
+   that it correctly integrates with the protocol's security framework.
+   The complete review criteria will be included in the "IANA
+   Considerations" section of any document describing RPP extension
+   mechanisms, according to the BCP described in [RFC8126].
+
 6.  Change History
 
 6.1.  -00 to -01
+
+   *  Added Extension Security and Extension Review Sections to
+      Section 5.4 (Issue #91).
+
+   *  Added Advertising of maintenance notices to "Service Discovery"
+      section.  (Issue #88)
+
+   *  Added "Scalability" section.  (Issue #92)
+
+   *  Explicitly state that all parties involved in a process are
+      allowed to retrieve the process status.  (Issue #98)
+
+   *  Added IDN to "Terminology" and "Service discovery mechanisms"
+      sections
 
    *  Added "additional measures to verify the client" to
       Section 5.1.2.4 (Issue #76).
@@ -1342,6 +1407,16 @@ Table of Contents
    [RFC7617]  Reschke, J., "The 'Basic' HTTP Authentication Scheme",
               IETF, DOI 10.17487/RFC7617, RFC 7617, September 2015,
               <https://www.rfc-editor.org/info/rfc7617>.
+
+   [RFC8126]  Cotton, M., Leiba, B., and T. Narten, "Guidelines for
+              Writing an IANA Considerations Section in RFCs", IETF,
+              DOI 10.17487/RFC8126, BCP 26, RFC 8126, June 2017,
+              <https://www.rfc-editor.org/info/rfc8126>.
+
+   [RFC5890]  Klensin, J., "Internationalized Domain Names for
+              Applications (IDNA): Definitions and Document Framework",
+              IETF, DOI 10.17487/RFC5890, RFC 5890, August 2010,
+              <https://www.rfc-editor.org/info/rfc5890>.
 
    [SD-JWT]   Terbu, O., Fett, D., and B. Campbell, "SD-JWT-based
               Verifiable Credentials (SD-JWT VC)", July 2025,

@@ -1407,6 +1407,9 @@ li > p:last-of-type:only-child {
                   <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5.2.1.2.18">
                     <p id="section-toc.1-1.5.2.1.2.18.1"><a href="#section-5.1.18" class="auto internal xref">5.1.18</a>. <a href="#name-service-discovery-mechanism" class="internal xref">Service discovery mechanisms</a></p>
 </li>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5.2.1.2.19">
+                    <p id="section-toc.1-1.5.2.1.2.19.1"><a href="#section-5.1.19" class="auto internal xref">5.1.19</a>. <a href="#name-scalability" class="internal xref">Scalability</a></p>
+</li>
                 </ul>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5.2.2">
@@ -1445,6 +1448,12 @@ li > p:last-of-type:only-child {
 <ul class="compact toc ulBare ulEmpty">
 <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5.2.4.2.1">
                     <p id="section-toc.1-1.5.2.4.2.1.1"><a href="#section-5.4.1" class="auto internal xref">5.4.1</a>.  <a href="#name-name-management-and-collisi" class="internal xref">Name Management and Collision Avoidance</a></p>
+</li>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5.2.4.2.2">
+                    <p id="section-toc.1-1.5.2.4.2.2.1"><a href="#section-5.4.2" class="auto internal xref">5.4.2</a>.  <a href="#name-extension-security" class="internal xref">Extension Security</a></p>
+</li>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5.2.4.2.3">
+                    <p id="section-toc.1-1.5.2.4.2.3.1"><a href="#section-5.4.3" class="auto internal xref">5.4.3</a>.  <a href="#name-extension-review" class="internal xref">Extension Review</a></p>
 </li>
                 </ul>
 </li>
@@ -1504,7 +1513,7 @@ li > p:last-of-type:only-child {
 </div>
 </section>
 </div>
-<div id="_ac16e9d1-59b2-d778-61b6-938116e69b94">
+<div id="_bf47949e-0076-b90e-d4cc-25d3505560fb">
 <section id="section-2">
       <h2 id="name-terminology">
 <a href="#section-2" class="section-number selfRef">2. </a><a href="#name-terminology" class="section-name selfRef">Terminology</a>
@@ -1533,6 +1542,15 @@ li > p:last-of-type:only-child {
 </li>
         <li class="normal" id="section-2-2.7">
           <strong>RPP client:</strong> An entity or application that interacts with the RPP server to perform provisioning operations, such as creating, updating, or deleting resources.<a href="#section-2-2.7" class="pilcrow">¶</a>
+</li>
+        <li class="normal" id="section-2-2.8">
+          <strong>Sponsoring Client:</strong> The RPP Client that currently has sponsorship of the object.<a href="#section-2-2.8" class="pilcrow">¶</a>
+</li>
+        <li class="normal" id="section-2-2.9">
+          <strong>Gaining Client:</strong> The client seeking to gain sponsorship of the object in a Transfer Operation.<a href="#section-2-2.9" class="pilcrow">¶</a>
+</li>
+        <li class="normal" id="section-2-2.10">
+          <strong>IDN:</strong> Internationalised Domain Names as defined in <span>[<a href="#RFC5890" class="cite xref">RFC5890</a>]</span><a href="#section-2-2.10" class="pilcrow">¶</a>
 </li>
       </ul>
 </section>
@@ -1801,7 +1819,7 @@ li > p:last-of-type:only-child {
 </div>
 </section>
 </div>
-<div id="_5569ffc7-109d-817a-3794-94d363ebb4b6">
+<div id="_93cf8862-052b-da26-817a-89449b9c10c9">
 <section id="section-5">
       <h2 id="name-protocol-details">
 <a href="#section-5" class="section-number selfRef">5. </a><a href="#name-protocol-details" class="section-name selfRef">Protocol Details</a>
@@ -1896,13 +1914,13 @@ li > p:last-of-type:only-child {
 </div>
 </section>
 </div>
-<div id="_75dbc62f-9b76-625d-53b2-cefe3bb42a1d">
+<div id="_43527528-91c2-9d68-b005-186b4142c85f">
 <section id="section-5.1.2.5">
             <h5 id="name-object-level-authorisation">
 <a href="#section-5.1.2.5" class="section-number selfRef">5.1.2.5. </a><a href="#name-object-level-authorisation" class="section-name selfRef">Object level authorisation</a>
             </h5>
-<div id="_0030907e-cd4d-42ed-81d6-954be7b06bf6">
-<p id="section-5.1.2.5-1">RPP will define a mechanism for object-level authorisation, preventing unauthorised access to specific objects or resources. Each object will have an associated sponsor or owner with full control over an object, and the protocol will allow for the specification of which clients are authorised to access or modify non-sponsored/owned objects. This could be achieved through state-of-the-art standards like OAuth authorisation tokens, scopes, and resource-specific permissions but also shared secrets for backward compatibility with EPP password-based authorisation information.<a href="#section-5.1.2.5-1" class="pilcrow">¶</a></p>
+<div id="_03332d5b-5227-6ac2-cd38-ec1e5ea15e31">
+<p id="section-5.1.2.5-1">RPP will define a mechanism for object-level authorisation, preventing unauthorised access to specific objects or resources. Each object will have an associated sponsor or owner with full control over an object, and the protocol will allow for the specification of which clients are authorised to access or modify non-sponsored/owned objects. This could be achieved through state-of-the-art standards like OAuth authorisation tokens, scopes, and resource-specific permissions but also shared secrets for backward compatibility with EPP password-based authorisation information. All parties involved in a running or completed process, such as the Sponsoring Client and the Gaining Client for a transfer operation, must be allowed to query the status of the proces using the same process resource.<a href="#section-5.1.2.5-1" class="pilcrow">¶</a></p>
 </div>
 </section>
 </div>
@@ -1934,13 +1952,13 @@ li > p:last-of-type:only-child {
 <div id="_db1be90f-2314-62f1-6f15-e03d13ee3b03">
 <p id="section-5.1.3-6">RPP responses will include URLs for related resources, allowing clients to navigate newly created resources easily. This is similar to the "links" concept in RESTful APIs, where related resources are linked together.<a href="#section-5.1.3-6" class="pilcrow">¶</a></p>
 </div>
-<div id="_07d1d4a2-e155-9ede-a97f-2b229d4e3fa5">
+<div id="_794b9063-97aa-2243-c315-80cdf60c61e5">
 <section id="section-5.1.3.1">
             <h5 id="name-internationalised-domain-na">
 <a href="#section-5.1.3.1" class="section-number selfRef">5.1.3.1. </a><a href="#name-internationalised-domain-na" class="section-name selfRef">Internationalised Domain Names (IDN)</a>
             </h5>
-<div id="_928c9f7b-08a9-dae3-bdcb-2dd3d2890c19">
-<p id="section-5.1.3.1-1">RPP will address the handling of Internationalised Domain Names (IDNs) in resource addressing. Specifications will define whether to use IDN or UTF-8 encoding directly in URLs and whether to employ redirects to canonical URLs or "see-also" linking for alternative representations. For example,  a "see-also" link could point from a UTF-8 encoded URL to an IDN URL and vice versa, allowing clients to use either URL. Another way would be to always redirect to the canonical URL, which would be the IDN URL.<a href="#section-5.1.3.1-1" class="pilcrow">¶</a></p>
+<div id="_f362e59e-05aa-3a9e-6b38-2485efdd0ed0">
+<p id="section-5.1.3.1-1">RPP will address the handling of IDNs in resource addressing. Specifications will define whether to use IDN or UTF-8 encoding directly in URLs and whether to employ redirects to canonical URLs or "see-also" linking for alternative representations. For example,  a "see-also" link could point from a UTF-8 encoded URL to an IDN URL and vice versa, allowing clients to use either URL. Another way would be to always redirect to the canonical URL, which would be the IDN URL.<a href="#section-5.1.3.1-1" class="pilcrow">¶</a></p>
 </div>
 </section>
 </div>
@@ -2224,15 +2242,27 @@ li > p:last-of-type:only-child {
 </li>
             <li class="normal" id="section-5.1.18-2.2">Potential use of well-known URIs (e.g., <code>/.well-known/rpp-capabilities</code>) for service discovery.<a href="#section-5.1.18-2.2" class="pilcrow">¶</a>
 </li>
-            <li class="normal" id="section-5.1.18-2.3">Advertising supported protocol versions, extensions, available resource types, authentication methods, and supported features.<a href="#section-5.1.18-2.3" class="pilcrow">¶</a>
+            <li class="normal" id="section-5.1.18-2.3">Advertising supported protocol versions, extensions, available resource types, authentication methods, IDN policies and supported features.<a href="#section-5.1.18-2.3" class="pilcrow">¶</a>
 </li>
-            <li class="normal" id="section-5.1.18-2.4">It may be considered for RPP to distribute service discovery for each resource type separately for better scalability and management. For example instead of having a single service discovery endpoint for the whole registry on <code>/.well-known/rpp-capabilities</code> there might be a separate discovery placed under <code>/{resource-type}/.well-known/rpp-capabilities</code> e.g. <code>/domains/.well-known/rpp-capabilities</code>.<a href="#section-5.1.18-2.4" class="pilcrow">¶</a>
+            <li class="normal" id="section-5.1.18-2.4">Advertising of maintenance notices, informing clients about future unavailability of the service due to scheduled maintenance.<a href="#section-5.1.18-2.4" class="pilcrow">¶</a>
 </li>
-            <li class="normal" id="section-5.1.18-2.5">Service discovery shall utilise standardised methods, like URI templates <span>[<a href="#RFC6570" class="cite xref">RFC6570</a>]</span> to allow easy navigation of resources and avoid hard-coding of URLs, same time allowing clients to navigate directly to a known resource without additional server queries.<a href="#section-5.1.18-2.5" class="pilcrow">¶</a>
+            <li class="normal" id="section-5.1.18-2.5">It may be considered for RPP to distribute service discovery for each resource type separately for better scalability and management. For example instead of having a single service discovery endpoint for the whole registry on <code>/.well-known/rpp-capabilities</code> there might be a separate discovery placed under <code>/{resource-type}/.well-known/rpp-capabilities</code> e.g. <code>/domains/.well-known/rpp-capabilities</code>.<a href="#section-5.1.18-2.5" class="pilcrow">¶</a>
 </li>
-            <li class="normal" id="section-5.1.18-2.6">As a matter of principle service discovery shall be used to bootstrap the communication between client and server, its capabilities and operational policies. The server configuration shall be considered static between reconfiguration of the server and not be used for any dynamic configuration, like load balancing etc. It would enable the right balance between discoverability and reduction of round trips between clients and servers.<a href="#section-5.1.18-2.6" class="pilcrow">¶</a>
+            <li class="normal" id="section-5.1.18-2.6">Service discovery shall utilise standardised methods, like URI templates <span>[<a href="#RFC6570" class="cite xref">RFC6570</a>]</span> to allow easy navigation of resources and avoid hard-coding of URLs, same time allowing clients to navigate directly to a known resource without additional server queries.<a href="#section-5.1.18-2.6" class="pilcrow">¶</a>
+</li>
+            <li class="normal" id="section-5.1.18-2.7">As a matter of principle service discovery shall be used to bootstrap the communication between client and server, its capabilities and operational policies. The server configuration shall be considered static between reconfiguration of the server and not be used for any dynamic configuration, like load balancing etc. It would enable the right balance between discoverability and reduction of round trips between clients and servers.<a href="#section-5.1.18-2.7" class="pilcrow">¶</a>
 </li>
           </ul>
+</section>
+</div>
+<div id="scalability">
+<section id="section-5.1.19">
+          <h4 id="name-scalability">
+<a href="#section-5.1.19" class="section-number selfRef">5.1.19. </a><a href="#name-scalability" class="section-name selfRef">Scalability</a>
+          </h4>
+<div id="_511f32f7-aa19-dc5c-c676-6f3e76567dcb">
+<p id="section-5.1.19-1">RPP leverages HTTP, enabling the use of standard web scalability techniques such as load balancing, horizontal scaling, and distributed caching. Stateless interactions allow requests to be handled independently, facilitating distribution across multiple servers and rapid scaling in response to demand. RPP shall enable by design existing web security and mitigation mechanisms to defend against attacks such as Denial of Service (DoS).<a href="#section-5.1.19-1" class="pilcrow">¶</a></p>
+</div>
 </section>
 </div>
 </section>
@@ -2427,40 +2457,70 @@ li > p:last-of-type:only-child {
 <div id="_debfcb2b-b50a-2c33-4a75-319386e9442e">
 <p id="section-5.4-4">These extensibility mechanisms ensure that RPP can evolve to meet future requirements, integrate with emerging technologies, and support a wide range of provisioning scenarios while maintaining interoperability and stability.<a href="#section-5.4-4" class="pilcrow">¶</a></p>
 </div>
-<div id="_96e5350d-e377-28be-75f5-ab94556af4fe">
+<div id="_b40c24b0-bd97-0f6a-e2c3-4581b40bc90b">
 <section id="section-5.4.1">
           <h4 id="name-name-management-and-collisi">
 <a href="#section-5.4.1" class="section-number selfRef">5.4.1. </a><a href="#name-name-management-and-collisi" class="section-name selfRef">Name Management and Collision Avoidance</a>
           </h4>
-<div id="_07253e80-05fb-2f5c-9cb6-59fcd595c66a">
+<div id="_acecdc24-c3a7-4d7e-178d-5bbb78479f44">
 <p id="section-5.4.1-1">RPP extensions MUST define unique names for all extension elements to prevent conflicts with other extensions and with core protocol elements. These names are used consistently in resource identifiers, data element identifiers, and URL path segments.<a href="#section-5.4.1-1" class="pilcrow">¶</a></p>
 </div>
-<div id="_8287ca1e-af38-b462-d4c5-a928841f70bc">
+<div id="_4d667800-d34a-ec5d-b7c3-8ce11d50e54e">
 <p id="section-5.4.1-2">Standardised RPP extensions MUST register their names in a dedicated IANA registry for RPP extensions to ensure global uniqueness and avoid collisions. Private (non-standardised) extensions are also required to use unique names, but are not required to register with IANA. This allows private extensions to be developed and used within specific implementations or organisations without impacting the global RPP ecosystem. Private extensions should use names that are unlikely to conflict with other extensions or with RPP core elements, for example by using reverse domain notation as a prefix (e.g., <code>org.example.rpp</code>).<a href="#section-5.4.1-2" class="pilcrow">¶</a></p>
 </div>
-<div id="_9ac2ed13-1b15-2419-ec51-454d0818879a">
+<div id="_64315132-8cb7-107d-e6d0-ad55dd956428">
 <p id="section-5.4.1-3">This naming mechanism ensures that new resource types, data elements, and operations can be introduced independently and safely, supporting the extensibility goals of the RPP architecture while maintaining interoperability and clarity across implementations.<a href="#section-5.4.1-3" class="pilcrow">¶</a></p>
 </div>
 </section>
 </div>
+<div id="extension-security">
+<section id="section-5.4.2">
+          <h4 id="name-extension-security">
+<a href="#section-5.4.2" class="section-number selfRef">5.4.2. </a><a href="#name-extension-security" class="section-name selfRef">Extension Security</a>
+          </h4>
+<div id="_a3a0ec7f-cf31-385d-31fb-d2e5353b856c">
+<p id="section-5.4.2-1">Extensions operate within the same security architecture as the core protocol. Security, authentication, and authorisation mechanisms defined at the HTTP Transport Layer (see <a href="#authentication-authorization" class="auto internal xref">Section 5.1.2</a>) apply uniformly to both core protocol operations and all extensions. This "security by design" approach is aimed to ensure that extensions cannot bypass or weaken the security posture established by the core protocol. Extensions must not introduce new authentication or authorisation mechanisms that circumvent or conflict with those defined by the core specifications.<a href="#section-5.4.2-1" class="pilcrow">¶</a></p>
+</div>
+</section>
+</div>
+<div id="extension-review">
+<section id="section-5.4.3">
+          <h4 id="name-extension-review">
+<a href="#section-5.4.3" class="section-number selfRef">5.4.3. </a><a href="#name-extension-review" class="section-name selfRef">Extension Review</a>
+          </h4>
+<div id="_ac60170d-9674-53ee-a195-5e4eed8b2aeb">
+<p id="section-5.4.3-1">Before any extension is accepted by IANA, a review by an RPP expert must be performed. This review includes verification that the extension does not violate any of the RPP security considerations and that it correctly integrates with the protocol's security framework. The complete review criteria will be included in the "IANA Considerations" section of any document describing RPP extension mechanisms, according to the BCP described in <span>[<a href="#RFC8126" class="cite xref">RFC8126</a>]</span>.<a href="#section-5.4.3-1" class="pilcrow">¶</a></p>
+</div>
+</section>
+</div>
 </section>
 </div>
 </section>
 </div>
-<div id="_58dea3fc-e337-622b-5232-ec79a123ea4e">
+<div id="_1df35b75-3f95-87d8-8f30-ba7b661c6116">
 <section id="section-6">
       <h2 id="name-change-history">
 <a href="#section-6" class="section-number selfRef">6. </a><a href="#name-change-history" class="section-name selfRef">Change History</a>
       </h2>
-<div id="_9b054958-d96d-264f-c78f-cf3da51121f0">
+<div id="_03cc5b97-2504-4555-a2e6-a3bbb59544a0">
 <section id="section-6.1">
         <h3 id="name-00-to-01">
 <a href="#section-6.1" class="section-number selfRef">6.1. </a><a href="#name-00-to-01" class="section-name selfRef">-00 to -01</a>
         </h3>
 <ul class="normal">
-<li class="normal" id="section-6.1-1.1">Added "additional measures to verify the client" to <a href="#http-layer-details-security" class="auto internal xref">Section 5.1.2.4</a> (Issue #76).<a href="#section-6.1-1.1" class="pilcrow">¶</a>
+<li class="normal" id="section-6.1-1.1">Added <a href="#extension-security" class="internal xref">Extension Security</a> and <a href="#extension-review" class="internal xref">Extension Review</a> Sections to <a href="#extension-mechanisms" class="auto internal xref">Section 5.4</a> (Issue #91).<a href="#section-6.1-1.1" class="pilcrow">¶</a>
 </li>
-          <li class="normal" id="section-6.1-1.2">Added TLS mandatory to <a href="#transport-security" class="auto internal xref">Section 5.1.1</a> (Issue #78).<a href="#section-6.1-1.2" class="pilcrow">¶</a>
+          <li class="normal" id="section-6.1-1.2">Added Advertising of maintenance notices to "Service Discovery" section. (Issue #88)<a href="#section-6.1-1.2" class="pilcrow">¶</a>
+</li>
+          <li class="normal" id="section-6.1-1.3">Added "Scalability" section. (Issue #92)<a href="#section-6.1-1.3" class="pilcrow">¶</a>
+</li>
+          <li class="normal" id="section-6.1-1.4">Explicitly state that all parties involved in a process are allowed to retrieve the process status. (Issue #98)<a href="#section-6.1-1.4" class="pilcrow">¶</a>
+</li>
+          <li class="normal" id="section-6.1-1.5">Added IDN to "Terminology" and "Service discovery mechanisms" sections<a href="#section-6.1-1.5" class="pilcrow">¶</a>
+</li>
+          <li class="normal" id="section-6.1-1.6">Added "additional measures to verify the client" to <a href="#http-layer-details-security" class="auto internal xref">Section 5.1.2.4</a> (Issue #76).<a href="#section-6.1-1.6" class="pilcrow">¶</a>
+</li>
+          <li class="normal" id="section-6.1-1.7">Added TLS mandatory to <a href="#transport-security" class="auto internal xref">Section 5.1.1</a> (Issue #78).<a href="#section-6.1-1.7" class="pilcrow">¶</a>
 </li>
         </ul>
 </section>
@@ -2551,7 +2611,7 @@ li > p:last-of-type:only-child {
 </div>
 </section>
 </div>
-<div id="_a48eaa8a-eff6-bea5-a772-b2f4f8ac0b1a">
+<div id="_c93fc269-7a62-2418-9b66-23693a62990b">
 <section id="section-7">
       <h2 id="name-references">
 <a href="#section-7" class="section-number selfRef">7. </a><a href="#name-references" class="section-name selfRef">References</a>
@@ -2569,7 +2629,7 @@ li > p:last-of-type:only-child {
 </dl>
 </section>
 </div>
-<div id="_66fc6e93-4705-6f79-9af1-d985ae63416d">
+<div id="_afbb6c8a-b360-f5a0-db53-d13514e96c8b">
 <section id="section-7.2">
         <h3 id="name-informational-references">
 <a href="#section-7.2" class="section-number selfRef">7.2. </a><a href="#name-informational-references" class="section-name selfRef">Informational References</a>
@@ -2646,6 +2706,14 @@ li > p:last-of-type:only-child {
 <dt id="RFC7617">[RFC7617]</dt>
         <dd>
 <span class="refAuthor">Reschke, J.</span>, <span class="refTitle">"The 'Basic' HTTP Authentication Scheme"</span>, <span class="stream">IETF</span>, <span class="seriesInfo">DOI 10.17487/RFC7617</span>, <span class="seriesInfo">RFC 7617</span>, <time datetime="2015-09" class="refDate">September 2015</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc7617">https://www.rfc-editor.org/info/rfc7617</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC8126">[RFC8126]</dt>
+        <dd>
+<span class="refAuthor">Cotton, M.</span>, <span class="refAuthor">Leiba, B.</span>, and <span class="refAuthor">T. Narten</span>, <span class="refTitle">"Guidelines for Writing an IANA Considerations Section in RFCs"</span>, <span class="stream">IETF</span>, <span class="seriesInfo">DOI 10.17487/RFC8126</span>, <span class="seriesInfo">BCP 26</span>, <span class="seriesInfo">RFC 8126</span>, <time datetime="2017-06" class="refDate">June 2017</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc8126">https://www.rfc-editor.org/info/rfc8126</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC5890">[RFC5890]</dt>
+        <dd>
+<span class="refAuthor">Klensin, J.</span>, <span class="refTitle">"Internationalized Domain Names for Applications (IDNA): Definitions and Document Framework"</span>, <span class="stream">IETF</span>, <span class="seriesInfo">DOI 10.17487/RFC5890</span>, <span class="seriesInfo">RFC 5890</span>, <time datetime="2010-08" class="refDate">August 2010</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc5890">https://www.rfc-editor.org/info/rfc5890</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="SD-JWT">[SD-JWT]</dt>
         <dd>
