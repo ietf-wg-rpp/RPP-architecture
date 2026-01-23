@@ -72,7 +72,12 @@ This document uses terminology from RFC5730 <<RFC5730>> and broadly adopts the R
 
 * **RPP client:** An entity or application that interacts with the RPP server to perform provisioning operations, such as creating, updating, or deleting resources.
 
+* **Sponsoring Client:** The RPP Client that currently has sponsorship of the object.
+
+* **Gaining Client:** The client seeking to gain sponsorship of the object in a Transfer Operation.
+
 * **IDN:** Internationalised Domain Names as defined in <<RFC5890>>
+
 
 == Requirements
 This document is based on the requirements defined by RPP WG in state from 7.3.2025 <<RPPReq>>.
@@ -250,6 +255,7 @@ RPP will not explicitly define security related policies related to authenticati
 
 ===== Object level authorisation
 RPP will define a mechanism for object-level authorisation, preventing unauthorised access to specific objects or resources. Each object will have an associated sponsor or owner with full control over an object, and the protocol will allow for the specification of which clients are authorised to access or modify non-sponsored/owned objects. This could be achieved through state-of-the-art standards like OAuth authorisation tokens, scopes, and resource-specific permissions but also shared secrets for backward compatibility with EPP password-based authorisation information.
+All parties involved in a running or completed process, such as the Sponsoring Client and the Gaining Client for a transfer operation, must be allowed to query the status of the proces using the same process resource. 
 
 [[resource-addressing]]
 ==== Resource Addressing
@@ -514,6 +520,7 @@ This naming mechanism ensures that new resource types, data elements, and operat
 
 === -00 to -01
 
+* Explicitly state that all parties involved in a process are allowed to retrieve the process status. (Issue #98)
 * Added IDN to "Terminology" and "Service discovery mechanisms" sections
 * Added "additional measures to verify the client" to <<http-layer-details-security>> (Issue #76).
 * Added TLS mandatory to <<transport-security>> (Issue #78).
