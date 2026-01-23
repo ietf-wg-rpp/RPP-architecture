@@ -316,6 +316,15 @@ As discussed in <<http-layer-detail-mapping-basic-ops>> EPP check command may no
 
 This basic set of rules and guidelines will be further refined in the RPP specifications and give a universal toolset for extending RPP with new resources and commands.
 
+[[server-managed-resources]]
+==== Server-Managed Resources
+
+RPP supports the definition of first-class resources whose state is managed exclusively by the server rather than provisioned by clients. These server-managed resources are read-only from the client's perspective, permitting only retrieval operations (GET, HEAD) through the uniform interface. Modification operations (POST, PUT, PATCH, DELETE) are not available to clients for these resources.
+
+Server-managed resources are identified by URLs following the same addressing conventions as client-provisioned resources. They participate fully in RPP's resource model, including content negotiation, caching, and representation formats. The read-only nature of these resources is enforced by the server, which responds with appropriate HTTP status codes (e.g., 405 Method Not Allowed or 403 Forbidden) if a client attempts a modification operation.
+
+Further aspects of server-managed resources, including examples and sub-resource relationships, are described in <<server-managed-resource-types>>.
+
 ==== HTTP response codes
 
 In general RPP shall make use of HTTP status codes to indicate general response status categories (e.g., 2xx success responses, 4xx for client errors, 5xx for server errors) <<RFC7231>> as opposed to responding always 200 if the request was understood even if the operation itself failed. This allows clients and intermediaries to make first level of determination of the requests outcome based on the status code alone, without needing to parse the response body.
@@ -497,9 +506,24 @@ This additional level of indirection would allow usage of data formats defined o
 The mapping layer shall be defined in IANA registry in a way that allows for automated processing of the mapping definition, including reading and writing operations. Mechanisms, such as defined for JavaScript Object Notation (JSON) Patch <<RFC6902>>, may be used to define the mapping.
 
 ==== Operations
-Each resource type shall define operations possible on this resource type. This may encompass any of the mechanisms defined on the HTTP transport layer and be constrained by those extensibility rules. 
+Each resource type shall define operations possible on this resource type. This may encompass any of the mechanisms defined on the HTTP transport layer and be constrained by those extensibility rules.
 
 Operations shall be defined in IANA registry in a way that allows for automated processing of the operation definition, including constraints and references to other resource types.
+
+[[server-managed-resource-types]]
+==== Server-Managed Resource Types
+
+As mentioned in <<server-managed-resources>>, RPP supports server-managed resources as first-class resource types. These resources are defined using the same mechanisms as client-provisioned resources, including data elements, mappings, and IANA registry entries. The distinction lies in the permitted operations: server-managed resource types restrict operations to read-only access (GET, HEAD).
+
+Examples of server-managed resource types include:
+
+* Registry policy information (e.g., supported TLDs, pricing, registration rules)
+* Server operational status and health information
+* Statistics
+
+Server-managed resources may expose logically associated information as sub-resources.
+
+A special class of server managed resources would represent provisioning objects, which however cannot be modified by any client, but rather are managed by server operator. From the external client view those resources would be read-only, however the server might actually implement modifying operations to the same object available only to internal client and tools and controlled by authorisation mechanisms. 
 
 [[extension-mechanisms]]
 === Extension mechanisms
@@ -536,6 +560,7 @@ Before any extension is accepted by IANA, a review by an RPP expert must be perf
 
 === -00 to -01
 
+* Added <<server-managed-resources, format=title>> Section to <<http-layer-details, format=title>> and <<server-managed-resource-types, format=title>> Section to Resource Definition Layer to define read-only server-managed resources (Issue #84).
 * Added <<extension-security, format=title>> and <<extension-review, format=title>> Sections to <<extension-mechanisms>> (Issue #91).
 * Added Advertising of maintenance notices to "Service Discovery" section. (Issue #88)
 * Added "Scalability" section. (Issue #92)

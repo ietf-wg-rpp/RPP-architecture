@@ -83,21 +83,22 @@ Table of Contents
                (verbs)
        5.1.5.  Mapping of operations beyond HTTP uniform interface to
                URLs and verbs
-       5.1.6.  HTTP response codes
-       5.1.7.  Content negotiation for media types
-       5.1.8.  Caching
-       5.1.9.  Language negotiation for textual content
-       5.1.10. Client Signalling for Response Verbosity
-       5.1.11. Client Signalling for Request Validation
-       5.1.12. Asynchronous Operation Processing
-       5.1.13. RPP specific status codes and relation to HTTP status
+       5.1.6.  Server-Managed Resources
+       5.1.7.  HTTP response codes
+       5.1.8.  Content negotiation for media types
+       5.1.9.  Caching
+       5.1.10. Language negotiation for textual content
+       5.1.11. Client Signalling for Response Verbosity
+       5.1.12. Client Signalling for Request Validation
+       5.1.13. Asynchronous Operation Processing
+       5.1.14. RPP specific status codes and relation to HTTP status
                codes
-       5.1.14. Transaction tracing and idempotency
-       5.1.15. Protocol Versioning
-       5.1.16. Profiles
-       5.1.17. Definition of special resources
-       5.1.18. Service discovery mechanisms
-       5.1.19. Scalability
+       5.1.15. Transaction tracing and idempotency
+       5.1.16. Protocol Versioning
+       5.1.17. Profiles
+       5.1.18. Definition of special resources
+       5.1.19. Service discovery mechanisms
+       5.1.20. Scalability
      5.2.  Data Representation Layer
        5.2.1.  Data structure
        5.2.2.  Data format
@@ -107,6 +108,7 @@ Table of Contents
        5.3.1.  Data Elements
        5.3.2.  Mapping
        5.3.3.  Operations
+       5.3.4.  Server-Managed Resource Types
      5.4.  Extension mechanisms
        5.4.1.  Name Management and Collision Avoidance
        5.4.2.  Extension Security
@@ -681,7 +683,27 @@ Table of Contents
    RPP specifications and give a universal toolset for extending RPP
    with new resources and commands.
 
-5.1.6.  HTTP response codes
+5.1.6.  Server-Managed Resources
+
+   RPP supports the definition of first-class resources whose state is
+   managed exclusively by the server rather than provisioned by clients.
+   These server-managed resources are read-only from the client's
+   perspective, permitting only retrieval operations (GET, HEAD) through
+   the uniform interface.  Modification operations (POST, PUT, PATCH,
+   DELETE) are not available to clients for these resources.
+
+   Server-managed resources are identified by URLs following the same
+   addressing conventions as client-provisioned resources.  They
+   participate fully in RPP's resource model, including content
+   negotiation, caching, and representation formats.  The read-only
+   nature of these resources is enforced by the server, which responds
+   with appropriate HTTP status codes (e.g., 405 Method Not Allowed or
+   403 Forbidden) if a client attempts a modification operation.
+
+   Further aspects of server-managed resources, including examples and
+   sub-resource relationships, are described in Section 5.3.4.
+
+5.1.7.  HTTP response codes
 
    In general RPP shall make use of HTTP status codes to indicate
    general response status categories (e.g., 2xx success responses, 4xx
@@ -696,9 +718,9 @@ Table of Contents
    corresponsing specific code exists (e.g. 404 for not existing
    resource or 401 for unauthenticated request).
 
-   More specific RPP codes are elaborated in Section 5.1.13.
+   More specific RPP codes are elaborated in Section 5.1.14.
 
-5.1.7.  Content negotiation for media types
+5.1.8.  Content negotiation for media types
 
    RPP supports content negotiation to allow clients to specify
    preferred media types for request and response payloads using the
@@ -711,7 +733,7 @@ Table of Contents
 
    *  Potential support for other media types defined in the Section 5.2
 
-5.1.8.  Caching
+5.1.9.  Caching
 
    RPP shall benefit from HTTP standard caching mechanisms to enable
    standard components like proxies and caches to improve performance
@@ -719,7 +741,7 @@ Table of Contents
    different resources and operations, including cache-control headers
    and ETag support.
 
-5.1.9.  Language negotiation for textual content
+5.1.10.  Language negotiation for textual content
 
    RPP shall support language negotiation to enable clients to request
    responses in a preferred language using the HTTP 'Accept-Language'
@@ -738,7 +760,7 @@ Table of Contents
       provided content.  Other media types may have different mechanisms
       for language representation.
 
-5.1.10.  Client Signalling for Response Verbosity
+5.1.11.  Client Signalling for Response Verbosity
 
    RPP may utilise the HTTP Prefer header [RFC7240] with the "return"
    preference to allow clients to control the verbosity of responses.
@@ -755,7 +777,7 @@ Table of Contents
    purpose, therefore RPP would need to define custom preference and
    register it in "HTTP Preferences" IANA registry.
 
-5.1.11.  Client Signalling for Request Validation
+5.1.12.  Client Signalling for Request Validation
 
    RPP may utilise the HTTP Prefer header [RFC7240] for signalling the
    preference for either strict or lenient processing of requests.  This
@@ -765,7 +787,7 @@ Table of Contents
    for additional flexibility in processing.  The default behaviour,
    without the Prefer header, would be to process requests leniently.
 
-5.1.12.  Asynchronous Operation Processing
+5.1.13.  Asynchronous Operation Processing
 
    The RPP architecture accommodates operations that are potentially
    long-running or cannot be completed synchronously due to their nature
@@ -810,7 +832,7 @@ Table of Contents
    operations intended for asynchronous execution will be designed to
    utilise this pattern.
 
-5.1.13.  RPP specific status codes and relation to HTTP status codes
+5.1.14.  RPP specific status codes and relation to HTTP status codes
 
    RPP uses a dual-layer approach for signaling operation outcomes,
    leveraging both standard HTTP status codes and RPP-specific status
@@ -857,7 +879,7 @@ Table of Contents
    *  RPP should also use other standardised HTTP signaling mechanisms
       where appropriate, for example for rate limiting.
 
-5.1.14.  Transaction tracing and idempotency
+5.1.15.  Transaction tracing and idempotency
 
    RPP shall support identification of requests and responses on both
    client side and server side with use of client provided identifiers
@@ -882,7 +904,7 @@ Table of Contents
    clear separation of resource representation from performed actions.
    If possible existing mechanisms of HTTP shall be employed.
 
-5.1.15.  Protocol Versioning
+5.1.16.  Protocol Versioning
 
    RPP will define a versioning schema for the protocol itself, the
    extensions and other protocol elements such as profiles as
@@ -897,7 +919,7 @@ Table of Contents
    Signalling of the versions will be preferably realised using
    parameters of the media type.
 
-5.1.16.  Profiles
+5.1.17.  Profiles
 
    In real operational conditions different RPP server operators may
    have different requirements regarding set of protocol elements and
@@ -916,18 +938,18 @@ Table of Contents
    Signalling of the profiles will be preferably realised using
    parameters of the media type.
 
-5.1.17.  Definition of special resources
+5.1.18.  Definition of special resources
 
    RPP may define special resources for specific purposes:
 
    *  Service Discovery endpoints to advertise protocol capabilities and
-      supported features (see Section 5.1.18).
+      supported features (see Section 5.1.19).
 
    *  Metadata endpoints to provide schema information or other
       protocol-level metadata, potentially including OpenAPI definitions
       for documentation and code generation.
 
-5.1.18.  Service discovery mechanisms
+5.1.19.  Service discovery mechanisms
 
    RPP will define mechanisms for service discovery, allowing clients to
    dynamically discover RPP service endpoints and capabilities, reducing
@@ -968,7 +990,7 @@ Table of Contents
       etc.  It would enable the right balance between discoverability
       and reduction of round trips between clients and servers.
 
-5.1.19.  Scalability
+5.1.20.  Scalability
 
    RPP leverages HTTP, enabling the use of standard web scalability
    techniques such as load balancing, horizontal scaling, and
@@ -1129,6 +1151,35 @@ Table of Contents
    automated processing of the operation definition, including
    constraints and references to other resource types.
 
+5.3.4.  Server-Managed Resource Types
+
+   As mentioned in Section 5.1.6, RPP supports server-managed resources
+   as first-class resource types.  These resources are defined using the
+   same mechanisms as client-provisioned resources, including data
+   elements, mappings, and IANA registry entries.  The distinction lies
+   in the permitted operations: server-managed resource types restrict
+   operations to read-only access (GET, HEAD).
+
+   Examples of server-managed resource types include:
+
+   *  Registry policy information (e.g., supported TLDs, pricing,
+      registration rules)
+
+   *  Server operational status and health information
+
+   *  Statistics
+
+   Server-managed resources may expose logically associated information
+   as sub-resources.
+
+   A special class of server managed resources would represent
+   provisioning objects, which however cannot be modified by any client,
+   but rather are managed by server operator.  From the external client
+   view those resources would be read-only, however the server might
+   actually implement modifying operations to the same object available
+   only to internal client and tools and controlled by authorisation
+   mechanisms.
+
 5.4.  Extension mechanisms
 
    The RPP architecture is designed to be extensible, allowing for the
@@ -1226,6 +1277,11 @@ Table of Contents
 
 6.1.  -00 to -01
 
+   *  Added Server-Managed Resources Section to HTTP Transport Layer
+      Details and Server-Managed Resource Types Section to Resource
+      Definition Layer to define read-only server-managed resources
+      (Issue #84).
+
    *  Added Extension Security and Extension Review Sections to
       Section 5.4 (Issue #91).
 
@@ -1256,7 +1312,7 @@ Table of Contents
       parts to cover all aspects.
 
    *  Clarified the relationship and mapping between HTTP status codes
-      and RPP-specific status codes in Section 5.1.13.
+      and RPP-specific status codes in Section 5.1.14.
 
    *  Added paragraph on promotion of standard extensions to
       Section 5.4.
@@ -1271,7 +1327,7 @@ Table of Contents
    *  Added responses must contain links to relevant object to
       Section 5.1.3
 
-   *  Added round trip minimisation principle to Section 5.1.18
+   *  Added round trip minimisation principle to Section 5.1.19
 
    *  Added description of lenient versus strict request validation to
       Section 4.2.3.
@@ -1297,7 +1353,7 @@ Table of Contents
       Section 5.4.
 
    *  Added Section about dereferenced related object representation to
-      Section 5.1.17.
+      Section 5.1.18.
 
 6.5.  -00 to -01
 
