@@ -1795,7 +1795,7 @@ li > p:last-of-type:only-child {
 </div>
 </section>
 </div>
-<div id="_37e46709-9f39-4dcd-ba53-dab125237e1c">
+<div id="_c444abf9-e9b2-a549-abf6-bd6605fb1d97">
 <section id="section-5">
       <h2 id="name-protocol-details">
 <a href="#section-5" class="section-number selfRef">5. </a><a href="#name-protocol-details" class="section-name selfRef">Protocol Details</a>
@@ -1915,13 +1915,23 @@ li > p:last-of-type:only-child {
 <div id="_5c5ef08c-e427-843a-5db7-27013a6bde73">
 <p id="section-5.1.2-6">RPP responses will include URLs for related resources, allowing clients to navigate newly created resources easily. This is similar to the "links" concept in RESTful APIs, where related resources are linked together.<a href="#section-5.1.2-6" class="pilcrow">¶</a></p>
 </div>
-<div id="_d54250b8-b1c3-30a1-438a-ea560b902035">
+<div id="collection-representation">
 <section id="section-5.1.2.1">
-            <h5 id="name-internationalised-domain-na">
-<a href="#section-5.1.2.1" class="section-number selfRef">5.1.2.1. </a><a href="#name-internationalised-domain-na" class="section-name selfRef">Internationalised Domain Names (IDN)</a>
+            <h5 id="name-collection-representation">
+<a href="#section-5.1.2.1" class="section-number selfRef">5.1.2.1. </a><a href="#name-collection-representation" class="section-name selfRef">Collection Representation</a>
             </h5>
-<div id="_c644f2d2-4c2a-e9d2-85ef-6e9cad9d7851">
-<p id="section-5.1.2.1-1">RPP will address the handling of Internationalised Domain Names (IDNs) in resource addressing. Specifications will define whether to use IDN or UTF-8 encoding directly in URLs and whether to employ redirects to canonical URLs or "see-also" linking for alternative representations. For example,  a "see-also" link could point from a UTF-8 encoded URL to an IDN URL and vice versa, allowing clients to use either URL. Another way would be to always redirect to the canonical URL, which would be the IDN URL.<a href="#section-5.1.2.1-1" class="pilcrow">¶</a></p>
+<div id="_0bf811e6-b93a-15ce-1814-29e1810f2bf9">
+<p id="section-5.1.2.1-1">RPP supports retrieval of collections of resources via dedicated collection endpoints (e.g., <code>/domains/</code> for listing domains). For collections that may contain large numbers of resources, RPP supports pagination using established mechanisms such as HTTP Link headers as defined in <span>[<a href="#RFC8288" class="cite xref">RFC8288</a>]</span>. Items within a collection may be returned as partial representations rather than full resource details, reducing payload size. Clients can retrieve full details by following links to individual resources. RPP may also support query parameters for filtering and sorting collection results.<a href="#section-5.1.2.1-1" class="pilcrow">¶</a></p>
+</div>
+</section>
+</div>
+<div id="_26c53582-03b3-e56e-da8b-cf2561eb78c4">
+<section id="section-5.1.2.2">
+            <h5 id="name-internationalised-domain-na">
+<a href="#section-5.1.2.2" class="section-number selfRef">5.1.2.2. </a><a href="#name-internationalised-domain-na" class="section-name selfRef">Internationalised Domain Names (IDN)</a>
+            </h5>
+<div id="_a3d0641d-5dc1-2f28-e97d-99b42ee8e769">
+<p id="section-5.1.2.2-1">RPP will address the handling of Internationalised Domain Names (IDNs) in resource addressing. Specifications will define whether to use IDN or UTF-8 encoding directly in URLs and whether to employ redirects to canonical URLs or "see-also" linking for alternative representations. For example,  a "see-also" link could point from a UTF-8 encoded URL to an IDN URL and vice versa, allowing clients to use either URL. Another way would be to always redirect to the canonical URL, which would be the IDN URL.<a href="#section-5.1.2.2-1" class="pilcrow">¶</a></p>
 </div>
 </section>
 </div>
@@ -2307,7 +2317,7 @@ li > p:last-of-type:only-child {
 </div>
 </section>
 </div>
-<div id="_f3f4e41f-d6e1-f06b-3a42-d27bf5273ac2">
+<div id="_216213c6-8f4f-e905-312d-928e27a91ad8">
 <section id="section-5.3">
         <h3 id="name-resource-definition-layer-2">
 <a href="#section-5.3" class="section-number selfRef">5.3. </a><a href="#name-resource-definition-layer-2" class="section-name selfRef">Resource Definition Layer</a>
@@ -2318,7 +2328,7 @@ li > p:last-of-type:only-child {
 <div id="_abf6c88f-8dc6-ae49-a8bd-cb65725cc9f7">
 <p id="section-5.3-2">All resource types shall be defined in IANA registry in a way that allows fully automated processing of the resource definition, including data elements, operations and media type representation.<a href="#section-5.3-2" class="pilcrow">¶</a></p>
 </div>
-<div id="_d57d39cd-3422-69c7-c761-e8d14d449209">
+<div id="data-elements">
 <section id="section-5.3.1">
           <h4 id="name-data-elements">
 <a href="#section-5.3.1" class="section-number selfRef">5.3.1. </a><a href="#name-data-elements" class="section-name selfRef">Data Elements</a>
@@ -2333,9 +2343,11 @@ li > p:last-of-type:only-child {
 </li>
             <li class="normal" id="section-5.3.1-2.3">Format and schema for primitive data elements or reference to other resource type definitions<a href="#section-5.3.1-2.3" class="pilcrow">¶</a>
 </li>
-            <li class="normal" id="section-5.3.1-2.4">Constraints on data elements (e.g., data type, length, allowed values)<a href="#section-5.3.1-2.4" class="pilcrow">¶</a>
+            <li class="normal" id="section-5.3.1-2.4">Definition of container elements, which are logical groupings that can encapsulate zero or more data elements or other containers. Container types include ordered lists (e.g., a sequence of nameservers) and maps (e.g., key-value pairs for extension data). The representation of container elements in specific data formats is defined by the mapping layer.<a href="#section-5.3.1-2.4" class="pilcrow">¶</a>
 </li>
-            <li class="normal" id="section-5.3.1-2.5">Mechanisms for extensibility, if applicable<a href="#section-5.3.1-2.5" class="pilcrow">¶</a>
+            <li class="normal" id="section-5.3.1-2.5">Constraints on data elements (e.g., data type, length, allowed values)<a href="#section-5.3.1-2.5" class="pilcrow">¶</a>
+</li>
+            <li class="normal" id="section-5.3.1-2.6">Mechanisms for extensibility, if applicable<a href="#section-5.3.1-2.6" class="pilcrow">¶</a>
 </li>
           </ul>
 <div id="_57bafeee-6d80-0e1a-9c71-2133df7e1290">
@@ -2428,16 +2440,20 @@ li > p:last-of-type:only-child {
 </div>
 </section>
 </div>
-<div id="_c55cf983-193e-cb05-e06e-1f9ba9250240">
+<div id="_6217a2ed-9fb1-4073-1574-e175c303a2d5">
 <section id="section-6">
       <h2 id="name-change-history">
 <a href="#section-6" class="section-number selfRef">6. </a><a href="#name-change-history" class="section-name selfRef">Change History</a>
       </h2>
-<div id="_7a15c360-117b-2567-ecdc-a2833b979365">
+<div id="_847aab82-39ec-fc49-ae16-5d4d70628d18">
 <section id="section-6.1">
         <h3 id="name-00-to-01">
 <a href="#section-6.1" class="section-number selfRef">6.1. </a><a href="#name-00-to-01" class="section-name selfRef">-00 to -01</a>
-      </h3>
+        </h3>
+<ul class="normal">
+<li class="normal" id="section-6.1-1.1">Added Section <a href="#collection-representation" class="internal xref">Collection Representation</a> for API-level collection retrieval and expanded container element description in <a href="#data-elements" class="internal xref">Data Elements</a> Section. (Issue #85)<a href="#section-6.1-1.1" class="pilcrow">¶</a>
+</li>
+        </ul>
 </section>
 </div>
 <div id="_f707dc54-23c5-01f2-0325-e27c9fde4010">
@@ -2526,7 +2542,7 @@ li > p:last-of-type:only-child {
 </div>
 </section>
 </div>
-<div id="_d41083cc-35eb-ebd5-fe52-9a5336274b47">
+<div id="_79cee3a9-5e3c-04ae-5269-4f6c836a6856">
 <section id="section-7">
       <h2 id="name-references">
 <a href="#section-7" class="section-number selfRef">7. </a><a href="#name-references" class="section-name selfRef">References</a>
@@ -2544,7 +2560,7 @@ li > p:last-of-type:only-child {
 </dl>
 </section>
 </div>
-<div id="_87f44d5a-6723-7e31-4bc7-a35c6ac04d5a">
+<div id="_008d5737-299e-7c9b-4bd9-41ce58db9895">
 <section id="section-7.2">
         <h3 id="name-informational-references">
 <a href="#section-7.2" class="section-number selfRef">7.2. </a><a href="#name-informational-references" class="section-name selfRef">Informational References</a>
@@ -2577,6 +2593,10 @@ li > p:last-of-type:only-child {
 <dt id="RFC8259">[RFC8259]</dt>
         <dd>
 <span class="refAuthor">Bray, T.</span>, <span class="refTitle">"The JavaScript Object Notation (JSON) Data Interchange Format"</span>, <span class="stream">IETF</span>, <span class="seriesInfo">DOI 10.17487/RFC8259</span>, <span class="seriesInfo">BCP 90</span>, <span class="seriesInfo">RFC 8259</span>, <time datetime="2017-12" class="refDate">December 2017</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc8259">https://www.rfc-editor.org/info/rfc8259</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC8288">[RFC8288]</dt>
+        <dd>
+<span class="refAuthor">Nottingham, M.</span>, <span class="refTitle">"Web Linking"</span>, <span class="stream">IETF</span>, <span class="seriesInfo">DOI 10.17487/RFC8288</span>, <span class="seriesInfo">RFC 8288</span>, <time datetime="2017-10" class="refDate">October 2017</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc8288">https://www.rfc-editor.org/info/rfc8288</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="RFC6570">[RFC6570]</dt>
         <dd>
