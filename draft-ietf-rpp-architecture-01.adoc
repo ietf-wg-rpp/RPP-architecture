@@ -255,6 +255,11 @@ RPP will not explicitly define security related policies related to authenticati
 
 ===== Object level authorisation
 RPP will define a mechanism for object-level authorisation, preventing unauthorised access to specific objects or resources. Each object will have an associated sponsor or owner with full control over an object, and the protocol will allow for the specification of which clients are authorised to access or modify non-sponsored/owned objects. This could be achieved through state-of-the-art standards like OAuth authorisation tokens, scopes, and resource-specific permissions but also shared secrets for backward compatibility with EPP password-based authorisation information.
+
+RPP may optionally include support for a simplified object transfer process, using an extension. The protocol must allow for a future extension where approval from the losing registrar can be obtained interactively by the registrant during the transfer process, rather than relying solely on asynchronous or out-of-band mechanisms.
+This approach enables a more streamlined and user-friendly transfer experience and reducing delays. RPP should allow for interactive workflows, such as real-time notifications or approval prompts, to facilitate immediate action by the registrant and registrar.
+Implementations supporting this feature should ensure secure authentication and authorization of all parties, and provide clear audit trails of the approval process.
+
 All parties involved in a running or completed process, such as the Sponsoring Client and the Gaining Client for a transfer operation, must be allowed to query the status of the proces using the same process resource. 
 
 [[resource-addressing]]
@@ -536,6 +541,7 @@ Before any extension is accepted by IANA, a review by an RPP expert must be perf
 
 === -00 to -01
 
+* Added text about simplified object transfers to "Object level authorisation" section. (Issue #32)
 * Changed default validation from lenient to strict. (Issue #82) 
 * Added <<extension-security, format=title>> and <<extension-review, format=title>> Sections to <<extension-mechanisms>> (Issue #91).
 * Added Advertising of maintenance notices to "Service Discovery" section. (Issue #88)
