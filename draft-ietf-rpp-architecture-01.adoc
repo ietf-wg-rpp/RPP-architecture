@@ -501,6 +501,11 @@ Each resource type shall define operations possible on this resource type. This 
 
 Operations shall be defined in IANA registry in a way that allows for automated processing of the operation definition, including constraints and references to other resource types.
 
+==== Relationships
+Resource types can define explicit relationships (links) to other resource types, supporting flexible cardinality—including one-to-one, one-to-many, and many-to-many associations.
+This enables robust modeling, navigation, and management of complex, interconnected resources within RPP.
+Importantly, each relationship must be able to define its own properties or attributes, such as status, metadata, or timestamps.
+
 [[extension-mechanisms]]
 === Extension mechanisms
 The RPP architecture is designed to be extensible, allowing for the addition of new resource types, data elements, and operations without breaking existing implementations. This extensibility is achieved through:
@@ -535,6 +540,8 @@ Before any extension is accepted by IANA, a review by an RPP expert must be perf
 == Change History
 
 === -00 to -01
+
+* Added a "Relationships" section to describe resource type relationships. (Issue #83)
 
 * Changed default validation from lenient to strict. (Issue #82) 
 * Added <<extension-security, format=title>> and <<extension-review, format=title>> Sections to <<extension-mechanisms>> (Issue #91).
