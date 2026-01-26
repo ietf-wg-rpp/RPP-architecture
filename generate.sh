@@ -61,4 +61,4 @@ xml2rfc --text --html --pdf "$filename.xml"
 xml2rfc --text --no-pagination -o "$filename.clean.txt" "$filename.xml"
 
 # Replace instances in index.html
-sed -i "s/draft-kowalik-rpp-architecture-[0-9]\{2\}/$filename/g" index.html
+sed -i "s/draft-ietf-rpp-architecture-[0-9]\{2\}/$filename/g" index.html

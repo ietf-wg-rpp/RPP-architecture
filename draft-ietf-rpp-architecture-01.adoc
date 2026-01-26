@@ -3,7 +3,6 @@
 :mn-document-class: ietf
 :mn-output-extensions: rfc,txt,html
 :doctype: internet-draft
-:abbrev: rpp-architecture
 :intended-series: informational
 :status: informational
 :workgroup: RPP (RESTful Provisioning Protocol) Working Group
@@ -44,7 +43,7 @@ This document defines the architecture for the RESTful Provisioning Protocol (RP
 [NOTE] 
 .Contributing
 ==== 
-When contributing to this document, please use the following GitHub project: https://github.com/pawel-kow/RPP-architecture.
+When contributing to this document, please use the following GitHub project: https://github.com/ietf-wg-rpp/RPP-architecture.
 ====
 
 == Introduction
@@ -72,6 +71,13 @@ This document uses terminology from RFC5730 <<RFC5730>> and broadly adopts the R
 * **OpenAPI:** The OpenAPI Specification (OAS) (formerly known as Swagger Specification) is an API description format for REST APIs <<OpenAPI>>.
 
 * **RPP client:** An entity or application that interacts with the RPP server to perform provisioning operations, such as creating, updating, or deleting resources.
+
+* **Sponsoring Client:** The RPP Client that currently has sponsorship of the object.
+
+* **Gaining Client:** The client seeking to gain sponsorship of the object in a Transfer Operation.
+
+* **IDN:** Internationalised Domain Names as defined in <<RFC5890>>
+
 
 == Requirements
 This document is based on the requirements defined by RPP WG in state from 7.3.2025 <<RPPReq>>.
@@ -152,6 +158,7 @@ These are features that are fully specified by the HTTP standard itself. RPP lev
 
 It encompasses aspects such as:
 
+* **Transport security:** Mechanisms to secure message transmission
 * **Authentication and Authorisation:** Mechanisms for verifying the identity of clients and controlling access to resources.
 * **Resource Addressing using URLs:** Consistent and meaningful URL structures for identifying, accessing resources and enabling request routing.
 * **Mapping of basic operations to HTTP uniform interface (verbs):** Mapping CRUD (Create, Read, Update, Delete) operations to POST, HEAD/GET, PUT/PATCH, and DELETE respectively.
@@ -206,10 +213,17 @@ This section provides further details on each layer of the RPP architecture.
 
 The RPP architecture uses the best practices described in <<RFC9205>> for the HTTP transport layer.
 
+[[transport-security]]
+==== Transport Security
+
+RPP communication relies on HTTPS with TLS to provide protection for data in transit. This addresses threats including eavesdropping, tampering, and man-in-the-middle attacks on provisioning operations, authentication credentials, and sensitive registry data exchanged between clients and servers.
+
+The architecture leverages HTTP's built-in transport security mechanisms and delegates specific security policy details to TLS standards and best practices. This approach allows implementations to adapt to evolving security requirements without requiring changes to the protocol specifications.
+
 [[authentication-authorization]]
 ==== Authentication and Authorisation
 
-RPP is aimed to leverage scalable and modern authorisation standards, with a focus on OAuth 2.0 <<RFC6749>> and related frameworks. However, to maintain functional equivalence with EPP client authentication, RPP SHOULD also support authentication schemes that can carry a client identifier and a password, such as HTTP Basic Authentication. RPP should be able to support future authentication and authorisation standards defined for HTTP.
+RPP is aimed to leverage scalable and modern authorisation standards, with a focus on OAuth 2.0 <<RFC6749>> and related frameworks. However, to maintain functional equivalence with EPP client authentication, RPP SHOULD also support authentication schemes that can carry a client identifier and a password, such as HTTP Basic Authentication <<RFC7617>>. RPP should be able to support future authentication and authorisation standards defined for HTTP.
 
 Specifications will define profiles for:
 
@@ -234,12 +248,14 @@ RPP authentication and authorisation model will make a clear distinction between
 
 In case of HTTP Basic Authentication, one user-id is always bound to at most one RPP client. For OAuth, the issued token is bound to the context of at most one RPP client, even though the OAuth client itself might have access to multiple RPP clients. The assignment of tokens to specific RPP clients can be controlled through the authorisation flow using the OAuth scope parameter. For example, if an OAuth client has access to two RPP clients (Client A and Client B), the scope parameter can specify which client the token applies to. A scope value like `scope=rpp:clientA` would ensure the token is valid only for Client A, while `scope=rpp:clientB` would apply to Client B.
 
+[[http-layer-details-security]]
 ===== Security
 
-RPP will not explicitly define security related policies related to authentication or authorisation (such as password complexity, token lifetime or cryptography used) on the protocol level. Instead, these properties will be delegated to the best practices of the chosen authentication schemes, which may evolve over time and would have to be independent of the protocol itself.
+RPP will not explicitly define security related policies related to authentication or authorisation (such as password complexity, token lifetime, cryptography used, or additional measures to verify the client) on the protocol level. Instead, these properties will be delegated to the best practices of the chosen authentication schemes, which may evolve over time and would have to be independent of the protocol itself.
 
 ===== Object level authorisation
 RPP will define a mechanism for object-level authorisation, preventing unauthorised access to specific objects or resources. Each object will have an associated sponsor or owner with full control over an object, and the protocol will allow for the specification of which clients are authorised to access or modify non-sponsored/owned objects. This could be achieved through state-of-the-art standards like OAuth authorisation tokens, scopes, and resource-specific permissions but also shared secrets for backward compatibility with EPP password-based authorisation information.
+All parties involved in a running or completed process, such as the Sponsoring Client and the Gaining Client for a transfer operation, must be allowed to query the status of the proces using the same process resource. 
 
 [[resource-addressing]]
 ==== Resource Addressing
@@ -259,7 +275,7 @@ RPP responses will include URLs for related resources, allowing clients to navig
 
 ===== Internationalised Domain Names (IDN)
 
-RPP will address the handling of Internationalised Domain Names (IDNs) in resource addressing. Specifications will define whether to use IDN or UTF-8 encoding directly in URLs and whether to employ redirects to canonical URLs or "see-also" linking for alternative representations. For example,  a "see-also" link could point from a UTF-8 encoded URL to an IDN URL and vice versa, allowing clients to use either URL. Another way would be to always redirect to the canonical URL, which would be the IDN URL.
+RPP will address the handling of IDNs in resource addressing. Specifications will define whether to use IDN or UTF-8 encoding directly in URLs and whether to employ redirects to canonical URLs or "see-also" linking for alternative representations. For example,  a "see-also" link could point from a UTF-8 encoded URL to an IDN URL and vice versa, allowing clients to use either URL. Another way would be to always redirect to the canonical URL, which would be the IDN URL.
 
 [[http-layer-detail-mapping-basic-ops]]
 ==== Mapping of basic operations to HTTP uniform interface (verbs)
@@ -406,11 +422,18 @@ to dynamically discover RPP service endpoints and capabilities, reducing couplin
 
 *  Potential discovery of RPP server location, like  IANA bootstrapping document or a special DNS TXT RR with location of RPP service for the tld.
 *  Potential use of well-known URIs (e.g., `/.well-known/rpp-capabilities`) for service discovery.
-*  Advertising supported protocol versions,
-extensions, available resource types, authentication methods, and supported features.
+*  Advertising supported protocol versions, extensions, available resource types, authentication methods, IDN policies and supported features.
+*  Advertising of maintenance notices, informing clients about future unavailability of the service due to scheduled maintenance.
 *  It may be considered for RPP to distribute service discovery for each resource type separately for better scalability and management. For example instead of having a single service discovery endpoint for the whole registry on `/.well-known/rpp-capabilities` there might be a separate discovery placed under `/{resource-type}/.well-known/rpp-capabilities` e.g. `/domains/.well-known/rpp-capabilities`.
 *  Service discovery shall utilise standardised methods, like URI templates <<RFC6570>> to allow easy navigation of resources and avoid hard-coding of URLs, same time allowing clients to navigate directly to a known resource without additional server queries.
 *  As a matter of principle service discovery shall be used to bootstrap the communication between client and server, its capabilities and operational policies. The server configuration shall be considered static between reconfiguration of the server and not be used for any dynamic configuration, like load balancing etc. It would enable the right balance between discoverability and reduction of round trips between clients and servers.
+
+[[scalability]]
+==== Scalability
+
+RPP leverages HTTP, enabling the use of standard web scalability techniques such as load balancing, horizontal scaling, and distributed caching.
+Stateless interactions allow requests to be handled independently, facilitating distribution across multiple servers and rapid scaling in response to demand.
+RPP shall enable by design existing web security and mitigation mechanisms to defend against attacks such as Denial of Service (DoS). 
 
 [[data-representation-layer]]
 === Data Representation Layer
@@ -501,13 +524,29 @@ Standardised RPP extensions MUST register their names in a dedicated IANA regist
 
 This naming mechanism ensures that new resource types, data elements, and operations can be introduced independently and safely, supporting the extensibility goals of the RPP architecture while maintaining interoperability and clarity across implementations.
 
+[[extension-security]]
+==== Extension Security
+Extensions operate within the same security architecture as the core protocol. Security, authentication, and authorisation mechanisms defined at the HTTP Transport Layer (see <<authentication-authorization>>) apply uniformly to both core protocol operations and all extensions. This "security by design" approach is aimed to ensure that extensions cannot bypass or weaken the security posture established by the core protocol. Extensions must not introduce new authentication or authorisation mechanisms that circumvent or conflict with those defined by the core specifications. 
+
+[[extension-review]]
+==== Extension Review
+Before any extension is accepted by IANA, a review by an RPP expert must be performed. This review includes verification that the extension does not violate any of the RPP security considerations and that it correctly integrates with the protocol's security framework. The complete review criteria will be included in the "IANA Considerations" section of any document describing RPP extension mechanisms, according to the BCP described in <<RFC8126>>.
+
 == Change History
 
 === -00 to -01
 
 * Changed default validation from lenient to strict. (Issue #82) 
+* Added <<extension-security, format=title>> and <<extension-review, format=title>> Sections to <<extension-mechanisms>> (Issue #91).
+* Added Advertising of maintenance notices to "Service Discovery" section. (Issue #88)
+* Added "Scalability" section. (Issue #92)
+* Explicitly state that all parties involved in a process are allowed to retrieve the process status. (Issue #98)
+* Added IDN to "Terminology" and "Service discovery mechanisms" sections
+* Added "additional measures to verify the client" to <<http-layer-details-security>> (Issue #76).
+* Added TLS mandatory to <<transport-security>> (Issue #78).
 
 === -03 to draft-ietf-rpp-architecture-00
+
 * No changes. Document adopted by RPP WG.
 
 === -02 to -03
@@ -568,6 +607,9 @@ This naming mechanism ensures that new resource types, data elements, and operat
 * [[[RFC9205, RFC 9205]]] Nottingham, M., "Building Protocols with HTTP", BCP 56, RFC 9205, DOI 10.17487/RFC9205, June 2022, <https://www.rfc-editor.org/info/rfc9205>.
 * [[[RFC8949, RFC 8949]]] Bormann, C. and P. Hoffman, "Concise Binary Object Representation (CBOR)", IETF, STD 94, DOI 10.17487/RFC8949, BCP 94, RFC 8949, December 2020, <https://www.rfc-editor.org/info/rfc8949>.
 * [[[RFC9553, RFC 9553]]] Stepanek, R. and M. Loffredo, "JSContact: A JSON Representation of Contact Data", IETF, DOI 10.17487/RFC9553, RFC 9553, May 2024, <https://www.rfc-editor.org/info/rfc9553>.
+* [[[RFC7617, RFC 7617]]] Reschke, J., "The 'Basic' HTTP Authentication Scheme", IETF, DOI 10.17487/RFC7617, RFC 7617, September 2015, <https://www.rfc-editor.org/info/rfc7617>.
+* [[[RFC8126, RFC 8126]]] Cotton, M., Leiba, B., and T. Narten, "Guidelines for Writing an IANA Considerations Section in RFCs", IETF, DOI 10.17487/RFC8126, BCP 26, RFC 8126, June 2017, <https://www.rfc-editor.org/info/rfc8126>.
+* [[[RFC5890, RFC 5890]]] Klensin, J., "Internationalized Domain Names for Applications (IDNA): Definitions and Document Framework", IETF, DOI 10.17487/RFC5890, RFC 5890, August 2010, <https://www.rfc-editor.org/info/rfc5890>.
 * [[[SD-JWT, IETF(I-D.draft-ietf-oauth-sd-jwt-vc-10)]]] Terbu, O., Fett, D., and B. Campbell, "SD-JWT-based Verifiable Credentials (SD-JWT VC)", July 2025, <https://datatracker.ietf.org/doc/html/draft-ietf-oauth-sd-jwt-vc-10>.
 * [[[SelDiscJWT, IETF(I-D.draft-ietf-oauth-selective-disclosure-jwt-22)]]] Fett, D., Yasuda, K., and B. Campbell, "Selective Disclosure for JWTs (SD-JWT)", May 2025, <https://datatracker.ietf.org/doc/html/draft-ietf-oauth-selective-disclosure-jwt-22>.
 * [[[RPPReq, IETF(I-D.draft-ietf-rpp-requirements-03)]]] Wullink, M. and P. Kowalik, "RESTful Provisioning Protocol (RPP) - Requirements", June 2025, <https://datatracker.ietf.org/doc/html/draft-ietf-rpp-requirements-03>.
