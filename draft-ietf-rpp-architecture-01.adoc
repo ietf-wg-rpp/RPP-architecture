@@ -295,6 +295,8 @@ EPP transfer commands (query and transform), may be modelled by a subresource `/
 
 Other transform operations like renew, or restore which are not directly addressable resources in terms of REST will modelled as a convention of URLs with processing resources with only POST interface, e.g. `/renewal`.
 
+Bulk operations can be supported on collections of resources, such as updating multiple domain objects within a single transaction. URLs for bulk operations must unambiguously indicate that the operation targets multiple objects, ensuring clear intent for clients and servers. Unless explicitly specified otherwise by the server operator, bulk operations should be executed atomically in a single transaction, guaranteeing consistency across all affected resources.
+
 This pattern can be further applied to object operations not defined in the core protocol or EPP, allowing easy and uniform extension of allowed operations.
 
 In order to minimise name collisions between process names and other kind of sub-resources, a distinct path segment shall be dedicated to processes, e.g. `/processes/{process-name}` or `/operations/{operation-name}`.
