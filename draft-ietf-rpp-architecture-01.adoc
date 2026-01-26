@@ -399,6 +399,8 @@ Signalling of the versions will be preferably realised using parameters of the m
 
 ==== Profiles
 In real operational conditions different RPP server operators may have different requirements regarding set of protocol elements and their versions necessary to be supported by the client to enable reliable communication. Such requirements may also be defined by external policies. For this purpose RPP will define a concept of profiles, being identifiers translated into a certain minimum configuration of protocol version, extensions and their versions. The profiles themselves will be versioned in the same way as other protocol elements.
+In certain deployment scenarios, an RPP server may be positioned in front of an existing EPP deployment, acting as a reverse proxy. In this configuration, the RPP server is responsible for translating RPP messages into EPP commands and responses, enabling interoperability between RPP clients and already exising EPP systems.
+To ensure clients are aware of the specific EPP features and operations supported by the RPP server, the server must provide an EPP compatibility profile. This profile should clearly describe the level of compliance with EPP operations and data models. By making this information available, clients can dynamically adapt their behavior to the capabilities of the underlying EPP system, improving interoperability and reducing the risk of unsupported operations.
 
 RPP may define a machine-readable definition of profiles to allow automatic processing by the clients, but may also refer to other forms of profile specification.
 
@@ -536,6 +538,7 @@ Before any extension is accepted by IANA, a review by an RPP expert must be perf
 
 === -00 to -01
 
+* Added text about compatibility profiles to "Profiles" section. (Issue #29)
 * Changed default validation from lenient to strict. (Issue #82) 
 * Added <<extension-security, format=title>> and <<extension-review, format=title>> Sections to <<extension-mechanisms>> (Issue #91).
 * Added Advertising of maintenance notices to "Service Discovery" section. (Issue #88)
