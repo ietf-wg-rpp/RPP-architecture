@@ -339,7 +339,7 @@ For certain use-cases it might be convenient for a client to receive also derefe
 
 ==== Client Signalling for Request Validation
 
-RPP may utilise the HTTP `Prefer` header <<RFC7240>> for signalling the preference for either strict or lenient processing of requests. This allows clients to indicate whether they prefer strict validation of message payloads and rejection of requests with unknown properties or a more lenient approach ignoring unknown properties that may allow for additional flexibility in processing. The default behaviour, without the `Prefer` header, would be strict validation of all request and response messages.
+RPP may utilise the HTTP `Prefer` header <<RFC7240>> for signalling the preference for either strict or lenient processing of requests. This allows clients to indicate whether they prefer strict validation of message payloads and rejection of requests with unknown properties or a more lenient approach ignoring unknown properties that may allow for additional flexibility in processing. The default behaviour, without the `Prefer` header, would be strict validation.
 
 ==== Asynchronous Operation Processing
 The RPP architecture accommodates operations that are potentially long-running or cannot be completed synchronously due to their nature (e.g., acting on multiple objects, resource-intensive tasks, or processes involving manual steps). This is achieved by leveraging standard HTTP mechanisms to provide an asynchronous interaction pattern. This pattern allows a client to initiate an operation and receive an immediate acknowledgement, with the means to check the operation's status and retrieve its outcome at a later point.
