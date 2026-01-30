@@ -213,7 +213,7 @@
 </section>
 </section>
 </section>
-    <section anchor="_5f1008fa-470a-93b9-f281-cb3571866f63"><name>Protocol Details</name>
+    <section anchor="_fde2397c-d6b1-8cc6-ead8-d48fdbe8c623"><name>Protocol Details</name>
 
 <t anchor="_258b3fe6-6525-0317-3cb7-1b42072bd9cf">This section provides further details on each layer of the RPP architecture.</t>
 
@@ -522,7 +522,7 @@
 </section>
 </section>
 
-<section anchor="_5ca77648-affa-8361-b94d-6e5964a17379"><name>Resource Definition Layer</name>
+<section anchor="_971e60fb-bb6e-60fa-09a6-91a9a5f2df74"><name>Resource Definition Layer</name>
 
 <t anchor="_9d096003-6f94-6333-5c40-4167a231cb9b">Each resource type, no matter if on a top level, being an independent provisioning object, or a subresource, being a part of another resource, shall be well defined including data elements and possible operations. A resource definition shall on the first level of abstraction be composable out of data elements, without any reference to the media type or representation. This will allow for easy extensibility and compatibility with different media types.</t>
 
@@ -551,9 +551,9 @@
 <t anchor="_428d96cb-0b40-c3c9-5804-23a392da44df">The mapping layer shall be defined in IANA registry in a way that allows for automated processing of the mapping definition, including reading and writing operations. Mechanisms, such as defined for JavaScript Object Notation (JSON) Patch <xref target="RFC6902" section="" relative=""></xref>, may be used to define the mapping.</t>
 </section>
 
-<section anchor="_bd8de150-0f4f-b36b-8f2b-c3e12980b68a"><name>Operations</name>
+<section anchor="_9ba01ecc-df78-7626-7133-42c6b43f8425"><name>Operations</name>
 
-<t anchor="_9d6b4e15-94fc-dc34-ffab-c97159456269">Each resource type shall define operations possible on this resource type. This may encompass any of the mechanisms defined on the HTTP transport layer and be constrained by those extensibility rules.</t>
+<t anchor="_b5f129f8-8ea4-1a20-3fb6-2c09c4c2bc8a">Each resource type shall define operations possible on this resource type. This may encompass any of the mechanisms defined on the HTTP transport layer.</t>
 
 <t anchor="_b1fca34d-8ac7-3d33-ca47-5e5ddda45855">Operations shall be defined in IANA registry in a way that allows for automated processing of the operation definition, including constraints and references to other resource types.</t>
 </section>

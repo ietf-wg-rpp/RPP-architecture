@@ -522,7 +522,7 @@ This additional level of indirection would allow usage of data formats defined o
 The mapping layer shall be defined in IANA registry in a way that allows for automated processing of the mapping definition, including reading and writing operations. Mechanisms, such as defined for JavaScript Object Notation (JSON) Patch <<RFC6902>>, may be used to define the mapping.
 
 ==== Operations
-Each resource type shall define operations possible on this resource type. This may encompass any of the mechanisms defined on the HTTP transport layer and be constrained by those extensibility rules.
+Each resource type shall define operations possible on this resource type. This may encompass any of the mechanisms defined on the HTTP transport layer.
 
 Operations shall be defined in IANA registry in a way that allows for automated processing of the operation definition, including constraints and references to other resource types.
 

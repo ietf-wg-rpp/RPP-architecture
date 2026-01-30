@@ -1175,7 +1175,7 @@ Table of Contents
 
    Each resource type shall define operations possible on this resource
    type.  This may encompass any of the mechanisms defined on the HTTP
-   transport layer and be constrained by those extensibility rules.
+   transport layer.
 
    Operations shall be defined in IANA registry in a way that allows for
    automated processing of the operation definition, including
