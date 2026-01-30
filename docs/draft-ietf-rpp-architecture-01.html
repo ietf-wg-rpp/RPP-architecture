@@ -1822,7 +1822,7 @@ li > p:last-of-type:only-child {
 </div>
 </section>
 </div>
-<div id="_1a7d1b8c-80fa-aac3-9cf3-3b4b935a0a13">
+<div id="_18ae6c8d-461d-cccb-083d-76ea43f79d01">
 <section id="section-5">
       <h2 id="name-protocol-details">
 <a href="#section-5" class="section-number selfRef">5. </a><a href="#name-protocol-details" class="section-name selfRef">Protocol Details</a>
@@ -1927,13 +1927,29 @@ li > p:last-of-type:only-child {
 </div>
 </section>
 </div>
-<div id="_9db987ec-0746-2eca-3f13-24a1b2fde9f0">
+<div id="credential-lifecycle">
 <section id="section-5.1.3.5">
-            <h5 id="name-object-level-authorisation">
-<a href="#section-5.1.3.5" class="section-number selfRef">5.1.3.5. </a><a href="#name-object-level-authorisation" class="section-name selfRef">Object level authorisation</a>
+            <h5 id="name-credential-and-token-lifecy">
+<a href="#section-5.1.3.5" class="section-number selfRef">5.1.3.5. </a><a href="#name-credential-and-token-lifecy" class="section-name selfRef">Credential and Token Lifecycle</a>
             </h5>
-<div id="_ea157b64-d987-c799-e09b-244915ca78ba">
-<p id="section-5.1.3.5-1">RPP will define a mechanism for object-level authorisation, preventing unauthorised access to specific objects or resources. Each object will have an associated sponsor or owner with full control over an object, and the protocol will allow for the specification of which clients are authorised to access or modify non-sponsored/owned objects. This could be achieved through state-of-the-art standards like OAuth authorisation tokens, scopes, and resource-specific permissions but also shared secrets for backward compatibility with EPP password-based authorisation information. All parties involved in a running or completed process, such as the Sponsoring Client and the Gaining Client for a transfer operation, must be allowed to query the status of the proces using the same process resource.<a href="#section-5.1.3.5-1" class="pilcrow">¶</a></p>
+<div id="_eafe464b-ebdf-fa79-27a9-cfdac2ff62a5">
+<p id="section-5.1.3.5-1">RPP will support mechanisms for revoking, rotating or deprecating credentials, tokens, or permissions when they are no longer needed or if they become compromised.<a href="#section-5.1.3.5-1" class="pilcrow">¶</a></p>
+</div>
+<div id="_8463472e-c67b-6203-e283-456cfeeb46ec">
+<p id="section-5.1.3.5-2">The architecture delegates revocation mechanisms to the specific authentication method in use, following their established practices. For OAuth-based deployments, standard token revocation mechanisms as defined in <span>[<a href="#RFC7009" class="cite xref">RFC7009</a>]</span> should be utilised. For HTTP Basic Authentication revocation must be fulfilled by off-band operational practice, or using using extension as described in  <a href="#credential-management" class="auto internal xref">Section 5.1.3</a> to rotate the credential. Protocol specifications must emphasize, that implementations should ensure that revocation takes effect promptly and that revoked credentials are consistently rejected across all RPP endpoints.<a href="#section-5.1.3.5-2" class="pilcrow">¶</a></p>
+</div>
+<div id="_bb8c17a7-1c29-3a92-f1ab-5b2a614d12c9">
+<p id="section-5.1.3.5-3">Service discovery endpoints may advertise supported revocation mechanisms, enabling clients to discover how to revoke credentials when necessary.<a href="#section-5.1.3.5-3" class="pilcrow">¶</a></p>
+</div>
+</section>
+</div>
+<div id="_f690a40d-0221-1eb8-ccbf-5dd90c85f5f3">
+<section id="section-5.1.3.6">
+            <h5 id="name-object-level-authorisation">
+<a href="#section-5.1.3.6" class="section-number selfRef">5.1.3.6. </a><a href="#name-object-level-authorisation" class="section-name selfRef">Object level authorisation</a>
+            </h5>
+<div id="_7552b323-b596-0380-54b0-d65e942aa513">
+<p id="section-5.1.3.6-1">RPP will define a mechanism for object-level authorisation, preventing unauthorised access to specific objects or resources. Each object will have an associated sponsor or owner with full control over an object, and the protocol will allow for the specification of which clients are authorised to access or modify non-sponsored/owned objects. This could be achieved through state-of-the-art standards like OAuth authorisation tokens, scopes, and resource-specific permissions but also shared secrets for backward compatibility with EPP password-based authorisation information. All parties involved in a running or completed process, such as the Sponsoring Client and the Gaining Client for a transfer operation, must be allowed to query the status of the proces using the same process resource.<a href="#section-5.1.3.6-1" class="pilcrow">¶</a></p>
 </div>
 </section>
 </div>
@@ -2510,12 +2526,12 @@ li > p:last-of-type:only-child {
 </div>
 </section>
 </div>
-<div id="_d084d19b-ff24-42d1-f3ee-26c8a8c29b6f">
+<div id="_16773fc3-3248-8176-9ed0-216e6e8a7f1e">
 <section id="section-6">
       <h2 id="name-change-history">
 <a href="#section-6" class="section-number selfRef">6. </a><a href="#name-change-history" class="section-name selfRef">Change History</a>
       </h2>
-<div id="_5e3f074c-8705-da4c-6c9f-3406831b5736">
+<div id="_f456a2c4-3841-21e9-a4b6-11f18df28fe8">
 <section id="section-6.1">
         <h3 id="name-00-to-01">
 <a href="#section-6.1" class="section-number selfRef">6.1. </a><a href="#name-00-to-01" class="section-name selfRef">-00 to -01</a>
@@ -2538,6 +2554,8 @@ li > p:last-of-type:only-child {
           <li class="normal" id="section-6.1-1.8">Added "additional measures to verify the client" to <a href="#http-layer-details-security" class="auto internal xref">Section 5.1.3.4</a> (Issue #76).<a href="#section-6.1-1.8" class="pilcrow">¶</a>
 </li>
           <li class="normal" id="section-6.1-1.9">Added TLS mandatory to <a href="#transport-security" class="auto internal xref">Section 5.1.1</a> (Issue #78).<a href="#section-6.1-1.9" class="pilcrow">¶</a>
+</li>
+          <li class="normal" id="section-6.1-1.10">Added Section <a href="#credential-lifecycle" class="auto internal xref">Section 5.1.3.5</a> for credential and token revocation/replacement mechanisms (Issue #79).<a href="#section-6.1-1.10" class="pilcrow">¶</a>
 </li>
         </ul>
 </section>
@@ -2628,7 +2646,7 @@ li > p:last-of-type:only-child {
 </div>
 </section>
 </div>
-<div id="_c93fc269-7a62-2418-9b66-23693a62990b">
+<div id="_acbb79d6-ac18-1fa5-ec8d-9685b2348d49">
 <section id="section-7">
       <h2 id="name-references">
 <a href="#section-7" class="section-number selfRef">7. </a><a href="#name-references" class="section-name selfRef">References</a>
@@ -2646,7 +2664,7 @@ li > p:last-of-type:only-child {
 </dl>
 </section>
 </div>
-<div id="_afbb6c8a-b360-f5a0-db53-d13514e96c8b">
+<div id="_c83e5b1d-0ed1-d0b3-c8fa-e3ec254bcdfb">
 <section id="section-7.2">
         <h3 id="name-informational-references">
 <a href="#section-7.2" class="section-number selfRef">7.2. </a><a href="#name-informational-references" class="section-name selfRef">Informational References</a>
@@ -2691,6 +2709,10 @@ li > p:last-of-type:only-child {
 <dt id="RFC6750">[RFC6750]</dt>
         <dd>
 <span class="refAuthor">Jones, M.</span> and <span class="refAuthor">D. Hardt</span>, <span class="refTitle">"The OAuth 2.0 Authorization Framework: Bearer Token Usage"</span>, <span class="stream">IETF</span>, <span class="seriesInfo">DOI 10.17487/RFC6750</span>, <span class="seriesInfo">RFC 6750</span>, <time datetime="2012-10" class="refDate">October 2012</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc6750">https://www.rfc-editor.org/info/rfc6750</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC7009">[RFC7009]</dt>
+        <dd>
+<span class="refAuthor">Dronia, S.</span>, <span class="refAuthor">Scurtescu, M.</span>, and <span class="refAuthor">T. Lodderstedt</span>, <span class="refTitle">"OAuth 2.0 Token Revocation"</span>, <span class="stream">IETF</span>, <span class="seriesInfo">DOI 10.17487/RFC7009</span>, <span class="seriesInfo">RFC 7009</span>, <time datetime="2013-08" class="refDate">August 2013</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc7009">https://www.rfc-editor.org/info/rfc7009</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="RFC7519">[RFC7519]</dt>
         <dd>

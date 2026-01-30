@@ -258,6 +258,17 @@ In case of HTTP Basic Authentication, one user-id is always bound to at most one
 
 RPP will not explicitly define security related policies related to authentication or authorisation (such as password complexity, token lifetime, cryptography used, or additional measures to verify the client) on the protocol level. Instead, these properties will be delegated to the best practices of the chosen authentication schemes, which may evolve over time and would have to be independent of the protocol itself.
 
+[[credential-lifecycle]]
+===== Credential and Token Lifecycle
+
+RPP will support mechanisms for revoking, rotating or deprecating credentials, tokens, or permissions when they are no longer needed or if they become compromised. 
+
+The architecture delegates revocation mechanisms to the specific authentication method in use, following their established practices. For OAuth-based deployments, standard token revocation mechanisms as defined in <<RFC7009>> should be utilised.
+For HTTP Basic Authentication revocation must be fulfilled by off-band operational practice, or using using extension as described in <<credential-management>> to rotate the credential.
+Protocol specifications must emphasize, that implementations should ensure that revocation takes effect promptly and that revoked credentials are consistently rejected across all RPP endpoints.
+
+Service discovery endpoints may advertise supported revocation mechanisms, enabling clients to discover how to revoke credentials when necessary.
+
 ===== Object level authorisation
 RPP will define a mechanism for object-level authorisation, preventing unauthorised access to specific objects or resources. Each object will have an associated sponsor or owner with full control over an object, and the protocol will allow for the specification of which clients are authorised to access or modify non-sponsored/owned objects. This could be achieved through state-of-the-art standards like OAuth authorisation tokens, scopes, and resource-specific permissions but also shared secrets for backward compatibility with EPP password-based authorisation information.
 All parties involved in a running or completed process, such as the Sponsoring Client and the Gaining Client for a transfer operation, must be allowed to query the status of the proces using the same process resource. 
@@ -550,6 +561,7 @@ Before any extension is accepted by IANA, a review by an RPP expert must be perf
 * Added IDN to "Terminology" and "Service discovery mechanisms" sections
 * Added "additional measures to verify the client" to <<http-layer-details-security>> (Issue #76).
 * Added TLS mandatory to <<transport-security>> (Issue #78).
+* Added Section <<credential-lifecycle>> for credential and token revocation/replacement mechanisms (Issue #79).
 
 === -03 to draft-ietf-rpp-architecture-00
 
@@ -606,6 +618,7 @@ Before any extension is accepted by IANA, a review by an RPP expert must be perf
 * [[[RFC6570, RFC 6570]]] Gregorio, J., Fielding, R., Hadley, M., Nottingham, M., and D. Orchard, "URI Template", RFC 6570, DOI 10.17487/RFC6570, March 2012, <https://www.rfc-editor.org/info/rfc6570>.
 * [[[RFC6749, RFC 6749]]] Hardt, D., Ed., "The OAuth 2.0 Authorization Framework", RFC 6749, DOI 10.17487/RFC6749, October 2012, <https://www.rfc-editor.org/info/rfc6749>.
 * [[[RFC6750, RFC 6750]]] Jones, M. and D. Hardt, "The OAuth 2.0 Authorization Framework: Bearer Token Usage", RFC 6750, DOI 10.17487/RFC6750, October 2012, <https://www.rfc-editor.org/info/rfc6750>.
+* [[[RFC7009, RFC 7009]]] Lodderstedt, T., Dronia, S., and M. Scurtescu, "OAuth 2.0 Token Revocation", RFC 7009, DOI 10.17487/RFC7009, August 2013, <https://www.rfc-editor.org/info/rfc7009>.
 * [[[RFC7519, RFC 7519]]] Jones, M., Bradley, J., and N. Sakimura, "JSON Web Token (JWT)", RFC 7519, DOI 10.17487/RFC7519, May 2015, <https://www.rfc-editor.org/info/rfc7519>.
 * [[[RFC9082, RFC 9082]]] Hollenbeck, S. and A. Newton, "Registration Data Access Protocol (RDAP) Query Format", STD 95, RFC 9082, DOI 10.17487/RFC9082, June 2021, <https://www.rfc-editor.org/info/rfc9082>.
 * [[[RFC6902, RFC 6902]]] Bryan, P. and M. Nottingham, "JavaScript Object Notation (JSON) Patch", IETF, DOI 10.17487/RFC6902, RFC 6902, April 2013, <https://www.rfc-editor.org/info/rfc6902>.
