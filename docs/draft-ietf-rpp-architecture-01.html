@@ -1825,7 +1825,7 @@ li > p:last-of-type:only-child {
 </div>
 </section>
 </div>
-<div id="_c0e2fde1-27fb-0085-06bf-f4586b1bc0c7">
+<div id="_48b607e3-0546-4d48-111f-4d869f0efdfa">
 <section id="section-5">
       <h2 id="name-protocol-details">
 <a href="#section-5" class="section-number selfRef">5. </a><a href="#name-protocol-details" class="section-name selfRef">Protocol Details</a>
@@ -1894,7 +1894,7 @@ li > p:last-of-type:only-child {
 </div>
 </section>
 </div>
-<div id="_bc196c51-74ea-87c7-09d2-46b4edf8a416">
+<div id="fine-grained-authorisation">
 <section id="section-5.1.3.2">
             <h5 id="name-fine-grained-authorisation">
 <a href="#section-5.1.3.2" class="section-number selfRef">5.1.3.2. </a><a href="#name-fine-grained-authorisation" class="section-name selfRef">Fine-Grained Authorisation</a>
@@ -1946,7 +1946,7 @@ li > p:last-of-type:only-child {
 </div>
 </section>
 </div>
-<div id="_f690a40d-0221-1eb8-ccbf-5dd90c85f5f3">
+<div id="object-level-authorisation">
 <section id="section-5.1.3.6">
             <h5 id="name-object-level-authorisation">
 <a href="#section-5.1.3.6" class="section-number selfRef">5.1.3.6. </a><a href="#name-object-level-authorisation" class="section-name selfRef">Object level authorisation</a>
@@ -2266,27 +2266,57 @@ li > p:last-of-type:only-child {
           <h4 id="name-service-discovery-mechanism">
 <a href="#section-5.1.19" class="section-number selfRef">5.1.19. </a><a href="#name-service-discovery-mechanism" class="section-name selfRef">Service discovery mechanisms</a>
           </h4>
-<div id="_949b3af6-ec09-4378-eacf-3a582885158f">
-<p id="section-5.1.19-1">RPP will define mechanisms for service discovery, allowing clients to dynamically discover RPP service endpoints and capabilities, reducing coupling between clients and servers.<a href="#section-5.1.19-1" class="pilcrow">¶</a></p>
+<div id="_391f9851-46d4-3439-64bb-23b063b3aa9c">
+<p id="section-5.1.19-1">RPP defines mechanisms for service discovery, allowing clients to dynamically discover RPP service endpoints, capabilities, and operational policies. This reduces coupling between clients and servers and enables clients to adapt to server configurations without hard-coded assumptions.<a href="#section-5.1.19-1" class="pilcrow">¶</a></p>
+</div>
+<div id="_4fe7ef05-a6a6-3adc-3ebf-dc47abdc62ab">
+<section id="section-5.1.19.1">
+            <h5 id="name-service-location-bootstrapp">
+<a href="#section-5.1.19.1" class="section-number selfRef">5.1.19.1. </a><a href="#name-service-location-bootstrapp" class="section-name selfRef">Service location bootstrapping</a>
+            </h5>
+<div id="_45ef8eb8-88e1-4bff-a346-e7d9f8762829">
+<p id="section-5.1.19.1-1">In order to discover the location of RPP services for a given TLD or other kind of registry RPP may employ publishing bootstrapping information in IANA registry backed with an API (similar to RDAP bootstrapping as per <span>[<a href="#RFC9224" class="cite xref">RFC9224</a>]</span> or special DNS TXT resource records.<a href="#section-5.1.19.1-1" class="pilcrow">¶</a></p>
+</div>
+</section>
+</div>
+<div id="_e8e804e3-1650-5385-60ab-3428023ee64e">
+<section id="section-5.1.19.2">
+            <h5 id="name-service-discovery-document">
+<a href="#section-5.1.19.2" class="section-number selfRef">5.1.19.2. </a><a href="#name-service-discovery-document" class="section-name selfRef">Service discovery document</a>
+            </h5>
+<div id="_19eaed44-7c4c-d20a-13de-2cd245096b9d">
+<p id="section-5.1.19.2-1">The service discovery document is a machine-readable resource that describes a server's capabilities, supported features, and operational policies. Clients retrieve this document to understand how to interact with the server and what behaviour to expect. The document includes:<a href="#section-5.1.19.2-1" class="pilcrow">¶</a></p>
 </div>
 <ul class="normal">
-<li class="normal" id="section-5.1.19-2.1">Potential discovery of RPP server location, like  IANA bootstrapping document or a special DNS TXT RR with location of RPP service for the tld.<a href="#section-5.1.19-2.1" class="pilcrow">¶</a>
+<li class="normal" id="section-5.1.19.2-2.1">Supported protocol versions, extensions, and available resource types.<a href="#section-5.1.19.2-2.1" class="pilcrow">¶</a>
 </li>
-            <li class="normal" id="section-5.1.19-2.2">Potential use of well-known URIs (e.g., <code>/.well-known/rpp-capabilities</code>) for service discovery.<a href="#section-5.1.19-2.2" class="pilcrow">¶</a>
+              <li class="normal" id="section-5.1.19.2-2.2">Supported authentication methods and security requirements.<a href="#section-5.1.19.2-2.2" class="pilcrow">¶</a>
 </li>
-            <li class="normal" id="section-5.1.19-2.3">Advertising supported protocol versions, extensions, available resource types, authentication methods, IDN policies and supported features.<a href="#section-5.1.19-2.3" class="pilcrow">¶</a>
+              <li class="normal" id="section-5.1.19.2-2.3">IDN policies and handling conventions.<a href="#section-5.1.19.2-2.3" class="pilcrow">¶</a>
 </li>
-            <li class="normal" id="section-5.1.19-2.4">Advertising of maintenance notices, informing clients about future unavailability of the service due to scheduled maintenance.<a href="#section-5.1.19-2.4" class="pilcrow">¶</a>
+              <li class="normal" id="section-5.1.19.2-2.4">Maintenance notices, informing clients about scheduled service unavailability.<a href="#section-5.1.19.2-2.4" class="pilcrow">¶</a>
 </li>
-            <li class="normal" id="section-5.1.19-2.5">Advertising policies related to data privacy.<a href="#section-5.1.19-2.5" class="pilcrow">¶</a>
+              <li class="normal" id="section-5.1.19.2-2.5">Data privacy policies, including information about data collection (what personal or sensitive data is collected and for what purposes), data retention (how long data is stored), and privacy practices (how data is protected and with whom it may be shared).<a href="#section-5.1.19.2-2.5" class="pilcrow">¶</a>
 </li>
-            <li class="normal" id="section-5.1.19-2.6">It may be considered for RPP to distribute service discovery for each resource type separately for better scalability and management. For example instead of having a single service discovery endpoint for the whole registry on <code>/.well-known/rpp-capabilities</code> there might be a separate discovery placed under <code>/{resource-type}/.well-known/rpp-capabilities</code> e.g. <code>/domains/.well-known/rpp-capabilities</code>.<a href="#section-5.1.19-2.6" class="pilcrow">¶</a>
-</li>
-            <li class="normal" id="section-5.1.19-2.7">Service discovery shall utilise standardised methods, like URI templates <span>[<a href="#RFC6570" class="cite xref">RFC6570</a>]</span> to allow easy navigation of resources and avoid hard-coding of URLs, same time allowing clients to navigate directly to a known resource without additional server queries.<a href="#section-5.1.19-2.7" class="pilcrow">¶</a>
-</li>
-            <li class="normal" id="section-5.1.19-2.8">As a matter of principle service discovery shall be used to bootstrap the communication between client and server, its capabilities and operational policies. The server configuration shall be considered static between reconfiguration of the server and not be used for any dynamic configuration, like load balancing etc. It would enable the right balance between discoverability and reduction of round trips between clients and servers.<a href="#section-5.1.19-2.8" class="pilcrow">¶</a>
-</li>
-          </ul>
+            </ul>
+<div id="_12b3eece-d7ac-9266-c0ab-4ae5a9efd1a4">
+<p id="section-5.1.19.2-3">By default the document will be published using well-known URIs <span>[<a href="#RFC8615" class="cite xref">RFC8615</a>]</span> (e.g., <code>/.well-known/rpp-capabilities</code>) for retrieving service discovery documents. In order to improve scalability it is worth considering to distribute discovery endpoints per resource type (e.g.,  <code>/domains/.well-known/rpp-capabilities</code>) instead of a single registry-wide endpoint.<a href="#section-5.1.19.2-3" class="pilcrow">¶</a></p>
+</div>
+</section>
+</div>
+<div id="_bc6fc8ed-6b1d-85ca-1ea0-f709a8973b1c">
+<section id="section-5.1.19.3">
+            <h5 id="name-discovery-principles">
+<a href="#section-5.1.19.3" class="section-number selfRef">5.1.19.3. </a><a href="#name-discovery-principles" class="section-name selfRef">Discovery principles</a>
+            </h5>
+<div id="_5075ab98-c716-3031-2dfb-a8c42e40c3d4">
+<p id="section-5.1.19.3-1">Service discovery shall utilise standardised methods, like URI templates <span>[<a href="#RFC6570" class="cite xref">RFC6570</a>]</span>, to allow easy navigation of resources and avoid hard-coding of URLs, same time allowing clients to navigate directly to a known resource without additional server queries.<a href="#section-5.1.19.3-1" class="pilcrow">¶</a></p>
+</div>
+<div id="_94082c7a-3460-5f8b-c92c-072f4af9bcbc">
+<p id="section-5.1.19.3-2">As a matter of principle service discovery shall be used to bootstrap the communication between client and server, its capabilities and operational policies. The server configuration shall be considered static between reconfiguration of the server and not be used for any dynamic configuration, like load balancing etc. It would enable the right balance between discoverability and reduction of round trips between clients and servers.<a href="#section-5.1.19.3-2" class="pilcrow">¶</a></p>
+</div>
+</section>
+</div>
 </section>
 </div>
 <div id="scalability">
@@ -2338,7 +2368,7 @@ li > p:last-of-type:only-child {
           </ul>
 </section>
 </div>
-<div id="_f3f32d0d-a839-7e1f-c22f-da41d61da7ee">
+<div id="data-format">
 <section id="section-5.2.2">
           <h4 id="name-data-format">
 <a href="#section-5.2.2" class="section-number selfRef">5.2.2. </a><a href="#name-data-format" class="section-name selfRef">Data format</a>
@@ -2357,7 +2387,7 @@ li > p:last-of-type:only-child {
               <strong>JWT:</strong> JSON data encapsulated within a JSON Web Token <span>[<a href="#RFC7519" class="cite xref">RFC7519</a>]</span> for potential use-cases when verifiable data consistency is required<a href="#section-5.2.2-2.3" class="pilcrow">¶</a>
 </li>
             <li class="normal" id="section-5.2.2-2.4">
-              <strong>JWT-SD:</strong> JSON data with Selective Disclosure using JWTs <span>[<a href="#SelDiscJWT" class="cite xref">SelDiscJWT</a>]</span> for minimisation of exposed data.<a href="#section-5.2.2-2.4" class="pilcrow">¶</a>
+              <strong>JWT-SD:</strong> JSON data with Selective Disclosure using JWTs <span>[<a href="#RFC9901" class="cite xref">RFC9901</a>]</span> for minimisation of exposed data.<a href="#section-5.2.2-2.4" class="pilcrow">¶</a>
 </li>
             <li class="normal" id="section-5.2.2-2.5">
               <strong>CBOR:</strong> Concise Binary Object Representation for specific use cases requiring compact binary encoding <span>[<a href="#RFC8949" class="cite xref">RFC8949</a>]</span>.<a href="#section-5.2.2-2.5" class="pilcrow">¶</a>
@@ -2390,7 +2420,7 @@ li > p:last-of-type:only-child {
 </div>
 </section>
 </div>
-<div id="_0e47ce93-99b8-ccb6-7145-0713742a4f2e">
+<div id="_f7190b81-3124-f414-a603-a268ce2bea0a">
 <section id="section-5.3">
         <h3 id="name-resource-definition-layer-2">
 <a href="#section-5.3" class="section-number selfRef">5.3. </a><a href="#name-resource-definition-layer-2" class="section-name selfRef">Resource Definition Layer</a>
@@ -2455,13 +2485,19 @@ li > p:last-of-type:only-child {
 </div>
 </section>
 </div>
-<div id="_a64235fe-8495-1f12-92c6-859141fbafd7">
+<div id="_a9e21c57-6e13-5b98-9ed9-51e0f690f02b">
 <section id="section-5.3.4">
           <h4 id="name-data-privacy">
 <a href="#section-5.3.4" class="section-number selfRef">5.3.4. </a><a href="#name-data-privacy" class="section-name selfRef">Data privacy</a>
           </h4>
-<div id="_cff893b7-981e-b821-4e9b-7ee58e06488d">
-<p id="section-5.3.4-1">RPP request and response representations may contain personal data or other sensitive information subject to local privacy laws and regulations. Data definition of those shall take into account data minimisation principles and enable both clients and servers to limit the dataset to only the necessary data elements required for the intended operation. A mean to achieve this goal is to define as small as possible dataset of required information and define all other information as optional on the protocol level. Servers would be able to turn some of the information required by their policy and profile definition.<a href="#section-5.3.4-1" class="pilcrow">¶</a></p>
+<div id="_07d25d58-2d0e-49de-c0a0-15c30e3afb5c">
+<p id="section-5.3.4-1">RPP request and response representations may contain personal data or other sensitive information subject to privacy regulations. The architecture incorporates mechanisms that enable implementations to adhere to data privacy principles such as data minimisation and purpose limitation.<a href="#section-5.3.4-1" class="pilcrow">¶</a></p>
+</div>
+<div id="_e34f5281-1fdd-dc1b-3e19-9c4a1adaf992">
+<p id="section-5.3.4-2">Data minimisation is supported through several architectural features. Data element definitions distinguish between required and optional elements, with the required set kept as small as possible for protocol operation. Servers may further constrain which elements are required through profile definitions. The <code>Prefer</code> header mechanism (see <a href="#prefer-header" class="auto internal xref">Section 5.1.18</a>) allows clients to request minimal representations, and <a href="#fine-grained-authorisation" class="internal xref">Fine-Grained Authorisation</a> (see <a href="#fine-grained-authorisation" class="auto internal xref">Section 5.1.3.2</a>) and <a href="#object-level-authorisation" class="internal xref">Object level authorisation</a> (see <a href="#object-level-authorisation" class="auto internal xref">Section 5.1.3.6</a>)enable servers to return only the data a client is authorised to access.<a href="#section-5.3.4-2" class="pilcrow">¶</a></p>
+</div>
+<div id="_c76ca39a-c0f2-bc34-9e32-c2c65c6e42d1">
+<p id="section-5.3.4-3">Purpose limitation is supported through multiple mechanisms. Data element definitions may include purpose attributes, indicating the specific processing purposes for which each element is intended. Authorisation scopes (see <a href="#authentication-authorization" class="auto internal xref">Section 5.1.2</a>) can be defined to restrict access to data elements based on their declared purpose, ensuring that clients only receive data relevant to their authorised use. The service discovery document (see <a href="#service-discovery" class="auto internal xref">Section 5.1.19</a>) advertises data collection purposes, allowing clients to understand how their data will be used and retained before submission.<a href="#section-5.3.4-3" class="pilcrow">¶</a></p>
 </div>
 </section>
 </div>
@@ -2541,20 +2577,20 @@ li > p:last-of-type:only-child {
 </div>
 </section>
 </div>
-<div id="_8a52ea64-44d9-ce33-2c12-98e11568f1d3">
+<div id="_0a6e1a3f-0d57-955c-7210-db1a34556d56">
 <section id="section-6">
       <h2 id="name-change-history">
 <a href="#section-6" class="section-number selfRef">6. </a><a href="#name-change-history" class="section-name selfRef">Change History</a>
       </h2>
-<div id="_7f8924fb-ca0b-9e8a-a03b-226bd00cc716">
+<div id="_ce1b4dd2-0da8-d47e-5560-d998db87a77e">
 <section id="section-6.1">
         <h3 id="name-00-to-01">
 <a href="#section-6.1" class="section-number selfRef">6.1. </a><a href="#name-00-to-01" class="section-name selfRef">-00 to -01</a>
         </h3>
 <ul class="normal">
-<li class="normal" id="section-6.1-1.1">Added data privacy to "Service discovery mechanisms" and new "Data privacy" section.<a href="#section-6.1-1.1" class="pilcrow">¶</a>
+<li class="normal" id="section-6.1-1.1">Editorial: updated document references<a href="#section-6.1-1.1" class="pilcrow">¶</a>
 </li>
-          <li class="normal" id="section-6.1-1.2">Added data privacy to "Service discovery mechanisms" and new "Data privacy" section.<a href="#section-6.1-1.2" class="pilcrow">¶</a>
+          <li class="normal" id="section-6.1-1.2">Added data privacy to <a href="#service-discovery" class="internal xref">Service discovery mechanisms</a> and new "Data privacy" section. Refactored the whole section <a href="#service-discovery" class="auto internal xref">Section 5.1.19</a>.<a href="#section-6.1-1.2" class="pilcrow">¶</a>
 </li>
           <li class="normal" id="section-6.1-1.3">Create "Credential management" section for updating credentials using an extension.<a href="#section-6.1-1.3" class="pilcrow">¶</a>
 </li>
@@ -2665,7 +2701,7 @@ li > p:last-of-type:only-child {
 </div>
 </section>
 </div>
-<div id="_acbb79d6-ac18-1fa5-ec8d-9685b2348d49">
+<div id="_fa9d25eb-d0ad-1212-74cc-538f15a32849">
 <section id="section-7">
       <h2 id="name-references">
 <a href="#section-7" class="section-number selfRef">7. </a><a href="#name-references" class="section-name selfRef">References</a>
@@ -2683,7 +2719,7 @@ li > p:last-of-type:only-child {
 </dl>
 </section>
 </div>
-<div id="_c83e5b1d-0ed1-d0b3-c8fa-e3ec254bcdfb">
+<div id="_1764cf20-734c-8300-dc63-bc74c0ff0340">
 <section id="section-7.2">
         <h3 id="name-informational-references">
 <a href="#section-7.2" class="section-number selfRef">7.2. </a><a href="#name-informational-references" class="section-name selfRef">Informational References</a>
@@ -2773,13 +2809,21 @@ li > p:last-of-type:only-child {
         <dd>
 <span class="refAuthor">Klensin, J.</span>, <span class="refTitle">"Internationalized Domain Names for Applications (IDNA): Definitions and Document Framework"</span>, <span class="stream">IETF</span>, <span class="seriesInfo">DOI 10.17487/RFC5890</span>, <span class="seriesInfo">RFC 5890</span>, <time datetime="2010-08" class="refDate">August 2010</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc5890">https://www.rfc-editor.org/info/rfc5890</a>&gt;</span>. </dd>
 <dd class="break"></dd>
+<dt id="RFC8615">[RFC8615]</dt>
+        <dd>
+<span class="refAuthor">Nottingham, M.</span>, <span class="refTitle">"Well-Known Uniform Resource Identifiers (URIs)"</span>, <span class="stream">IETF</span>, <span class="seriesInfo">DOI 10.17487/RFC8615</span>, <span class="seriesInfo">RFC 8615</span>, <time datetime="2019-05" class="refDate">May 2019</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc8615">https://www.rfc-editor.org/info/rfc8615</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC9224">[RFC9224]</dt>
+        <dd>
+<span class="refAuthor">Blanchet, M.</span>, <span class="refTitle">"Finding the Authoritative Registration Data Access Protocol (RDAP) Service"</span>, <span class="stream">IETF</span>, <span class="seriesInfo">DOI 10.17487/RFC9224</span>, <span class="seriesInfo">BCP 95</span>, <span class="seriesInfo">RFC 9224</span>, <time datetime="2022-03" class="refDate">March 2022</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc9224">https://www.rfc-editor.org/info/rfc9224</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC9901">[RFC9901]</dt>
+        <dd>
+<span class="refAuthor">Fett, D.</span>, <span class="refAuthor">Yasuda, K.</span>, and <span class="refAuthor">B. Campbell</span>, <span class="refTitle">"Selective Disclosure for JSON Web Tokens"</span>, <span class="stream">IETF</span>, <span class="seriesInfo">DOI 10.17487/RFC9901</span>, <span class="seriesInfo">RFC 9901</span>, <time datetime="2025-11" class="refDate">November 2025</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc9901">https://www.rfc-editor.org/info/rfc9901</a>&gt;</span>. </dd>
+<dd class="break"></dd>
 <dt id="SD-JWT">[SD-JWT]</dt>
         <dd>
-<span class="refAuthor">Terbu, O.</span>, <span class="refAuthor">Fett, D.</span>, and <span class="refAuthor">B. Campbell</span>, <span class="refTitle">"SD-JWT-based Verifiable Credentials (SD-JWT VC)"</span>, <time datetime="2025-07" class="refDate">July 2025</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-oauth-sd-jwt-vc-10">https://datatracker.ietf.org/doc/html/draft-ietf-oauth-sd-jwt-vc-10</a>&gt;</span>. </dd>
-<dd class="break"></dd>
-<dt id="SelDiscJWT">[SelDiscJWT]</dt>
-        <dd>
-<span class="refAuthor">Fett, D.</span>, <span class="refAuthor">Yasuda, K.</span>, and <span class="refAuthor">B. Campbell</span>, <span class="refTitle">"Selective Disclosure for JWTs (SD-JWT)"</span>, <time datetime="2025-05" class="refDate">May 2025</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-oauth-selective-disclosure-jwt-22">https://datatracker.ietf.org/doc/html/draft-ietf-oauth-selective-disclosure-jwt-22</a>&gt;</span>. </dd>
+<span class="refAuthor">Terbu, O.</span>, <span class="refAuthor">Fett, D.</span>, and <span class="refAuthor">B. Campbell</span>, <span class="refTitle">"SD-JWT-based Verifiable Credentials (SD-JWT VC)"</span>, <time datetime="2025-11" class="refDate">November 2025</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-oauth-sd-jwt-vc-13">https://datatracker.ietf.org/doc/html/draft-ietf-oauth-sd-jwt-vc-13</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="RPPReq">[RPPReq]</dt>
         <dd>
