@@ -334,7 +334,7 @@ languages will be defined, preferably using HTTP methods, like OPTIONS or HEAD r
 
 ==== Client Signalling for Response Verbosity
 
-RPP may utilise the HTTP `Prefer` header <<RFC7240>> with the "return" preference to allow clients to control the verbosity of responses. For example, clients not interested in full resource representations could use `Prefer: return=minimal` to request minimal responses, reducing payload sizes and improving efficiency. The default behaviour, without the `Prefer` header, would be to return a full resource representation, similar to object info responses in EPP, especially after compound requests are completed.
+RPP may utilise the HTTP `Prefer` header <<RFC7240>> with the "return" preference to allow clients to control the verbosity of responses. For example, clients not interested in full resource representations could use `Prefer: return=minimal` to request minimal responses, reducing payload sizes and improving efficiency or `Prefer: return=representation` to receive full representation of the object. The default behaviour, without the `Prefer` header, would be to return a full representation only for GET requests and a minimal resource representation in all other cases, similar to responses in EPP, and following the data minimisation principles.
 For certain use-cases it might be convenient for a client to receive also dereferenced full or partial representation of related objects. For example details about sponsoring client of domain name instead of just ID. "return" preference syntax alone is not sufficient for this purpose, therefore RPP would need to define custom preference and register it in "HTTP Preferences" IANA registry.
 
 ==== Client Signalling for Request Validation
@@ -480,7 +480,7 @@ Operations shall be defined in IANA registry in a way that allows for automated 
 
 ==== Data privacy
 RPP request and response representations may contain personal data or other sensitive information subject to local privacy laws and regulations.
-Data definition of those shall take into account data minimisation principles and enable both clients and servers to limit the dataset to only the necessary data elements required for the intended operation.
+Data definition of those shall take into account data minimisation principles and enable both clients and servers to limit the dataset to only the necessary data elements required for the intended operation. A mean to achieve this goal is to define as small as possible dataset of required information and define all other information as optional on the protocol level. Servers would be able to turn some of the information required by their policy and profile definition.
 
 [[extension-mechanisms]]
 === Extension mechanisms
