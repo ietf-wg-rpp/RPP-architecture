@@ -264,8 +264,7 @@ RPP will not explicitly define security related policies related to authenticati
 RPP will support mechanisms for revoking, rotating or deprecating credentials, tokens, or permissions when they are no longer needed or if they become compromised. 
 
 The architecture delegates revocation mechanisms to the specific authentication method in use, following their established practices. For OAuth-based deployments, standard token revocation mechanisms as defined in <<RFC7009>> should be utilised.
-For HTTP Basic Authentication revocation must be fulfilled by off-band operational practice, or using using Authenticaton Extension to rotate the credential.
-//TODO: after merging https://github.com/ietf-wg-rpp/RPP-architecture/pull/110 link Authenticaton Extension properly / review text
+For HTTP Basic Authentication revocation must be fulfilled by off-band operational practice, or using using extension as described in <<credential-management>> to rotate the credential.
 Protocol specifications must emphasize, that implementations should ensure that revocation takes effect promptly and that revoked credentials are consistently rejected across all RPP endpoints.
 
 Service discovery endpoints may advertise supported revocation mechanisms, enabling clients to discover how to revoke credentials when necessary.

@@ -651,8 +651,8 @@ Internet-Draft            ietf-rpp-architecture            November 2025
    For OAuth-based deployments, standard token revocation mechanisms as
    defined in [RFC7009] should be utilised.  For HTTP Basic
    Authentication revocation must be fulfilled by off-band operational
-   practice, or using using Authenticaton Extension to rotate the
-   credential.  Protocol specifications must emphasize, that
+   practice, or using using extension as described in Section 5.1.3 to
+   rotate the credential.  Protocol specifications must emphasize, that
    implementations should ensure that revocation takes effect promptly
    and that revoked credentials are consistently rejected across all RPP
    endpoints.

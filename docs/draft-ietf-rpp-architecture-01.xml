@@ -213,7 +213,7 @@
 </section>
 </section>
 </section>
-    <section anchor="_63f007f6-cd87-5570-cffd-d9336227ec06"><name>Protocol Details</name>
+    <section anchor="_18ae6c8d-461d-cccb-083d-76ea43f79d01"><name>Protocol Details</name>
 
 <t anchor="_258b3fe6-6525-0317-3cb7-1b42072bd9cf">This section provides further details on each layer of the RPP architecture.</t>
 
@@ -273,7 +273,7 @@
 
 <t anchor="_eafe464b-ebdf-fa79-27a9-cfdac2ff62a5">RPP will support mechanisms for revoking, rotating or deprecating credentials, tokens, or permissions when they are no longer needed or if they become compromised.</t>
 
-<t anchor="_635ef5a1-c65b-abf0-7609-6f792f2487c3">The architecture delegates revocation mechanisms to the specific authentication method in use, following their established practices. For OAuth-based deployments, standard token revocation mechanisms as defined in <xref target="RFC7009" section="" relative=""></xref> should be utilised. For HTTP Basic Authentication revocation must be fulfilled by off-band operational practice, or using using Authenticaton Extension to rotate the credential. Protocol specifications must emphasize, that implementations should ensure that revocation takes effect promptly and that revoked credentials are consistently rejected across all RPP endpoints.</t>
+<t anchor="_8463472e-c67b-6203-e283-456cfeeb46ec">The architecture delegates revocation mechanisms to the specific authentication method in use, following their established practices. For OAuth-based deployments, standard token revocation mechanisms as defined in <xref target="RFC7009" section="" relative=""></xref> should be utilised. For HTTP Basic Authentication revocation must be fulfilled by off-band operational practice, or using using extension as described in  <xref target="credential-management"></xref> to rotate the credential. Protocol specifications must emphasize, that implementations should ensure that revocation takes effect promptly and that revoked credentials are consistently rejected across all RPP endpoints.</t>
 
 <t anchor="_bb8c17a7-1c29-3a92-f1ab-5b2a614d12c9">Service discovery endpoints may advertise supported revocation mechanisms, enabling clients to discover how to revoke credentials when necessary.</t>
 </section>
