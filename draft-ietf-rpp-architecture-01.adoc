@@ -225,6 +225,11 @@ The architecture leverages HTTP's built-in transport security mechanisms and del
 
 RPP is aimed to leverage scalable and modern authorisation standards, with a focus on OAuth 2.0 <<RFC6749>> and related frameworks. However, to maintain functional equivalence with EPP client authentication, RPP SHOULD also support authentication schemes that can carry a client identifier and a password, such as HTTP Basic Authentication <<RFC7617>>. RPP should be able to support future authentication and authorisation standards defined for HTTP.
 
+[[credential-management]]
+==== Credential management
+The management of client credentials is not considered to be a part of the core protocol, for this an extension can be created using the extension points described in <<extension-mechanisms>>.
+This will enable support for situations where management of authentication credentials is not delegated to a separate identity provider.
+
 Specifications will define profiles for:
 
 *  HTTP Authentication schemes (e.g., HTTP Basic Authentication, Bearer Token <<RFC6750>> etc.)
@@ -536,6 +541,7 @@ Before any extension is accepted by IANA, a review by an RPP expert must be perf
 
 === -00 to -01
 
+* Create "Credential management" section for updating credentials using an extension.
 * Changed default validation from lenient to strict. (Issue #82) 
 * Added <<extension-security, format=title>> and <<extension-review, format=title>> Sections to <<extension-mechanisms>> (Issue #91).
 * Added Advertising of maintenance notices to "Service Discovery" section. (Issue #88)
