@@ -30,7 +30,7 @@ Abstract
 Contributing
 
    When contributing to this document, please use the following GitHub
-   project: https://github.com/pawel-kow/RPP-architecture.
+   project: https://github.com/ietf-wg-rpp/RPP-architecture.
 
 Status of This Memo
 
@@ -87,25 +87,25 @@ Table of Contents
      5.1.  HTTP Transport Layer Details  . . . . . . . . . . . . . .  10
        5.1.1.  Transport Security  . . . . . . . . . . . . . . . . .  10
        5.1.2.  Authentication and Authorisation  . . . . . . . . . .  10
-       5.1.3.  Resource Addressing . . . . . . . . . . . . . . . . .  12
-       5.1.4.  Mapping of basic operations to HTTP uniform interface
-               (verbs) . . . . . . . . . . . . . . . . . . . . . . .  13
-       5.1.5.  Mapping of operations beyond HTTP uniform interface to
-               URLs and verbs  . . . . . . . . . . . . . . . . . . .  14
-       5.1.6.  Server-Managed Resources  . . . . . . . . . . . . . .  15
-       5.1.7.  HTTP response codes . . . . . . . . . . . . . . . . .  16
-       5.1.8.  Content negotiation for media types . . . . . . . . .  16
-       5.1.9.  Caching . . . . . . . . . . . . . . . . . . . . . . .  16
-       5.1.10. Language negotiation for textual content  . . . . . .  16
-       5.1.11. Client Signalling for Response Verbosity  . . . . . .  17
-       5.1.12. Client Signalling for Request Validation  . . . . . .  17
-       5.1.13. Asynchronous Operation Processing . . . . . . . . . .  17
-       5.1.14. RPP specific status codes and relation to HTTP status
-               codes . . . . . . . . . . . . . . . . . . . . . . . .  18
-       5.1.15. Transaction tracing and idempotency . . . . . . . . .  19
-       5.1.16. Protocol Versioning . . . . . . . . . . . . . . . . .  20
-       5.1.17. Profiles  . . . . . . . . . . . . . . . . . . . . . .  20
-       5.1.18. Definition of special resources . . . . . . . . . . .  21
+       5.1.3.  Credential management . . . . . . . . . . . . . . . .  11
+       5.1.4.  Resource Addressing . . . . . . . . . . . . . . . . .  13
+       5.1.5.  Mapping of basic operations to HTTP uniform interface
+               (verbs) . . . . . . . . . . . . . . . . . . . . . . .  14
+       5.1.6.  Mapping of operations beyond HTTP uniform interface to
+               URLs and verbs  . . . . . . . . . . . . . . . . . . .  15
+       5.1.7.  Server-Managed Resources  . . . . . . . . . . . . . .  16
+       5.1.8.  HTTP response codes . . . . . . . . . . . . . . . . .  16
+       5.1.9.  Content negotiation for media types . . . . . . . . .  17
+       5.1.10. Caching . . . . . . . . . . . . . . . . . . . . . . .  17
+       5.1.11. Language negotiation for textual content  . . . . . .  17
+       5.1.12. Client Signalling for Response Verbosity  . . . . . .  17
+       5.1.13. Client Signalling for Request Validation  . . . . . .  18
+       5.1.14. Asynchronous Operation Processing . . . . . . . . . .  18
+       5.1.15. RPP specific status codes and relation to HTTP status
+               codes . . . . . . . . . . . . . . . . . . . . . . . .  19
+       5.1.16. Transaction tracing and idempotency . . . . . . . . .  20
+       5.1.17. Protocol Versioning . . . . . . . . . . . . . . . . .  20
+       5.1.18. Profiles  . . . . . . . . . . . . . . . . . . . . . .  21
 
 
 
@@ -114,32 +114,33 @@ Kowalik & Wullink          Expires 10 May 2026                  [Page 2]
 Internet-Draft            ietf-rpp-architecture            November 2025
 
 
-       5.1.19. Service discovery mechanisms  . . . . . . . . . . . .  21
-       5.1.20. Scalability . . . . . . . . . . . . . . . . . . . . .  22
+       5.1.19. Definition of special resources . . . . . . . . . . .  21
+       5.1.20. Service discovery mechanisms  . . . . . . . . . . . .  21
+       5.1.21. Scalability . . . . . . . . . . . . . . . . . . . . .  22
      5.2.  Data Representation Layer . . . . . . . . . . . . . . . .  22
-       5.2.1.  Data structure  . . . . . . . . . . . . . . . . . . .  22
+       5.2.1.  Data structure  . . . . . . . . . . . . . . . . . . .  23
        5.2.2.  Data format . . . . . . . . . . . . . . . . . . . . .  23
-       5.2.3.  Data Validation . . . . . . . . . . . . . . . . . . .  23
+       5.2.3.  Data Validation . . . . . . . . . . . . . . . . . . .  24
        5.2.4.  Media Type definition . . . . . . . . . . . . . . . .  24
      5.3.  Resource Definition Layer . . . . . . . . . . . . . . . .  24
-       5.3.1.  Data Elements . . . . . . . . . . . . . . . . . . . .  24
+       5.3.1.  Data Elements . . . . . . . . . . . . . . . . . . . .  25
        5.3.2.  Mapping . . . . . . . . . . . . . . . . . . . . . . .  25
-       5.3.3.  Operations  . . . . . . . . . . . . . . . . . . . . .  25
-       5.3.4.  Server-Managed Resource Types . . . . . . . . . . . .  25
+       5.3.3.  Operations  . . . . . . . . . . . . . . . . . . . . .  26
+       5.3.4.  Server-Managed Resource Types . . . . . . . . . . . .  26
      5.4.  Extension mechanisms  . . . . . . . . . . . . . . . . . .  26
        5.4.1.  Name Management and Collision Avoidance . . . . . . .  27
-       5.4.2.  Extension Security  . . . . . . . . . . . . . . . . .  27
+       5.4.2.  Extension Security  . . . . . . . . . . . . . . . . .  28
        5.4.3.  Extension Review  . . . . . . . . . . . . . . . . . .  28
    6.  Change History  . . . . . . . . . . . . . . . . . . . . . . .  28
      6.1.  -00 to -01  . . . . . . . . . . . . . . . . . . . . . . .  28
-     6.2.  -03 to draft-ietf-rpp-architecture-00 . . . . . . . . . .  28
-     6.3.  -02 to -03  . . . . . . . . . . . . . . . . . . . . . . .  28
-     6.4.  -01 to -02  . . . . . . . . . . . . . . . . . . . . . . .  29
-     6.5.  -00 to -01  . . . . . . . . . . . . . . . . . . . . . . .  29
-   7.  References  . . . . . . . . . . . . . . . . . . . . . . . . .  30
-     7.1.  Normative References  . . . . . . . . . . . . . . . . . .  30
-     7.2.  Informational References  . . . . . . . . . . . . . . . .  30
-   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  33
+     6.2.  -03 to draft-ietf-rpp-architecture-00 . . . . . . . . . .  29
+     6.3.  -02 to -03  . . . . . . . . . . . . . . . . . . . . . . .  29
+     6.4.  -01 to -02  . . . . . . . . . . . . . . . . . . . . . . .  30
+     6.5.  -00 to -01  . . . . . . . . . . . . . . . . . . . . . . .  30
+   7.  References  . . . . . . . . . . . . . . . . . . . . . . . . .  31
+     7.1.  Normative References  . . . . . . . . . . . . . . . . . .  31
+     7.2.  Informational References  . . . . . . . . . . . . . . . .  31
+   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  34
 
 1.  Introduction
 
@@ -161,7 +162,6 @@ Internet-Draft            ietf-rpp-architecture            November 2025
    in protocols such as RDAP [RFC9082].  The choice of REST and JSON
    also facilitates direct browser and mobile application integration
    including modern security mechanisms such as OAuth2.0.
-
 
 
 
@@ -562,6 +562,14 @@ Kowalik & Wullink          Expires 10 May 2026                 [Page 10]
 Internet-Draft            ietf-rpp-architecture            November 2025
 
 
+5.1.3.  Credential management
+
+   The management of client credentials is not considered to be a part
+   of the core protocol, for this an extension can be created using the
+   extension points described in Section 5.4.  This will enable support
+   for situations where management of authentication credentials is not
+   delegated to a separate identity provider.
+
    Specifications will define profiles for:
 
    *  HTTP Authentication schemes (e.g., HTTP Basic Authentication,
@@ -572,7 +580,7 @@ Internet-Draft            ietf-rpp-architecture            November 2025
    Implementations will be able to choose authentication and
    authorisation methods appropriate for their security requirements.
 
-5.1.2.1.  Authorisation Scopes
+5.1.3.1.  Authorisation Scopes
 
    RPP specifications will standardise authorisation scopes (like
    rpp:read or rpp:write) to define granular access control for
@@ -580,7 +588,7 @@ Internet-Draft            ietf-rpp-architecture            November 2025
    operations and resource types, ensuring that clients can be granted
    only the necessary permissions.
 
-5.1.2.2.  Fine-Grained Authorisation
+5.1.3.2.  Fine-Grained Authorisation
 
    RPP authorisation models may become fine-grained, extending beyond
    simple auth-code based models used in EPP.  Authorisation decisions
@@ -592,7 +600,7 @@ Internet-Draft            ietf-rpp-architecture            November 2025
    Here solutions like OAuth2 RAR [RFC9396] could be considered to
    provide fine-grained access control.
 
-5.1.2.3.  Relationship between clients and authentication credentials
+5.1.3.3.  Relationship between clients and authentication credentials
 
    RPP authentication and authorisation model will make a clear
    distinction between the login credentials and the authorisation to
@@ -600,14 +608,6 @@ Internet-Draft            ietf-rpp-architecture            November 2025
    be authorised to act on behalf of the same RPP client.  The same
    credential however must always be assigned to one and only one RPP
    client context.
-
-
-
-
-
-
-
-
 
 
 
@@ -630,7 +630,7 @@ Internet-Draft            ietf-rpp-architecture            November 2025
    valid only for Client A, while scope=rpp:clientB would apply to
    Client B.
 
-5.1.2.4.  Security
+5.1.3.4.  Security
 
    RPP will not explicitly define security related policies related to
    authentication or authorisation (such as password complexity, token
@@ -640,7 +640,41 @@ Internet-Draft            ietf-rpp-architecture            November 2025
    which may evolve over time and would have to be independent of the
    protocol itself.
 
-5.1.2.5.  Object level authorisation
+5.1.3.5.  Credential and Token Lifecycle
+
+   RPP will support mechanisms for revoking, rotating or deprecating
+   credentials, tokens, or permissions when they are no longer needed or
+   if they become compromised.
+
+   The architecture delegates revocation mechanisms to the specific
+   authentication method in use, following their established practices.
+   For OAuth-based deployments, standard token revocation mechanisms as
+   defined in [RFC7009] should be utilised.  For HTTP Basic
+   Authentication revocation must be fulfilled by off-band operational
+   practice, or using using extension as described in Section 5.1.3 to
+   rotate the credential.  Protocol specifications must emphasize, that
+   implementations should ensure that revocation takes effect promptly
+   and that revoked credentials are consistently rejected across all RPP
+   endpoints.
+
+   Service discovery endpoints may advertise supported revocation
+   mechanisms, enabling clients to discover how to revoke credentials
+   when necessary.
+
+
+
+
+
+
+
+
+
+Kowalik & Wullink          Expires 10 May 2026                 [Page 12]
+
+Internet-Draft            ietf-rpp-architecture            November 2025
+
+
+5.1.3.6.  Object level authorisation
 
    RPP will define a mechanism for object-level authorisation,
    preventing unauthorised access to specific objects or resources.
@@ -656,7 +690,7 @@ Internet-Draft            ietf-rpp-architecture            November 2025
    must be allowed to query the status of the proces using the same
    process resource.
 
-5.1.3.  Resource Addressing
+5.1.4.  Resource Addressing
 
    RPP resources are addressed using URLs.  Considerations include:
 
@@ -665,14 +699,6 @@ Internet-Draft            ietf-rpp-architecture            November 2025
 
    *  URL structure to represent list of related resources (e.g.,
       /domains/{domain-name}/contacts/)
-
-
-
-
-Kowalik & Wullink          Expires 10 May 2026                 [Page 12]
-
-Internet-Draft            ietf-rpp-architecture            November 2025
-
 
    RPP URL structure will be designed to be human-readable, intuitive,
    and RESTful, allowing clients to easily navigate and interact with
@@ -695,7 +721,16 @@ Internet-Draft            ietf-rpp-architecture            November 2025
    to the "links" concept in RESTful APIs, where related resources are
    linked together.
 
-5.1.3.1.  Internationalised Domain Names (IDN)
+
+
+
+
+Kowalik & Wullink          Expires 10 May 2026                 [Page 13]
+
+Internet-Draft            ietf-rpp-architecture            November 2025
+
+
+5.1.4.1.  Internationalised Domain Names (IDN)
 
    RPP will address the handling of IDNs in resource addressing.
    Specifications will define whether to use IDN or UTF-8 encoding
@@ -706,7 +741,7 @@ Internet-Draft            ietf-rpp-architecture            November 2025
    would be to always redirect to the canonical URL, which would be the
    IDN URL.
 
-5.1.4.  Mapping of basic operations to HTTP uniform interface (verbs)
+5.1.5.  Mapping of basic operations to HTTP uniform interface (verbs)
 
    RPP operations are mapped to standard HTTP methods to leverage the
    uniform interface and RESTful principles:
@@ -720,15 +755,6 @@ Internet-Draft            ietf-rpp-architecture            November 2025
          resource state.  Overloading HEAD with EPP semantics may lead
          to confusion, especially as some frameworks implicitly
          implement HEAD out of GET handling.
-
-
-
-
-
-Kowalik & Wullink          Expires 10 May 2026                 [Page 13]
-
-Internet-Draft            ietf-rpp-architecture            November 2025
-
 
       -  a better equivalence of EPP check would be a POST with Expect
          header, however this header being a reserved header in browsers
@@ -752,13 +778,21 @@ Internet-Draft            ietf-rpp-architecture            November 2025
       domain registration details) - not 100% equivalent of EPP update
       command
 
+
+
+
+Kowalik & Wullink          Expires 10 May 2026                 [Page 14]
+
+Internet-Draft            ietf-rpp-architecture            November 2025
+
+
    *  *DELETE:* Delete a resource (e.g., deleting a domain registration)
       - EPP delete command
 
    *  *PATCH:* Partially modify a resource (e.g., updating specific
       attributes of a domain or contact) - EPP update command
 
-5.1.5.  Mapping of operations beyond HTTP uniform interface to URLs and
+5.1.6.  Mapping of operations beyond HTTP uniform interface to URLs and
         verbs
 
    Many of EPP commands do not map directly to the HTTP uniform
@@ -778,14 +812,6 @@ Internet-Draft            ietf-rpp-architecture            November 2025
    initiate the transfer, GET operation to query the transfer status and
    POST operation to approve or reject the transfer.
 
-
-
-
-Kowalik & Wullink          Expires 10 May 2026                 [Page 14]
-
-Internet-Draft            ietf-rpp-architecture            November 2025
-
-
    Other transform operations like renew, or restore which are not
    directly addressable resources in terms of REST will modelled as a
    convention of URLs with processing resources with only POST
@@ -804,10 +830,18 @@ Internet-Draft            ietf-rpp-architecture            November 2025
    full URI of such processing resource (e.g. /domains/{domain-
    name}/processes/renewal for domain renew operation).
 
-   As discussed in Section 5.1.4 EPP check command may not be
+   As discussed in Section 5.1.5 EPP check command may not be
    appropriate to be mapped directly to the HTTP uniform interface of
    the resource itself.  EPP check command will be therefore modelled as
    sub-resource such as /availability offering both HEAD operation for
+
+
+
+Kowalik & Wullink          Expires 10 May 2026                 [Page 15]
+
+Internet-Draft            ietf-rpp-architecture            November 2025
+
+
    quick yes/no response and GET operation for more detailed response
    allowing for example to extend on the dataset provided (e.g. pricing
    information).
@@ -816,7 +850,7 @@ Internet-Draft            ietf-rpp-architecture            November 2025
    RPP specifications and give a universal toolset for extending RPP
    with new resources and commands.
 
-5.1.6.  Server-Managed Resources
+5.1.7.  Server-Managed Resources
 
    RPP supports the definition of first-class resources whose state is
    managed exclusively by the server rather than provisioned by clients.
@@ -833,19 +867,10 @@ Internet-Draft            ietf-rpp-architecture            November 2025
    with appropriate HTTP status codes (e.g., 405 Method Not Allowed or
    403 Forbidden) if a client attempts a modification operation.
 
-
-
-
-
-Kowalik & Wullink          Expires 10 May 2026                 [Page 15]
-
-Internet-Draft            ietf-rpp-architecture            November 2025
-
-
    Further aspects of server-managed resources, including examples and
    sub-resource relationships, are described in Section 5.3.4.
 
-5.1.7.  HTTP response codes
+5.1.8.  HTTP response codes
 
    In general RPP shall make use of HTTP status codes to indicate
    general response status categories (e.g., 2xx success responses, 4xx
@@ -860,9 +885,20 @@ Internet-Draft            ietf-rpp-architecture            November 2025
    corresponsing specific code exists (e.g. 404 for not existing
    resource or 401 for unauthenticated request).
 
-   More specific RPP codes are elaborated in Section 5.1.14.
+   More specific RPP codes are elaborated in Section 5.1.15.
 
-5.1.8.  Content negotiation for media types
+
+
+
+
+
+
+Kowalik & Wullink          Expires 10 May 2026                 [Page 16]
+
+Internet-Draft            ietf-rpp-architecture            November 2025
+
+
+5.1.9.  Content negotiation for media types
 
    RPP supports content negotiation to allow clients to specify
    preferred media types for request and response payloads using the
@@ -875,7 +911,7 @@ Internet-Draft            ietf-rpp-architecture            November 2025
 
    *  Potential support for other media types defined in the Section 5.2
 
-5.1.9.  Caching
+5.1.10.  Caching
 
    RPP shall benefit from HTTP standard caching mechanisms to enable
    standard components like proxies and caches to improve performance
@@ -883,20 +919,11 @@ Internet-Draft            ietf-rpp-architecture            November 2025
    different resources and operations, including cache-control headers
    and ETag support.
 
-5.1.10.  Language negotiation for textual content
+5.1.11.  Language negotiation for textual content
 
    RPP shall support language negotiation to enable clients to request
    responses in a preferred language using the HTTP 'Accept-Language'
    header [RFC7231].
-
-
-
-
-
-Kowalik & Wullink          Expires 10 May 2026                 [Page 16]
-
-Internet-Draft            ietf-rpp-architecture            November 2025
-
 
    *  Server implementations MAY support multiple languages for textual
       content in responses to provide human-readable localised
@@ -911,7 +938,7 @@ Internet-Draft            ietf-rpp-architecture            November 2025
       provided content.  Other media types may have different mechanisms
       for language representation.
 
-5.1.11.  Client Signalling for Response Verbosity
+5.1.12.  Client Signalling for Response Verbosity
 
    RPP may utilise the HTTP Prefer header [RFC7240] with the "return"
    preference to allow clients to control the verbosity of responses.
@@ -919,6 +946,14 @@ Internet-Draft            ietf-rpp-architecture            November 2025
    could use Prefer: return=minimal to request minimal responses,
    reducing payload sizes and improving efficiency.  The default
    behaviour, without the Prefer header, would be to return a full
+
+
+
+Kowalik & Wullink          Expires 10 May 2026                 [Page 17]
+
+Internet-Draft            ietf-rpp-architecture            November 2025
+
+
    resource representation, similar to object info responses in EPP,
    especially after compound requests are completed.  For certain use-
    cases it might be convenient for a client to receive also
@@ -928,7 +963,7 @@ Internet-Draft            ietf-rpp-architecture            November 2025
    purpose, therefore RPP would need to define custom preference and
    register it in "HTTP Preferences" IANA registry.
 
-5.1.12.  Client Signalling for Request Validation
+5.1.13.  Client Signalling for Request Validation
 
    RPP may utilise the HTTP Prefer header [RFC7240] for signalling the
    preference for either strict or lenient processing of requests.  This
@@ -936,9 +971,9 @@ Internet-Draft            ietf-rpp-architecture            November 2025
    message payloads and rejection of requests with unknown properties or
    a more lenient approach ignoring unknown properties that may allow
    for additional flexibility in processing.  The default behaviour,
-   without the Prefer header, would be to process requests leniently.
+   without the Prefer header, would be strict validation.
 
-5.1.13.  Asynchronous Operation Processing
+5.1.14.  Asynchronous Operation Processing
 
    The RPP architecture accommodates operations that are potentially
    long-running or cannot be completed synchronously due to their nature
@@ -946,14 +981,6 @@ Internet-Draft            ietf-rpp-architecture            November 2025
    processes involving manual steps).  This is achieved by leveraging
    standard HTTP mechanisms to provide an asynchronous interaction
    pattern.  This pattern allows a client to initiate an operation and
-
-
-
-Kowalik & Wullink          Expires 10 May 2026                 [Page 17]
-
-Internet-Draft            ietf-rpp-architecture            November 2025
-
-
    receive an immediate acknowledgement, with the means to check the
    operation's status and retrieve its outcome at a later point.
 
@@ -975,6 +1002,14 @@ Internet-Draft            ietf-rpp-architecture            November 2025
    in line with RPP's error reporting principles.  It shall remain up to
    protocol design for certain operation and server policy which
    granularity of status information shall be offered.  In some cases it
+
+
+
+Kowalik & Wullink          Expires 10 May 2026                 [Page 18]
+
+Internet-Draft            ietf-rpp-architecture            November 2025
+
+
    might be sufficient to have one final message, in other cases
    intermediate statuses might be required.  The lifetime of these
    resources might also be differentiated.  Messages in the queue would
@@ -991,24 +1026,12 @@ Internet-Draft            ietf-rpp-architecture            November 2025
    operations intended for asynchronous execution will be designed to
    utilise this pattern.
 
-5.1.14.  RPP specific status codes and relation to HTTP status codes
+5.1.15.  RPP specific status codes and relation to HTTP status codes
 
    RPP uses a dual-layer approach for signaling operation outcomes,
    leveraging both standard HTTP status codes and RPP-specific status
    codes.  This allows for compatibility with generic HTTP components
    while providing detailed, application-level feedback for RPP clients.
-
-
-
-
-
-
-
-
-Kowalik & Wullink          Expires 10 May 2026                 [Page 18]
-
-Internet-Draft            ietf-rpp-architecture            November 2025
-
 
    *  The HTTP status code [RFC7231] must be used to convey the overall
       outcome of an operation.  Any HTTP-aware component, such as a
@@ -1035,6 +1058,14 @@ Internet-Draft            ietf-rpp-architecture            November 2025
       rule failure, 200 for a successful operation with additional
       information) should be used.
 
+
+
+
+Kowalik & Wullink          Expires 10 May 2026                 [Page 19]
+
+Internet-Draft            ietf-rpp-architecture            November 2025
+
+
    *  This mechanism applies to both successful and unsuccessful
       operations.  A successful response (e.g., HTTP 200 OK) may include
       an RPP-specific header to provide additional information, such as
@@ -1050,21 +1081,13 @@ Internet-Draft            ietf-rpp-architecture            November 2025
    *  RPP should also use other standardised HTTP signaling mechanisms
       where appropriate, for example for rate limiting.
 
-5.1.15.  Transaction tracing and idempotency
+5.1.16.  Transaction tracing and idempotency
 
    RPP shall support identification of requests and responses on both
    client side and server side with use of client provided identifiers
    and server provided identifiers.  This will allow for tracking of
    requests and responses in case of errors, and for idempotency of
    requests.
-
-
-
-
-Kowalik & Wullink          Expires 10 May 2026                 [Page 19]
-
-Internet-Draft            ietf-rpp-architecture            November 2025
-
 
    Client provided identifier shall be returned in the corresponding
    synchronous response and shall be included in the asynchronous
@@ -1083,7 +1106,7 @@ Internet-Draft            ietf-rpp-architecture            November 2025
    clear separation of resource representation from performed actions.
    If possible existing mechanisms of HTTP shall be employed.
 
-5.1.16.  Protocol Versioning
+5.1.17.  Protocol Versioning
 
    RPP will define a versioning schema for the protocol itself, the
    extensions and other protocol elements such as profiles as
@@ -1091,6 +1114,14 @@ Internet-Draft            ietf-rpp-architecture            November 2025
    independent introduction of new features in a non-breaking manner on
    both client and server side, and on the other side allow the opposite
    party of the communication to determine if the version is compatible
+
+
+
+Kowalik & Wullink          Expires 10 May 2026                 [Page 20]
+
+Internet-Draft            ietf-rpp-architecture            November 2025
+
+
    or not.  One of potential approaches having this property might be
    use of Semantic Versioning [SemVer], but also other versioning schema
    shall be possible.
@@ -1098,7 +1129,7 @@ Internet-Draft            ietf-rpp-architecture            November 2025
    Signalling of the versions will be preferably realised using
    parameters of the media type.
 
-5.1.17.  Profiles
+5.1.18.  Profiles
 
    In real operational conditions different RPP server operators may
    have different requirements regarding set of protocol elements and
@@ -1114,29 +1145,21 @@ Internet-Draft            ietf-rpp-architecture            November 2025
    automatic processing by the clients, but may also refer to other
    forms of profile specification.
 
-
-
-
-Kowalik & Wullink          Expires 10 May 2026                 [Page 20]
-
-Internet-Draft            ietf-rpp-architecture            November 2025
-
-
    Signalling of the profiles will be preferably realised using
    parameters of the media type.
 
-5.1.18.  Definition of special resources
+5.1.19.  Definition of special resources
 
    RPP may define special resources for specific purposes:
 
    *  Service Discovery endpoints to advertise protocol capabilities and
-      supported features (see Section 5.1.19).
+      supported features (see Section 5.1.20).
 
    *  Metadata endpoints to provide schema information or other
       protocol-level metadata, potentially including OpenAPI definitions
       for documentation and code generation.
 
-5.1.19.  Service discovery mechanisms
+5.1.20.  Service discovery mechanisms
 
    RPP will define mechanisms for service discovery, allowing clients to
    dynamically discover RPP service endpoints and capabilities, reducing
@@ -1145,6 +1168,15 @@ Internet-Draft            ietf-rpp-architecture            November 2025
    *  Potential discovery of RPP server location, like IANA
       bootstrapping document or a special DNS TXT RR with location of
       RPP service for the tld.
+
+
+
+
+
+Kowalik & Wullink          Expires 10 May 2026                 [Page 21]
+
+Internet-Draft            ietf-rpp-architecture            November 2025
+
 
    *  Potential use of well-known URIs (e.g., /.well-known/rpp-
       capabilities) for service discovery.
@@ -1169,15 +1201,6 @@ Internet-Draft            ietf-rpp-architecture            November 2025
       avoid hard-coding of URLs, same time allowing clients to navigate
       directly to a known resource without additional server queries.
 
-
-
-
-
-Kowalik & Wullink          Expires 10 May 2026                 [Page 21]
-
-Internet-Draft            ietf-rpp-architecture            November 2025
-
-
    *  As a matter of principle service discovery shall be used to
       bootstrap the communication between client and server, its
       capabilities and operational policies.  The server configuration
@@ -1186,7 +1209,7 @@ Internet-Draft            ietf-rpp-architecture            November 2025
       etc.  It would enable the right balance between discoverability
       and reduction of round trips between clients and servers.
 
-5.1.20.  Scalability
+5.1.21.  Scalability
 
    RPP leverages HTTP, enabling the use of standard web scalability
    techniques such as load balancing, horizontal scaling, and
@@ -1201,6 +1224,15 @@ Internet-Draft            ietf-rpp-architecture            November 2025
    This layer focuses on the data representation of RPP messages.  It
    defines the media type used to carry RPP data and supports various
    data representation formats.
+
+
+
+
+
+Kowalik & Wullink          Expires 10 May 2026                 [Page 22]
+
+Internet-Draft            ietf-rpp-architecture            November 2025
+
 
 5.2.1.  Data structure
 
@@ -1223,16 +1255,6 @@ Internet-Draft            ietf-rpp-architecture            November 2025
    *  *'JSContact' Structure Adaptation:* Adapting to the existing JSON
       representation for Contact Information [RFC9553], to maintain
       alignment with RDAP.
-
-
-
-
-
-
-Kowalik & Wullink          Expires 10 May 2026                 [Page 22]
-
-Internet-Draft            ietf-rpp-architecture            November 2025
-
 
    *  *'VC' Structure Adaptation:* Adapting to existing Verifiable
       Credentials ([W3C-VC], [SD-JWT]) data structures, especially for
@@ -1260,6 +1282,14 @@ Internet-Draft            ietf-rpp-architecture            November 2025
    *  *CBOR:* Concise Binary Object Representation for specific use
       cases requiring compact binary encoding [RFC8949].
 
+
+
+
+Kowalik & Wullink          Expires 10 May 2026                 [Page 23]
+
+Internet-Draft            ietf-rpp-architecture            November 2025
+
+
    Some data formats can be optionally represented in other
    encapsulations, for example JSON data can be represented also in JWT
    or CBOR.  Change of encapsulation shall not affect the data
@@ -1282,14 +1312,6 @@ Internet-Draft            ietf-rpp-architecture            November 2025
    processing of requests and responses and support protocol
    extensibility.
 
-
-
-
-Kowalik & Wullink          Expires 10 May 2026                 [Page 23]
-
-Internet-Draft            ietf-rpp-architecture            November 2025
-
-
 5.2.4.  Media Type definition
 
    Together data structure and data format would define the whole media
@@ -1310,6 +1332,19 @@ Internet-Draft            ietf-rpp-architecture            November 2025
    All resource types shall be defined in IANA registry in a way that
    allows fully automated processing of the resource definition,
    including data elements, operations and media type representation.
+
+
+
+
+
+
+
+
+
+Kowalik & Wullink          Expires 10 May 2026                 [Page 24]
+
+Internet-Draft            ietf-rpp-architecture            November 2025
+
 
 5.3.1.  Data Elements
 
@@ -1336,16 +1371,6 @@ Internet-Draft            ietf-rpp-architecture            November 2025
    for automated processing of the data element definition, including
    constraints and references to other data elements.
 
-
-
-
-
-
-Kowalik & Wullink          Expires 10 May 2026                 [Page 24]
-
-Internet-Draft            ietf-rpp-architecture            November 2025
-
-
 5.3.2.  Mapping
 
    This layer defines the mapping of Data Elements onto the Data
@@ -1365,6 +1390,18 @@ Internet-Draft            ietf-rpp-architecture            November 2025
    JavaScript Object Notation (JSON) Patch [RFC6902], may be used to
    define the mapping.
 
+
+
+
+
+
+
+
+Kowalik & Wullink          Expires 10 May 2026                 [Page 25]
+
+Internet-Draft            ietf-rpp-architecture            November 2025
+
+
 5.3.3.  Operations
 
    Each resource type shall define operations possible on this resource
@@ -1377,7 +1414,7 @@ Internet-Draft            ietf-rpp-architecture            November 2025
 
 5.3.4.  Server-Managed Resource Types
 
-   As mentioned in Section 5.1.6, RPP supports server-managed resources
+   As mentioned in Section 5.1.7, RPP supports server-managed resources
    as first-class resource types.  These resources are defined using the
    same mechanisms as client-provisioned resources, including data
    elements, mappings, and IANA registry entries.  The distinction lies
@@ -1392,15 +1429,6 @@ Internet-Draft            ietf-rpp-architecture            November 2025
    *  Server operational status and health information
 
    *  Statistics
-
-
-
-
-
-Kowalik & Wullink          Expires 10 May 2026                 [Page 25]
-
-Internet-Draft            ietf-rpp-architecture            November 2025
-
 
    Server-managed resources may expose logically associated information
    as sub-resources.
@@ -1419,6 +1447,16 @@ Internet-Draft            ietf-rpp-architecture            November 2025
    addition of new resource types, data elements, and operations without
    breaking existing implementations.  This extensibility is achieved
    through:
+
+
+
+
+
+
+Kowalik & Wullink          Expires 10 May 2026                 [Page 26]
+
+Internet-Draft            ietf-rpp-architecture            November 2025
+
 
    *  *Layered Design:* Each architectural layer (HTTP Transport, Data
       Representation, Resource Definition) is defined independently,
@@ -1448,16 +1486,6 @@ Internet-Draft            ietf-rpp-architecture            November 2025
    *  *Status codes:* New RPP status codes can be defined and registered
       including their mapping to HTTP status codes.
 
-
-
-
-
-
-Kowalik & Wullink          Expires 10 May 2026                 [Page 26]
-
-Internet-Draft            ietf-rpp-architecture            November 2025
-
-
    RPP shall facilitate standardisation and reuse by requiring that
    extensions be registered with IANA.  These registration requirements
    shall be fine-grained, applying independently to protocol elements
@@ -1477,6 +1505,14 @@ Internet-Draft            ietf-rpp-architecture            November 2025
    prevent conflicts with other extensions and with core protocol
    elements.  These names are used consistently in resource identifiers,
    data element identifiers, and URL path segments.
+
+
+
+
+Kowalik & Wullink          Expires 10 May 2026                 [Page 27]
+
+Internet-Draft            ietf-rpp-architecture            November 2025
+
 
    Standardised RPP extensions MUST register their names in a dedicated
    IANA registry for RPP extensions to ensure global uniqueness and
@@ -1506,14 +1542,6 @@ Internet-Draft            ietf-rpp-architecture            November 2025
    authorisation mechanisms that circumvent or conflict with those
    defined by the core specifications.
 
-
-
-
-Kowalik & Wullink          Expires 10 May 2026                 [Page 27]
-
-Internet-Draft            ietf-rpp-architecture            November 2025
-
-
 5.4.3.  Extension Review
 
    Before any extension is accepted by IANA, a review by an RPP expert
@@ -1533,6 +1561,20 @@ Internet-Draft            ietf-rpp-architecture            November 2025
       Definition Layer to define read-only server-managed resources
       (Issue #84).
 
+
+
+
+
+Kowalik & Wullink          Expires 10 May 2026                 [Page 28]
+
+Internet-Draft            ietf-rpp-architecture            November 2025
+
+
+   *  Create "Credential management" section for updating credentials
+      using an extension.
+
+   *  Changed default validation from lenient to strict.  (Issue #82)
+
    *  Added Extension Security and Extension Review Sections to
       Section 5.4 (Issue #91).
 
@@ -1548,9 +1590,12 @@ Internet-Draft            ietf-rpp-architecture            November 2025
       sections
 
    *  Added "additional measures to verify the client" to
-      Section 5.1.2.4 (Issue #76).
+      Section 5.1.3.4 (Issue #76).
 
    *  Added TLS mandatory to Section 5.1.1 (Issue #78).
+
+   *  Added Section Section 5.1.3.5 for credential and token revocation/
+      replacement mechanisms (Issue #79).
 
 6.2.  -03 to draft-ietf-rpp-architecture-00
 
@@ -1562,16 +1607,8 @@ Internet-Draft            ietf-rpp-architecture            November 2025
       Reorganised Section 5.1 to reflect that and added/rewritten some
       parts to cover all aspects.
 
-
-
-
-Kowalik & Wullink          Expires 10 May 2026                 [Page 28]
-
-Internet-Draft            ietf-rpp-architecture            November 2025
-
-
    *  Clarified the relationship and mapping between HTTP status codes
-      and RPP-specific status codes in Section 5.1.14.
+      and RPP-specific status codes in Section 5.1.15.
 
    *  Added paragraph on promotion of standard extensions to
       Section 5.4.
@@ -1581,12 +1618,20 @@ Internet-Draft            ietf-rpp-architecture            November 2025
    *  Explicitly stated that RPP SHOULD support client_id/password
       authentication for EPP compatibility in Section 5.1.2.
 
+
+
+
+Kowalik & Wullink          Expires 10 May 2026                 [Page 29]
+
+Internet-Draft            ietf-rpp-architecture            November 2025
+
+
 6.4.  -01 to -02
 
    *  Added responses must contain links to relevant object to
-      Section 5.1.3
+      Section 5.1.4
 
-   *  Added round trip minimisation principle to Section 5.1.19
+   *  Added round trip minimisation principle to Section 5.1.20
 
    *  Added description of lenient versus strict request validation to
       Section 4.2.3.
@@ -1612,19 +1657,11 @@ Internet-Draft            ietf-rpp-architecture            November 2025
       Section 5.4.
 
    *  Added Section about dereferenced related object representation to
-      Section 5.1.18.
+      Section 5.1.19.
 
 6.5.  -00 to -01
 
    *  Removed requirements and replaced with a reference to RPP WG
-
-
-
-
-Kowalik & Wullink          Expires 10 May 2026                 [Page 29]
-
-Internet-Draft            ietf-rpp-architecture            November 2025
-
 
    *  Encapsulation removed as a primary extension point and part of
       architecture
@@ -1637,6 +1674,13 @@ Internet-Draft            ietf-rpp-architecture            November 2025
       codes
 
    *  Added Extension mechanisms section to Protocol Details
+
+
+
+Kowalik & Wullink          Expires 10 May 2026                 [Page 30]
+
+Internet-Draft            ietf-rpp-architecture            November 2025
+
 
 7.  References
 
@@ -1672,16 +1716,6 @@ Internet-Draft            ietf-rpp-architecture            November 2025
               DOI 10.17487/RFC7231, RFC 7231, June 2014,
               <https://www.rfc-editor.org/info/rfc7231>.
 
-
-
-
-
-
-Kowalik & Wullink          Expires 10 May 2026                 [Page 30]
-
-Internet-Draft            ietf-rpp-architecture            November 2025
-
-
    [RFC7240]  Snell, J., "Prefer Header for HTTP", IETF,
               DOI 10.17487/RFC7240, RFC 7240, June 2014,
               <https://www.rfc-editor.org/info/rfc7240>.
@@ -1696,6 +1730,14 @@ Internet-Draft            ietf-rpp-architecture            November 2025
               DOI 10.17487/RFC6570, RFC 6570, March 2012,
               <https://www.rfc-editor.org/info/rfc6570>.
 
+
+
+
+Kowalik & Wullink          Expires 10 May 2026                 [Page 31]
+
+Internet-Draft            ietf-rpp-architecture            November 2025
+
+
    [RFC6749]  Hardt, D., "The OAuth 2.0 Authorization Framework", IETF,
               DOI 10.17487/RFC6749, RFC 6749, October 2012,
               <https://www.rfc-editor.org/info/rfc6749>.
@@ -1704,6 +1746,10 @@ Internet-Draft            ietf-rpp-architecture            November 2025
               Framework: Bearer Token Usage", IETF,
               DOI 10.17487/RFC6750, RFC 6750, October 2012,
               <https://www.rfc-editor.org/info/rfc6750>.
+
+   [RFC7009]  Dronia, S., Scurtescu, M., and T. Lodderstedt, "OAuth 2.0
+              Token Revocation", IETF, DOI 10.17487/RFC7009, RFC 7009,
+              August 2013, <https://www.rfc-editor.org/info/rfc7009>.
 
    [RFC7519]  Jones, M., Bradley, J., and N. Sakimura, "JSON Web Token
               (JWT)", IETF, DOI 10.17487/RFC7519, RFC 7519, May 2015,
@@ -1727,17 +1773,6 @@ Internet-Draft            ietf-rpp-architecture            November 2025
               DOI 10.17487/RFC9205, BCP 56, RFC 9205, June 2022,
               <https://www.rfc-editor.org/info/rfc9205>.
 
-
-
-
-
-
-
-Kowalik & Wullink          Expires 10 May 2026                 [Page 31]
-
-Internet-Draft            ietf-rpp-architecture            November 2025
-
-
    [RFC8949]  Bormann, C. and P. Hoffman, "Concise Binary Object
               Representation (CBOR)", IETF, DOI 10.17487/RFC8949,
               BCP 94, RFC 8949, December 2020,
@@ -1751,6 +1786,13 @@ Internet-Draft            ietf-rpp-architecture            November 2025
    [RFC7617]  Reschke, J., "The 'Basic' HTTP Authentication Scheme",
               IETF, DOI 10.17487/RFC7617, RFC 7617, September 2015,
               <https://www.rfc-editor.org/info/rfc7617>.
+
+
+
+Kowalik & Wullink          Expires 10 May 2026                 [Page 32]
+
+Internet-Draft            ietf-rpp-architecture            November 2025
+
 
    [RFC8126]  Cotton, M., Leiba, B., and T. Narten, "Guidelines for
               Writing an IANA Considerations Section in RFCs", IETF,
@@ -1786,14 +1828,6 @@ Internet-Draft            ietf-rpp-architecture            November 2025
    [SemVer]   "Semantic Versioning 2.0.0", Misc SemVer 2.0.0,
               <https://semver.org/spec/v2.0.0.html>.
 
-
-
-
-Kowalik & Wullink          Expires 10 May 2026                 [Page 32]
-
-Internet-Draft            ietf-rpp-architecture            November 2025
-
-
    [REST]     Fielding, R., "Architectural Styles and the Design of
               Network-based Software Architectures",
               Doctoral Dissertation University of California, Irvine,
@@ -1807,6 +1841,14 @@ Internet-Draft            ietf-rpp-architecture            November 2025
               M., Thibodeau, T., Herman, I., Cohen, G., and M. Jones,
               "Verifiable Credentials Data Model v2.0", vc-data-model-
               2.0, <https://www.w3.org/TR/vc-data-model-2.0/>.
+
+
+
+
+Kowalik & Wullink          Expires 10 May 2026                 [Page 33]
+
+Internet-Draft            ietf-rpp-architecture            November 2025
+
 
 Authors' Addresses
 
@@ -1845,4 +1887,18 @@ Authors' Addresses
 
 
 
-Kowalik & Wullink          Expires 10 May 2026                 [Page 33]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Kowalik & Wullink          Expires 10 May 2026                 [Page 34]
