@@ -46,7 +46,7 @@
 </abstract>
     <note><name>Contributing</name>
 
-<t anchor="_bb4d6bff-2e23-5f22-6202-de5183d5a34c">When contributing to this document, please use the following GitHub project: <eref target="https://github.com/pawel-kow/RPP-architecture"></eref>.</t>
+<t anchor="_bb4d6bff-2e23-5f22-6202-de5183d5a34c">When contributing to this document, please use the following GitHub project: <eref target="https://github.com/ietf-wg-rpp/RPP-architecture"></eref>.</t>
 </note>
   </front>
   <middle>
@@ -58,17 +58,20 @@
 
 <t anchor="_8506c5a3-b243-7444-75c6-9001d29728bc">This architecture document serves as a foundation for a series of specifications that will collectively define RPP. It details the layered approach, core components, and design considerations for building an interoperable and extensible provisioning protocol. RPP is intended to coexist with EPP, offering an alternative for implementers seeking a RESTful approach without aiming to replace EPP or define migration paths from EPP. RPP aims for data model compatibility with EPP core objects to allow automatic and mechanical mapping and conversion, especially for core objects (domain, contact, host).</t>
 </section>
-    <section anchor="_ac16e9d1-59b2-d778-61b6-938116e69b94"><name>Terminology</name>
+    <section anchor="_bf47949e-0076-b90e-d4cc-25d3505560fb"><name>Terminology</name>
 
 <t anchor="_5fc8299b-18c8-f461-c422-35b49f4911d0">This document uses terminology from RFC5730 <xref target="RFC5730" section="" relative=""></xref> and broadly adopts the REST architectural principles as defined in [REST] and related RFCs.</t>
 
-<ul anchor="_c9bd2ee0-28bb-b718-ca7c-b917690dbc7a"><li><strong>RPP:</strong> RESTful Provisioning Protocol. The protocol being defined by the RPP working group.</li>
+<ul anchor="_118db662-f519-492d-1eee-4fac59aaa160"><li><strong>RPP:</strong> RESTful Provisioning Protocol. The protocol being defined by the RPP working group.</li>
 <li><strong>EPP:</strong> Extensible Provisioning Protocol as defined in <xref target="RFC5730" section="" relative=""></xref>.</li>
 <li><strong>REST:</strong> Representational State Transfer architectural style <xref target="REST" section="" relative=""></xref>.</li>
 <li><strong>JSON:</strong> JavaScript Object Notation <xref target="RFC8259" section="" relative=""></xref>.</li>
 <li><strong>JWT:</strong> JSON Web Token <xref target="RFC7519" section="" relative=""></xref>.</li>
 <li><strong>OpenAPI:</strong> The OpenAPI Specification (OAS) (formerly known as Swagger Specification) is an API description format for REST APIs <xref target="OpenAPI" section="" relative=""></xref>.</li>
 <li><strong>RPP client:</strong> An entity or application that interacts with the RPP server to perform provisioning operations, such as creating, updating, or deleting resources.</li>
+<li><strong>Sponsoring Client:</strong> The RPP Client that currently has sponsorship of the object.</li>
+<li><strong>Gaining Client:</strong> The client seeking to gain sponsorship of the object in a Transfer Operation.</li>
+<li><strong>IDN:</strong> Internationalised Domain Names as defined in <xref target="RFC5890" section="" relative=""></xref></li>
 </ul>
 </section>
     <section anchor="_d053034f-32f8-cf4f-5258-3d7027f600f6"><name>Requirements</name>
@@ -210,7 +213,7 @@
 </section>
 </section>
 </section>
-    <section anchor="_bc67e8de-b687-e935-9a25-540b71d61741"><name>Protocol Details</name>
+    <section anchor="_63f007f6-cd87-5570-cffd-d9336227ec06"><name>Protocol Details</name>
 
 <t anchor="_258b3fe6-6525-0317-3cb7-1b42072bd9cf">This section provides further details on each layer of the RPP architecture.</t>
 
@@ -227,87 +230,92 @@
 
 <section anchor="authentication-authorization"><name>Authentication and Authorisation</name>
 
-<t anchor="_6ecedd84-91ab-9739-f14b-99c90e51bff1">RPP is aimed to leverage scalable and modern authorisation standards, with a focus on OAuth 2.0 <xref target="RFC6749" section="" relative=""></xref> and related frameworks. However, to maintain functional equivalence with EPP client authentication, RPP SHOULD also support authentication schemes that can carry a client identifier and a password, such as HTTP Basic Authentication. RPP should be able to support future authentication and authorisation standards defined for HTTP.</t>
+<t anchor="_a9f420cc-ccf9-6a6b-5383-86c17c18c981">RPP is aimed to leverage scalable and modern authorisation standards, with a focus on OAuth 2.0 <xref target="RFC6749" section="" relative=""></xref> and related frameworks. However, to maintain functional equivalence with EPP client authentication, RPP SHOULD also support authentication schemes that can carry a client identifier and a password, such as HTTP Basic Authentication <xref target="RFC7617" section="" relative=""></xref>. RPP should be able to support future authentication and authorisation standards defined for HTTP.</t>
+</section>
 
-<t anchor="_a1c98f13-4deb-0bd1-96ef-537bb62ca9d2">Specifications will define profiles for:</t>
+<section anchor="credential-management"><name>Credential management</name>
 
-<ul anchor="_b0623248-888f-1f0f-6f91-c8f6c9682c3d"><li>HTTP Authentication schemes (e.g., HTTP Basic Authentication, Bearer Token <xref target="RFC6750" section="" relative=""></xref> etc.)</li>
+<t anchor="_47c6c410-e8b2-f25b-177a-41c42e812cb0">The management of client credentials is not considered to be a part of the core protocol, for this an extension can be created using the extension points described in <xref target="extension-mechanisms"></xref>. This will enable support for situations where management of authentication credentials is not delegated to a separate identity provider.</t>
+
+<t anchor="_8a7cfeae-6b50-09c5-5f3a-ebb72069e3aa">Specifications will define profiles for:</t>
+
+<ul anchor="_1fde82a0-dce8-b263-7aba-05ad0f3617c0"><li>HTTP Authentication schemes (e.g., HTTP Basic Authentication, Bearer Token <xref target="RFC6750" section="" relative=""></xref> etc.)</li>
 <li>Authorisation frameworks (e.g., OAuth 2.0 <xref target="RFC6749" section="" relative=""></xref>)</li>
 </ul>
 
-<t anchor="_f02a7c7f-2dfb-fc69-e208-929f4a662166">Implementations will be able to choose authentication and authorisation methods appropriate for their security requirements.</t>
+<t anchor="_4745ab63-0f08-66e6-622e-ee90f93fde01">Implementations will be able to choose authentication and authorisation methods appropriate for their security requirements.</t>
 
-<section anchor="_65619dee-e130-2648-c360-97fba36779b4"><name>Authorisation Scopes</name>
+<section anchor="_021ed153-7c38-13a7-dfd4-8aaf3ba1796e"><name>Authorisation Scopes</name>
 
-<t anchor="_f07864ae-9a0b-494d-b97e-7e18a4d468b9">RPP specifications will standardise authorisation scopes (like rpp:read or rpp:write) to define granular access control for different usage scenarios. These scopes will be defined for various operations and resource types, ensuring that clients can be granted only the necessary permissions.</t>
+<t anchor="_63a8a886-d2ff-473a-6e63-c4d069534e74">RPP specifications will standardise authorisation scopes (like rpp:read or rpp:write) to define granular access control for different usage scenarios. These scopes will be defined for various operations and resource types, ensuring that clients can be granted only the necessary permissions.</t>
 </section>
 
-<section anchor="_83e5cd67-ce26-4ce0-996a-9a1dde73e848"><name>Fine-Grained Authorisation</name>
+<section anchor="_bc196c51-74ea-87c7-09d2-46b4edf8a416"><name>Fine-Grained Authorisation</name>
 
-<t anchor="_4adc00c8-7c34-cc5a-788f-056f65f596ea">RPP authorisation models may become fine-grained, extending beyond simple auth-code based models used in EPP. Authorisation decisions will be able to consider the specific operation being performed (e.g., update vs. read), the resource being accessed (e.g., a specific domain name), and potentially even attributes within the resource.</t>
+<t anchor="_598107cd-ca21-9527-6f3b-df1b13e3ab4e">RPP authorisation models may become fine-grained, extending beyond simple auth-code based models used in EPP. Authorisation decisions will be able to consider the specific operation being performed (e.g., update vs. read), the resource being accessed (e.g., a specific domain name), and potentially even attributes within the resource.</t>
 
-<t anchor="_0358f0a0-085c-e3a8-a340-5652fcdf3421">Here solutions like OAuth2 RAR <xref target="RFC9396" section="" relative=""></xref> could be considered to provide fine-grained access control.</t>
+<t anchor="_792c5ad1-d762-0649-3cfc-832ccce9ef26">Here solutions like OAuth2 RAR <xref target="RFC9396" section="" relative=""></xref> could be considered to provide fine-grained access control.</t>
 </section>
 
-<section anchor="_a55802f9-62ec-a7b6-350e-c5e55813069c"><name>Relationship between clients and authentication credentials</name>
+<section anchor="_53c50b3e-2dd4-8f74-dbbf-dc196c4f7109"><name>Relationship between clients and authentication credentials</name>
 
-<t anchor="_72ab90d9-ad5f-5da5-46ef-fe432e0ecceb">RPP authentication and authorisation model will make a clear distinction between the login credentials and the authorisation to act in context of a given RPP client. More than one credential might be authorised to act on behalf of the same RPP client. The same credential however must always be assigned to one and only one RPP client context.</t>
+<t anchor="_0063747a-a857-6f84-99d9-5f60177ff671">RPP authentication and authorisation model will make a clear distinction between the login credentials and the authorisation to act in context of a given RPP client. More than one credential might be authorised to act on behalf of the same RPP client. The same credential however must always be assigned to one and only one RPP client context.</t>
 
-<t anchor="_51d4aca4-e534-4ed9-7b9f-ea4507f81173">In case of HTTP Basic Authentication, one user-id is always bound to at most one RPP client. For OAuth, the issued token is bound to the context of at most one RPP client, even though the OAuth client itself might have access to multiple RPP clients. The assignment of tokens to specific RPP clients can be controlled through the authorisation flow using the OAuth scope parameter. For example, if an OAuth client has access to two RPP clients (Client A and Client B), the scope parameter can specify which client the token applies to. A scope value like <tt>scope=rpp:clientA</tt> would ensure the token is valid only for Client A, while <tt>scope=rpp:clientB</tt> would apply to Client B.</t>
+<t anchor="_7468f631-74c9-1b14-d94e-d08562a65f58">In case of HTTP Basic Authentication, one user-id is always bound to at most one RPP client. For OAuth, the issued token is bound to the context of at most one RPP client, even though the OAuth client itself might have access to multiple RPP clients. The assignment of tokens to specific RPP clients can be controlled through the authorisation flow using the OAuth scope parameter. For example, if an OAuth client has access to two RPP clients (Client A and Client B), the scope parameter can specify which client the token applies to. A scope value like <tt>scope=rpp:clientA</tt> would ensure the token is valid only for Client A, while <tt>scope=rpp:clientB</tt> would apply to Client B.</t>
 </section>
 
 <section anchor="http-layer-details-security"><name>Security</name>
 
-<t anchor="_4532122c-c111-0dd0-d8df-2a088ed05aca">RPP will not explicitly define security related policies related to authentication or authorisation (such as password complexity, token lifetime, cryptography used, or additional measures to verify the client) on the protocol level. Instead, these properties will be delegated to the best practices of the chosen authentication schemes, which may evolve over time and would have to be independent of the protocol itself.</t>
+<t anchor="_235362e9-2ddc-1668-6de0-ceb3fcc06829">RPP will not explicitly define security related policies related to authentication or authorisation (such as password complexity, token lifetime, cryptography used, or additional measures to verify the client) on the protocol level. Instead, these properties will be delegated to the best practices of the chosen authentication schemes, which may evolve over time and would have to be independent of the protocol itself.</t>
 </section>
 
 <section anchor="credential-lifecycle"><name>Credential and Token Lifecycle</name>
 
-<t anchor="_aebf7a8e-1775-b878-5970-f7ed2b1a92b1">RPP will support mechanisms for revoking, rotating or deprecating credentials, tokens, or permissions when they are no longer needed or if they become compromised.</t>
+<t anchor="_eafe464b-ebdf-fa79-27a9-cfdac2ff62a5">RPP will support mechanisms for revoking, rotating or deprecating credentials, tokens, or permissions when they are no longer needed or if they become compromised.</t>
 
-<t anchor="_9969a671-cbb4-2d2c-ae2a-6076cf64b5c1">The architecture delegates revocation mechanisms to the specific authentication method in use, following their established practices. For OAuth-based deployments, standard token revocation mechanisms as defined in <xref target="RFC7009" section="" relative=""></xref> should be utilised. For HTTP Basic Authentication revocation must be fulfilled by off-band operational practice, or using using Authenticaton Extension to rotate the credential. Protocol specifications must emphasize, that implementations should ensure that revocation takes effect promptly and that revoked credentials are consistently rejected across all RPP endpoints.</t>
+<t anchor="_635ef5a1-c65b-abf0-7609-6f792f2487c3">The architecture delegates revocation mechanisms to the specific authentication method in use, following their established practices. For OAuth-based deployments, standard token revocation mechanisms as defined in <xref target="RFC7009" section="" relative=""></xref> should be utilised. For HTTP Basic Authentication revocation must be fulfilled by off-band operational practice, or using using Authenticaton Extension to rotate the credential. Protocol specifications must emphasize, that implementations should ensure that revocation takes effect promptly and that revoked credentials are consistently rejected across all RPP endpoints.</t>
 
-<t anchor="_d0885896-d6f9-f0e3-08b0-3e327cabdff1">Service discovery endpoints may advertise supported revocation mechanisms, enabling clients to discover how to revoke credentials when necessary.</t>
+<t anchor="_bb8c17a7-1c29-3a92-f1ab-5b2a614d12c9">Service discovery endpoints may advertise supported revocation mechanisms, enabling clients to discover how to revoke credentials when necessary.</t>
 </section>
 
-<section anchor="_0a4ff3d5-8625-1346-0168-6c9c1ee52d27"><name>Object level authorisation</name>
+<section anchor="_f690a40d-0221-1eb8-ccbf-5dd90c85f5f3"><name>Object level authorisation</name>
 
-<t anchor="_3e627d68-9017-f5d1-feaa-08d5edb3e5c6">RPP will define a mechanism for object-level authorisation, preventing unauthorised access to specific objects or resources. Each object will have an associated sponsor or owner with full control over an object, and the protocol will allow for the specification of which clients are authorised to access or modify non-sponsored/owned objects. This could be achieved through state-of-the-art standards like OAuth authorisation tokens, scopes, and resource-specific permissions but also shared secrets for backward compatibility with EPP password-based authorisation information.</t>
+<t anchor="_7552b323-b596-0380-54b0-d65e942aa513">RPP will define a mechanism for object-level authorisation, preventing unauthorised access to specific objects or resources. Each object will have an associated sponsor or owner with full control over an object, and the protocol will allow for the specification of which clients are authorised to access or modify non-sponsored/owned objects. This could be achieved through state-of-the-art standards like OAuth authorisation tokens, scopes, and resource-specific permissions but also shared secrets for backward compatibility with EPP password-based authorisation information. All parties involved in a running or completed process, such as the Sponsoring Client and the Gaining Client for a transfer operation, must be allowed to query the status of the proces using the same process resource.</t>
 </section>
 </section>
 
 <section anchor="resource-addressing"><name>Resource Addressing</name>
 
-<t anchor="_8482cb64-2dc0-f7f0-1050-52a207aa8117">RPP resources are addressed using URLs. Considerations include:</t>
+<t anchor="_f333e72d-ce1c-4581-825f-84fc1aa34419">RPP resources are addressed using URLs. Considerations include:</t>
 
-<ul anchor="_c7d3a273-b23e-9f47-08d7-ac8ca14d393f"><li>Hierarchical URL structure to represent resources of different types (e.g., <tt>/domains/{domain-name}</tt>, <tt>/contacts/{contact-id}</tt>).</li>
+<ul anchor="_94dd0d07-72e2-5f0f-d559-99257e911ae0"><li>Hierarchical URL structure to represent resources of different types (e.g., <tt>/domains/{domain-name}</tt>, <tt>/contacts/{contact-id}</tt>).</li>
 <li>URL structure to represent list of related resources (e.g., <tt>/domains/{domain-name}/contacts/</tt>)</li>
 </ul>
 
-<t anchor="_403e99a1-5470-d0cb-f070-05a94b6c38bc">RPP URL structure will be designed to be human-readable, intuitive, and RESTful, allowing clients to easily navigate and interact with resources.</t>
+<t anchor="_3b04bb94-3d0c-0e18-c923-cd6316e093b8">RPP URL structure will be designed to be human-readable, intuitive, and RESTful, allowing clients to easily navigate and interact with resources.</t>
 
-<t anchor="_92253bcc-e316-5c03-f49a-2770d3d5028f">RPP would not require all URLs to be hard wired to server's RPP root URL. Instead, it would allow for relative URLs to be defined and discovered by the client. This would allow servers to distribute resources across multiple servers and URLs and allow for easier scaling as described in <xref target="RFC9205" section="" relative=""></xref>. At the same time the URLs shall be deterministic for the duration of the client session in order to minimise round trips and streamline the interaction.</t>
+<t anchor="_bc62345a-0665-1490-149e-b9adbbea80df">RPP would not require all URLs to be hard wired to server's RPP root URL. Instead, it would allow for relative URLs to be defined and discovered by the client. This would allow servers to distribute resources across multiple servers and URLs and allow for easier scaling as described in <xref target="RFC9205" section="" relative=""></xref>. At the same time the URLs shall be deterministic for the duration of the client session in order to minimise round trips and streamline the interaction.</t>
 
-<t anchor="_e47958cd-d3df-498d-f538-de39b9193429">As a matter of extensibility consideration RPP should allow for additional path segments to be added to the URLs and be discoverable by clients.</t>
+<t anchor="_3db792a5-b813-cf9a-9453-bbd247a24fad">As a matter of extensibility consideration RPP should allow for additional path segments to be added to the URLs and be discoverable by clients.</t>
 
-<t anchor="_db1be90f-2314-62f1-6f15-e03d13ee3b03">RPP responses will include URLs for related resources, allowing clients to navigate newly created resources easily. This is similar to the "links" concept in RESTful APIs, where related resources are linked together.</t>
+<t anchor="_9e0e996e-834b-7695-409f-035b26031026">RPP responses will include URLs for related resources, allowing clients to navigate newly created resources easily. This is similar to the "links" concept in RESTful APIs, where related resources are linked together.</t>
 
-<section anchor="_07d1d4a2-e155-9ede-a97f-2b229d4e3fa5"><name>Internationalised Domain Names (IDN)</name>
+<section anchor="_e1040169-fb08-a0e7-cf12-d1dd734a0c14"><name>Internationalised Domain Names (IDN)</name>
 
-<t anchor="_928c9f7b-08a9-dae3-bdcb-2dd3d2890c19">RPP will address the handling of Internationalised Domain Names (IDNs) in resource addressing. Specifications will define whether to use IDN or UTF-8 encoding directly in URLs and whether to employ redirects to canonical URLs or "see-also" linking for alternative representations. For example,  a "see-also" link could point from a UTF-8 encoded URL to an IDN URL and vice versa, allowing clients to use either URL. Another way would be to always redirect to the canonical URL, which would be the IDN URL.</t>
+<t anchor="_752cb063-724c-2fb3-af71-c3403dc8164d">RPP will address the handling of IDNs in resource addressing. Specifications will define whether to use IDN or UTF-8 encoding directly in URLs and whether to employ redirects to canonical URLs or "see-also" linking for alternative representations. For example,  a "see-also" link could point from a UTF-8 encoded URL to an IDN URL and vice versa, allowing clients to use either URL. Another way would be to always redirect to the canonical URL, which would be the IDN URL.</t>
 </section>
 </section>
 
 <section anchor="http-layer-detail-mapping-basic-ops"><name>Mapping of basic operations to HTTP uniform interface (verbs)</name>
 
-<t anchor="_16b1f78c-203a-939a-a9d9-f74f2b362025">RPP operations are mapped to standard HTTP methods to leverage the uniform interface and RESTful principles:</t>
+<t anchor="_cd590815-2f4e-b245-939f-785b7593ac4c">RPP operations are mapped to standard HTTP methods to leverage the uniform interface and RESTful principles:</t>
 
-<ul anchor="_75f0589d-e574-c0b4-9120-bc8e5b286e0f"><li><t anchor="_e8a2ba18-a48a-600e-2c52-8899d5fb4b11"><strong>HEAD:</strong>  Retrieve resource state (e.g., retrieving domain existence information). This may be a candidate for equivalence of EPP check command, however it may come with a few caveats to consider:</t>
-<ul anchor="_1c75b5dd-acca-d12c-9687-a993c9b843b4"><li>EPP check is intended to check whether (future) resource provisioning is possible. This is not semantically the same as resource state. Overloading HEAD with EPP semantics may lead to confusion, especially as some frameworks implicitly implement HEAD out of GET handling.</li>
+<ul anchor="_c5f7a9ea-ed79-ca67-fdc2-9c8d6502dab6"><li><t anchor="_7fece6ed-8b4d-0ed8-76a5-6da5112cc764"><strong>HEAD:</strong>  Retrieve resource state (e.g., retrieving domain existence information). This may be a candidate for equivalence of EPP check command, however it may come with a few caveats to consider:</t>
+<ul anchor="_5ed34d42-cda4-18c9-84b4-ad8640a44589"><li>EPP check is intended to check whether (future) resource provisioning is possible. This is not semantically the same as resource state. Overloading HEAD with EPP semantics may lead to confusion, especially as some frameworks implicitly implement HEAD out of GET handling.</li>
 <li>a better equivalence of EPP check would be a POST with Expect header, however this header being a reserved header in browsers it may not be availble to all client implementations</li>
 </ul>
 
-<t anchor="_52f699ef-9be5-9b35-084d-418da489b793">The conclusion is that RPP should not overload HTTP HEAD with own semantics, and support HEAD as it is defined in HTTP.</t>
+<t anchor="_8e9dc9cb-7006-4e45-563b-a3fdf91872f3">The conclusion is that RPP should not overload HTTP HEAD with own semantics, and support HEAD as it is defined in HTTP.</t>
 </li>
 <li><strong>OPTIONS</strong> RPP shall not define any new semantics for OPTIONS however the specifications should make implementers aware of its role in CORS and pre-flight requests typically made by web browsers</li>
 <li><strong>GET:</strong>  Retrieve resource state (e.g., retrieving domain or contact information) - EPP info command</li>
@@ -318,83 +326,83 @@
 </ul>
 </section>
 
-<section anchor="_b1440d9b-6ab2-e449-6f25-9c8b7ed5285f"><name>Mapping of operations beyond HTTP uniform interface to URLs and verbs</name>
+<section anchor="_0b5fedfe-5d11-84e9-809c-fa56984f307d"><name>Mapping of operations beyond HTTP uniform interface to URLs and verbs</name>
 
-<t anchor="_ce2f2407-9f63-68e1-e182-7f069684dbe3">Many of EPP commands do not map directly to the HTTP uniform interface. RPP will define how to handle these operations using appropriate URL structures and HTTP methods. In order to model additional operations RPP will define an abstraction of process, this being either a transient or a long running operations with state. In both cases such process may accept additional input data as well as have an outcome or result not being part of the resource state itself. Processes shall therefore be modelled as separate sub-resources of the resource being processed, with own uniform interface and set of operations (CRUD).</t>
+<t anchor="_7d586285-c5f3-6544-037b-6dca10087540">Many of EPP commands do not map directly to the HTTP uniform interface. RPP will define how to handle these operations using appropriate URL structures and HTTP methods. In order to model additional operations RPP will define an abstraction of process, this being either a transient or a long running operations with state. In both cases such process may accept additional input data as well as have an outcome or result not being part of the resource state itself. Processes shall therefore be modelled as separate sub-resources of the resource being processed, with own uniform interface and set of operations (CRUD).</t>
 
-<t anchor="_c4bd7767-a075-842f-008d-04854e02a0cc">EPP transfer commands (query and transform), may be modelled by a subresource <tt>/transfer</tt> of the resource being transferred, or a collection <tt>/transfers</tt> with a PUT/POST operation correspondingly to initiate the transfer, GET operation to query the transfer status and POST operation to approve or reject the transfer.</t>
+<t anchor="_c188c299-3bbc-feb1-9720-2bb5336c69a2">EPP transfer commands (query and transform), may be modelled by a subresource <tt>/transfer</tt> of the resource being transferred, or a collection <tt>/transfers</tt> with a PUT/POST operation correspondingly to initiate the transfer, GET operation to query the transfer status and POST operation to approve or reject the transfer.</t>
 
-<t anchor="_f7edce76-2623-8ebf-8cb2-81d188942075">Other transform operations like renew, or restore which are not directly addressable resources in terms of REST will modelled as a convention of URLs with processing resources with only POST interface, e.g. <tt>/renewal</tt>.</t>
+<t anchor="_682b7ef8-c722-d576-e95d-829c1f716a5e">Other transform operations like renew, or restore which are not directly addressable resources in terms of REST will modelled as a convention of URLs with processing resources with only POST interface, e.g. <tt>/renewal</tt>.</t>
 
-<t anchor="_6b9c3be5-e285-ea08-66d8-1ad4c18877ad">This pattern can be further applied to object operations not defined in the core protocol or EPP, allowing easy and uniform extension of allowed operations.</t>
+<t anchor="_bece8900-b9ac-49fc-1643-ad90462aa02c">This pattern can be further applied to object operations not defined in the core protocol or EPP, allowing easy and uniform extension of allowed operations.</t>
 
-<t anchor="_80fd4e40-b90e-7813-a444-85cf7252edb7">In order to minimise name collisions between process names and other kind of sub-resources, a distinct path segment shall be dedicated to processes, e.g. <tt>/processes/{process-name}</tt> or <tt>/operations/{operation-name}</tt>.</t>
+<t anchor="_f9d0db3e-a838-ef61-64f9-7492194a4a7c">In order to minimise name collisions between process names and other kind of sub-resources, a distinct path segment shall be dedicated to processes, e.g. <tt>/processes/{process-name}</tt> or <tt>/operations/{operation-name}</tt>.</t>
 
-<t anchor="_9aa4c1c3-237b-86ee-1055-c11d5df6fc82">The path segments shall be appended to the resource path to create full URI of such processing resource (e.g. <tt>/domains/{domain-name}/processes/renewal</tt> for domain renew operation).</t>
+<t anchor="_d972c6d1-65ca-3d58-c0e9-b16964513c6f">The path segments shall be appended to the resource path to create full URI of such processing resource (e.g. <tt>/domains/{domain-name}/processes/renewal</tt> for domain renew operation).</t>
 
-<t anchor="_98e0925a-113c-99f2-24ba-5a3113c4f0ad">As discussed in <xref target="http-layer-detail-mapping-basic-ops"></xref> EPP check command may not be appropriate to be mapped directly to the HTTP uniform interface of the resource itself. EPP check command will be therefore modelled as sub-resource such as <tt>/availability</tt> offering both HEAD operation for quick yes/no response and GET operation for more detailed response allowing for example to extend on the dataset provided (e.g. pricing information).</t>
+<t anchor="_3b214777-b8c9-2463-0f6e-47d393b677fb">As discussed in <xref target="http-layer-detail-mapping-basic-ops"></xref> EPP check command may not be appropriate to be mapped directly to the HTTP uniform interface of the resource itself. EPP check command will be therefore modelled as sub-resource such as <tt>/availability</tt> offering both HEAD operation for quick yes/no response and GET operation for more detailed response allowing for example to extend on the dataset provided (e.g. pricing information).</t>
 
-<t anchor="_e09d442a-cdbc-4b50-35a8-2587f5089871">This basic set of rules and guidelines will be further refined in the RPP specifications and give a universal toolset for extending RPP with new resources and commands.</t>
+<t anchor="_b71c366c-da45-4133-72ab-a66d480f6e7b">This basic set of rules and guidelines will be further refined in the RPP specifications and give a universal toolset for extending RPP with new resources and commands.</t>
 </section>
 
-<section anchor="_5edef7d1-67c2-e5d9-15cb-d44f8ab4afa7"><name>HTTP response codes</name>
+<section anchor="_baefb380-79df-2b62-985f-c38e2be73521"><name>HTTP response codes</name>
 
-<t anchor="_6649a605-75e7-4773-01cb-c5ace3c21c2b">In general RPP shall make use of HTTP status codes to indicate general response status categories (e.g., 2xx success responses, 4xx for client errors, 5xx for server errors) <xref target="RFC7231" section="" relative=""></xref> as opposed to responding always 200 if the request was understood even if the operation itself failed. This allows clients and intermediaries to make first level of determination of the requests outcome based on the status code alone, without needing to parse the response body.</t>
+<t anchor="_5f74e10c-4b75-8bbe-ddfc-3e44ce3aab08">In general RPP shall make use of HTTP status codes to indicate general response status categories (e.g., 2xx success responses, 4xx for client errors, 5xx for server errors) <xref target="RFC7231" section="" relative=""></xref> as opposed to responding always 200 if the request was understood even if the operation itself failed. This allows clients and intermediaries to make first level of determination of the requests outcome based on the status code alone, without needing to parse the response body.</t>
 
-<t anchor="_263dcba6-4f1a-7b98-80bf-4dee3fdc64d3">RPP shall use as specific HTTP codes as possible, using generic codes like 400 Bad Request or 500 Internal Server Error only if no corresponsing specific code exists (e.g. 404 for not existing resource or 401 for unauthenticated request).</t>
+<t anchor="_4927269d-fc57-5dfe-f10a-81a14f7125c2">RPP shall use as specific HTTP codes as possible, using generic codes like 400 Bad Request or 500 Internal Server Error only if no corresponsing specific code exists (e.g. 404 for not existing resource or 401 for unauthenticated request).</t>
 
-<t anchor="_62734ef0-c6ba-60e7-f60f-3f4f4f1fc297">More specific RPP codes are elaborated in <xref target="http-layer-detail-rpp-status-codes"></xref>.</t>
+<t anchor="_d274e683-87bc-db9e-d26b-277f43f3dbbc">More specific RPP codes are elaborated in <xref target="http-layer-detail-rpp-status-codes"></xref>.</t>
 </section>
 
-<section anchor="_d1fe3398-87ef-45db-20d6-8f6f7822a1cb"><name>Content negotiation for media types</name>
+<section anchor="_90b8f38e-ecc5-5a3e-e811-b16c43fa6396"><name>Content negotiation for media types</name>
 
-<t anchor="_35ac789b-5512-a44f-a745-faa05b861aee">RPP supports content negotiation to allow clients to specify preferred media types for request and response payloads using the HTTP 'Accept' and 'Content-Type' headers <xref target="RFC7231" section="" relative=""></xref>.</t>
+<t anchor="_6d825898-d2e5-85d8-0a0a-710f67ac0570">RPP supports content negotiation to allow clients to specify preferred media types for request and response payloads using the HTTP 'Accept' and 'Content-Type' headers <xref target="RFC7231" section="" relative=""></xref>.</t>
 
-<ul anchor="_cf92df66-fc86-74ca-4af3-52ac740d2627"><li>'application/rpp+json' as the primary media type.</li>
+<ul anchor="_61e562ec-16e1-fe70-cec8-ea854e3b92ac"><li>'application/rpp+json' as the primary media type.</li>
 <li>potential media type parameters for versioning, profiles, and other protocol elements.</li>
 <li>Potential support for other media types defined in the <xref target="data-representation-layer"></xref></li>
 </ul>
 </section>
 
-<section anchor="_0631ea08-8e58-5643-6f85-82a604129930"><name>Caching</name>
+<section anchor="_8e97c77a-108a-8e55-367c-476c01ec70bd"><name>Caching</name>
 
-<t anchor="_3846070c-2b3a-2eb0-6943-06ea3023385c">RPP shall benefit from HTTP standard caching mechanisms to enable standard components like proxies and caches to improve performance and reduce load on servers. RPP shall define caching policies for different resources and operations, including cache-control headers and ETag support.</t>
+<t anchor="_44cee94a-8564-6307-2a1e-896a916674b2">RPP shall benefit from HTTP standard caching mechanisms to enable standard components like proxies and caches to improve performance and reduce load on servers. RPP shall define caching policies for different resources and operations, including cache-control headers and ETag support.</t>
 </section>
 
-<section anchor="_c1b5ee86-f397-1d8c-3fbd-4be5e05e0285"><name>Language negotiation for textual content</name>
+<section anchor="_c6c1dabf-822e-8cd1-340f-ef3d9251aefa"><name>Language negotiation for textual content</name>
 
-<t anchor="_e964b715-2274-80f2-0778-07ede98d43db">RPP shall support language negotiation to enable clients to request responses in a preferred language using the HTTP 'Accept-Language' header  <xref target="RFC7231" section="" relative=""></xref>.</t>
+<t anchor="_0df2d438-14b4-a022-5229-d9ce5bd454a9">RPP shall support language negotiation to enable clients to request responses in a preferred language using the HTTP 'Accept-Language' header  <xref target="RFC7231" section="" relative=""></xref>.</t>
 
-<ul anchor="_d56159dc-8f02-98f1-04fe-982c940a750d"><li>Server implementations MAY support multiple languages for textual content in responses to provide human-readable localised responses.</li>
+<ul anchor="_f4dcfb82-0786-4cb9-9957-495e001f4f63"><li>Server implementations MAY support multiple languages for textual content in responses to provide human-readable localised responses.</li>
 <li>The default language and mechanisms for indicating supported languages will be defined, preferably using HTTP methods, like OPTIONS or HEAD requests.</li>
 <li>application/rpp+json media type may support multi-language representations, especially for writing operations involving user provided content. Other media types may have different mechanisms for language representation.</li>
 </ul>
 </section>
 
-<section anchor="_9d7b7235-8dc9-e11f-fc13-4ae20e03eac0"><name>Client Signalling for Response Verbosity</name>
+<section anchor="_3744773b-c4cd-fcef-99ec-7cdb1349a5c2"><name>Client Signalling for Response Verbosity</name>
 
-<t anchor="_4ae78626-503e-0c04-17b7-1bb554cd9ef9">RPP may utilise the HTTP <tt>Prefer</tt> header <xref target="RFC7240" section="" relative=""></xref> with the "return" preference to allow clients to control the verbosity of responses. For example, clients not interested in full resource representations could use <tt>Prefer: return=minimal</tt> to request minimal responses, reducing payload sizes and improving efficiency. The default behaviour, without the <tt>Prefer</tt> header, would be to return a full resource representation, similar to object info responses in EPP, especially after compound requests are completed. For certain use-cases it might be convenient for a client to receive also dereferenced full or partial representation of related objects. For example details about sponsoring client of domain name instead of just ID. "return" preference syntax alone is not sufficient for this purpose, therefore RPP would need to define custom preference and register it in "HTTP Preferences" IANA registry.</t>
+<t anchor="_680748bb-a3fa-fa20-cccb-3592fb37862e">RPP may utilise the HTTP <tt>Prefer</tt> header <xref target="RFC7240" section="" relative=""></xref> with the "return" preference to allow clients to control the verbosity of responses. For example, clients not interested in full resource representations could use <tt>Prefer: return=minimal</tt> to request minimal responses, reducing payload sizes and improving efficiency. The default behaviour, without the <tt>Prefer</tt> header, would be to return a full resource representation, similar to object info responses in EPP, especially after compound requests are completed. For certain use-cases it might be convenient for a client to receive also dereferenced full or partial representation of related objects. For example details about sponsoring client of domain name instead of just ID. "return" preference syntax alone is not sufficient for this purpose, therefore RPP would need to define custom preference and register it in "HTTP Preferences" IANA registry.</t>
 </section>
 
-<section anchor="_d9c3bb8e-3c30-bb7a-945e-59259395ecfd"><name>Client Signalling for Request Validation</name>
+<section anchor="_dc602334-db1e-4e78-dd5e-abfa2c471fe8"><name>Client Signalling for Request Validation</name>
 
-<t anchor="_739876e0-4a93-aa74-2af7-17e6d21f1aec">RPP may utilise the HTTP <tt>Prefer</tt> header <xref target="RFC7240" section="" relative=""></xref> for signalling the preference for either strict or lenient processing of requests. This allows clients to indicate whether they prefer strict validation of message payloads and rejection of requests with unknown properties or a more lenient approach ignoring unknown properties that may allow for additional flexibility in processing. The default behaviour, without the <tt>Prefer</tt> header, would be to process requests leniently.</t>
+<t anchor="_dccb7b1e-fb60-807e-ae2e-dd296f298f96">RPP may utilise the HTTP <tt>Prefer</tt> header <xref target="RFC7240" section="" relative=""></xref> for signalling the preference for either strict or lenient processing of requests. This allows clients to indicate whether they prefer strict validation of message payloads and rejection of requests with unknown properties or a more lenient approach ignoring unknown properties that may allow for additional flexibility in processing. The default behaviour, without the <tt>Prefer</tt> header, would be strict validation.</t>
 </section>
 
-<section anchor="_8345ee2d-817a-e970-a2b9-ec284dfc6d10"><name>Asynchronous Operation Processing</name>
+<section anchor="_ba3531d5-e8fe-72ab-6285-bf479e0b6760"><name>Asynchronous Operation Processing</name>
 
-<t anchor="_ebf6583b-e0f4-e712-e65c-73cc8261235d">The RPP architecture accommodates operations that are potentially long-running or cannot be completed synchronously due to their nature (e.g., acting on multiple objects, resource-intensive tasks, or processes involving manual steps). This is achieved by leveraging standard HTTP mechanisms to provide an asynchronous interaction pattern. This pattern allows a client to initiate an operation and receive an immediate acknowledgement, with the means to check the operation's status and retrieve its outcome at a later point.</t>
+<t anchor="_c3da4c75-2439-4ffe-1c7c-40e94cb9e1e2">The RPP architecture accommodates operations that are potentially long-running or cannot be completed synchronously due to their nature (e.g., acting on multiple objects, resource-intensive tasks, or processes involving manual steps). This is achieved by leveraging standard HTTP mechanisms to provide an asynchronous interaction pattern. This pattern allows a client to initiate an operation and receive an immediate acknowledgement, with the means to check the operation's status and retrieve its outcome at a later point.</t>
 
-<t anchor="_d8a3486a-4793-22f9-5864-69cb91beca8d">The typical interaction flow facilitated by the architecture is as follows: 1.  A client initiates an operation via an HTTP request. 2.  For operations processed asynchronously, the server typically responds immediately with an appropriate HTTP status code and an indication of a status resource where the client would be able to obtain result of the operation. The resource may be dedicated to the specific performed operation, be a subresource of the resource being processed, or be a separate message queue resource with a stream of operation results. 3.  The server may also provide additional signalling in the response to indicate the expected time for completion or other relevant information using standard HTTP mechanisms. 4.  The representation of the status resource reflects the operation's progress. Once the operation concludes, this representation indicates the final outcome, providing either the results directly, links to the results, or detailed error information in line with RPP's error reporting principles. It shall remain up to protocol design for certain operation and server policy which granularity of status information shall be offered. In some cases it might be sufficient to have one final message, in other cases intermediate statuses might be required. The lifetime of these resources might also be differentiated. Messages in the queue would exist until they are read out by the RPP client. Other status resources might exist for a specific time defined by the server after the processing reached its final state. Finally resources might virtually exist forever or require an explicit delete operation from the client.</t>
+<t anchor="_9d7b8355-cd07-6b07-6e03-a30df425563e">The typical interaction flow facilitated by the architecture is as follows: 1.  A client initiates an operation via an HTTP request. 2.  For operations processed asynchronously, the server typically responds immediately with an appropriate HTTP status code and an indication of a status resource where the client would be able to obtain result of the operation. The resource may be dedicated to the specific performed operation, be a subresource of the resource being processed, or be a separate message queue resource with a stream of operation results. 3.  The server may also provide additional signalling in the response to indicate the expected time for completion or other relevant information using standard HTTP mechanisms. 4.  The representation of the status resource reflects the operation's progress. Once the operation concludes, this representation indicates the final outcome, providing either the results directly, links to the results, or detailed error information in line with RPP's error reporting principles. It shall remain up to protocol design for certain operation and server policy which granularity of status information shall be offered. In some cases it might be sufficient to have one final message, in other cases intermediate statuses might be required. The lifetime of these resources might also be differentiated. Messages in the queue would exist until they are read out by the RPP client. Other status resources might exist for a specific time defined by the server after the processing reached its final state. Finally resources might virtually exist forever or require an explicit delete operation from the client.</t>
 
-<t anchor="_295387d7-f15b-5f0c-d8e9-17b1302659b7">This architectural approach to asynchronous operations allows client applications to remain responsive and manage extended processing times effectively, contributing to the overall scalability and robustness of interactions within the RPP ecosystem. Specific RPP operations intended for asynchronous execution will be designed to utilise this pattern.</t>
+<t anchor="_a4dc4965-72c9-ed89-dc47-e9c373af5d3b">This architectural approach to asynchronous operations allows client applications to remain responsive and manage extended processing times effectively, contributing to the overall scalability and robustness of interactions within the RPP ecosystem. Specific RPP operations intended for asynchronous execution will be designed to utilise this pattern.</t>
 </section>
 
 <section anchor="http-layer-detail-rpp-status-codes"><name>RPP specific status codes and relation to HTTP status codes</name>
 
-<t anchor="_05fd1cad-8c31-3a09-f4ca-a68f4d59ded3">RPP uses a dual-layer approach for signaling operation outcomes, leveraging both standard HTTP status codes and RPP-specific status codes. This allows for compatibility with generic HTTP components while providing detailed, application-level feedback for RPP clients.</t>
+<t anchor="_9d186b9d-350d-c098-cbe3-e0ff9a2da6ab">RPP uses a dual-layer approach for signaling operation outcomes, leveraging both standard HTTP status codes and RPP-specific status codes. This allows for compatibility with generic HTTP components while providing detailed, application-level feedback for RPP clients.</t>
 
-<ul anchor="_82a4c6f5-bbb1-43e9-4ede-9b240b703360"><li>The HTTP status code <xref target="RFC7231" section="" relative=""></xref> must be used to convey the overall outcome of an operation. Any HTTP-aware component, such as a proxy or monitoring tool, can determine if a request was successful (2xx), resulted in a client error (4xx), or a server error (5xx) by inspecting the HTTP status code alone.</li>
+<ul anchor="_b0cea76c-2004-45e1-6d85-8f9b16c4f884"><li>The HTTP status code <xref target="RFC7231" section="" relative=""></xref> must be used to convey the overall outcome of an operation. Any HTTP-aware component, such as a proxy or monitoring tool, can determine if a request was successful (2xx), resulted in a client error (4xx), or a server error (5xx) by inspecting the HTTP status code alone.</li>
 <li>RPP-specific status codes, transmitted in a dedicated HTTP header, must be used to provide granular, application-level information about the operation's result.</li>
 <li>RPP responses must include both an HTTP status code and an RPP-specific status code, however in some cases request handling may be terminated already on HTTP level, for example due malformed HTTP message, in such cases only HTTP status code will be present.</li>
 <li>RPP-specific status codes should be mapped to the most semantically appropriate HTTP status code. For example, an RPP status code indicating "object already exists" during a creation attempt should map to HTTP 409 (Conflict), while a code for "object does not exist" during a lookup should map to HTTP 404 (Not Found). If no specific HTTP status code is a good semantic fit, a generic code (e.g., 400 for a general client-side business rule failure, 200 for a successful operation with additional information) should be used.</li>
@@ -405,53 +413,59 @@
 </ul>
 </section>
 
-<section anchor="_dabe3b6b-ea99-6dac-4597-fb98dd1cef3c"><name>Transaction tracing and idempotency</name>
+<section anchor="_88c55fc9-3510-ede4-ba86-c18d23fe475c"><name>Transaction tracing and idempotency</name>
 
-<t anchor="_ff2dfc1c-8286-9be1-754d-6331bc6e058f">RPP shall support identification of requests and responses on both client side and server side with use of client provided identifiers and server provided identifiers. This will allow for tracking of requests and responses in case of errors, and for idempotency of requests.</t>
+<t anchor="_51c5991b-5c66-e4d2-41d3-d137f1fb0a2a">RPP shall support identification of requests and responses on both client side and server side with use of client provided identifiers and server provided identifiers. This will allow for tracking of requests and responses in case of errors, and for idempotency of requests.</t>
 
-<t anchor="_68fc8bf2-560b-328f-a00b-9ca25ee28465">Client provided identifier shall be returned in the corresponding synchronous response and shall be included in the asynchronous responses. This identifier shall be also used as idempotency identifier to allow clients to retry requests without risk of duplicate processing. The client provided identifier shall be unique for the client and the lifetime of the identifier shall be defined by the server, typically for a limited time after the request was processed.</t>
+<t anchor="_348c449f-5ae2-cba1-0ded-fd478587ce60">Client provided identifier shall be returned in the corresponding synchronous response and shall be included in the asynchronous responses. This identifier shall be also used as idempotency identifier to allow clients to retry requests without risk of duplicate processing. The client provided identifier shall be unique for the client and the lifetime of the identifier shall be defined by the server, typically for a limited time after the request was processed.</t>
 
-<t anchor="_a7ad388c-43e1-65d4-9aaa-8f0d3605fcd1">Server shall always generate own unique trasaction identifier, regardless of nature of the transaction (reading or changing).</t>
+<t anchor="_88880a42-1a1c-3fdc-75bd-c1e46b432315">Server shall always generate own unique trasaction identifier, regardless of nature of the transaction (reading or changing).</t>
 
-<t anchor="_0b92785b-68f4-96c4-45c8-7dce026f8491">The transmission of transaction identifiers should be defined outside of the Data Representation Layer (e.g. as HTTP Headers), to assure clear separation of resource representation from performed actions. If possible existing mechanisms of HTTP shall be employed.</t>
+<t anchor="_bb312dcb-9590-725a-5128-f9b9c54e0ea7">The transmission of transaction identifiers should be defined outside of the Data Representation Layer (e.g. as HTTP Headers), to assure clear separation of resource representation from performed actions. If possible existing mechanisms of HTTP shall be employed.</t>
 </section>
 
-<section anchor="_f873b9be-dbe1-7a13-b9a6-00ee2674b9da"><name>Protocol Versioning</name>
+<section anchor="_c49325ab-73ca-e32c-e502-9597cb04d865"><name>Protocol Versioning</name>
 
-<t anchor="_58b8f3a0-c0d5-476f-6d23-a554a2e7e00e">RPP will define a versioning schema for the protocol itself, the extensions and other protocol elements such as profiles as appropriate. The versioning schema shall on one side allow for independent introduction of new features in a non-breaking manner on both client and server side, and on the other side allow the opposite party of the communication to determine if the version is compatible or not. One of potential approaches having this property might be use of Semantic Versioning  <xref target="SemVer" section="" relative=""></xref>, but also other versioning schema shall be possible.</t>
+<t anchor="_a6ca8eb3-951f-2fb2-e6a4-52b00de79e17">RPP will define a versioning schema for the protocol itself, the extensions and other protocol elements such as profiles as appropriate. The versioning schema shall on one side allow for independent introduction of new features in a non-breaking manner on both client and server side, and on the other side allow the opposite party of the communication to determine if the version is compatible or not. One of potential approaches having this property might be use of Semantic Versioning  <xref target="SemVer" section="" relative=""></xref>, but also other versioning schema shall be possible.</t>
 
-<t anchor="_da97a085-db20-93d7-732e-2f72d1f783e3">Signalling of the versions will be preferably realised using parameters of the media type.</t>
+<t anchor="_c0c2cbc9-f2f8-794d-fe16-cccf9cc55a88">Signalling of the versions will be preferably realised using parameters of the media type.</t>
 </section>
 
-<section anchor="_d2159ee6-0ece-7d82-94a3-68b0e8cc4583"><name>Profiles</name>
+<section anchor="_f0024d24-4236-a8e0-0518-1156b4292d15"><name>Profiles</name>
 
-<t anchor="_c532d7d6-cedb-c2bb-a57f-c45e9888f627">In real operational conditions different RPP server operators may have different requirements regarding set of protocol elements and their versions necessary to be supported by the client to enable reliable communication. Such requirements may also be defined by external policies. For this purpose RPP will define a concept of profiles, being identifiers translated into a certain minimum configuration of protocol version, extensions and their versions. The profiles themselves will be versioned in the same way as other protocol elements.</t>
+<t anchor="_51755d84-4f29-6ef8-03a1-ca4a783cf834">In real operational conditions different RPP server operators may have different requirements regarding set of protocol elements and their versions necessary to be supported by the client to enable reliable communication. Such requirements may also be defined by external policies. For this purpose RPP will define a concept of profiles, being identifiers translated into a certain minimum configuration of protocol version, extensions and their versions. The profiles themselves will be versioned in the same way as other protocol elements.</t>
 
-<t anchor="_7436af51-0a16-7d3b-1a68-9ad578e4d7c1">RPP may define a machine-readable definition of profiles to allow automatic processing by the clients, but may also refer to other forms of profile specification.</t>
+<t anchor="_d439eb48-60e1-02e4-6db6-ac8a4abe21c1">RPP may define a machine-readable definition of profiles to allow automatic processing by the clients, but may also refer to other forms of profile specification.</t>
 
-<t anchor="_2fbbe50e-708f-147f-c0f2-d2b18d4a9386">Signalling of the profiles will be preferably realised using parameters of the media type.</t>
+<t anchor="_78ba514f-a2b8-a5bf-f3c5-518d445c97b8">Signalling of the profiles will be preferably realised using parameters of the media type.</t>
 </section>
 
 <section anchor="prefer-header"><name>Definition of special resources</name>
 
-<t anchor="_fff969b8-d955-5d64-5e9f-bba55a365477">RPP may define special resources for specific purposes:</t>
+<t anchor="_97329bc0-9124-0ab9-ac6f-0428138a24ed">RPP may define special resources for specific purposes:</t>
 
-<ul anchor="_f6d9b3f7-d6dd-9c8d-5f3d-888bde14c92e"><li>Service Discovery endpoints to advertise protocol capabilities and supported features (see  <xref target="service-discovery"></xref>).</li>
+<ul anchor="_331f2c39-7446-4f51-cf09-acf438bdf015"><li>Service Discovery endpoints to advertise protocol capabilities and supported features (see  <xref target="service-discovery"></xref>).</li>
 <li>Metadata endpoints to provide schema information or other protocol-level metadata, potentially including OpenAPI definitions for documentation and code generation.</li>
 </ul>
 </section>
 
 <section anchor="service-discovery"><name>Service discovery mechanisms</name>
 
-<t anchor="_534c1f7f-d74d-c8a4-dc79-a9f4e367c8a0">RPP will define mechanisms for service discovery, allowing clients to dynamically discover RPP service endpoints and capabilities, reducing coupling between clients and servers.</t>
+<t anchor="_949b3af6-ec09-4378-eacf-3a582885158f">RPP will define mechanisms for service discovery, allowing clients to dynamically discover RPP service endpoints and capabilities, reducing coupling between clients and servers.</t>
 
-<ul anchor="_9b73e5a1-f500-73a9-9a94-29afcdd99772"><li>Potential discovery of RPP server location, like  IANA bootstrapping document or a special DNS TXT RR with location of RPP service for the tld.</li>
+<ul anchor="_f7d8bfa0-3774-a15d-d610-333957389082"><li>Potential discovery of RPP server location, like  IANA bootstrapping document or a special DNS TXT RR with location of RPP service for the tld.</li>
 <li>Potential use of well-known URIs (e.g., <tt>/.well-known/rpp-capabilities</tt>) for service discovery.</li>
-<li>Advertising supported protocol versions, extensions, available resource types, authentication methods, and supported features.</li>
+<li>Advertising supported protocol versions, extensions, available resource types, authentication methods, IDN policies and supported features.</li>
+<li>Advertising of maintenance notices, informing clients about future unavailability of the service due to scheduled maintenance.</li>
 <li>It may be considered for RPP to distribute service discovery for each resource type separately for better scalability and management. For example instead of having a single service discovery endpoint for the whole registry on <tt>/.well-known/rpp-capabilities</tt> there might be a separate discovery placed under <tt>/{resource-type}/.well-known/rpp-capabilities</tt> e.g. <tt>/domains/.well-known/rpp-capabilities</tt>.</li>
 <li>Service discovery shall utilise standardised methods, like URI templates <xref target="RFC6570" section="" relative=""></xref> to allow easy navigation of resources and avoid hard-coding of URLs, same time allowing clients to navigate directly to a known resource without additional server queries.</li>
 <li>As a matter of principle service discovery shall be used to bootstrap the communication between client and server, its capabilities and operational policies. The server configuration shall be considered static between reconfiguration of the server and not be used for any dynamic configuration, like load balancing etc. It would enable the right balance between discoverability and reduction of round trips between clients and servers.</li>
 </ul>
+</section>
+
+<section anchor="scalability"><name>Scalability</name>
+
+<t anchor="_b8ca0fe7-5559-9848-1a42-d7a7df6ac2e7">RPP leverages HTTP, enabling the use of standard web scalability techniques such as load balancing, horizontal scaling, and distributed caching. Stateless interactions allow requests to be handled independently, facilitating distribution across multiple servers and rapid scaling in response to demand. RPP shall enable by design existing web security and mitigation mechanisms to defend against attacks such as Denial of Service (DoS).</t>
 </section>
 </section>
 
@@ -552,21 +566,38 @@
 
 <t anchor="_debfcb2b-b50a-2c33-4a75-319386e9442e">These extensibility mechanisms ensure that RPP can evolve to meet future requirements, integrate with emerging technologies, and support a wide range of provisioning scenarios while maintaining interoperability and stability.</t>
 
-<section anchor="_96e5350d-e377-28be-75f5-ab94556af4fe"><name>Name Management and Collision Avoidance</name>
+<section anchor="_b40c24b0-bd97-0f6a-e2c3-4581b40bc90b"><name>Name Management and Collision Avoidance</name>
 
-<t anchor="_07253e80-05fb-2f5c-9cb6-59fcd595c66a">RPP extensions MUST define unique names for all extension elements to prevent conflicts with other extensions and with core protocol elements. These names are used consistently in resource identifiers, data element identifiers, and URL path segments.</t>
+<t anchor="_acecdc24-c3a7-4d7e-178d-5bbb78479f44">RPP extensions MUST define unique names for all extension elements to prevent conflicts with other extensions and with core protocol elements. These names are used consistently in resource identifiers, data element identifiers, and URL path segments.</t>
 
-<t anchor="_8287ca1e-af38-b462-d4c5-a928841f70bc">Standardised RPP extensions MUST register their names in a dedicated IANA registry for RPP extensions to ensure global uniqueness and avoid collisions. Private (non-standardised) extensions are also required to use unique names, but are not required to register with IANA. This allows private extensions to be developed and used within specific implementations or organisations without impacting the global RPP ecosystem. Private extensions should use names that are unlikely to conflict with other extensions or with RPP core elements, for example by using reverse domain notation as a prefix (e.g., <tt>org.example.rpp</tt>).</t>
+<t anchor="_4d667800-d34a-ec5d-b7c3-8ce11d50e54e">Standardised RPP extensions MUST register their names in a dedicated IANA registry for RPP extensions to ensure global uniqueness and avoid collisions. Private (non-standardised) extensions are also required to use unique names, but are not required to register with IANA. This allows private extensions to be developed and used within specific implementations or organisations without impacting the global RPP ecosystem. Private extensions should use names that are unlikely to conflict with other extensions or with RPP core elements, for example by using reverse domain notation as a prefix (e.g., <tt>org.example.rpp</tt>).</t>
 
-<t anchor="_9ac2ed13-1b15-2419-ec51-454d0818879a">This naming mechanism ensures that new resource types, data elements, and operations can be introduced independently and safely, supporting the extensibility goals of the RPP architecture while maintaining interoperability and clarity across implementations.</t>
+<t anchor="_64315132-8cb7-107d-e6d0-ad55dd956428">This naming mechanism ensures that new resource types, data elements, and operations can be introduced independently and safely, supporting the extensibility goals of the RPP architecture while maintaining interoperability and clarity across implementations.</t>
+</section>
+
+<section anchor="extension-security"><name>Extension Security</name>
+
+<t anchor="_a3a0ec7f-cf31-385d-31fb-d2e5353b856c">Extensions operate within the same security architecture as the core protocol. Security, authentication, and authorisation mechanisms defined at the HTTP Transport Layer (see <xref target="authentication-authorization"></xref>) apply uniformly to both core protocol operations and all extensions. This "security by design" approach is aimed to ensure that extensions cannot bypass or weaken the security posture established by the core protocol. Extensions must not introduce new authentication or authorisation mechanisms that circumvent or conflict with those defined by the core specifications.</t>
+</section>
+
+<section anchor="extension-review"><name>Extension Review</name>
+
+<t anchor="_ac60170d-9674-53ee-a195-5e4eed8b2aeb">Before any extension is accepted by IANA, a review by an RPP expert must be performed. This review includes verification that the extension does not violate any of the RPP security considerations and that it correctly integrates with the protocol's security framework. The complete review criteria will be included in the "IANA Considerations" section of any document describing RPP extension mechanisms, according to the BCP described in <xref target="RFC8126" section="" relative=""></xref>.</t>
 </section>
 </section>
 </section>
-    <section anchor="_9e84a756-3958-9e46-689f-fbd74bbd7d77"><name>Change History</name>
+    <section anchor="_16773fc3-3248-8176-9ed0-216e6e8a7f1e"><name>Change History</name>
 
-<section anchor="_51c5d164-33fe-f32e-9572-071f2687f22d"><name>-00 to -01</name>
+<section anchor="_f456a2c4-3841-21e9-a4b6-11f18df28fe8"><name>-00 to -01</name>
 
-<ul anchor="_6523e27e-714e-2eb5-4af4-5571ce9ce61e"><li>Added "additional measures to verify the client" to <xref target="http-layer-details-security"></xref> (Issue #76).</li>
+<ul anchor="_65f260cd-1224-2d53-80f3-ebf3aad4b875"><li>Create "Credential management" section for updating credentials using an extension.</li>
+<li>Changed default validation from lenient to strict. (Issue #82)</li>
+<li>Added <xref target="extension-security" format="title"></xref> and <xref target="extension-review" format="title"></xref> Sections to <xref target="extension-mechanisms"></xref> (Issue #91).</li>
+<li>Added Advertising of maintenance notices to "Service Discovery" section. (Issue #88)</li>
+<li>Added "Scalability" section. (Issue #92)</li>
+<li>Explicitly state that all parties involved in a process are allowed to retrieve the process status. (Issue #98)</li>
+<li>Added IDN to "Terminology" and "Service discovery mechanisms" sections</li>
+<li>Added "additional measures to verify the client" to <xref target="http-layer-details-security"></xref> (Issue #76).</li>
 <li>Added TLS mandatory to <xref target="transport-security"></xref> (Issue #78).</li>
 <li>Added Section <xref target="credential-lifecycle"></xref> for credential and token revocation/replacement mechanisms (Issue #79).</li>
 </ul>
@@ -618,13 +649,13 @@
 </section>
   </middle>
   <back>
-    <references anchor="_53ca9cc4-609d-2494-8c43-dbbbf2c07abf">
+    <references anchor="_acbb79d6-ac18-1fa5-ec8d-9685b2348d49">
       <name>References</name>
       <references anchor="_1737475f-1704-31cc-f9a8-dfeffc236cda">
         <name>Normative References</name>
         <reference target="https://www.rfc-editor.org/info/rfc9457" anchor="RFC9457"><stream>IETF</stream> <front> <title>Problem Details for HTTP APIs</title> <author fullname="M. Nottingham" asciiFullname="M. Nottingham"></author> <author fullname="E. Wilde" asciiFullname="E. Wilde"></author> <author fullname="S. Dalal" asciiFullname="S. Dalal"></author> <date month="July" year="2023"></date> <keyword>status</keyword><keyword>HTTP</keyword><keyword>error</keyword><keyword>problem</keyword><keyword>API</keyword><keyword>JSON</keyword><keyword>XML</keyword> <abstract>  <t anchor="_e6beef86-8395-151c-0747-d646de1942a2">This document defines a "problem detail" to carry machine-readable details of errors in HTTP response content to avoid the need to define new error response formats for HTTP APIs.</t>  <t anchor="_a9d0d5a4-6dce-d031-1eb0-7627711f0048">This document obsoletes RFC 7807.</t></abstract> </front> <seriesInfo value="10.17487/RFC9457" name="DOI"></seriesInfo> <seriesInfo value="9457" name="RFC"></seriesInfo></reference>
       </references>
-      <references anchor="_a1b70ae6-f80d-2c8a-b5fe-d643c5b364c2">
+      <references anchor="_c83e5b1d-0ed1-d0b3-c8fa-e3ec254bcdfb">
         <name>Informational References</name>
         <reference target="https://www.rfc-editor.org/info/rfc5730" anchor="RFC5730"><stream>IETF</stream> <front> <title>Extensible Provisioning Protocol (EPP)</title> <author fullname="S. Hollenbeck" asciiFullname="S. Hollenbeck"></author> <date month="August" year="2009"></date> <keyword>shared framework mapping</keyword> <abstract>  <t anchor="_cc32730d-efd7-bbae-4860-a6c80f962559">This document describes an application-layer client-server protocol for the provisioning and management of objects stored in a shared central repository. Specified in XML, the protocol defines generic object management operations and an extensible framework that maps protocol operations to objects. This document includes a protocol specification, an object mapping template, and an XML media type registration. This document obsoletes RFC 4930. [STANDARDS-TRACK]</t></abstract> </front> <seriesInfo value="10.17487/RFC5730" name="DOI"></seriesInfo> <seriesInfo value="69" name="BCP"></seriesInfo> <seriesInfo value="5730" name="RFC"></seriesInfo></reference>
         <reference target="https://www.rfc-editor.org/info/rfc5731" anchor="RFC5731"><stream>IETF</stream> <front> <title>Extensible Provisioning Protocol (EPP) Domain Name Mapping</title> <author fullname="S. Hollenbeck" asciiFullname="S. Hollenbeck"></author> <date month="August" year="2009"></date> <keyword>EPP</keyword><keyword>Extensible Provisioning Protocol</keyword><keyword>XML</keyword><keyword>domain</keyword><keyword>domain name</keyword> <abstract>  <t anchor="_487492fb-c9ae-fbe7-d7da-416a09049381">This document describes an Extensible Provisioning Protocol (EPP) mapping for the provisioning and management of Internet domain names stored in a shared central repository. Specified in XML, the mapping defines EPP command syntax and semantics as applied to domain names. This document obsoletes RFC 4931. [STANDARDS-TRACK]</t></abstract> </front> <seriesInfo value="10.17487/RFC5731" name="DOI"></seriesInfo> <seriesInfo value="69" name="BCP"></seriesInfo> <seriesInfo value="5731" name="RFC"></seriesInfo></reference>
@@ -644,14 +675,17 @@
         <reference target="https://www.rfc-editor.org/info/rfc9205" anchor="RFC9205"><stream>IETF</stream> <front> <title>Building Protocols with HTTP</title> <author fullname="M. Nottingham" asciiFullname="M. Nottingham"></author> <date month="June" year="2022"></date> <keyword>HTTP API</keyword> <abstract>  <t anchor="_d8065117-a261-b659-2b6b-13b88aacc62f">Applications often use HTTP as a substrate to create HTTP-based APIs. This document specifies best practices for writing specifications that use HTTP to define new application protocols. It is written primarily to guide IETF efforts to define application protocols using HTTP for deployment on the Internet but might be applicable in other situations.</t>  <t anchor="_7c23962c-0242-57dd-875f-069f4cf97331">This document obsoletes RFC 3205.</t></abstract> </front> <seriesInfo value="10.17487/RFC9205" name="DOI"></seriesInfo> <seriesInfo value="56" name="BCP"></seriesInfo> <seriesInfo value="9205" name="RFC"></seriesInfo></reference>
         <reference target="https://www.rfc-editor.org/info/rfc8949" anchor="RFC8949"><stream>IETF</stream> <front> <title>Concise Binary Object Representation (CBOR)</title> <author fullname="C. Bormann" asciiFullname="C. Bormann"></author> <author fullname="P. Hoffman" asciiFullname="P. Hoffman"></author> <date month="December" year="2020"></date> <keyword>parser</keyword><keyword>decoder</keyword><keyword>encoder</keyword><keyword>binary format</keyword><keyword>data interchange format</keyword><keyword>JSON</keyword> <abstract>  <t anchor="_8f288013-d36a-a1b4-3b02-3b28391fa82f">The Concise Binary Object Representation (CBOR) is a data format whose design goals include the possibility of extremely small code size, fairly small message size, and extensibility without the need for version negotiation. These design goals make it different from earlier binary serializations such as ASN.1 and MessagePack.</t>  <t anchor="_8e8154d1-8242-b33c-aa2b-8a7513358c40">This document obsoletes RFC 7049, providing editorial improvements, new details, and errata fixes while keeping full compatibility with the interchange format of RFC 7049. It does not create a new version of the format.</t></abstract> </front> <seriesInfo value="10.17487/RFC8949" name="DOI"></seriesInfo> <seriesInfo value="94" name="BCP"></seriesInfo> <seriesInfo value="8949" name="RFC"></seriesInfo></reference>
         <reference target="https://www.rfc-editor.org/info/rfc9553" anchor="RFC9553"><stream>IETF</stream> <front> <title>JSContact: A JSON Representation of Contact Data</title> <author fullname="R. Stepanek" asciiFullname="R. Stepanek"></author> <author fullname="M. Loffredo" asciiFullname="M. Loffredo"></author> <date month="May" year="2024"></date> <keyword>JSON</keyword><keyword>addressbook</keyword><keyword>contacts</keyword><keyword>cards</keyword><keyword>VCARD</keyword> <abstract>  <t anchor="_c8c1ae92-1683-2649-b639-a21729495936">This specification defines a data model and JavaScript Object Notation (JSON) representation of contact card information that can be used for data storage and exchange in address book or directory applications. It aims to be an alternative to the vCard data format and to be unambiguous, extendable, and simple to process. In contrast to the JSON-based jCard format, it is not a direct mapping from the vCard data model and expands semantics where appropriate. Two additional specifications define new vCard elements and how to convert between JSContact and vCard.</t></abstract> </front> <seriesInfo value="10.17487/RFC9553" name="DOI"></seriesInfo> <seriesInfo value="9553" name="RFC"></seriesInfo></reference>
+        <reference target="https://www.rfc-editor.org/info/rfc7617" anchor="RFC7617"><stream>IETF</stream> <front> <title>The 'Basic' HTTP Authentication Scheme</title> <author fullname="J. Reschke" asciiFullname="J. Reschke"></author> <date month="September" year="2015"></date> <keyword>HTTP</keyword><keyword>authentication scheme</keyword><keyword>basic authentication scheme</keyword> <abstract>  <t anchor="_9f5ff782-70ea-9dc1-a5c8-eb49af4cfcd7">This document defines the "Basic" Hypertext Transfer Protocol (HTTP) authentication scheme, which transmits credentials as user-id/ password pairs, encoded using Base64.</t></abstract> </front> <seriesInfo value="10.17487/RFC7617" name="DOI"></seriesInfo> <seriesInfo value="7617" name="RFC"></seriesInfo></reference>
+        <reference target="https://www.rfc-editor.org/info/rfc8126" anchor="RFC8126"><stream>IETF</stream> <front> <title>Guidelines for Writing an IANA Considerations Section in RFCs</title> <author fullname="M. Cotton" asciiFullname="M. Cotton"></author> <author fullname="B. Leiba" asciiFullname="B. Leiba"></author> <author fullname="T. Narten" asciiFullname="T. Narten"></author> <date month="June" year="2017"></date> <keyword>internet assigned numbers authority</keyword><keyword>values</keyword><keyword>implementations</keyword><keyword>code point</keyword><keyword>protocol constant</keyword><keyword>protocol parameter</keyword><keyword>codepoint</keyword> <abstract>  <t anchor="_0885b0a3-8c3e-8f9b-2f7e-dffd7a7db301">Many protocols make use of points of extensibility that use constants to identify various protocol parameters. To ensure that the values in these fields do not have conflicting uses and to promote interoperability, their allocations are often coordinated by a central record keeper. For IETF protocols, that role is filled by the Internet Assigned Numbers Authority (IANA).</t>  <t anchor="_57ab738e-8459-4766-1916-2879dc3d7933">To make assignments in a given registry prudently, guidance describing the conditions under which new values should be assigned, as well as when and how modifications to existing values can be made, is needed. This document defines a framework for the documentation of these guidelines by specification authors, in order to assure that the provided guidance for the IANA Considerations is clear and addresses the various issues that are likely in the operation of a registry.</t>  <t anchor="_2b111151-a6a6-f74f-9e3b-a46e612f277a">This is the third edition of this document; it obsoletes RFC 5226.</t></abstract> </front> <seriesInfo value="10.17487/RFC8126" name="DOI"></seriesInfo> <seriesInfo value="26" name="BCP"></seriesInfo> <seriesInfo value="8126" name="RFC"></seriesInfo></reference>
+        <reference target="https://www.rfc-editor.org/info/rfc5890" anchor="RFC5890"><stream>IETF</stream> <front> <title>Internationalized Domain Names for Applications (IDNA): Definitions and Document Framework</title> <author fullname="J. Klensin" asciiFullname="J. Klensin"></author> <date month="August" year="2010"></date> <keyword>IDNA2008</keyword><keyword>idn</keyword><keyword>ascii</keyword><keyword>characters</keyword> <abstract>  <t anchor="_7b77c2b5-07a7-4c85-e83a-b31344e25135">This document is one of a collection that, together, describe the protocol and usage context for a revision of Internationalized Domain Names for Applications (IDNA), superseding the earlier version. It describes the document collection and provides definitions and other material that are common to the set. [STANDARDS-TRACK]</t></abstract> </front> <seriesInfo value="10.17487/RFC5890" name="DOI"></seriesInfo> <seriesInfo value="5890" name="RFC"></seriesInfo></reference>
         <reference target="https://datatracker.ietf.org/doc/html/draft-ietf-oauth-sd-jwt-vc-10" anchor="SD-JWT">
-          <front> <title>SD-JWT-based Verifiable Credentials (SD-JWT VC)</title> <author fullname="Oliver Terbu" asciiFullname="Oliver Terbu"></author> <author fullname="Daniel Fett" asciiFullname="Daniel Fett"></author> <author fullname="Brian Campbell" asciiFullname="Brian Campbell"></author> <date month="July" year="2025"></date> <abstract>  <t anchor="_433df176-e41b-9469-e8f7-b7ea32c6e6dd">This specification describes data formats as well as validation and processing rules to express Verifiable Credentials with JSON payloads with and without selective disclosure based on the SD-JWT [I-D.ietf-oauth-selective-disclosure-jwt] format.</t></abstract> </front>
+          <front> <title>SD-JWT-based Verifiable Credentials (SD-JWT VC)</title> <author fullname="Oliver Terbu" asciiFullname="Oliver Terbu"></author> <author fullname="Daniel Fett" asciiFullname="Daniel Fett"></author> <author fullname="Brian Campbell" asciiFullname="Brian Campbell"></author> <date month="July" year="2025"></date> <abstract>  <t anchor="_2623f518-8b9c-2f0e-fe7f-9b7f5af370e7">This specification describes data formats as well as validation and processing rules to express Verifiable Credentials with JSON payloads with and without selective disclosure based on the SD-JWT [I-D.ietf-oauth-selective-disclosure-jwt] format.</t></abstract> </front>
         </reference>
         <reference target="https://datatracker.ietf.org/doc/html/draft-ietf-oauth-selective-disclosure-jwt-22" anchor="SelDiscJWT">
-          <front> <title>Selective Disclosure for JWTs (SD-JWT)</title> <author fullname="Daniel Fett" asciiFullname="Daniel Fett"></author> <author fullname="Kristina Yasuda" asciiFullname="Kristina Yasuda"></author> <author fullname="Brian Campbell" asciiFullname="Brian Campbell"></author> <date month="May" year="2025"></date> <abstract>  <t anchor="_8c856a88-ebba-b063-d020-93093e857ec8">This specification defines a mechanism for the selective disclosure of individual elements of a JSON data structure used as the payload of a JSON Web Signature (JWS). The primary use case is the selective disclosure of JSON Web Token (JWT) claims.</t></abstract> </front>
+          <front> <title>Selective Disclosure for JWTs (SD-JWT)</title> <author fullname="Daniel Fett" asciiFullname="Daniel Fett"></author> <author fullname="Kristina Yasuda" asciiFullname="Kristina Yasuda"></author> <author fullname="Brian Campbell" asciiFullname="Brian Campbell"></author> <date month="May" year="2025"></date> <abstract>  <t anchor="_8a2fcfa8-e0ec-9a4f-75f0-53ae04c770cf">This specification defines a mechanism for the selective disclosure of individual elements of a JSON data structure used as the payload of a JSON Web Signature (JWS). The primary use case is the selective disclosure of JSON Web Token (JWT) claims.</t></abstract> </front>
         </reference>
         <reference target="https://datatracker.ietf.org/doc/html/draft-ietf-rpp-requirements-03" anchor="RPPReq">
-          <front> <title>RESTful Provisioning Protocol (RPP) - Requirements</title> <author fullname="Maarten Wullink" asciiFullname="Maarten Wullink"></author> <author fullname="Paweł Kowalik" asciiFullname="Pawel Kowalik"></author> <date month="December" year="2025"></date> <abstract>  <t anchor="_caa8c8e4-dbdd-b068-2518-384f53064b6a">This document describes the requirements for the development of the RESTful Provisioning Protocol (RPP).</t></abstract> </front>
+          <front> <title>RESTful Provisioning Protocol (RPP) - Requirements</title> <author fullname="Maarten Wullink" asciiFullname="Maarten Wullink"></author> <author fullname="Paweł Kowalik" asciiFullname="Pawel Kowalik"></author> <date month="December" year="2025"></date> <abstract>  <t anchor="_b76bb802-ff40-6be2-5340-601b4828053e">This document describes the requirements for the development of the RESTful Provisioning Protocol (RPP).</t></abstract> </front>
         </reference>
         <reference target="https://www.w3.org/TR/2008/REC-xml-20081126/" anchor="XML"><front> <title>Extensible Markup Language (XML) 1.0 (Fifth Edition)</title> <author surname="Bray" asciiSurname="Bray" initials="T." asciiInitials="T."></author> <author surname="Paoli" asciiSurname="Paoli" initials="J." asciiInitials="J."></author> <author surname="Sperberg-McQueen" asciiSurname="Sperberg-McQueen" initials="C." asciiInitials="C."></author> <author surname="Maler" asciiSurname="Maler" initials="E." asciiInitials="E."></author> <author surname="Yergeau" asciiSurname="Yergeau" initials="F." asciiInitials="F."></author> <date month="November" year="2008"></date> </front> <refcontent>REC-xml-20081126</refcontent></reference>
         <reference target="https://semver.org/spec/v2.0.0.html" anchor="SemVer"><front> <title>Semantic Versioning 2.0.0</title><author surname="Unknown"></author> </front> <refcontent>Misc SemVer 2.0.0</refcontent></reference>

@@ -30,7 +30,7 @@ Abstract
 Contributing
 
    When contributing to this document, please use the following GitHub
-   project: https://github.com/pawel-kow/RPP-architecture.
+   project: https://github.com/ietf-wg-rpp/RPP-architecture.
 
 Status of This Memo
 
@@ -78,25 +78,27 @@ Table of Contents
      5.1.  HTTP Transport Layer Details
        5.1.1.  Transport Security
        5.1.2.  Authentication and Authorisation
-       5.1.3.  Resource Addressing
-       5.1.4.  Mapping of basic operations to HTTP uniform interface
+       5.1.3.  Credential management
+       5.1.4.  Resource Addressing
+       5.1.5.  Mapping of basic operations to HTTP uniform interface
                (verbs)
-       5.1.5.  Mapping of operations beyond HTTP uniform interface to
+       5.1.6.  Mapping of operations beyond HTTP uniform interface to
                URLs and verbs
-       5.1.6.  HTTP response codes
-       5.1.7.  Content negotiation for media types
-       5.1.8.  Caching
-       5.1.9.  Language negotiation for textual content
-       5.1.10. Client Signalling for Response Verbosity
-       5.1.11. Client Signalling for Request Validation
-       5.1.12. Asynchronous Operation Processing
-       5.1.13. RPP specific status codes and relation to HTTP status
+       5.1.7.  HTTP response codes
+       5.1.8.  Content negotiation for media types
+       5.1.9.  Caching
+       5.1.10. Language negotiation for textual content
+       5.1.11. Client Signalling for Response Verbosity
+       5.1.12. Client Signalling for Request Validation
+       5.1.13. Asynchronous Operation Processing
+       5.1.14. RPP specific status codes and relation to HTTP status
                codes
-       5.1.14. Transaction tracing and idempotency
-       5.1.15. Protocol Versioning
-       5.1.16. Profiles
-       5.1.17. Definition of special resources
-       5.1.18. Service discovery mechanisms
+       5.1.15. Transaction tracing and idempotency
+       5.1.16. Protocol Versioning
+       5.1.17. Profiles
+       5.1.18. Definition of special resources
+       5.1.19. Service discovery mechanisms
+       5.1.20. Scalability
      5.2.  Data Representation Layer
        5.2.1.  Data structure
        5.2.2.  Data format
@@ -108,6 +110,8 @@ Table of Contents
        5.3.3.  Operations
      5.4.  Extension mechanisms
        5.4.1.  Name Management and Collision Avoidance
+       5.4.2.  Extension Security
+       5.4.3.  Extension Review
    6.  Change History
      6.1.  -00 to -01
      6.2.  -03 to draft-ietf-rpp-architecture-00
@@ -176,6 +180,14 @@ Table of Contents
    *  *RPP client:* An entity or application that interacts with the RPP
       server to perform provisioning operations, such as creating,
       updating, or deleting resources.
+
+   *  *Sponsoring Client:* The RPP Client that currently has sponsorship
+      of the object.
+
+   *  *Gaining Client:* The client seeking to gain sponsorship of the
+      object in a Transfer Operation.
+
+   *  *IDN:* Internationalised Domain Names as defined in [RFC5890]
 
 3.  Requirements
 
@@ -454,9 +466,17 @@ Table of Contents
    with a focus on OAuth 2.0 [RFC6749] and related frameworks.  However,
    to maintain functional equivalence with EPP client authentication,
    RPP SHOULD also support authentication schemes that can carry a
-   client identifier and a password, such as HTTP Basic Authentication.
-   RPP should be able to support future authentication and authorisation
-   standards defined for HTTP.
+   client identifier and a password, such as HTTP Basic Authentication
+   [RFC7617].  RPP should be able to support future authentication and
+   authorisation standards defined for HTTP.
+
+5.1.3.  Credential management
+
+   The management of client credentials is not considered to be a part
+   of the core protocol, for this an extension can be created using the
+   extension points described in Section 5.4.  This will enable support
+   for situations where management of authentication credentials is not
+   delegated to a separate identity provider.
 
    Specifications will define profiles for:
 
@@ -468,7 +488,7 @@ Table of Contents
    Implementations will be able to choose authentication and
    authorisation methods appropriate for their security requirements.
 
-5.1.2.1.  Authorisation Scopes
+5.1.3.1.  Authorisation Scopes
 
    RPP specifications will standardise authorisation scopes (like
    rpp:read or rpp:write) to define granular access control for
@@ -476,7 +496,7 @@ Table of Contents
    operations and resource types, ensuring that clients can be granted
    only the necessary permissions.
 
-5.1.2.2.  Fine-Grained Authorisation
+5.1.3.2.  Fine-Grained Authorisation
 
    RPP authorisation models may become fine-grained, extending beyond
    simple auth-code based models used in EPP.  Authorisation decisions
@@ -488,7 +508,7 @@ Table of Contents
    Here solutions like OAuth2 RAR [RFC9396] could be considered to
    provide fine-grained access control.
 
-5.1.2.3.  Relationship between clients and authentication credentials
+5.1.3.3.  Relationship between clients and authentication credentials
 
    RPP authentication and authorisation model will make a clear
    distinction between the login credentials and the authorisation to
@@ -509,7 +529,7 @@ Table of Contents
    valid only for Client A, while scope=rpp:clientB would apply to
    Client B.
 
-5.1.2.4.  Security
+5.1.3.4.  Security
 
    RPP will not explicitly define security related policies related to
    authentication or authorisation (such as password complexity, token
@@ -519,7 +539,7 @@ Table of Contents
    which may evolve over time and would have to be independent of the
    protocol itself.
 
-5.1.2.5.  Credential and Token Lifecycle
+5.1.3.5.  Credential and Token Lifecycle
 
    RPP will support mechanisms for revoking, rotating or deprecating
    credentials, tokens, or permissions when they are no longer needed or
@@ -540,7 +560,7 @@ Table of Contents
    mechanisms, enabling clients to discover how to revoke credentials
    when necessary.
 
-5.1.2.6.  Object level authorisation
+5.1.3.6.  Object level authorisation
 
    RPP will define a mechanism for object-level authorisation,
    preventing unauthorised access to specific objects or resources.
@@ -550,9 +570,13 @@ Table of Contents
    non-sponsored/owned objects.  This could be achieved through state-
    of-the-art standards like OAuth authorisation tokens, scopes, and
    resource-specific permissions but also shared secrets for backward
-   compatibility with EPP password-based authorisation information.
+   compatibility with EPP password-based authorisation information.  All
+   parties involved in a running or completed process, such as the
+   Sponsoring Client and the Gaining Client for a transfer operation,
+   must be allowed to query the status of the proces using the same
+   process resource.
 
-5.1.3.  Resource Addressing
+5.1.4.  Resource Addressing
 
    RPP resources are addressed using URLs.  Considerations include:
 
@@ -583,18 +607,18 @@ Table of Contents
    to the "links" concept in RESTful APIs, where related resources are
    linked together.
 
-5.1.3.1.  Internationalised Domain Names (IDN)
+5.1.4.1.  Internationalised Domain Names (IDN)
 
-   RPP will address the handling of Internationalised Domain Names
-   (IDNs) in resource addressing.  Specifications will define whether to
-   use IDN or UTF-8 encoding directly in URLs and whether to employ
-   redirects to canonical URLs or "see-also" linking for alternative
-   representations.  For example, a "see-also" link could point from a
-   UTF-8 encoded URL to an IDN URL and vice versa, allowing clients to
-   use either URL.  Another way would be to always redirect to the
-   canonical URL, which would be the IDN URL.
+   RPP will address the handling of IDNs in resource addressing.
+   Specifications will define whether to use IDN or UTF-8 encoding
+   directly in URLs and whether to employ redirects to canonical URLs or
+   "see-also" linking for alternative representations.  For example, a
+   "see-also" link could point from a UTF-8 encoded URL to an IDN URL
+   and vice versa, allowing clients to use either URL.  Another way
+   would be to always redirect to the canonical URL, which would be the
+   IDN URL.
 
-5.1.4.  Mapping of basic operations to HTTP uniform interface (verbs)
+5.1.5.  Mapping of basic operations to HTTP uniform interface (verbs)
 
    RPP operations are mapped to standard HTTP methods to leverage the
    uniform interface and RESTful principles:
@@ -637,7 +661,7 @@ Table of Contents
    *  *PATCH:* Partially modify a resource (e.g., updating specific
       attributes of a domain or contact) - EPP update command
 
-5.1.5.  Mapping of operations beyond HTTP uniform interface to URLs and
+5.1.6.  Mapping of operations beyond HTTP uniform interface to URLs and
         verbs
 
    Many of EPP commands do not map directly to the HTTP uniform
@@ -675,7 +699,7 @@ Table of Contents
    full URI of such processing resource (e.g. /domains/{domain-
    name}/processes/renewal for domain renew operation).
 
-   As discussed in Section 5.1.4 EPP check command may not be
+   As discussed in Section 5.1.5 EPP check command may not be
    appropriate to be mapped directly to the HTTP uniform interface of
    the resource itself.  EPP check command will be therefore modelled as
    sub-resource such as /availability offering both HEAD operation for
@@ -687,7 +711,7 @@ Table of Contents
    RPP specifications and give a universal toolset for extending RPP
    with new resources and commands.
 
-5.1.6.  HTTP response codes
+5.1.7.  HTTP response codes
 
    In general RPP shall make use of HTTP status codes to indicate
    general response status categories (e.g., 2xx success responses, 4xx
@@ -702,9 +726,9 @@ Table of Contents
    corresponsing specific code exists (e.g. 404 for not existing
    resource or 401 for unauthenticated request).
 
-   More specific RPP codes are elaborated in Section 5.1.13.
+   More specific RPP codes are elaborated in Section 5.1.14.
 
-5.1.7.  Content negotiation for media types
+5.1.8.  Content negotiation for media types
 
    RPP supports content negotiation to allow clients to specify
    preferred media types for request and response payloads using the
@@ -717,7 +741,7 @@ Table of Contents
 
    *  Potential support for other media types defined in the Section 5.2
 
-5.1.8.  Caching
+5.1.9.  Caching
 
    RPP shall benefit from HTTP standard caching mechanisms to enable
    standard components like proxies and caches to improve performance
@@ -725,7 +749,7 @@ Table of Contents
    different resources and operations, including cache-control headers
    and ETag support.
 
-5.1.9.  Language negotiation for textual content
+5.1.10.  Language negotiation for textual content
 
    RPP shall support language negotiation to enable clients to request
    responses in a preferred language using the HTTP 'Accept-Language'
@@ -744,7 +768,7 @@ Table of Contents
       provided content.  Other media types may have different mechanisms
       for language representation.
 
-5.1.10.  Client Signalling for Response Verbosity
+5.1.11.  Client Signalling for Response Verbosity
 
    RPP may utilise the HTTP Prefer header [RFC7240] with the "return"
    preference to allow clients to control the verbosity of responses.
@@ -761,7 +785,7 @@ Table of Contents
    purpose, therefore RPP would need to define custom preference and
    register it in "HTTP Preferences" IANA registry.
 
-5.1.11.  Client Signalling for Request Validation
+5.1.12.  Client Signalling for Request Validation
 
    RPP may utilise the HTTP Prefer header [RFC7240] for signalling the
    preference for either strict or lenient processing of requests.  This
@@ -769,9 +793,9 @@ Table of Contents
    message payloads and rejection of requests with unknown properties or
    a more lenient approach ignoring unknown properties that may allow
    for additional flexibility in processing.  The default behaviour,
-   without the Prefer header, would be to process requests leniently.
+   without the Prefer header, would be strict validation.
 
-5.1.12.  Asynchronous Operation Processing
+5.1.13.  Asynchronous Operation Processing
 
    The RPP architecture accommodates operations that are potentially
    long-running or cannot be completed synchronously due to their nature
@@ -816,7 +840,7 @@ Table of Contents
    operations intended for asynchronous execution will be designed to
    utilise this pattern.
 
-5.1.13.  RPP specific status codes and relation to HTTP status codes
+5.1.14.  RPP specific status codes and relation to HTTP status codes
 
    RPP uses a dual-layer approach for signaling operation outcomes,
    leveraging both standard HTTP status codes and RPP-specific status
@@ -863,7 +887,7 @@ Table of Contents
    *  RPP should also use other standardised HTTP signaling mechanisms
       where appropriate, for example for rate limiting.
 
-5.1.14.  Transaction tracing and idempotency
+5.1.15.  Transaction tracing and idempotency
 
    RPP shall support identification of requests and responses on both
    client side and server side with use of client provided identifiers
@@ -888,7 +912,7 @@ Table of Contents
    clear separation of resource representation from performed actions.
    If possible existing mechanisms of HTTP shall be employed.
 
-5.1.15.  Protocol Versioning
+5.1.16.  Protocol Versioning
 
    RPP will define a versioning schema for the protocol itself, the
    extensions and other protocol elements such as profiles as
@@ -903,7 +927,7 @@ Table of Contents
    Signalling of the versions will be preferably realised using
    parameters of the media type.
 
-5.1.16.  Profiles
+5.1.17.  Profiles
 
    In real operational conditions different RPP server operators may
    have different requirements regarding set of protocol elements and
@@ -922,18 +946,18 @@ Table of Contents
    Signalling of the profiles will be preferably realised using
    parameters of the media type.
 
-5.1.17.  Definition of special resources
+5.1.18.  Definition of special resources
 
    RPP may define special resources for specific purposes:
 
    *  Service Discovery endpoints to advertise protocol capabilities and
-      supported features (see Section 5.1.18).
+      supported features (see Section 5.1.19).
 
    *  Metadata endpoints to provide schema information or other
       protocol-level metadata, potentially including OpenAPI definitions
       for documentation and code generation.
 
-5.1.18.  Service discovery mechanisms
+5.1.19.  Service discovery mechanisms
 
    RPP will define mechanisms for service discovery, allowing clients to
    dynamically discover RPP service endpoints and capabilities, reducing
@@ -947,7 +971,11 @@ Table of Contents
       capabilities) for service discovery.
 
    *  Advertising supported protocol versions, extensions, available
-      resource types, authentication methods, and supported features.
+      resource types, authentication methods, IDN policies and supported
+      features.
+
+   *  Advertising of maintenance notices, informing clients about future
+      unavailability of the service due to scheduled maintenance.
 
    *  It may be considered for RPP to distribute service discovery for
       each resource type separately for better scalability and
@@ -969,6 +997,16 @@ Table of Contents
       and not be used for any dynamic configuration, like load balancing
       etc.  It would enable the right balance between discoverability
       and reduction of round trips between clients and servers.
+
+5.1.20.  Scalability
+
+   RPP leverages HTTP, enabling the use of standard web scalability
+   techniques such as load balancing, horizontal scaling, and
+   distributed caching.  Stateless interactions allow requests to be
+   handled independently, facilitating distribution across multiple
+   servers and rapid scaling in response to demand.  RPP shall enable by
+   design existing web security and mitigation mechanisms to defend
+   against attacks such as Denial of Service (DoS).
 
 5.2.  Data Representation Layer
 
@@ -1192,16 +1230,57 @@ Table of Contents
    the extensibility goals of the RPP architecture while maintaining
    interoperability and clarity across implementations.
 
+5.4.2.  Extension Security
+
+   Extensions operate within the same security architecture as the core
+   protocol.  Security, authentication, and authorisation mechanisms
+   defined at the HTTP Transport Layer (see Section 5.1.2) apply
+   uniformly to both core protocol operations and all extensions.  This
+   "security by design" approach is aimed to ensure that extensions
+   cannot bypass or weaken the security posture established by the core
+   protocol.  Extensions must not introduce new authentication or
+   authorisation mechanisms that circumvent or conflict with those
+   defined by the core specifications.
+
+5.4.3.  Extension Review
+
+   Before any extension is accepted by IANA, a review by an RPP expert
+   must be performed.  This review includes verification that the
+   extension does not violate any of the RPP security considerations and
+   that it correctly integrates with the protocol's security framework.
+   The complete review criteria will be included in the "IANA
+   Considerations" section of any document describing RPP extension
+   mechanisms, according to the BCP described in [RFC8126].
+
 6.  Change History
 
 6.1.  -00 to -01
 
+   *  Create "Credential management" section for updating credentials
+      using an extension.
+
+   *  Changed default validation from lenient to strict.  (Issue #82)
+
+   *  Added Extension Security and Extension Review Sections to
+      Section 5.4 (Issue #91).
+
+   *  Added Advertising of maintenance notices to "Service Discovery"
+      section.  (Issue #88)
+
+   *  Added "Scalability" section.  (Issue #92)
+
+   *  Explicitly state that all parties involved in a process are
+      allowed to retrieve the process status.  (Issue #98)
+
+   *  Added IDN to "Terminology" and "Service discovery mechanisms"
+      sections
+
    *  Added "additional measures to verify the client" to
-      Section 5.1.2.4 (Issue #76).
+      Section 5.1.3.4 (Issue #76).
 
    *  Added TLS mandatory to Section 5.1.1 (Issue #78).
 
-   *  Added Section Section 5.1.2.5 for credential and token revocation/
+   *  Added Section Section 5.1.3.5 for credential and token revocation/
       replacement mechanisms (Issue #79).
 
 6.2.  -03 to draft-ietf-rpp-architecture-00
@@ -1215,7 +1294,7 @@ Table of Contents
       parts to cover all aspects.
 
    *  Clarified the relationship and mapping between HTTP status codes
-      and RPP-specific status codes in Section 5.1.13.
+      and RPP-specific status codes in Section 5.1.14.
 
    *  Added paragraph on promotion of standard extensions to
       Section 5.4.
@@ -1228,9 +1307,9 @@ Table of Contents
 6.4.  -01 to -02
 
    *  Added responses must contain links to relevant object to
-      Section 5.1.3
+      Section 5.1.4
 
-   *  Added round trip minimisation principle to Section 5.1.18
+   *  Added round trip minimisation principle to Section 5.1.19
 
    *  Added description of lenient versus strict request validation to
       Section 4.2.3.
@@ -1256,7 +1335,7 @@ Table of Contents
       Section 5.4.
 
    *  Added Section about dereferenced related object representation to
-      Section 5.1.17.
+      Section 5.1.18.
 
 6.5.  -00 to -01
 
@@ -1366,6 +1445,20 @@ Table of Contents
               Representation of Contact Data", IETF,
               DOI 10.17487/RFC9553, RFC 9553, May 2024,
               <https://www.rfc-editor.org/info/rfc9553>.
+
+   [RFC7617]  Reschke, J., "The 'Basic' HTTP Authentication Scheme",
+              IETF, DOI 10.17487/RFC7617, RFC 7617, September 2015,
+              <https://www.rfc-editor.org/info/rfc7617>.
+
+   [RFC8126]  Cotton, M., Leiba, B., and T. Narten, "Guidelines for
+              Writing an IANA Considerations Section in RFCs", IETF,
+              DOI 10.17487/RFC8126, BCP 26, RFC 8126, June 2017,
+              <https://www.rfc-editor.org/info/rfc8126>.
+
+   [RFC5890]  Klensin, J., "Internationalized Domain Names for
+              Applications (IDNA): Definitions and Document Framework",
+              IETF, DOI 10.17487/RFC5890, RFC 5890, August 2010,
+              <https://www.rfc-editor.org/info/rfc5890>.
 
    [SD-JWT]   Terbu, O., Fett, D., and B. Campbell, "SD-JWT-based
               Verifiable Credentials (SD-JWT VC)", July 2025,
