@@ -24,10 +24,10 @@
     pycountry 24.6.1
     PyYAML 6.0.3
     requests 2.32.5
-    wcwidth 0.2.14
+    wcwidth 0.5.3
     weasyprint 65.0
 -->
-<link href="draft-ietf-rpp-architecture-01.xml" rel="alternate" type="application/rfc+xml">
+<link href="draft-ietf-rpp-architecture-01.rfc.xml" rel="alternate" type="application/rfc+xml">
 <link href="#copyright" rel="license">
 <style type="text/css">/*
 
@@ -1208,6 +1208,7 @@ li > p:last-of-type:only-child {
   margin-bottom: 0;
 }
 </style>
+<link href="rfc-local.css" rel="stylesheet" type="text/css">
 <script type="application/javascript">async function addMetadata(){try{const e=document.styleSheets[0].cssRules;for(let t=0;t<e.length;t++)if(/#identifiers/.exec(e[t].selectorText)){const a=e[t].cssText.replace("#identifiers","#external-updates");document.styleSheets[0].insertRule(a,document.styleSheets[0].cssRules.length)}}catch(e){console.log(e)}const e=document.getElementById("external-metadata");if(e)try{var t,a="",o=function(e){const t=document.getElementsByTagName("meta");for(let a=0;a<t.length;a++)if(t[a].getAttribute("name")===e)return t[a].getAttribute("content");return""}("rfc.number");if(o){t="https://www.rfc-editor.org/rfc/rfc"+o+".json";try{const e=await fetch(t);a=await e.json()}catch(e){t=document.URL.indexOf("html")>=0?document.URL.replace(/html$/,"json"):document.URL+".json";const o=await fetch(t);a=await o.json()}}if(!a)return;e.style.display="block";const s="",d="https://datatracker.ietf.org/doc",n="https://datatracker.ietf.org/ipr/search",c="https://www.rfc-editor.org/info",l=a.doc_id.toLowerCase(),i=a.doc_id.slice(0,3).toLowerCase(),f=a.doc_id.slice(3).replace(/^0+/,""),u={status:"Status",obsoletes:"Obsoletes",obsoleted_by:"Obsoleted By",updates:"Updates",updated_by:"Updated By",see_also:"See Also",errata_url:"Errata"};let h="<dl style='overflow:hidden' id='external-updates'>";["status","obsoletes","obsoleted_by","updates","updated_by","see_also","errata_url"].forEach(e=>{if("status"==e){a[e]=a[e].toLowerCase();var t=a[e].split(" "),o=t.length,w="",p=1;for(let e=0;e<o;e++)p<o?w=w+r(t[e])+" ":w+=r(t[e]),p++;a[e]=w}else if("obsoletes"==e||"obsoleted_by"==e||"updates"==e||"updated_by"==e){var g,m="",b=1;g=a[e].length;for(let t=0;t<g;t++)a[e][t]&&(a[e][t]=String(a[e][t]).toLowerCase(),m=b<g?m+"<a href='"+s+"/rfc/".concat(a[e][t])+"'>"+a[e][t].slice(3)+"</a>, ":m+"<a href='"+s+"/rfc/".concat(a[e][t])+"'>"+a[e][t].slice(3)+"</a>",b++);a[e]=m}else if("see_also"==e){var y,L="",C=1;y=a[e].length;for(let t=0;t<y;t++)if(a[e][t]){a[e][t]=String(a[e][t]);var _=a[e][t].slice(0,3),v=a[e][t].slice(3).replace(/^0+/,"");L=C<y?"RFC"!=_?L+"<a href='"+s+"/info/"+_.toLowerCase().concat(v.toLowerCase())+"'>"+_+" "+v+"</a>, ":L+"<a href='"+s+"/info/"+_.toLowerCase().concat(v.toLowerCase())+"'>"+v+"</a>, ":"RFC"!=_?L+"<a href='"+s+"/info/"+_.toLowerCase().concat(v.toLowerCase())+"'>"+_+" "+v+"</a>":L+"<a href='"+s+"/info/"+_.toLowerCase().concat(v.toLowerCase())+"'>"+v+"</a>",C++}a[e]=L}else if("errata_url"==e){var R="";R=a[e]?R+"<a href='"+a[e]+"'>Errata exist</a> | <a href='"+d+"/"+l+"'>Datatracker</a>| <a href='"+n+"/?"+i+"="+f+"&submit="+i+"'>IPR</a> | <a href='"+c+"/"+l+"'>Info page</a>":"<a href='"+d+"/"+l+"'>Datatracker</a> | <a href='"+n+"/?"+i+"="+f+"&submit="+i+"'>IPR</a> | <a href='"+c+"/"+l+"'>Info page</a>",a[e]=R}""!=a[e]?"Errata"==u[e]?h+=`<dt>More info:</dt><dd>${a[e]}</dd>`:h+=`<dt>${u[e]}:</dt><dd>${a[e]}</dd>`:"Errata"==u[e]&&(h+=`<dt>More info:</dt><dd>${a[e]}</dd>`)}),h+="</dl>",e.innerHTML=h}catch(e){console.log(e)}else console.log("Could not locate metadata <div> element");function r(e){return e.charAt(0).toUpperCase()+e.slice(1)}}window.removeEventListener("load",addMetadata),window.addEventListener("load",addMetadata);</script>
 </head>
 <body class="xml2rfc">
@@ -1372,7 +1373,7 @@ li > p:last-of-type:only-child {
                     <p id="section-toc.1-1.5.2.1.2.6.1"><a href="#section-5.1.6" class="auto internal xref">5.1.6</a>.  <a href="#name-mapping-of-operations-beyon" class="internal xref">Mapping of operations beyond HTTP uniform interface to URLs and verbs</a></p>
 </li>
                   <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5.2.1.2.7">
-                    <p id="section-toc.1-1.5.2.1.2.7.1"><a href="#section-5.1.7" class="auto internal xref">5.1.7</a>.  <a href="#name-http-response-codes" class="internal xref">HTTP response codes</a></p>
+                    <p id="section-toc.1-1.5.2.1.2.7.1"><a href="#section-5.1.7" class="auto internal xref">5.1.7</a>.  <a href="#name-http-response-status-codes" class="internal xref">HTTP response status codes</a></p>
 </li>
                   <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5.2.1.2.8">
                     <p id="section-toc.1-1.5.2.1.2.8.1"><a href="#section-5.1.8" class="auto internal xref">5.1.8</a>.  <a href="#name-content-negotiation-for-med" class="internal xref">Content negotiation for media types</a></p>
@@ -1393,7 +1394,7 @@ li > p:last-of-type:only-child {
                     <p id="section-toc.1-1.5.2.1.2.13.1"><a href="#section-5.1.13" class="auto internal xref">5.1.13</a>. <a href="#name-asynchronous-operation-proc" class="internal xref">Asynchronous Operation Processing</a></p>
 </li>
                   <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5.2.1.2.14">
-                    <p id="section-toc.1-1.5.2.1.2.14.1"><a href="#section-5.1.14" class="auto internal xref">5.1.14</a>. <a href="#name-rpp-specific-status-codes-a" class="internal xref">RPP specific status codes and relation to HTTP status codes</a></p>
+                    <p id="section-toc.1-1.5.2.1.2.14.1"><a href="#section-5.1.14" class="auto internal xref">5.1.14</a>. <a href="#name-rpp-specific-status-codes-a" class="internal xref">RPP specific status codes and relation to HTTP response status codes</a></p>
 </li>
                   <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5.2.1.2.15">
                     <p id="section-toc.1-1.5.2.1.2.15.1"><a href="#section-5.1.15" class="auto internal xref">5.1.15</a>. <a href="#name-transaction-tracing-and-ide" class="internal xref">Transaction tracing and idempotency</a></p>
@@ -1429,6 +1430,9 @@ li > p:last-of-type:only-child {
 </li>
                   <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5.2.2.2.4">
                     <p id="section-toc.1-1.5.2.2.2.4.1"><a href="#section-5.2.4" class="auto internal xref">5.2.4</a>.  <a href="#name-media-type-definition" class="internal xref">Media Type definition</a></p>
+</li>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5.2.2.2.5">
+                    <p id="section-toc.1-1.5.2.2.2.5.1"><a href="#section-5.2.5" class="auto internal xref">5.2.5</a>.  <a href="#name-optionality" class="internal xref">Optionality</a></p>
 </li>
                 </ul>
 </li>
@@ -1574,7 +1578,7 @@ li > p:last-of-type:only-child {
 </div>
 </section>
 </div>
-<div id="_110d973f-9ead-a8b9-6d0c-c057ca0475eb">
+<div id="_73ddfaa7-1951-0d50-ea53-1b351e0693f7">
 <section id="section-4">
       <h2 id="name-architectural-overview">
 <a href="#section-4" class="section-number selfRef">4. </a><a href="#name-architectural-overview" class="section-name selfRef">Architectural Overview</a>
@@ -1668,7 +1672,7 @@ li > p:last-of-type:only-child {
         </ul>
 </section>
 </div>
-<div id="_883a841e-6dbf-baee-42ae-52f2dc855a16">
+<div id="_a1eb2e53-c497-5259-9670-8aff8ebd3b37">
 <section id="section-4.2">
         <h3 id="name-architecture-layers">
 <a href="#section-4.2" class="section-number selfRef">4.2. </a><a href="#name-architecture-layers" class="section-name selfRef">Architecture Layers</a>
@@ -1684,7 +1688,7 @@ li > p:last-of-type:only-child {
 <div id="_848fb936-c4aa-0b45-d998-a38c165070bb">
 <p id="section-4.2.1-2">The HTTP Transport Layer consists of two sub-layers:<a href="#section-4.2.1-2" class="pilcrow">¶</a></p>
 </div>
-<div id="_759fbbc5-8f44-add3-5be5-f9e4e88520ea">
+<div id="_0b9584ef-39ef-2c87-1da5-7ec6febe415a">
 <section id="section-4.2.1.1">
             <h5 id="name-built-in-http-features">
 <a href="#section-4.2.1.1" class="section-number selfRef">4.2.1.1. </a><a href="#name-built-in-http-features" class="section-name selfRef">Built-in HTTP Features</a>
@@ -1712,7 +1716,7 @@ li > p:last-of-type:only-child {
                 <strong>Mapping of operations beyond HTTP uniform interface to URLs and verbs:</strong> Handling more complex operations through appropriate URL structures and HTTP methods.<a href="#section-4.2.1.1-3.5" class="pilcrow">¶</a>
 </li>
               <li class="normal" id="section-4.2.1.1-3.6">
-                <strong>HTTP response codes:</strong> Utilising standard HTTP status codes to indicate the outcome of requests.<a href="#section-4.2.1.1-3.6" class="pilcrow">¶</a>
+                <strong>HTTP response status codes:</strong> Utilising standard HTTP response status codes to indicate the outcome of requests.<a href="#section-4.2.1.1-3.6" class="pilcrow">¶</a>
 </li>
               <li class="normal" id="section-4.2.1.1-3.7">
                 <strong>Content negotiation for media types:</strong> Supporting multiple data representation formats and using content negotiation to select the appropriate format.<a href="#section-4.2.1.1-3.7" class="pilcrow">¶</a>
@@ -1732,7 +1736,7 @@ li > p:last-of-type:only-child {
             </ul>
 </section>
 </div>
-<div id="_37754dff-2893-ad62-adb4-ea12274d6c92">
+<div id="_dfc37ba6-196d-cb3a-9748-095aafe74b35">
 <section id="section-4.2.1.2">
             <h5 id="name-rpp-specific-extensions">
 <a href="#section-4.2.1.2" class="section-number selfRef">4.2.1.2. </a><a href="#name-rpp-specific-extensions" class="section-name selfRef">RPP-Specific Extensions</a>
@@ -1748,7 +1752,7 @@ li > p:last-of-type:only-child {
                 <strong>Asynchronous Operation Management:</strong> Facilitating the handling of operations that are not completed immediately, by defining an HTTP-based interaction pattern for status checking and deferred result retrieval.<a href="#section-4.2.1.2-3.1" class="pilcrow">¶</a>
 </li>
               <li class="normal" id="section-4.2.1.2-3.2">
-                <strong>RPP specific error codes and relation to HTTP error codes:</strong> Defining RPP-specific error codes while relating them to standard HTTP error codes for consistency.<a href="#section-4.2.1.2-3.2" class="pilcrow">¶</a>
+                <strong>RPP specific error codes and relation to HTTP response status codes:</strong> Defining RPP-specific error codes while relating them to standard HTTP response status codes for consistency.<a href="#section-4.2.1.2-3.2" class="pilcrow">¶</a>
 </li>
               <li class="normal" id="section-4.2.1.2-3.3">
                 <strong>Transaction tracing and idempotency:</strong> Mechanisms for tracking requests and ensuring idempotent operations where appropriate.<a href="#section-4.2.1.2-3.3" class="pilcrow">¶</a>
@@ -1825,7 +1829,7 @@ li > p:last-of-type:only-child {
 </div>
 </section>
 </div>
-<div id="_48b607e3-0546-4d48-111f-4d869f0efdfa">
+<div id="_dc807338-c0e6-1e42-46d5-7fa1b7f22248">
 <section id="section-5">
       <h2 id="name-protocol-details">
 <a href="#section-5" class="section-number selfRef">5. </a><a href="#name-protocol-details" class="section-name selfRef">Protocol Details</a>
@@ -1984,13 +1988,66 @@ li > p:last-of-type:only-child {
 <div id="_9e0e996e-834b-7695-409f-035b26031026">
 <p id="section-5.1.4-6">RPP responses will include URLs for related resources, allowing clients to navigate newly created resources easily. This is similar to the "links" concept in RESTful APIs, where related resources are linked together.<a href="#section-5.1.4-6" class="pilcrow">¶</a></p>
 </div>
-<div id="_e1040169-fb08-a0e7-cf12-d1dd734a0c14">
+<div id="collection-representation">
 <section id="section-5.1.4.1">
-            <h5 id="name-internationalised-domain-na">
-<a href="#section-5.1.4.1" class="section-number selfRef">5.1.4.1. </a><a href="#name-internationalised-domain-na" class="section-name selfRef">Internationalised Domain Names (IDN)</a>
+            <h5 id="name-collection-representation">
+<a href="#section-5.1.4.1" class="section-number selfRef">5.1.4.1. </a><a href="#name-collection-representation" class="section-name selfRef">Collection Representation</a>
             </h5>
-<div id="_752cb063-724c-2fb3-af71-c3403dc8164d">
-<p id="section-5.1.4.1-1">RPP will address the handling of IDNs in resource addressing. Specifications will define whether to use IDN or UTF-8 encoding directly in URLs and whether to employ redirects to canonical URLs or "see-also" linking for alternative representations. For example,  a "see-also" link could point from a UTF-8 encoded URL to an IDN URL and vice versa, allowing clients to use either URL. Another way would be to always redirect to the canonical URL, which would be the IDN URL.<a href="#section-5.1.4.1-1" class="pilcrow">¶</a></p>
+<div id="_8036014a-efe0-bd5f-8fed-9bd7b5523695">
+<p id="section-5.1.4.1-1">RPP supports retrieval of collections of resources via dedicated collection endpoints (e.g., <code>/domains/</code> for listing domains). For collections that may contain large numbers of resources, RPP supports pagination using established mechanisms such as HTTP Link headers as defined in <span>[<a href="#RFC8288" class="cite xref">RFC8288</a>]</span>. Items within a collection may be returned as partial representations rather than full resource details, reducing payload size. Clients can retrieve full details by following links to individual resources. RPP may also support query parameters for filtering and sorting collection results.<a href="#section-5.1.4.1-1" class="pilcrow">¶</a></p>
+</div>
+</section>
+</div>
+<div id="_b3678762-9cd5-65be-842b-2a5a4fc46abe">
+<section id="section-5.1.4.2">
+            <h5 id="name-internationalised-domain-na">
+<a href="#section-5.1.4.2" class="section-number selfRef">5.1.4.2. </a><a href="#name-internationalised-domain-na" class="section-name selfRef">Internationalised Domain Names (IDN)</a>
+            </h5>
+<div id="_f8b5c0df-dca1-f305-eab0-4dab21a9de18">
+<p id="section-5.1.4.2-1">RPP will address the handling of IDNs in resource addressing. Specifications will define whether to use IDN or UTF-8 encoding directly in URLs and whether to employ redirects to canonical URLs or "see-also" linking for alternative representations. For example,  a "see-also" link could point from a UTF-8 encoded URL to an IDN URL and vice versa, allowing clients to use either URL. Another way would be to always redirect to the canonical URL, which would be the IDN URL.<a href="#section-5.1.4.2-1" class="pilcrow">¶</a></p>
+</div>
+</section>
+</div>
+<div id="_287863f4-c4b9-056e-2847-3961e174f033">
+<section id="section-5.1.4.3">
+            <h5 id="name-canonical-addressing">
+<a href="#section-5.1.4.3" class="section-number selfRef">5.1.4.3. </a><a href="#name-canonical-addressing" class="section-name selfRef">Canonical Addressing</a>
+            </h5>
+<div id="_7685eb65-facc-88e4-2122-a0b03bfb79ae">
+<p id="section-5.1.4.3-1">A single resource can be addressed using multiple alternative identifiers in a URL. These identifiers may represent different alternative syntactic forms, these include, but are not limited to:<a href="#section-5.1.4.3-1" class="pilcrow">¶</a></p>
+</div>
+<ul class="normal">
+<li class="normal" id="section-5.1.4.3-2.1">Internationalized identifiers (IDNs) and their ASCII/Punycode equivalents<a href="#section-5.1.4.3-2.1" class="pilcrow">¶</a>
+</li>
+              <li class="normal" id="section-5.1.4.3-2.2">Unicode identifiers and their percent-encoded representations<a href="#section-5.1.4.3-2.2" class="pilcrow">¶</a>
+</li>
+            </ul>
+<div id="_bdaea169-deec-0aca-0dea-d218ee05b19e">
+<p id="section-5.1.4.3-3">The canonical address is the authoritative identifier for the resource and is the form that RPP uses for:<a href="#section-5.1.4.3-3" class="pilcrow">¶</a></p>
+</div>
+<ul class="normal">
+<li class="normal" id="section-5.1.4.3-4.1">Persistent storage and internal references<a href="#section-5.1.4.3-4.1" class="pilcrow">¶</a>
+</li>
+              <li class="normal" id="section-5.1.4.3-4.2">Hypermedia links generated by the server<a href="#section-5.1.4.3-4.2" class="pilcrow">¶</a>
+</li>
+              <li class="normal" id="section-5.1.4.3-4.3">Resource metadata and self-links<a href="#section-5.1.4.3-4.3" class="pilcrow">¶</a>
+</li>
+              <li class="normal" id="section-5.1.4.3-4.4">Equality checks<a href="#section-5.1.4.3-4.4" class="pilcrow">¶</a>
+</li>
+            </ul>
+<div id="_865be96c-2056-d508-73f2-1e86cb233b12">
+<p id="section-5.1.4.3-5">Any other valid address for the same resource is to be treated strictly as an alias. When a resource is addressed using an alias, RPP must ensure canonicalization through at least one of the following mechanisms:<a href="#section-5.1.4.3-5" class="pilcrow">¶</a></p>
+</div>
+<ul class="normal">
+<li class="normal" id="section-5.1.4.3-6.1">Redirecting the client to the canonical URL<a href="#section-5.1.4.3-6.1" class="pilcrow">¶</a>
+</li>
+              <li class="normal" id="section-5.1.4.3-6.2">Returning a representation that explicitly declares the canonical URL<a href="#section-5.1.4.3-6.2" class="pilcrow">¶</a>
+</li>
+              <li class="normal" id="section-5.1.4.3-6.3">Internally resolving the alias to the canonical identifier before any authorization, or state mutation occurs<a href="#section-5.1.4.3-6.3" class="pilcrow">¶</a>
+</li>
+            </ul>
+<div id="_ddea0864-b0f3-bf5f-a3a5-b26c1a2a709f">
+<p id="section-5.1.4.3-7">Canonicalization shall be performed prior to any operation that depends on resource identity.<a href="#section-5.1.4.3-7" class="pilcrow">¶</a></p>
 </div>
 </section>
 </div>
@@ -2040,7 +2097,7 @@ li > p:last-of-type:only-child {
           </ul>
 </section>
 </div>
-<div id="_0b5fedfe-5d11-84e9-809c-fa56984f307d">
+<div id="_291f06df-781f-3a99-67b1-81c37963c5eb">
 <section id="section-5.1.6">
           <h4 id="name-mapping-of-operations-beyon">
 <a href="#section-5.1.6" class="section-number selfRef">5.1.6. </a><a href="#name-mapping-of-operations-beyon" class="section-name selfRef">Mapping of operations beyond HTTP uniform interface to URLs and verbs</a>
@@ -2054,33 +2111,36 @@ li > p:last-of-type:only-child {
 <div id="_682b7ef8-c722-d576-e95d-829c1f716a5e">
 <p id="section-5.1.6-3">Other transform operations like renew, or restore which are not directly addressable resources in terms of REST will modelled as a convention of URLs with processing resources with only POST interface, e.g. <code>/renewal</code>.<a href="#section-5.1.6-3" class="pilcrow">¶</a></p>
 </div>
-<div id="_bece8900-b9ac-49fc-1643-ad90462aa02c">
-<p id="section-5.1.6-4">This pattern can be further applied to object operations not defined in the core protocol or EPP, allowing easy and uniform extension of allowed operations.<a href="#section-5.1.6-4" class="pilcrow">¶</a></p>
+<div id="_8889f32c-a823-971a-ccfc-03c8a8ec892a">
+<p id="section-5.1.6-4">Bulk operations can be supported on collections of resources, such as updating multiple domain objects within a single transaction. URLs for bulk operations must unambiguously indicate that the operation targets multiple objects, ensuring clear intent for clients and servers. Unless explicitly specified otherwise by the server operator, bulk operations should be executed atomically in a single transaction, guaranteeing consistency across all affected resources.<a href="#section-5.1.6-4" class="pilcrow">¶</a></p>
 </div>
-<div id="_f9d0db3e-a838-ef61-64f9-7492194a4a7c">
-<p id="section-5.1.6-5">In order to minimise name collisions between process names and other kind of sub-resources, a distinct path segment shall be dedicated to processes, e.g. <code>/processes/{process-name}</code> or <code>/operations/{operation-name}</code>.<a href="#section-5.1.6-5" class="pilcrow">¶</a></p>
+<div id="_5fafd45d-3264-1e01-9a5c-6abc285ec9c1">
+<p id="section-5.1.6-5">This pattern can be further applied to object operations not defined in the core protocol or EPP, allowing easy and uniform extension of allowed operations.<a href="#section-5.1.6-5" class="pilcrow">¶</a></p>
 </div>
-<div id="_d972c6d1-65ca-3d58-c0e9-b16964513c6f">
-<p id="section-5.1.6-6">The path segments shall be appended to the resource path to create full URI of such processing resource (e.g. <code>/domains/{domain-name}/processes/renewal</code> for domain renew operation).<a href="#section-5.1.6-6" class="pilcrow">¶</a></p>
+<div id="_c3ec61d3-f4c5-c282-4983-8230e8ffb7e8">
+<p id="section-5.1.6-6">In order to minimise name collisions between process names and other kind of sub-resources, a distinct path segment shall be dedicated to processes, e.g. <code>/processes/{process-name}</code> or <code>/operations/{operation-name}</code>.<a href="#section-5.1.6-6" class="pilcrow">¶</a></p>
 </div>
-<div id="_3b214777-b8c9-2463-0f6e-47d393b677fb">
-<p id="section-5.1.6-7">As discussed in <a href="#http-layer-detail-mapping-basic-ops" class="auto internal xref">Section 5.1.5</a> EPP check command may not be appropriate to be mapped directly to the HTTP uniform interface of the resource itself. EPP check command will be therefore modelled as sub-resource such as <code>/availability</code> offering both HEAD operation for quick yes/no response and GET operation for more detailed response allowing for example to extend on the dataset provided (e.g. pricing information).<a href="#section-5.1.6-7" class="pilcrow">¶</a></p>
+<div id="_df3f4b63-2e8e-03b6-662b-992f10b5ffdf">
+<p id="section-5.1.6-7">The path segments shall be appended to the resource path to create full URI of such processing resource (e.g. <code>/domains/{domain-name}/processes/renewal</code> for domain renew operation).<a href="#section-5.1.6-7" class="pilcrow">¶</a></p>
 </div>
-<div id="_b71c366c-da45-4133-72ab-a66d480f6e7b">
-<p id="section-5.1.6-8">This basic set of rules and guidelines will be further refined in the RPP specifications and give a universal toolset for extending RPP with new resources and commands.<a href="#section-5.1.6-8" class="pilcrow">¶</a></p>
+<div id="_ab47189b-f001-67c3-bbc9-8d1505f46301">
+<p id="section-5.1.6-8">As discussed in <a href="#http-layer-detail-mapping-basic-ops" class="auto internal xref">Section 5.1.5</a> EPP check command may not be appropriate to be mapped directly to the HTTP uniform interface of the resource itself. EPP check command will be therefore modelled as sub-resource such as <code>/availability</code> offering both HEAD operation for quick yes/no response and GET operation for more detailed response allowing for example to extend on the dataset provided (e.g. pricing information).<a href="#section-5.1.6-8" class="pilcrow">¶</a></p>
+</div>
+<div id="_e35b08e9-571a-e692-2043-9a4902183b79">
+<p id="section-5.1.6-9">This basic set of rules and guidelines will be further refined in the RPP specifications and give a universal toolset for extending RPP with new resources and commands.<a href="#section-5.1.6-9" class="pilcrow">¶</a></p>
 </div>
 </section>
 </div>
-<div id="_baefb380-79df-2b62-985f-c38e2be73521">
+<div id="_617c6a67-4fec-3595-b759-0458aad5acff">
 <section id="section-5.1.7">
-          <h4 id="name-http-response-codes">
-<a href="#section-5.1.7" class="section-number selfRef">5.1.7. </a><a href="#name-http-response-codes" class="section-name selfRef">HTTP response codes</a>
+          <h4 id="name-http-response-status-codes">
+<a href="#section-5.1.7" class="section-number selfRef">5.1.7. </a><a href="#name-http-response-status-codes" class="section-name selfRef">HTTP response status codes</a>
           </h4>
-<div id="_5f74e10c-4b75-8bbe-ddfc-3e44ce3aab08">
-<p id="section-5.1.7-1">In general RPP shall make use of HTTP status codes to indicate general response status categories (e.g., 2xx success responses, 4xx for client errors, 5xx for server errors) <span>[<a href="#RFC7231" class="cite xref">RFC7231</a>]</span> as opposed to responding always 200 if the request was understood even if the operation itself failed. This allows clients and intermediaries to make first level of determination of the requests outcome based on the status code alone, without needing to parse the response body.<a href="#section-5.1.7-1" class="pilcrow">¶</a></p>
+<div id="_048c9b31-f1dd-3675-88f1-fc67d2b96b95">
+<p id="section-5.1.7-1">In general RPP shall make use of HTTP response status codes to indicate general response status categories (e.g., 2xx success responses, 4xx for client errors, 5xx for server errors) <span>[<a href="#RFC7231" class="cite xref">RFC7231</a>]</span> as opposed to responding always 200 if the request was understood even if the operation itself failed. This allows clients and intermediaries to make first level of determination of the requests outcome based on the status code alone, without needing to parse the response body.<a href="#section-5.1.7-1" class="pilcrow">¶</a></p>
 </div>
-<div id="_4927269d-fc57-5dfe-f10a-81a14f7125c2">
-<p id="section-5.1.7-2">RPP shall use as specific HTTP codes as possible, using generic codes like 400 Bad Request or 500 Internal Server Error only if no corresponsing specific code exists (e.g. 404 for not existing resource or 401 for unauthenticated request).<a href="#section-5.1.7-2" class="pilcrow">¶</a></p>
+<div id="_b5394824-a544-5658-0b20-35a597f06e48">
+<p id="section-5.1.7-2">RPP shall use as specific HTTP response status codes as possible, using generic codes like 400 Bad Request or 500 Internal Server Error only if no corresponsing specific code exists (e.g. 404 for not existing resource or 401 for unauthenticated request).<a href="#section-5.1.7-2" class="pilcrow">¶</a></p>
 </div>
 <div id="_d274e683-87bc-db9e-d26b-277f43f3dbbc">
 <p id="section-5.1.7-3">More specific RPP codes are elaborated in <a href="#http-layer-detail-rpp-status-codes" class="auto internal xref">Section 5.1.14</a>.<a href="#section-5.1.7-3" class="pilcrow">¶</a></p>
@@ -2153,7 +2213,7 @@ li > p:last-of-type:only-child {
 </div>
 </section>
 </div>
-<div id="_ba3531d5-e8fe-72ab-6285-bf479e0b6760">
+<div id="_405fcb72-8226-c109-47f3-e89d5236e5a1">
 <section id="section-5.1.13">
           <h4 id="name-asynchronous-operation-proc">
 <a href="#section-5.1.13" class="section-number selfRef">5.1.13. </a><a href="#name-asynchronous-operation-proc" class="section-name selfRef">Asynchronous Operation Processing</a>
@@ -2161,8 +2221,8 @@ li > p:last-of-type:only-child {
 <div id="_c3da4c75-2439-4ffe-1c7c-40e94cb9e1e2">
 <p id="section-5.1.13-1">The RPP architecture accommodates operations that are potentially long-running or cannot be completed synchronously due to their nature (e.g., acting on multiple objects, resource-intensive tasks, or processes involving manual steps). This is achieved by leveraging standard HTTP mechanisms to provide an asynchronous interaction pattern. This pattern allows a client to initiate an operation and receive an immediate acknowledgement, with the means to check the operation's status and retrieve its outcome at a later point.<a href="#section-5.1.13-1" class="pilcrow">¶</a></p>
 </div>
-<div id="_9d7b8355-cd07-6b07-6e03-a30df425563e">
-<p id="section-5.1.13-2">The typical interaction flow facilitated by the architecture is as follows: 1.  A client initiates an operation via an HTTP request. 2.  For operations processed asynchronously, the server typically responds immediately with an appropriate HTTP status code and an indication of a status resource where the client would be able to obtain result of the operation. The resource may be dedicated to the specific performed operation, be a subresource of the resource being processed, or be a separate message queue resource with a stream of operation results. 3.  The server may also provide additional signalling in the response to indicate the expected time for completion or other relevant information using standard HTTP mechanisms. 4.  The representation of the status resource reflects the operation's progress. Once the operation concludes, this representation indicates the final outcome, providing either the results directly, links to the results, or detailed error information in line with RPP's error reporting principles. It shall remain up to protocol design for certain operation and server policy which granularity of status information shall be offered. In some cases it might be sufficient to have one final message, in other cases intermediate statuses might be required. The lifetime of these resources might also be differentiated. Messages in the queue would exist until they are read out by the RPP client. Other status resources might exist for a specific time defined by the server after the processing reached its final state. Finally resources might virtually exist forever or require an explicit delete operation from the client.<a href="#section-5.1.13-2" class="pilcrow">¶</a></p>
+<div id="_75430a4c-90e7-d8a0-a5b7-5ec8f4c9776a">
+<p id="section-5.1.13-2">The typical interaction flow facilitated by the architecture is as follows: 1.  A client initiates an operation via an HTTP request. 2.  For operations processed asynchronously, the server typically responds immediately with an appropriate HTTP response status code and an indication of a status resource where the client would be able to obtain result of the operation. The resource may be dedicated to the specific performed operation, be a subresource of the resource being processed, or be a separate message queue resource with a stream of operation results. 3.  The server may also provide additional signalling in the response to indicate the expected time for completion or other relevant information using standard HTTP mechanisms. 4.  The representation of the status resource reflects the operation's progress. Once the operation concludes, this representation indicates the final outcome, providing either the results directly, links to the results, or detailed error information in line with RPP's error reporting principles. It shall remain up to protocol design for certain operation and server policy which granularity of status information shall be offered. In some cases it might be sufficient to have one final message, in other cases intermediate statuses might be required. The lifetime of these resources might also be differentiated. Messages in the queue would exist until they are read out by the RPP client. Other status resources might exist for a specific time defined by the server after the processing reached its final state. Finally resources might virtually exist forever or require an explicit delete operation from the client.<a href="#section-5.1.13-2" class="pilcrow">¶</a></p>
 </div>
 <div id="_a4dc4965-72c9-ed89-dc47-e9c373af5d3b">
 <p id="section-5.1.13-3">This architectural approach to asynchronous operations allows client applications to remain responsive and manage extended processing times effectively, contributing to the overall scalability and robustness of interactions within the RPP ecosystem. Specific RPP operations intended for asynchronous execution will be designed to utilise this pattern.<a href="#section-5.1.13-3" class="pilcrow">¶</a></p>
@@ -2172,19 +2232,19 @@ li > p:last-of-type:only-child {
 <div id="http-layer-detail-rpp-status-codes">
 <section id="section-5.1.14">
           <h4 id="name-rpp-specific-status-codes-a">
-<a href="#section-5.1.14" class="section-number selfRef">5.1.14. </a><a href="#name-rpp-specific-status-codes-a" class="section-name selfRef">RPP specific status codes and relation to HTTP status codes</a>
+<a href="#section-5.1.14" class="section-number selfRef">5.1.14. </a><a href="#name-rpp-specific-status-codes-a" class="section-name selfRef">RPP specific status codes and relation to HTTP response status codes</a>
           </h4>
-<div id="_9d186b9d-350d-c098-cbe3-e0ff9a2da6ab">
-<p id="section-5.1.14-1">RPP uses a dual-layer approach for signaling operation outcomes, leveraging both standard HTTP status codes and RPP-specific status codes. This allows for compatibility with generic HTTP components while providing detailed, application-level feedback for RPP clients.<a href="#section-5.1.14-1" class="pilcrow">¶</a></p>
+<div id="_205ac123-fac5-888c-32c0-ccd51479292e">
+<p id="section-5.1.14-1">RPP uses a dual-layer approach for signaling operation outcomes, leveraging both standard HTTP response status codes and RPP-specific status codes. This allows for compatibility with generic HTTP components while providing detailed, application-level feedback for RPP clients.<a href="#section-5.1.14-1" class="pilcrow">¶</a></p>
 </div>
 <ul class="normal">
-<li class="normal" id="section-5.1.14-2.1">The HTTP status code <span>[<a href="#RFC7231" class="cite xref">RFC7231</a>]</span> must be used to convey the overall outcome of an operation. Any HTTP-aware component, such as a proxy or monitoring tool, can determine if a request was successful (2xx), resulted in a client error (4xx), or a server error (5xx) by inspecting the HTTP status code alone.<a href="#section-5.1.14-2.1" class="pilcrow">¶</a>
+<li class="normal" id="section-5.1.14-2.1">The HTTP response status code <span>[<a href="#RFC7231" class="cite xref">RFC7231</a>]</span> must be used to convey the overall outcome of an operation. Any HTTP-aware component, such as a proxy or monitoring tool, can determine if a request was successful (2xx), resulted in a client error (4xx), or a server error (5xx) by inspecting the HTTP response status code alone.<a href="#section-5.1.14-2.1" class="pilcrow">¶</a>
 </li>
             <li class="normal" id="section-5.1.14-2.2">RPP-specific status codes, transmitted in a dedicated HTTP header, must be used to provide granular, application-level information about the operation's result.<a href="#section-5.1.14-2.2" class="pilcrow">¶</a>
 </li>
-            <li class="normal" id="section-5.1.14-2.3">RPP responses must include both an HTTP status code and an RPP-specific status code, however in some cases request handling may be terminated already on HTTP level, for example due malformed HTTP message, in such cases only HTTP status code will be present.<a href="#section-5.1.14-2.3" class="pilcrow">¶</a>
+            <li class="normal" id="section-5.1.14-2.3">RPP responses must include both an HTTP response status code and an RPP-specific status code, however in some cases request handling may be terminated already on HTTP level, for example due malformed HTTP message, in such cases only HTTP response status code will be present.<a href="#section-5.1.14-2.3" class="pilcrow">¶</a>
 </li>
-            <li class="normal" id="section-5.1.14-2.4">RPP-specific status codes should be mapped to the most semantically appropriate HTTP status code. For example, an RPP status code indicating "object already exists" during a creation attempt should map to HTTP 409 (Conflict), while a code for "object does not exist" during a lookup should map to HTTP 404 (Not Found). If no specific HTTP status code is a good semantic fit, a generic code (e.g., 400 for a general client-side business rule failure, 200 for a successful operation with additional information) should be used.<a href="#section-5.1.14-2.4" class="pilcrow">¶</a>
+            <li class="normal" id="section-5.1.14-2.4">RPP-specific status codes should be mapped to the most semantically appropriate HTTP response status code. For example, an RPP status code indicating "object already exists" during a creation attempt should map to HTTP 409 (Conflict), while a code for "object does not exist" during a lookup should map to HTTP 404 (Not Found). If no specific HTTP response status code is a good semantic fit, a generic code (e.g., 400 for a general client-side business rule failure, 200 for a successful operation with additional information) should be used.<a href="#section-5.1.14-2.4" class="pilcrow">¶</a>
 </li>
             <li class="normal" id="section-5.1.14-2.5">This mechanism applies to both successful and unsuccessful operations. A successful response (e.g., HTTP 200 OK) may include an RPP-specific header to provide additional information, such as warnings, deprecation notices, or details about a partial success.<a href="#section-5.1.14-2.5" class="pilcrow">¶</a>
 </li>
@@ -2418,9 +2478,19 @@ li > p:last-of-type:only-child {
 </div>
 </section>
 </div>
+<div id="_af0a83a6-0813-eb89-69d6-f31ef20b4e5a">
+<section id="section-5.2.5">
+          <h4 id="name-optionality">
+<a href="#section-5.2.5" class="section-number selfRef">5.2.5. </a><a href="#name-optionality" class="section-name selfRef">Optionality</a>
+          </h4>
+<div id="_f9d6b9dc-793f-d1d6-e5fc-10a9611731c5">
+<p id="section-5.2.5-1">The result of a RPP operation may result in an empty HTTP message body when mapped to a representation, for example a check for existence is allowed return only HTTP and RPP headers to indicate the result of the executed operation.<a href="#section-5.2.5-1" class="pilcrow">¶</a></p>
+</div>
 </section>
 </div>
-<div id="_f7190b81-3124-f414-a603-a268ce2bea0a">
+</section>
+</div>
+<div id="_520431ab-ae5d-b3bc-161a-c13fa3021e7c">
 <section id="section-5.3">
         <h3 id="name-resource-definition-layer-2">
 <a href="#section-5.3" class="section-number selfRef">5.3. </a><a href="#name-resource-definition-layer-2" class="section-name selfRef">Resource Definition Layer</a>
@@ -2431,7 +2501,7 @@ li > p:last-of-type:only-child {
 <div id="_abf6c88f-8dc6-ae49-a8bd-cb65725cc9f7">
 <p id="section-5.3-2">All resource types shall be defined in IANA registry in a way that allows fully automated processing of the resource definition, including data elements, operations and media type representation.<a href="#section-5.3-2" class="pilcrow">¶</a></p>
 </div>
-<div id="_d57d39cd-3422-69c7-c761-e8d14d449209">
+<div id="data-elements">
 <section id="section-5.3.1">
           <h4 id="name-data-elements">
 <a href="#section-5.3.1" class="section-number selfRef">5.3.1. </a><a href="#name-data-elements" class="section-name selfRef">Data Elements</a>
@@ -2446,9 +2516,11 @@ li > p:last-of-type:only-child {
 </li>
             <li class="normal" id="section-5.3.1-2.3">Format and schema for primitive data elements or reference to other resource type definitions<a href="#section-5.3.1-2.3" class="pilcrow">¶</a>
 </li>
-            <li class="normal" id="section-5.3.1-2.4">Constraints on data elements (e.g., data type, length, allowed values)<a href="#section-5.3.1-2.4" class="pilcrow">¶</a>
+            <li class="normal" id="section-5.3.1-2.4">Definition of container elements, which are logical groupings that can encapsulate zero or more data elements or other containers. Container types include ordered lists (e.g., a sequence of nameservers) and maps (e.g., key-value pairs for extension data). The representation of container elements in specific data formats is defined by the mapping layer.<a href="#section-5.3.1-2.4" class="pilcrow">¶</a>
 </li>
-            <li class="normal" id="section-5.3.1-2.5">Mechanisms for extensibility, if applicable<a href="#section-5.3.1-2.5" class="pilcrow">¶</a>
+            <li class="normal" id="section-5.3.1-2.5">Constraints on data elements (e.g., data type, length, allowed values)<a href="#section-5.3.1-2.5" class="pilcrow">¶</a>
+</li>
+            <li class="normal" id="section-5.3.1-2.6">Mechanisms for extensibility, if applicable<a href="#section-5.3.1-2.6" class="pilcrow">¶</a>
 </li>
           </ul>
 <div id="_57bafeee-6d80-0e1a-9c71-2133df7e1290">
@@ -2528,7 +2600,10 @@ li > p:last-of-type:only-child {
             <strong>Discovery and Negotiation:</strong> Service discovery endpoints and content negotiation mechanisms allow clients and servers to dynamically discover and utilise new capabilities, resource types, and representations as they are introduced.<a href="#section-5.4-2.5" class="pilcrow">¶</a>
 </li>
           <li class="normal" id="section-5.4-2.6">
-            <strong>Status codes:</strong> New RPP status codes can be defined and registered including their mapping to HTTP status codes.<a href="#section-5.4-2.6" class="pilcrow">¶</a>
+            <strong>Status codes:</strong> New RPP status codes can be defined and registered including their mapping to HTTP response status codes.<a href="#section-5.4-2.6" class="pilcrow">¶</a>
+</li>
+          <li class="normal" id="section-5.4-2.7">
+            <strong>HTTP Headers:</strong> New HTTP headers can be defined and used when mapping RPP data structures or control signals to requests and responses.<a href="#section-5.4-2.7" class="pilcrow">¶</a>
 </li>
         </ul>
 <div id="_e4667a4e-d287-86de-3be5-f0c5dd34efb4">
@@ -2577,40 +2652,50 @@ li > p:last-of-type:only-child {
 </div>
 </section>
 </div>
-<div id="_0a6e1a3f-0d57-955c-7210-db1a34556d56">
+<div id="_e58d4e4a-5cb0-d956-7547-e2cbd643bb8c">
 <section id="section-6">
       <h2 id="name-change-history">
 <a href="#section-6" class="section-number selfRef">6. </a><a href="#name-change-history" class="section-name selfRef">Change History</a>
       </h2>
-<div id="_ce1b4dd2-0da8-d47e-5560-d998db87a77e">
+<div id="_93aac6f1-b940-ca93-e2f0-e3cd607495d3">
 <section id="section-6.1">
         <h3 id="name-00-to-01">
 <a href="#section-6.1" class="section-number selfRef">6.1. </a><a href="#name-00-to-01" class="section-name selfRef">-00 to -01</a>
         </h3>
 <ul class="normal">
-<li class="normal" id="section-6.1-1.1">Editorial: updated document references<a href="#section-6.1-1.1" class="pilcrow">¶</a>
+<li class="normal" id="section-6.1-1.1">Added Section <a href="#collection-representation" class="internal xref">Collection Representation</a> for API-level collection retrieval and expanded container element description in <a href="#data-elements" class="internal xref">Data Elements</a> Section. (Issue #85)<a href="#section-6.1-1.1" class="pilcrow">¶</a>
 </li>
-          <li class="normal" id="section-6.1-1.2">Added data privacy to <a href="#service-discovery" class="internal xref">Service discovery mechanisms</a> and new "Data privacy" section. Refactored the whole section <a href="#service-discovery" class="auto internal xref">Section 5.1.19</a>.<a href="#section-6.1-1.2" class="pilcrow">¶</a>
+          <li class="normal" id="section-6.1-1.2">Editorial: updated document references<a href="#section-6.1-1.2" class="pilcrow">¶</a>
 </li>
-          <li class="normal" id="section-6.1-1.3">Create "Credential management" section for updating credentials using an extension.<a href="#section-6.1-1.3" class="pilcrow">¶</a>
+          <li class="normal" id="section-6.1-1.3">Added data privacy to <a href="#service-discovery" class="internal xref">Service discovery mechanisms</a> and new "Data privacy" section. Refactored the whole section <a href="#service-discovery" class="auto internal xref">Section 5.1.19</a> (Issue #100).<a href="#section-6.1-1.3" class="pilcrow">¶</a>
 </li>
-          <li class="normal" id="section-6.1-1.4">Changed default validation from lenient to strict. (Issue #82)<a href="#section-6.1-1.4" class="pilcrow">¶</a>
+          <li class="normal" id="section-6.1-1.4">Fixed inconsistent usage of HTTP status codes (Issue #108).<a href="#section-6.1-1.4" class="pilcrow">¶</a>
 </li>
-          <li class="normal" id="section-6.1-1.5">Added <a href="#extension-security" class="internal xref">Extension Security</a> and <a href="#extension-review" class="internal xref">Extension Review</a> Sections to <a href="#extension-mechanisms" class="auto internal xref">Section 5.4</a> (Issue #91).<a href="#section-6.1-1.5" class="pilcrow">¶</a>
+          <li class="normal" id="section-6.1-1.5">Added "Canonical Addressing" section (Issue #81)<a href="#section-6.1-1.5" class="pilcrow">¶</a>
 </li>
-          <li class="normal" id="section-6.1-1.6">Added Advertising of maintenance notices to "Service Discovery" section. (Issue #88)<a href="#section-6.1-1.6" class="pilcrow">¶</a>
+          <li class="normal" id="section-6.1-1.6">Added HTTP Headers to the "extension-mechanisms" section (Issue #93).<a href="#section-6.1-1.6" class="pilcrow">¶</a>
 </li>
-          <li class="normal" id="section-6.1-1.7">Added "Scalability" section. (Issue #92)<a href="#section-6.1-1.7" class="pilcrow">¶</a>
+          <li class="normal" id="section-6.1-1.7">Added "Optionality" section to explicitly allow empty HTTP message body in a response (Issue #97).<a href="#section-6.1-1.7" class="pilcrow">¶</a>
 </li>
-          <li class="normal" id="section-6.1-1.8">Explicitly state that all parties involved in a process are allowed to retrieve the process status. (Issue #98)<a href="#section-6.1-1.8" class="pilcrow">¶</a>
+          <li class="normal" id="section-6.1-1.8">Create "Credential management" section for updating credentials using an extension.<a href="#section-6.1-1.8" class="pilcrow">¶</a>
 </li>
-          <li class="normal" id="section-6.1-1.9">Added IDN to "Terminology" and "Service discovery mechanisms" sections<a href="#section-6.1-1.9" class="pilcrow">¶</a>
+          <li class="normal" id="section-6.1-1.9">Changed default validation from lenient to strict. (Issue #82)<a href="#section-6.1-1.9" class="pilcrow">¶</a>
 </li>
-          <li class="normal" id="section-6.1-1.10">Added "additional measures to verify the client" to <a href="#http-layer-details-security" class="auto internal xref">Section 5.1.3.4</a> (Issue #76).<a href="#section-6.1-1.10" class="pilcrow">¶</a>
+          <li class="normal" id="section-6.1-1.10">Added <a href="#extension-security" class="internal xref">Extension Security</a> and <a href="#extension-review" class="internal xref">Extension Review</a> Sections to <a href="#extension-mechanisms" class="auto internal xref">Section 5.4</a> (Issue #91).<a href="#section-6.1-1.10" class="pilcrow">¶</a>
 </li>
-          <li class="normal" id="section-6.1-1.11">Added TLS mandatory to <a href="#transport-security" class="auto internal xref">Section 5.1.1</a> (Issue #78).<a href="#section-6.1-1.11" class="pilcrow">¶</a>
+          <li class="normal" id="section-6.1-1.11">Added Advertising of maintenance notices to "Service Discovery" section. (Issue #88)<a href="#section-6.1-1.11" class="pilcrow">¶</a>
 </li>
-          <li class="normal" id="section-6.1-1.12">Added Section <a href="#credential-lifecycle" class="auto internal xref">Section 5.1.3.5</a> for credential and token revocation/replacement mechanisms (Issue #79).<a href="#section-6.1-1.12" class="pilcrow">¶</a>
+          <li class="normal" id="section-6.1-1.12">Added "Scalability" section. (Issue #92)<a href="#section-6.1-1.12" class="pilcrow">¶</a>
+</li>
+          <li class="normal" id="section-6.1-1.13">Explicitly state that all parties involved in a process are allowed to retrieve the process status. (Issue #98)<a href="#section-6.1-1.13" class="pilcrow">¶</a>
+</li>
+          <li class="normal" id="section-6.1-1.14">Added IDN to "Terminology" and "Service discovery mechanisms" sections<a href="#section-6.1-1.14" class="pilcrow">¶</a>
+</li>
+          <li class="normal" id="section-6.1-1.15">Added "additional measures to verify the client" to <a href="#http-layer-details-security" class="auto internal xref">Section 5.1.3.4</a> (Issue #76).<a href="#section-6.1-1.15" class="pilcrow">¶</a>
+</li>
+          <li class="normal" id="section-6.1-1.16">Added TLS mandatory to <a href="#transport-security" class="auto internal xref">Section 5.1.1</a> (Issue #78).<a href="#section-6.1-1.16" class="pilcrow">¶</a>
+</li>
+          <li class="normal" id="section-6.1-1.17">Added Section <a href="#credential-lifecycle" class="auto internal xref">Section 5.1.3.5</a> for credential and token revocation/replacement mechanisms (Issue #79).<a href="#section-6.1-1.17" class="pilcrow">¶</a>
 </li>
         </ul>
 </section>
@@ -2626,7 +2711,7 @@ li > p:last-of-type:only-child {
         </ul>
 </section>
 </div>
-<div id="_ea8235d5-7f1c-bac5-7e25-78b3f32b32a9">
+<div id="_9488aed0-45d1-b3e4-73d6-a3c1f847dee9">
 <section id="section-6.3">
         <h3 id="name-02-to-03">
 <a href="#section-6.3" class="section-number selfRef">6.3. </a><a href="#name-02-to-03" class="section-name selfRef">-02 to -03</a>
@@ -2634,7 +2719,7 @@ li > p:last-of-type:only-child {
 <ul class="normal">
 <li class="normal" id="section-6.3-1.1">split into HTTP built-ins and custom RPP in <a href="#http-transport-layer-overview" class="auto internal xref">Section 4.2.1</a>. Reorganised <a href="#http-layer-details" class="auto internal xref">Section 5.1</a> to reflect that and added/rewritten some parts to cover all aspects.<a href="#section-6.3-1.1" class="pilcrow">¶</a>
 </li>
-          <li class="normal" id="section-6.3-1.2">Clarified the relationship and mapping between HTTP status codes and RPP-specific status codes in <a href="#http-layer-detail-rpp-status-codes" class="auto internal xref">Section 5.1.14</a>.<a href="#section-6.3-1.2" class="pilcrow">¶</a>
+          <li class="normal" id="section-6.3-1.2">Clarified the relationship and mapping between HTTP response status codes and RPP-specific status codes in <a href="#http-layer-detail-rpp-status-codes" class="auto internal xref">Section 5.1.14</a>.<a href="#section-6.3-1.2" class="pilcrow">¶</a>
 </li>
           <li class="normal" id="section-6.3-1.3">Added paragraph on promotion of standard extensions to <a href="#extension-mechanisms" class="auto internal xref">Section 5.4</a>.<a href="#section-6.3-1.3" class="pilcrow">¶</a>
 </li>
@@ -2678,7 +2763,7 @@ li > p:last-of-type:only-child {
         </ul>
 </section>
 </div>
-<div id="_4ff6eadf-8fb4-0dfd-5866-0a822b96cde6">
+<div id="_6f750f9c-acd5-e5d1-8d94-4fa97e2475be">
 <section id="section-6.5">
         <h3 id="name-00-to-01-2">
 <a href="#section-6.5" class="section-number selfRef">6.5. </a><a href="#name-00-to-01-2" class="section-name selfRef">-00 to -01</a>
@@ -2692,7 +2777,7 @@ li > p:last-of-type:only-child {
 </li>
           <li class="normal" id="section-6.5-1.4">Added HEAD verb to basic operations<a href="#section-6.5-1.4" class="pilcrow">¶</a>
 </li>
-          <li class="normal" id="section-6.5-1.5">Updated RPP specific status codes and relation to HTTP status codes<a href="#section-6.5-1.5" class="pilcrow">¶</a>
+          <li class="normal" id="section-6.5-1.5">Updated RPP specific status codes and relation to HTTP response status codes<a href="#section-6.5-1.5" class="pilcrow">¶</a>
 </li>
           <li class="normal" id="section-6.5-1.6">Added Extension mechanisms section to Protocol Details<a href="#section-6.5-1.6" class="pilcrow">¶</a>
 </li>
@@ -2701,12 +2786,12 @@ li > p:last-of-type:only-child {
 </div>
 </section>
 </div>
-<div id="_fa9d25eb-d0ad-1212-74cc-538f15a32849">
+<div id="_36745bc0-114b-8ada-b02f-74a4cdc78afb">
 <section id="section-7">
       <h2 id="name-references">
 <a href="#section-7" class="section-number selfRef">7. </a><a href="#name-references" class="section-name selfRef">References</a>
       </h2>
-<div id="_1737475f-1704-31cc-f9a8-dfeffc236cda">
+<div id="_7bebdecb-c678-bd9d-5a0d-3dc07855aabd">
 <section id="section-7.1">
         <h3 id="name-normative-references">
 <a href="#section-7.1" class="section-number selfRef">7.1. </a><a href="#name-normative-references" class="section-name selfRef">Normative References</a>
@@ -2719,7 +2804,7 @@ li > p:last-of-type:only-child {
 </dl>
 </section>
 </div>
-<div id="_1764cf20-734c-8300-dc63-bc74c0ff0340">
+<div id="_97daa1f0-576d-3aa5-57b6-d1c3dfb0bb97">
 <section id="section-7.2">
         <h3 id="name-informational-references">
 <a href="#section-7.2" class="section-number selfRef">7.2. </a><a href="#name-informational-references" class="section-name selfRef">Informational References</a>
@@ -2752,6 +2837,10 @@ li > p:last-of-type:only-child {
 <dt id="RFC8259">[RFC8259]</dt>
         <dd>
 <span class="refAuthor">Bray, T.</span>, <span class="refTitle">"The JavaScript Object Notation (JSON) Data Interchange Format"</span>, <span class="stream">IETF</span>, <span class="seriesInfo">DOI 10.17487/RFC8259</span>, <span class="seriesInfo">BCP 90</span>, <span class="seriesInfo">RFC 8259</span>, <time datetime="2017-12" class="refDate">December 2017</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc8259">https://www.rfc-editor.org/info/rfc8259</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC8288">[RFC8288]</dt>
+        <dd>
+<span class="refAuthor">Nottingham, M.</span>, <span class="refTitle">"Web Linking"</span>, <span class="stream">IETF</span>, <span class="seriesInfo">DOI 10.17487/RFC8288</span>, <span class="seriesInfo">RFC 8288</span>, <time datetime="2017-10" class="refDate">October 2017</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc8288">https://www.rfc-editor.org/info/rfc8288</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="RFC6570">[RFC6570]</dt>
         <dd>
