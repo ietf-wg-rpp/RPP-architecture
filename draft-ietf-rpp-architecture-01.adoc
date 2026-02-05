@@ -392,7 +392,7 @@ Server shall always generate own unique trasaction identifier, regardless of nat
 The transmission of transaction identifiers should be defined outside of the Data Representation Layer (e.g. as HTTP Headers), to assure clear separation of resource representation from performed actions. If possible existing mechanisms of HTTP shall be employed.
 
 ==== Message verification
-RPP may optionally support the creation and verification of digital signatures to provide an additional layer of protection against message tampering. This mechanism can be useful in scenarios where TLS is not (correctly) enabled at some point in the chain of HTTP intermediaries.
+RPP may optionally support the creation and verification of digital signatures to provide an additional layer of protection by enabling the client and server to verify message integrity and authenticity. The mechanism for signing and verification of a message is described in <<RFC9421>>.
 Clients must provide their cryptographic public key(s), used for signing requests, to the RPP server operator via an out-of-band process. The server, in turn, will publish its public keys, used for signing responses, through the RPP capabilities discovery mechanism.
 
 ==== Protocol Versioning
