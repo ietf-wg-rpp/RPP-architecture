@@ -489,6 +489,10 @@ The schemas must support both strict and lenient processing of requests and resp
 ==== Media Type definition
 Together data structure and data format would define the whole media type. So application/rpp+json would be the primary media type with "rpp" payloads in plain json format. application/epp+xml would be epp payload as per <<RFC5730>>. 
 
+==== Optionality
+The result of a RPP operation may result in an empty HTTP message body when mapped to a representation, for example a check for existence is allowed return only HTTP and RPP headers to indicate the result of the executed operation.
+
+
 === Resource Definition Layer
 Each resource type, no matter if on a top level, being an independent provisioning object, or a subresource, being a part of another resource, shall be well defined including data elements and possible operations. A resource definition shall on the first level of abstraction be composable out of data elements, without any reference to the media type or representation. This will allow for easy extensibility and compatibility with different media types.
 
@@ -552,6 +556,7 @@ Before any extension is accepted by IANA, a review by an RPP expert must be perf
 
 === -00 to -01
 
+* Added "Optionality" section to explicitly allow empty HTTP message body in a response (Issue #97).
 * Create "Credential management" section for updating credentials using an extension.
 * Changed default validation from lenient to strict. (Issue #82) 
 * Added <<extension-security, format=title>> and <<extension-review, format=title>> Sections to <<extension-mechanisms>> (Issue #91).
