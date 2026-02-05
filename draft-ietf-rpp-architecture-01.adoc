@@ -489,6 +489,11 @@ This part defines logical data elements for each resource type, which can also b
 
 Data elements shall be defined in IANA registry in a way that allows for automated processing of the data element definition, including constraints and references to other data elements.
 
+==== Relationships
+Resource types can define explicit relationships (links) to other resource types, supporting flexible cardinality—including one-to-one, one-to-many, and many-to-many associations.
+This enables robust modeling, navigation, and management of complex, interconnected resources within RPP.
+Importantly, each relationship must be able to define its own properties or attributes, such as status, metadata, or timestamps.
+
 ==== Mapping
 This layer defines the mapping of Data Elements onto the Data Representation Layer. For example in case of application/rpp+json media type, the mapping layer would define how the logical data units are represented in JSON format.
 
@@ -500,11 +505,6 @@ The mapping layer shall be defined in IANA registry in a way that allows for aut
 Each resource type shall define operations possible on this resource type. This may encompass any of the mechanisms defined on the HTTP transport layer and be constrained by those extensibility rules. 
 
 Operations shall be defined in IANA registry in a way that allows for automated processing of the operation definition, including constraints and references to other resource types.
-
-==== Relationships
-Resource types can define explicit relationships (links) to other resource types, supporting flexible cardinality—including one-to-one, one-to-many, and many-to-many associations.
-This enables robust modeling, navigation, and management of complex, interconnected resources within RPP.
-Importantly, each relationship must be able to define its own properties or attributes, such as status, metadata, or timestamps.
 
 [[extension-mechanisms]]
 === Extension mechanisms
