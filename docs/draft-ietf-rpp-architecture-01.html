@@ -1825,7 +1825,7 @@ li > p:last-of-type:only-child {
 </div>
 </section>
 </div>
-<div id="_7e1c30d4-3958-74ff-3557-5019c7a4324b">
+<div id="_4832620c-16e9-cf5c-0914-3b48c7d25c18">
 <section id="section-5">
       <h2 id="name-protocol-details">
 <a href="#section-5" class="section-number selfRef">5. </a><a href="#name-protocol-details" class="section-name selfRef">Protocol Details</a>
@@ -2177,11 +2177,11 @@ li > p:last-of-type:only-child {
 <div id="_0440cc3d-abbd-c687-39e1-2369a79a9ffc">
 <p id="section-5.1.14-1">RPP provides a mechanism for servers to communicate service messages to clients, offering a functional equivalent to the EPP Poll command described in <span>[<a href="#RFC5730" class="cite xref">RFC5730</a>]</span>. Service messages may include notifications about events affecting client resources (such as transfer requests, expiration warnings, or administrative actions), system announcements, or other server-initiated communications.<a href="#section-5.1.14-1" class="pilcrow">¶</a></p>
 </div>
-<div id="_4ca18766-b5bf-b535-505d-de02d25f1047">
-<p id="section-5.1.14-2">In order to enable effective processing of the messages, the data model of a message defines metadata fields with a type of a message and extension or a profile used to produce it, so that the clients know how to process message payload.<a href="#section-5.1.14-2" class="pilcrow">¶</a></p>
+<div id="_4877aea2-6d90-f50b-9fa8-2c661fdc81cc">
+<p id="section-5.1.14-2">In order to enable effective and unambiguous processing of the messages, the data model of a message defines metadata fields with a type of a message and extension or a profile used to produce it.<a href="#section-5.1.14-2" class="pilcrow">¶</a></p>
 </div>
-<div id="_d6e604d8-abb9-959b-f06f-2490792486ea">
-<p id="section-5.1.14-3">At minimum, RPP defines message queue resources that clients can access to discover and retrieve pending service messages. The baseline interaction pattern follows a read-first/acknowledge-delete approach:<a href="#section-5.1.14-3" class="pilcrow">¶</a></p>
+<div id="_dd44a9a4-c98d-7faf-6573-935a28cd8cb3">
+<p id="section-5.1.14-3">RPP defines message queue resources that clients can access to discover and retrieve pending service messages. The baseline interaction pattern follows a read-first/acknowledge-delete approach:<a href="#section-5.1.14-3" class="pilcrow">¶</a></p>
 </div>
 <div id="_f12fceb7-bf0a-a91a-57da-fb1e2ba6e7db">
 <ol start="1" type="1" class="normal type-1" id="section-5.1.14-4">
@@ -2193,8 +2193,8 @@ li > p:last-of-type:only-child {
 </li>
           </ol>
 </div>
-<div id="_22a6f92a-311e-cbaa-6e95-730b561eebe7">
-<p id="section-5.1.14-5">RPP offers separate queues per message type, so that clients may split the workload to several specialised readers, however a joint queue of all messages is offered for convenience and EPP compatibility.<a href="#section-5.1.14-5" class="pilcrow">¶</a></p>
+<div id="_cbea6f84-566b-ac2c-49ca-a7b5c2b64e54">
+<p id="section-5.1.14-5">RPP offers separate queues per message type, so that clients may split the workload to several specialised readers, however a unified queue of all messages is offered for convenience and EPP compatibility.<a href="#section-5.1.14-5" class="pilcrow">¶</a></p>
 </div>
 <div id="_9dc711b7-cab4-b8d0-319f-c4eb99ab82a9">
 <p id="section-5.1.14-6">In order to assure idempotency and proper processing in case of concurrent clients, each service message carries a unique message id, which allows clients to assure the correct message is acknowledged and deleted in step 3.<a href="#section-5.1.14-6" class="pilcrow">¶</a></p>
@@ -2208,17 +2208,9 @@ li > p:last-of-type:only-child {
 <div id="_e9733721-5780-4ead-3d8a-8fc70767c1b4">
 <p id="section-5.1.14-9">The design of message partitioning in separate queues and filters must assure processing order of related or interdependent messages, so that the client can reconstruct a consistent state of an object at all times.<a href="#section-5.1.14-9" class="pilcrow">¶</a></p>
 </div>
-<div id="_0343b930-e5db-4473-295d-26269817f9cf">
-<p id="section-5.1.14-10">Additionally, RPP may support or be further extended with optional features for enhanced service message handling:<a href="#section-5.1.14-10" class="pilcrow">¶</a></p>
+<div id="_d2778756-4790-34af-9440-17383ec43047">
+<p id="section-5.1.14-10">The design of end points to retrieve/acknowledge/delete service messages shall assure further extensibility to optionally allow operation on multiple messages in a single request, reducing round trips for clients with many pending messages.<a href="#section-5.1.14-10" class="pilcrow">¶</a></p>
 </div>
-<ul class="normal">
-<li class="normal" id="section-5.1.14-11.1">retrieve/acknowledge/delete multiple service messages in a single request, reducing round trips for clients with many pending messages.<a href="#section-5.1.14-11.1" class="pilcrow">¶</a>
-</li>
-            <li class="normal" id="section-5.1.14-11.2">Supporting multiple concurrent readers, allowing different client sessions or applications to access the message queue simultaneously.<a href="#section-5.1.14-11.2" class="pilcrow">¶</a>
-</li>
-            <li class="normal" id="section-5.1.14-11.3">Supporting streaming mechanisms (such as Server-Sent Events or WebSockets) for real-time delivery of service messages to clients, as an alternative to polling-based retrieval.<a href="#section-5.1.14-11.3" class="pilcrow">¶</a>
-</li>
-          </ul>
 </section>
 </div>
 <div id="http-layer-detail-rpp-status-codes">
@@ -2703,12 +2695,12 @@ li > p:last-of-type:only-child {
 </div>
 </section>
 </div>
-<div id="_acbb79d6-ac18-1fa5-ec8d-9685b2348d49">
+<div id="_93eaadb0-b21d-5d46-1082-d8c8fb562b94">
 <section id="section-7">
       <h2 id="name-references">
 <a href="#section-7" class="section-number selfRef">7. </a><a href="#name-references" class="section-name selfRef">References</a>
       </h2>
-<div id="_1737475f-1704-31cc-f9a8-dfeffc236cda">
+<div id="_7bebdecb-c678-bd9d-5a0d-3dc07855aabd">
 <section id="section-7.1">
         <h3 id="name-normative-references">
 <a href="#section-7.1" class="section-number selfRef">7.1. </a><a href="#name-normative-references" class="section-name selfRef">Normative References</a>
@@ -2721,7 +2713,7 @@ li > p:last-of-type:only-child {
 </dl>
 </section>
 </div>
-<div id="_c83e5b1d-0ed1-d0b3-c8fa-e3ec254bcdfb">
+<div id="_24da2491-457d-5170-b7f8-bea4376ea6b1">
 <section id="section-7.2">
         <h3 id="name-informational-references">
 <a href="#section-7.2" class="section-number selfRef">7.2. </a><a href="#name-informational-references" class="section-name selfRef">Informational References</a>
