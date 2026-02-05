@@ -163,7 +163,7 @@ It encompasses aspects such as:
 * **Resource Addressing using URLs:** Consistent and meaningful URL structures for identifying, accessing resources and enabling request routing.
 * **Mapping of basic operations to HTTP uniform interface (verbs):** Mapping CRUD (Create, Read, Update, Delete) operations to POST, HEAD/GET, PUT/PATCH, and DELETE respectively.
 * **Mapping of operations beyond HTTP uniform interface to URLs and verbs:** Handling more complex operations through appropriate URL structures and HTTP methods.
-* **HTTP response codes:** Utilising standard HTTP status codes to indicate the outcome of requests.
+* **HTTP response status codes:** Utilising standard HTTP response status codes to indicate the outcome of requests.
 * **Content negotiation for media types:** Supporting multiple data representation formats and using content negotiation to select the appropriate format.
 * **Caching:** Leveraging HTTP caching mechanisms to improve performance.
 * **Language negotiation for textual content:** Supporting multiple languages for textual content and using language negotiation to select the appropriate language.
@@ -176,7 +176,7 @@ These are protocol features where HTTP provides the necessary building blocks, b
 It encompasses aspects such as:
 
 * **Asynchronous Operation Management:** Facilitating the handling of operations that are not completed immediately, by defining an HTTP-based interaction pattern for status checking and deferred result retrieval.
-* **RPP specific error codes and relation to HTTP error codes:** Defining RPP-specific error codes while relating them to standard HTTP error codes for consistency.
+* **RPP specific error codes and relation to HTTP response status codes:** Defining RPP-specific error codes while relating them to standard HTTP response status codes for consistency.
 * **Transaction tracing and idempotency:** Mechanisms for tracking requests and ensuring idempotent operations where appropriate.
 * **Versions and profiles:** Support signalling of versions of RPP protocol and other protocol elements as well as defining sets of protocol elements and their versions in the form of profiles.
 * **Definition of special resources:** Defining specific resources for service discovery, metadata retrieval, etc.
@@ -356,11 +356,11 @@ As discussed in <<http-layer-detail-mapping-basic-ops>> EPP check command may no
 
 This basic set of rules and guidelines will be further refined in the RPP specifications and give a universal toolset for extending RPP with new resources and commands.
 
-==== HTTP response codes
+==== HTTP response status codes
 
-In general RPP shall make use of HTTP status codes to indicate general response status categories (e.g., 2xx success responses, 4xx for client errors, 5xx for server errors) <<RFC7231>> as opposed to responding always 200 if the request was understood even if the operation itself failed. This allows clients and intermediaries to make first level of determination of the requests outcome based on the status code alone, without needing to parse the response body.
+In general RPP shall make use of HTTP response status codes to indicate general response status categories (e.g., 2xx success responses, 4xx for client errors, 5xx for server errors) <<RFC7231>> as opposed to responding always 200 if the request was understood even if the operation itself failed. This allows clients and intermediaries to make first level of determination of the requests outcome based on the status code alone, without needing to parse the response body.
 
-RPP shall use as specific HTTP codes as possible, using generic codes like 400 Bad Request or 500 Internal Server Error only if no corresponsing specific code exists (e.g. 404 for not existing resource or 401 for unauthenticated request).
+RPP shall use as specific HTTP response status codes as possible, using generic codes like 400 Bad Request or 500 Internal Server Error only if no corresponsing specific code exists (e.g. 404 for not existing resource or 401 for unauthenticated request).
 
 More specific RPP codes are elaborated in <<http-layer-detail-rpp-status-codes>>.
 
@@ -402,21 +402,21 @@ The RPP architecture accommodates operations that are potentially long-running o
 
 The typical interaction flow facilitated by the architecture is as follows:
 1.  A client initiates an operation via an HTTP request.
-2.  For operations processed asynchronously, the server typically responds immediately with an appropriate HTTP status code and an indication of a status resource where the client would be able to obtain result of the operation. The resource may be dedicated to the specific performed operation, be a subresource of the resource being processed, or be a separate message queue resource with a stream of operation results.
+2.  For operations processed asynchronously, the server typically responds immediately with an appropriate HTTP response status code and an indication of a status resource where the client would be able to obtain result of the operation. The resource may be dedicated to the specific performed operation, be a subresource of the resource being processed, or be a separate message queue resource with a stream of operation results.
 3.  The server may also provide additional signalling in the response to indicate the expected time for completion or other relevant information using standard HTTP mechanisms.
 4.  The representation of the status resource reflects the operation's progress. Once the operation concludes, this representation indicates the final outcome, providing either the results directly, links to the results, or detailed error information in line with RPP's error reporting principles. It shall remain up to protocol design for certain operation and server policy which granularity of status information shall be offered. In some cases it might be sufficient to have one final message, in other cases intermediate statuses might be required. The lifetime of these resources might also be differentiated. Messages in the queue would exist until they are read out by the RPP client. Other status resources might exist for a specific time defined by the server after the processing reached its final state. Finally resources might virtually exist forever or require an explicit delete operation from the client.
 
 This architectural approach to asynchronous operations allows client applications to remain responsive and manage extended processing times effectively, contributing to the overall scalability and robustness of interactions within the RPP ecosystem. Specific RPP operations intended for asynchronous execution will be designed to utilise this pattern.
 
 [[http-layer-detail-rpp-status-codes]]
-==== RPP specific status codes and relation to HTTP status codes
+==== RPP specific status codes and relation to HTTP response status codes
 
-RPP uses a dual-layer approach for signaling operation outcomes, leveraging both standard HTTP status codes and RPP-specific status codes. This allows for compatibility with generic HTTP components while providing detailed, application-level feedback for RPP clients.
+RPP uses a dual-layer approach for signaling operation outcomes, leveraging both standard HTTP response status codes and RPP-specific status codes. This allows for compatibility with generic HTTP components while providing detailed, application-level feedback for RPP clients.
 
-* The HTTP status code <<RFC7231>> must be used to convey the overall outcome of an operation. Any HTTP-aware component, such as a proxy or monitoring tool, can determine if a request was successful (2xx), resulted in a client error (4xx), or a server error (5xx) by inspecting the HTTP status code alone.
+* The HTTP response status code <<RFC7231>> must be used to convey the overall outcome of an operation. Any HTTP-aware component, such as a proxy or monitoring tool, can determine if a request was successful (2xx), resulted in a client error (4xx), or a server error (5xx) by inspecting the HTTP response status code alone.
 * RPP-specific status codes, transmitted in a dedicated HTTP header, must be used to provide granular, application-level information about the operation's result.
-* RPP responses must include both an HTTP status code and an RPP-specific status code, however in some cases request handling may be terminated already on HTTP level, for example due malformed HTTP message, in such cases only HTTP status code will be present.
-* RPP-specific status codes should be mapped to the most semantically appropriate HTTP status code. For example, an RPP status code indicating "object already exists" during a creation attempt should map to HTTP 409 (Conflict), while a code for "object does not exist" during a lookup should map to HTTP 404 (Not Found). If no specific HTTP status code is a good semantic fit, a generic code (e.g., 400 for a general client-side business rule failure, 200 for a successful operation with additional information) should be used.
+* RPP responses must include both an HTTP response status code and an RPP-specific status code, however in some cases request handling may be terminated already on HTTP level, for example due malformed HTTP message, in such cases only HTTP response status code will be present.
+* RPP-specific status codes should be mapped to the most semantically appropriate HTTP response status code. For example, an RPP status code indicating "object already exists" during a creation attempt should map to HTTP 409 (Conflict), while a code for "object does not exist" during a lookup should map to HTTP 404 (Not Found). If no specific HTTP response status code is a good semantic fit, a generic code (e.g., 400 for a general client-side business rule failure, 200 for a successful operation with additional information) should be used.
 * This mechanism applies to both successful and unsuccessful operations. A successful response (e.g., HTTP 200 OK) may include an RPP-specific header to provide additional information, such as warnings, deprecation notices, or details about a partial success.
 * In the case of an error, the response body should contain a machine-readable problem details document <<RFC9457>> to provide further information about the error.
 * RPP status codes should be categorised as either temporary or permanent to guide client retry behaviour.
@@ -554,7 +554,7 @@ The RPP architecture is designed to be extensible, allowing for the addition of 
 * **Resource and Operation Extension:** New resource types and operations can be defined and registered. Existing resources can be extended with additional data elements or operations in a backward-compatible manner.
 * **Profile and Compatibility Layers:** Compatibility profiles can be defined to support subsets of RPP for specific use cases (such as EPP compatibility)
 * **Discovery and Negotiation:** Service discovery endpoints and content negotiation mechanisms allow clients and servers to dynamically discover and utilise new capabilities, resource types, and representations as they are introduced.
-* **Status codes:** New RPP status codes can be defined and registered including their mapping to HTTP status codes.
+* **Status codes:** New RPP status codes can be defined and registered including their mapping to HTTP response status codes.
 * **HTTP Headers:** New HTTP headers can be defined and used when mapping RPP data structures or control signals to requests and responses. 
 
 RPP shall facilitate standardisation and reuse by requiring that extensions be registered with IANA. These registration requirements shall be fine-grained, applying independently to protocol elements such as resource types, data elements, operations, and status codes. This approach promotes consistency and interoperability, avoids fragmentation from conflicting definitions, and allows protocol elements to evolve independently.
@@ -581,6 +581,7 @@ Before any extension is accepted by IANA, a review by an RPP expert must be perf
 
 === -00 to -01
 
+* Fixed inconsistent usage of HTTP status codes (Issue #108).
 * Added "Canonical Addressing" section (Issue #81)
 * Added HTTP Headers to the "extension-mechanisms" section (Issue #93).
 * Added "Optionality" section to explicitly allow empty HTTP message body in a response (Issue #97).
@@ -602,7 +603,7 @@ Before any extension is accepted by IANA, a review by an RPP expert must be perf
 === -02 to -03
 
 * split into HTTP built-ins and custom RPP in <<http-transport-layer-overview>>. Reorganised <<http-layer-details>> to reflect that and added/rewritten some parts to cover all aspects.
-* Clarified the relationship and mapping between HTTP status codes and RPP-specific status codes in <<http-layer-detail-rpp-status-codes>>.
+* Clarified the relationship and mapping between HTTP response status codes and RPP-specific status codes in <<http-layer-detail-rpp-status-codes>>.
 * Added paragraph on promotion of standard extensions to <<extension-mechanisms>>.
 * Fixed broken references to non-RFC documents
 * Explicitly stated that RPP SHOULD support client_id/password authentication for EPP compatibility in <<authentication-authorization>>.
@@ -628,7 +629,7 @@ Before any extension is accepted by IANA, a review by an RPP expert must be perf
 * Encapsulation removed as a primary extension point and part of architecture
 * Added reference to JSContact as a possible contact representation
 * Added HEAD verb to basic operations
-* Updated RPP specific status codes and relation to HTTP status codes
+* Updated RPP specific status codes and relation to HTTP response status codes
 * Added Extension mechanisms section to Protocol Details
 
 
