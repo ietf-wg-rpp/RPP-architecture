@@ -241,6 +241,7 @@ Implementations will be able to choose authentication and authorisation methods 
 
 RPP specifications will standardise authorisation scopes (like rpp:read or rpp:write) to define granular access control for different usage scenarios. These scopes will be defined for various operations and resource types, ensuring that clients can be granted only the necessary permissions.
 
+[[fine-grained-authorisation]]
 ===== Fine-Grained Authorisation
 
 RPP authorisation models may become fine-grained, extending beyond simple auth-code based models used in EPP. Authorisation decisions will be able to consider the specific operation being performed (e.g., update vs. read), the resource being accessed (e.g., a specific domain name), and potentially even attributes within the resource. 
@@ -269,6 +270,7 @@ Protocol specifications must emphasize, that implementations should ensure that 
 
 Service discovery endpoints may advertise supported revocation mechanisms, enabling clients to discover how to revoke credentials when necessary.
 
+[[object-level-authorisation]]
 ===== Object level authorisation
 RPP will define a mechanism for object-level authorisation, preventing unauthorised access to specific objects or resources. Each object will have an associated sponsor or owner with full control over an object, and the protocol will allow for the specification of which clients are authorised to access or modify non-sponsored/owned objects. This could be achieved through state-of-the-art standards like OAuth authorisation tokens, scopes, and resource-specific permissions but also shared secrets for backward compatibility with EPP password-based authorisation information.
 All parties involved in a running or completed process, such as the Sponsoring Client and the Gaining Client for a transfer operation, must be allowed to query the status of the proces using the same process resource. 
@@ -397,7 +399,7 @@ languages will be defined, preferably using HTTP methods, like OPTIONS or HEAD r
 
 ==== Client Signalling for Response Verbosity
 
-RPP may utilise the HTTP `Prefer` header <<RFC7240>> with the "return" preference to allow clients to control the verbosity of responses. For example, clients not interested in full resource representations could use `Prefer: return=minimal` to request minimal responses, reducing payload sizes and improving efficiency. The default behaviour, without the `Prefer` header, would be to return a full resource representation, similar to object info responses in EPP, especially after compound requests are completed.
+RPP may utilise the HTTP `Prefer` header <<RFC7240>> with the "return" preference to allow clients to control the verbosity of responses. For example, clients not interested in full resource representations could use `Prefer: return=minimal` to request minimal responses, reducing payload sizes and improving efficiency or `Prefer: return=representation` to receive full representation of the object. The default behaviour, without the `Prefer` header, would be to return a full representation only for GET requests and a minimal resource representation in all other cases, similar to responses in EPP, and following the data minimisation principles.
 For certain use-cases it might be convenient for a client to receive also dereferenced full or partial representation of related objects. For example details about sponsoring client of domain name instead of just ID. "return" preference syntax alone is not sufficient for this purpose, therefore RPP would need to define custom preference and register it in "HTTP Preferences" IANA registry.
 
 ==== Client Signalling for Request Validation
@@ -464,16 +466,30 @@ protocol-level metadata, potentially including OpenAPI definitions for documenta
 [[service-discovery]]
 ==== Service discovery mechanisms
 
-RPP will define mechanisms for service discovery, allowing clients
-to dynamically discover RPP service endpoints and capabilities, reducing coupling between clients and servers.
+RPP defines mechanisms for service discovery, allowing clients to dynamically discover RPP service endpoints, capabilities, and operational policies. This reduces coupling between clients and servers and enables clients to adapt to server configurations without hard-coded assumptions.
 
-*  Potential discovery of RPP server location, like  IANA bootstrapping document or a special DNS TXT RR with location of RPP service for the tld.
-*  Potential use of well-known URIs (e.g., `/.well-known/rpp-capabilities`) for service discovery.
-*  Advertising supported protocol versions, extensions, available resource types, authentication methods, IDN policies and supported features.
-*  Advertising of maintenance notices, informing clients about future unavailability of the service due to scheduled maintenance.
-*  It may be considered for RPP to distribute service discovery for each resource type separately for better scalability and management. For example instead of having a single service discovery endpoint for the whole registry on `/.well-known/rpp-capabilities` there might be a separate discovery placed under `/{resource-type}/.well-known/rpp-capabilities` e.g. `/domains/.well-known/rpp-capabilities`.
-*  Service discovery shall utilise standardised methods, like URI templates <<RFC6570>> to allow easy navigation of resources and avoid hard-coding of URLs, same time allowing clients to navigate directly to a known resource without additional server queries.
-*  As a matter of principle service discovery shall be used to bootstrap the communication between client and server, its capabilities and operational policies. The server configuration shall be considered static between reconfiguration of the server and not be used for any dynamic configuration, like load balancing etc. It would enable the right balance between discoverability and reduction of round trips between clients and servers.
+===== Service location bootstrapping
+
+In order to discover the location of RPP services for a given TLD or other kind of registry RPP may employ publishing bootstrapping information in IANA registry backed with an API (similar to RDAP bootstrapping as per <<RFC9224>> or special DNS TXT resource records. 
+
+===== Service discovery document
+
+The service discovery document is a machine-readable resource that describes a server's capabilities, supported features, and operational policies. Clients retrieve this document to understand how to interact with the server and what behaviour to expect. The document includes:
+
+*  Supported protocol versions, extensions, and available resource types.
+*  Supported authentication methods and security requirements.
+*  IDN policies and handling conventions.
+*  Maintenance notices, informing clients about scheduled service unavailability.
+*  Data privacy policies, including information about data collection (what personal or sensitive data is collected and for what purposes), data retention (how long data is stored), and privacy practices (how data is protected and with whom it may be shared).
+
+By default the document will be published using well-known URIs <<RFC8615>> (e.g., `/.well-known/rpp-capabilities`) for retrieving service discovery documents.
+In order to improve scalability it is worth considering to distribute discovery endpoints per resource type (e.g., `/domains/.well-known/rpp-capabilities`) instead of a single registry-wide endpoint.
+
+===== Discovery principles
+
+Service discovery shall utilise standardised methods, like URI templates <<RFC6570>>, to allow easy navigation of resources and avoid hard-coding of URLs, same time allowing clients to navigate directly to a known resource without additional server queries.
+
+As a matter of principle service discovery shall be used to bootstrap the communication between client and server, its capabilities and operational policies. The server configuration shall be considered static between reconfiguration of the server and not be used for any dynamic configuration, like load balancing etc. It would enable the right balance between discoverability and reduction of round trips between clients and servers.
 
 [[scalability]]
 ==== Scalability
@@ -500,13 +516,14 @@ Other future possibilities:
 *  **'JSContact' Structure Adaptation:**  Adapting to the existing JSON representation for Contact Information <<RFC9553>>, to maintain alignment with RDAP.
 *  **'VC' Structure Adaptation:**  Adapting to existing Verifiable Credentials (<<W3C-VC>>, <<SD-JWT>>) data structures, especially for representing identity or authorisation information, allowing for integration with external identity systems.
 
+[[data-format]]
 ==== Data format
 The primary format for RPP data representations shall be JSON, however RPP should be able to be extended to support other formats like XML, JWT, JWT-SD or CBOR.
 
 * **JSON:** Standard JSON format <<RFC8259>>. 
 * **XML:** eXtensible Markup Language <<XML>> (considered for potential compatibility with EPP).
 * **JWT:** JSON data encapsulated within a JSON Web Token <<RFC7519>> for potential use-cases when verifiable data consistency is required 
-* **JWT-SD:** JSON data with Selective Disclosure using JWTs <<SelDiscJWT>> for minimisation of exposed data. 
+* **JWT-SD:** JSON data with Selective Disclosure using JWTs <<RFC9901>> for minimisation of exposed data. 
 * **CBOR:** Concise Binary Object Representation for specific use cases requiring compact binary encoding <<RFC8949>>.
 
 Some data formats can be optionally represented in other encapsulations, for example JSON data can be represented also in JWT or CBOR. Change of encapsulation shall not affect the data structure. This might be beneficial if RPP is to be extended to support different data formats in the future that only require additional properties provided by encapsulation, like signing, encryption or binary representation.
@@ -554,6 +571,14 @@ Each resource type shall define operations possible on this resource type. This 
 
 Operations shall be defined in IANA registry in a way that allows for automated processing of the operation definition, including constraints and references to other resource types.
 
+==== Data privacy
+
+RPP request and response representations may contain personal data or other sensitive information subject to privacy regulations. The architecture incorporates mechanisms that enable implementations to adhere to data privacy principles such as data minimisation and purpose limitation.
+
+Data minimisation is supported through several architectural features. Data element definitions distinguish between required and optional elements, with the required set kept as small as possible for protocol operation. Servers may further constrain which elements are required through profile definitions. The `Prefer` header mechanism (see <<prefer-header>>) allows clients to request minimal representations, and <<fine-grained-authorisation, format=title>> (see <<fine-grained-authorisation>>) and <<object-level-authorisation, format=title>> (see <<object-level-authorisation>>)enable servers to return only the data a client is authorised to access. 
+
+Purpose limitation is supported through multiple mechanisms. Data element definitions may include purpose attributes, indicating the specific processing purposes for which each element is intended. Authorisation scopes (see <<authentication-authorization>>) can be defined to restrict access to data elements based on their declared purpose, ensuring that clients only receive data relevant to their authorised use. The service discovery document (see <<service-discovery>>) advertises data collection purposes, allowing clients to understand how their data will be used and retained before submission.
+
 [[extension-mechanisms]]
 === Extension mechanisms
 The RPP architecture is designed to be extensible, allowing for the addition of new resource types, data elements, and operations without breaking existing implementations. This extensibility is achieved through:
@@ -591,6 +616,8 @@ Before any extension is accepted by IANA, a review by an RPP expert must be perf
 === -00 to -01
 
 * Added Section <<collection-representation, format=title>> for API-level collection retrieval and expanded container element description in <<data-elements, format=title>> Section. (Issue #85)
+* Editorial: updated document references
+* Added data privacy to <<service-discovery, format=title>> and new "Data privacy" section. Refactored the whole section <<service-discovery>> (Issue #100).
 * Fixed inconsistent usage of HTTP status codes (Issue #108).
 * Added "Canonical Addressing" section (Issue #81)
 * Added HTTP Headers to the "extension-mechanisms" section (Issue #93).
@@ -673,8 +700,10 @@ Before any extension is accepted by IANA, a review by an RPP expert must be perf
 * [[[RFC7617, RFC 7617]]] Reschke, J., "The 'Basic' HTTP Authentication Scheme", IETF, DOI 10.17487/RFC7617, RFC 7617, September 2015, <https://www.rfc-editor.org/info/rfc7617>.
 * [[[RFC8126, RFC 8126]]] Cotton, M., Leiba, B., and T. Narten, "Guidelines for Writing an IANA Considerations Section in RFCs", IETF, DOI 10.17487/RFC8126, BCP 26, RFC 8126, June 2017, <https://www.rfc-editor.org/info/rfc8126>.
 * [[[RFC5890, RFC 5890]]] Klensin, J., "Internationalized Domain Names for Applications (IDNA): Definitions and Document Framework", IETF, DOI 10.17487/RFC5890, RFC 5890, August 2010, <https://www.rfc-editor.org/info/rfc5890>.
-* [[[SD-JWT, IETF(I-D.draft-ietf-oauth-sd-jwt-vc-10)]]] Terbu, O., Fett, D., and B. Campbell, "SD-JWT-based Verifiable Credentials (SD-JWT VC)", July 2025, <https://datatracker.ietf.org/doc/html/draft-ietf-oauth-sd-jwt-vc-10>.
-* [[[SelDiscJWT, IETF(I-D.draft-ietf-oauth-selective-disclosure-jwt-22)]]] Fett, D., Yasuda, K., and B. Campbell, "Selective Disclosure for JWTs (SD-JWT)", May 2025, <https://datatracker.ietf.org/doc/html/draft-ietf-oauth-selective-disclosure-jwt-22>.
+* [[[RFC8615, RFC 8615]]] Nottingham, M., "Well-Known Uniform Resource Identifiers (URIs)", IETF, DOI 10.17487/RFC8615, RFC 8615, May 2019, <https://www.rfc-editor.org/info/rfc8615>.
+* [[[RFC9224, RFC 9224]]] Blanchet, M., "Finding the Authoritative Registration Data Access Protocol (RDAP) Service", IETF, DOI 10.17487/RFC9224, BCP 95, RFC 9224, March 2022, <https://www.rfc-editor.org/info/rfc9224>.
+* [[[RFC9901, RFC 9901]]] Fett, D., Yasuda, K., and B. Campbell, "Selective Disclosure for JSON Web Tokens", IETF, DOI 10.17487/RFC9901, RFC 9901, November 2025, <https://www.rfc-editor.org/info/rfc9901>.
+* [[[SD-JWT, IETF(I-D.draft-ietf-oauth-sd-jwt-vc-13)]]] Terbu, O., Fett, D., and B. Campbell, "SD-JWT-based Verifiable Credentials (SD-JWT VC)", July 2025, <https://datatracker.ietf.org/doc/html/draft-ietf-oauth-sd-jwt-vc-13>.
 * [[[RPPReq, IETF(I-D.draft-ietf-rpp-requirements-03)]]] Wullink, M. and P. Kowalik, "RESTful Provisioning Protocol (RPP) - Requirements", June 2025, <https://datatracker.ietf.org/doc/html/draft-ietf-rpp-requirements-03>.
 
 // Documentation of asciibib: https://www.relaton.org/asciibib/
