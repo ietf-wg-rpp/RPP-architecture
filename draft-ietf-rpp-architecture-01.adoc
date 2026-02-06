@@ -619,19 +619,33 @@ Purpose limitation is supported through multiple mechanisms. Data element defini
 
 [[extension-mechanisms]]
 === Extension mechanisms
-The RPP architecture is designed to be extensible, allowing for the addition of new resource types, data elements, and operations without breaking existing implementations. This extensibility is achieved through:
+The RPP architecture is designed to be extensible, allowing for the addition of new resource types, data elements, and operations without breaking existing implementations.
 
-* **Layered Design:** Each architectural layer (HTTP Transport, Data Representation, Resource Definition) is defined independently, allowing new features or technologies to be introduced at one layer without impacting others.
-* **IANA Registries:** Resource types, data elements, mappings, and operations are registered in IANA registries using machine-readable formats. This enables automated processing, discovery, and extension of protocol elements without requiring changes to the core specifications.
-* **Resource and Operation Extension:** New resource types and operations can be defined and registered. Existing resources can be extended with additional data elements or operations in a backward-compatible manner.
-* **Profile and Compatibility Layers:** Compatibility profiles can be defined to support subsets of RPP for specific use cases (such as EPP compatibility)
-* **Discovery and Negotiation:** Service discovery endpoints and content negotiation mechanisms allow clients and servers to dynamically discover and utilise new capabilities, resource types, and representations as they are introduced.
-* **Status codes:** New RPP status codes can be defined and registered including their mapping to HTTP response status codes.
-* **HTTP Headers:** New HTTP headers can be defined and used when mapping RPP data structures or control signals to requests and responses. 
+==== Layered Extensibility
 
-RPP shall facilitate standardisation and reuse by requiring that extensions be registered with IANA. These registration requirements shall be fine-grained, applying independently to protocol elements such as resource types, data elements, operations, and status codes. This approach promotes consistency and interoperability, avoids fragmentation from conflicting definitions, and allows protocol elements to evolve independently.
+The layered design ensures that each architectural layer (HTTP Transport, Data Representation, Resource Definition) is defined independently, allowing new features or technologies to be introduced at one layer without impacting others. This separation enables focused extension of specific protocol aspects whilst maintaining overall coherence.
 
-These extensibility mechanisms ensure that RPP can evolve to meet future requirements, integrate with emerging technologies, and support a wide range of provisioning scenarios while maintaining interoperability and stability.
+==== Protocol Element Extension
+
+Extensions may introduce new protocol elements at various levels of granularity:
+
+* New resource types and server-managed resource types with their complete definitions
+* Additional data elements that can be incorporated into existing or new resource types
+* New operations on existing resources, including process sub-resources
+* Additional transient parameters for existing operations (e.g., pricing preferences, processing priorities) that influence operation execution without becoming part of persistent resource state
+* Non-persistent result information in operation responses (e.g., applied discounts, validation details) that provide additional feedback without modifying resource state
+* New RPP status codes with their mappings to HTTP response status codes
+* New HTTP headers for conveying RPP-specific data structures or control signals
+
+==== Registry-Based Discovery
+
+Resource types, data elements, mappings, and operations are registered in IANA registries using machine-readable formats. This enables automated processing, discovery, and extension of protocol elements without requiring changes to the core specifications. Extensions must be registered with IANA to facilitate standardisation and reuse. These registration requirements are fine-grained, applying independently to protocol elements such as resource types, data elements, operations, and status codes. This approach promotes consistency and interoperability, avoids fragmentation from conflicting definitions, and allows protocol elements to evolve independently.
+
+==== Compatibility and Profiles
+
+Compatibility profiles can be defined to support subsets of RPP for specific use cases, such as EPP compatibility profiles that enable gradual migration or interoperability scenarios. Service discovery endpoints and content negotiation mechanisms allow clients and servers to dynamically discover and utilise new capabilities, resource types, and representations as they are introduced.
+
+These extensibility mechanisms ensure that RPP can evolve to meet future requirements, integrate with emerging technologies, and support a wide range of provisioning scenarios whilst maintaining interoperability and stability.
 
 ==== Name Management and Collision Avoidance
 
