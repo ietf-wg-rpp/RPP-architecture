@@ -114,9 +114,13 @@ Table of Contents
        5.3.4.  Server-Managed Resource Types
        5.3.5.  Data privacy
      5.4.  Extension mechanisms
-       5.4.1.  Name Management and Collision Avoidance
-       5.4.2.  Extension Security
-       5.4.3.  Extension Review
+       5.4.1.  Layered Extensibility
+       5.4.2.  Protocol Element Extension
+       5.4.3.  IANA Registry-Based Discovery
+       5.4.4.  Compatibility and Profiles
+       5.4.5.  Name Management and Collision Avoidance
+       5.4.6.  Extension Security
+       5.4.7.  Extension Review
    6.  Change History
      6.1.  -00 to -01
      6.2.  -03 to draft-ietf-rpp-architecture-00
@@ -1398,55 +1402,67 @@ Table of Contents
 
    The RPP architecture is designed to be extensible, allowing for the
    addition of new resource types, data elements, and operations without
-   breaking existing implementations.  This extensibility is achieved
-   through:
+   breaking existing implementations while maintaining interoperability
+   and stability.  This enables RPP to integrate with emerging
+   technologies and support a wide range of provisioning scenarios.
 
-   *  *Layered Design:* Each architectural layer (HTTP Transport, Data
-      Representation, Resource Definition) is defined independently,
-      allowing new features or technologies to be introduced at one
-      layer without impacting others.
+5.4.1.  Layered Extensibility
 
-   *  *IANA Registries:* Resource types, data elements, mappings, and
-      operations are registered in IANA registries using machine-
-      readable formats.  This enables automated processing, discovery,
-      and extension of protocol elements without requiring changes to
-      the core specifications.
+   The layered design ensures that each architectural layer (HTTP
+   Transport, Data Representation, Resource Definition) is defined
+   independently, allowing new features or technologies to be introduced
+   at one layer without impacting others.  This separation enables
+   focused extension of specific protocol aspects and preserves overall
+   coherence.
 
-   *  *Resource and Operation Extension:* New resource types and
-      operations can be defined and registered.  Existing resources can
-      be extended with additional data elements or operations in a
-      backward-compatible manner.
+5.4.2.  Protocol Element Extension
 
-   *  *Profile and Compatibility Layers:* Compatibility profiles can be
-      defined to support subsets of RPP for specific use cases (such as
-      EPP compatibility)
+   Extensions may introduce new protocol elements at various levels of
+   granularity:
 
-   *  *Discovery and Negotiation:* Service discovery endpoints and
-      content negotiation mechanisms allow clients and servers to
-      dynamically discover and utilise new capabilities, resource types,
-      and representations as they are introduced.
+   *  New resource types and server-managed resource types with their
+      complete definitions
 
-   *  *Status codes:* New RPP status codes can be defined and registered
-      including their mapping to HTTP response status codes.
+   *  Additional data elements that can be incorporated into existing or
+      new resource types
 
-   *  *HTTP Headers:* New HTTP headers can be defined and used when
-      mapping RPP data structures or control signals to requests and
-      responses.
+   *  New operations on existing resources, including process sub-
+      resources
 
-   RPP shall facilitate standardisation and reuse by requiring that
-   extensions be registered with IANA.  These registration requirements
-   shall be fine-grained, applying independently to protocol elements
-   such as resource types, data elements, operations, and status codes.
-   This approach promotes consistency and interoperability, avoids
-   fragmentation from conflicting definitions, and allows protocol
-   elements to evolve independently.
+   *  Additional transient parameters for existing operations
 
-   These extensibility mechanisms ensure that RPP can evolve to meet
-   future requirements, integrate with emerging technologies, and
-   support a wide range of provisioning scenarios while maintaining
-   interoperability and stability.
+   *  Non-persistent result information in operation responses
 
-5.4.1.  Name Management and Collision Avoidance
+   *  New RPP status codes with their mappings to HTTP response status
+      codes
+
+   *  New HTTP headers for conveying RPP-specific data structures or
+      control signals
+
+5.4.3.  IANA Registry-Based Discovery
+
+   Resource types, data elements, mappings, and operations are
+   registered in IANA registries using machine-readable formats.  This
+   enables automated processing, discovery, and extension of protocol
+   elements without requiring changes to the core specifications.
+   Extensions must be registered with IANA to facilitate standardisation
+   and reuse.  These registration requirements are fine-grained,
+   applying independently to protocol elements such as resource types,
+   data elements, operations, and status codes.  This approach promotes
+   consistency and interoperability, avoids fragmentation from
+   conflicting definitions, and allows protocol elements to evolve
+   independently.
+
+5.4.4.  Compatibility and Profiles
+
+   Compatibility profiles can be defined to support subsets of RPP for
+   specific use cases, such as EPP compatibility profiles that enable
+   gradual migration or interoperability scenarios.  Service discovery
+   endpoints and content negotiation mechanisms allow clients and
+   servers to dynamically discover and utilise new capabilities,
+   resource types, and representations as they are introduced.
+
+5.4.5.  Name Management and Collision Avoidance
 
    RPP extensions MUST define unique names for all extension elements to
    prevent conflicts with other extensions and with core protocol
@@ -1469,7 +1485,7 @@ Table of Contents
    the extensibility goals of the RPP architecture while maintaining
    interoperability and clarity across implementations.
 
-5.4.2.  Extension Security
+5.4.6.  Extension Security
 
    Extensions operate within the same security architecture as the core
    protocol.  Security, authentication, and authorisation mechanisms
@@ -1481,7 +1497,7 @@ Table of Contents
    authorisation mechanisms that circumvent or conflict with those
    defined by the core specifications.
 
-5.4.3.  Extension Review
+5.4.7.  Extension Review
 
    Before any extension is accepted by IANA, a review by an RPP expert
    must be performed.  This review includes verification that the
@@ -1494,6 +1510,10 @@ Table of Contents
 6.  Change History
 
 6.1.  -00 to -01
+
+   *  Refactoring of Extension mechanisms Section and addition of
+      extensibility with transient request parameters and responses
+      (Issus #94 and #95)
 
    *  Added text about signing messages in the "Message verification"
       section.  (Issue #33)
