@@ -397,17 +397,19 @@ RPP defines message queue resources that clients can access to discover and retr
 2.  The client processes the message content.
 3.  The client explicitly acknowledges the message through a DELETE operation, removing it from the queue. This step can optionally be optimised to execute together with step 1 for the following message.
 
-RPP offers separate queues per message type, so that clients may split the workload to several specialised readers, however a unified queue of all messages is offered for convenience and EPP compatibility.
-
 In order to assure idempotency and proper processing in case of concurrent clients, each service message carries a unique message id, which allows clients to assure the correct message is acknowledged and deleted in step 3.
 
-Information about unread messages may be delivered as a custom HTTP header with each queue response. Such header can be also added to other responses (for example with the first response after the queue state change or every n-th response or time based) in order to give a hint to the client about unread messages, however possible negative impact on server operation and performance shall be taken into account.
+RPP offers separate queues per message type, so that clients may split the workload to several specialised readers, however a unified queue of all messages is offered for convenience and EPP compatibility.
 
 The baseline mechanism may be extended through message filtering, where clients may apply filters using query parameters when querying the message queue to retrieve only messages matching specific criteria. This feature might be useful to peek messages related to a certain object without need to process the whole queue.
 
 The design of message partitioning in separate queues and filters must assure processing order of related or interdependent messages, so that the client can reconstruct a consistent state of an object at all times.
 
+Information about unread messages may be delivered as a custom HTTP header with each queue response. Such header can be also added to other responses (for example with the first response after the queue state change or every n-th response or time based) in order to give a hint to the client about unread messages, however possible negative impact on server operation and performance shall be taken into account.
+
 The design of end points to retrieve/acknowledge/delete service messages shall assure further extensibility to optionally allow operation on multiple messages in a single request, reducing round trips for clients with many pending messages.
+
+The architecture does not address service message streaming or other push-based approaches to message delivery, however these solutions can be added at any time later without changes to the base mechanisms described above.
 
 [[http-layer-detail-rpp-status-codes]]
 ==== RPP specific status codes and relation to HTTP status codes

@@ -213,7 +213,7 @@
 </section>
 </section>
 </section>
-    <section anchor="_4832620c-16e9-cf5c-0914-3b48c7d25c18"><name>Protocol Details</name>
+    <section anchor="_f3952549-99a6-cfe1-72d7-bc012933a0db"><name>Protocol Details</name>
 
 <t anchor="_258b3fe6-6525-0317-3cb7-1b42072bd9cf">This section provides further details on each layer of the RPP architecture.</t>
 
@@ -411,17 +411,19 @@
 <li>The client explicitly acknowledges the message through a DELETE operation, removing it from the queue. This step can optionally be optimised to execute together with step 1 for the following message.</li>
 </ol>
 
-<t anchor="_cbea6f84-566b-ac2c-49ca-a7b5c2b64e54">RPP offers separate queues per message type, so that clients may split the workload to several specialised readers, however a unified queue of all messages is offered for convenience and EPP compatibility.</t>
+<t anchor="_f73bda48-4254-0d89-86fc-140da4a0ba67">In order to assure idempotency and proper processing in case of concurrent clients, each service message carries a unique message id, which allows clients to assure the correct message is acknowledged and deleted in step 3.</t>
 
-<t anchor="_9dc711b7-cab4-b8d0-319f-c4eb99ab82a9">In order to assure idempotency and proper processing in case of concurrent clients, each service message carries a unique message id, which allows clients to assure the correct message is acknowledged and deleted in step 3.</t>
+<t anchor="_bf367975-b985-3e0b-ec57-cb95d1757c64">RPP offers separate queues per message type, so that clients may split the workload to several specialised readers, however a unified queue of all messages is offered for convenience and EPP compatibility.</t>
 
-<t anchor="_5ed05b49-c253-4760-feba-07594a9af819">Information about unread messages may be delivered as a custom HTTP header with each queue response. Such header can be also added to other responses (for example with the first response after the queue state change or every n-th response or time based) in order to give a hint to the client about unread messages, however possible negative impact on server operation and performance shall be taken into account.</t>
+<t anchor="_861f9a99-33f8-11ff-481a-1764b3596798">The baseline mechanism may be extended through message filtering, where clients may apply filters using query parameters when querying the message queue to retrieve only messages matching specific criteria. This feature might be useful to peek messages related to a certain object without need to process the whole queue.</t>
 
-<t anchor="_e5993efa-6257-bb34-c2ee-e3147e117afa">The baseline mechanism may be extended through message filtering, where clients may apply filters using query parameters when querying the message queue to retrieve only messages matching specific criteria. This feature might be useful to peek messages related to a certain object without need to process the whole queue.</t>
+<t anchor="_a4764903-7020-5475-6706-5e9edc328afb">The design of message partitioning in separate queues and filters must assure processing order of related or interdependent messages, so that the client can reconstruct a consistent state of an object at all times.</t>
 
-<t anchor="_e9733721-5780-4ead-3d8a-8fc70767c1b4">The design of message partitioning in separate queues and filters must assure processing order of related or interdependent messages, so that the client can reconstruct a consistent state of an object at all times.</t>
+<t anchor="_bd248956-a37c-448a-104c-fa8a48c61844">Information about unread messages may be delivered as a custom HTTP header with each queue response. Such header can be also added to other responses (for example with the first response after the queue state change or every n-th response or time based) in order to give a hint to the client about unread messages, however possible negative impact on server operation and performance shall be taken into account.</t>
 
 <t anchor="_d2778756-4790-34af-9440-17383ec43047">The design of end points to retrieve/acknowledge/delete service messages shall assure further extensibility to optionally allow operation on multiple messages in a single request, reducing round trips for clients with many pending messages.</t>
+
+<t anchor="_7c52cdeb-5da3-44dc-0a27-697025c9747d">The architecture does not address service message streaming or other push-based approaches to message delivery, however these solutions can be added at any time later without changes to the base mechanisms described above.</t>
 </section>
 
 <section anchor="http-layer-detail-rpp-status-codes"><name>RPP specific status codes and relation to HTTP status codes</name>
