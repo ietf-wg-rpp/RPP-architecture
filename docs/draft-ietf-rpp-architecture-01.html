@@ -1840,7 +1840,7 @@ li > p:last-of-type:only-child {
 </div>
 </section>
 </div>
-<div id="_6d0111f4-fa4c-1f75-e5ed-e91f79e9d860">
+<div id="_1de86de8-d0c8-a5a3-fc18-97a92d40d040">
 <section id="section-5">
       <h2 id="name-protocol-details">
 <a href="#section-5" class="section-number selfRef">5. </a><a href="#name-protocol-details" class="section-name selfRef">Protocol Details</a>
@@ -2543,7 +2543,7 @@ li > p:last-of-type:only-child {
 </div>
 </section>
 </div>
-<div id="_a642c080-f901-0226-0115-e86c733e241c">
+<div id="_5ed65976-2574-0850-af2e-14fafe269d51">
 <section id="section-5.3">
         <h3 id="name-resource-definition-layer-2">
 <a href="#section-5.3" class="section-number selfRef">5.3. </a><a href="#name-resource-definition-layer-2" class="section-name selfRef">Resource Definition Layer</a>
@@ -2578,6 +2578,19 @@ li > p:last-of-type:only-child {
           </ul>
 <div id="_57bafeee-6d80-0e1a-9c71-2133df7e1290">
 <p id="section-5.3.1-3">Data elements shall be defined in IANA registry in a way that allows for automated processing of the data element definition, including constraints and references to other data elements.<a href="#section-5.3.1-3" class="pilcrow">¶</a></p>
+</div>
+<div id="required-optional-data-elements">
+<section id="section-5.3.1.1">
+            <h5 id="name-required-and-optional-data-">
+<a href="#section-5.3.1.1" class="section-number selfRef">5.3.1.1. </a><a href="#name-required-and-optional-data-" class="section-name selfRef">Required and Optional Data Elements</a>
+            </h5>
+<div id="_7af729b9-82b7-c5d3-0d22-6caf0ed94a2c">
+<p id="section-5.3.1.1-1">RPP Core specifications define only data elements that are strictly necessary for the technical provisioning and maintenance of objects as required at the protocol level. All other data elements are optional at the protocol level.<a href="#section-5.3.1.1-1" class="pilcrow">¶</a></p>
+</div>
+<div id="_5a04abb5-2759-83a3-93f5-d8542e5bf299">
+<p id="section-5.3.1.1-2">Servers may designate any protocol-optional data element as mandatory according to their local server policy. Such server-specific requirements are communicated to clients through profile definitions or service discovery mechanisms.<a href="#section-5.3.1.1-2" class="pilcrow">¶</a></p>
+</div>
+</section>
 </div>
 </section>
 </div>
@@ -2637,7 +2650,7 @@ li > p:last-of-type:only-child {
 </div>
 </section>
 </div>
-<div id="_2a5f80e9-1568-6f36-2604-fdf3270578d4">
+<div id="_a0313528-d396-863c-41ac-fb80b28bff97">
 <section id="section-5.3.5">
           <h4 id="name-data-privacy">
 <a href="#section-5.3.5" class="section-number selfRef">5.3.5. </a><a href="#name-data-privacy" class="section-name selfRef">Data privacy</a>
@@ -2645,8 +2658,8 @@ li > p:last-of-type:only-child {
 <div id="_2806b6b5-f04a-d7bb-4081-cdf445f45c68">
 <p id="section-5.3.5-1">RPP request and response representations may contain personal data or other sensitive information subject to privacy regulations. The architecture incorporates mechanisms that enable implementations to adhere to data privacy principles such as data minimisation and purpose limitation.<a href="#section-5.3.5-1" class="pilcrow">¶</a></p>
 </div>
-<div id="_5b8d0a7f-0ee5-91df-75f3-59e17857f6d9">
-<p id="section-5.3.5-2">Data minimisation is supported through several architectural features. Data element definitions distinguish between required and optional elements, with the required set kept as small as possible for protocol operation. Servers may further constrain which elements are required through profile definitions. The <code>Prefer</code> header mechanism (see <a href="#prefer-header" class="auto internal xref">Section 5.1.20</a>) allows clients to request minimal representations, and <a href="#fine-grained-authorisation" class="internal xref">Fine-Grained Authorisation</a> (see <a href="#fine-grained-authorisation" class="auto internal xref">Section 5.1.3.2</a>) and <a href="#object-level-authorisation" class="internal xref">Object level authorisation</a> (see <a href="#object-level-authorisation" class="auto internal xref">Section 5.1.3.6</a>)enable servers to return only the data a client is authorised to access.<a href="#section-5.3.5-2" class="pilcrow">¶</a></p>
+<div id="_af21cdf5-d853-f4f8-08b8-51303957c405">
+<p id="section-5.3.5-2">Data minimisation is supported through the protocol's design principle that only strictly necessary data elements are required at the protocol level (see <a href="#data-elements" class="auto internal xref">Section 5.3.1</a>). Servers may further constrain which elements are required through profile definitions. The <code>Prefer</code> header mechanism (see <a href="#prefer-header" class="auto internal xref">Section 5.1.20</a>) allows clients to request minimal representations, and <a href="#fine-grained-authorisation" class="internal xref">Fine-Grained Authorisation</a> (see <a href="#fine-grained-authorisation" class="auto internal xref">Section 5.1.3.2</a>) and <a href="#object-level-authorisation" class="internal xref">Object level authorisation</a> (see <a href="#object-level-authorisation" class="auto internal xref">Section 5.1.3.6</a>)enable servers to return only the data a client is authorised to access.<a href="#section-5.3.5-2" class="pilcrow">¶</a></p>
 </div>
 <div id="_6a332a43-d1d5-6d8a-70fa-26d1ac25e234">
 <p id="section-5.3.5-3">Purpose limitation is supported through multiple mechanisms. Data element definitions may include purpose attributes, indicating the specific processing purposes for which each element is intended. Authorisation scopes (see <a href="#authentication-authorization" class="auto internal xref">Section 5.1.2</a>) can be defined to restrict access to data elements based on their declared purpose, ensuring that clients only receive data relevant to their authorised use. The service discovery document (see <a href="#service-discovery" class="auto internal xref">Section 5.1.21</a>) advertises data collection purposes, allowing clients to understand how their data will be used and retained before submission.<a href="#section-5.3.5-3" class="pilcrow">¶</a></p>
@@ -2732,56 +2745,58 @@ li > p:last-of-type:only-child {
 </div>
 </section>
 </div>
-<div id="_c7febee7-4675-7986-38ea-2ef97cadf4d5">
+<div id="_4aa2f837-e064-c779-81ef-454bbabfc4e9">
 <section id="section-6">
       <h2 id="name-change-history">
 <a href="#section-6" class="section-number selfRef">6. </a><a href="#name-change-history" class="section-name selfRef">Change History</a>
       </h2>
-<div id="_1791a549-ca3a-a2cd-d463-fa2c778dbe7a">
+<div id="_4e6659b8-3ab3-bdfa-0e24-6efde920d062">
 <section id="section-6.1">
         <h3 id="name-00-to-01">
 <a href="#section-6.1" class="section-number selfRef">6.1. </a><a href="#name-00-to-01" class="section-name selfRef">-00 to -01</a>
         </h3>
 <ul class="normal">
-<li class="normal" id="section-6.1-1.1">Added text about signing messages in the "Message verification" section. (Issue #33)<a href="#section-6.1-1.1" class="pilcrow">¶</a>
+<li class="normal" id="section-6.1-1.1">Added Section <a href="#required-optional-data-elements" class="internal xref">Required and Optional Data Elements</a> to <a href="#data-elements" class="internal xref">Data Elements</a> to explicitly address protocol-level vs. server-policy-level data element requirements (Requirement R4.3).<a href="#section-6.1-1.1" class="pilcrow">¶</a>
 </li>
-          <li class="normal" id="section-6.1-1.2">Added reference to RFC9154 in the "Object level authorisation" section. (Issue #89)<a href="#section-6.1-1.2" class="pilcrow">¶</a>
+          <li class="normal" id="section-6.1-1.2">Added text about signing messages in the "Message verification" section. (Issue #33)<a href="#section-6.1-1.2" class="pilcrow">¶</a>
 </li>
-          <li class="normal" id="section-6.1-1.3">Added Section <a href="#collection-representation" class="internal xref">Collection Representation</a> for API-level collection retrieval and expanded container element description in <a href="#data-elements" class="internal xref">Data Elements</a> Section. (Issue #85)<a href="#section-6.1-1.3" class="pilcrow">¶</a>
+          <li class="normal" id="section-6.1-1.3">Added reference to RFC9154 in the "Object level authorisation" section. (Issue #89)<a href="#section-6.1-1.3" class="pilcrow">¶</a>
 </li>
-          <li class="normal" id="section-6.1-1.4">Editorial: updated document references<a href="#section-6.1-1.4" class="pilcrow">¶</a>
+          <li class="normal" id="section-6.1-1.4">Added Section <a href="#collection-representation" class="internal xref">Collection Representation</a> for API-level collection retrieval and expanded container element description in <a href="#data-elements" class="internal xref">Data Elements</a> Section. (Issue #85)<a href="#section-6.1-1.4" class="pilcrow">¶</a>
 </li>
-          <li class="normal" id="section-6.1-1.5">Added data privacy to <a href="#service-discovery" class="internal xref">Service discovery mechanisms</a> and new "Data privacy" section. Refactored the whole section <a href="#service-discovery" class="auto internal xref">Section 5.1.21</a> (Issue #100).<a href="#section-6.1-1.5" class="pilcrow">¶</a>
+          <li class="normal" id="section-6.1-1.5">Editorial: updated document references<a href="#section-6.1-1.5" class="pilcrow">¶</a>
 </li>
-          <li class="normal" id="section-6.1-1.6">Fixed inconsistent usage of HTTP status codes (Issue #108).<a href="#section-6.1-1.6" class="pilcrow">¶</a>
+          <li class="normal" id="section-6.1-1.6">Added data privacy to <a href="#service-discovery" class="internal xref">Service discovery mechanisms</a> and new "Data privacy" section. Refactored the whole section <a href="#service-discovery" class="auto internal xref">Section 5.1.21</a> (Issue #100).<a href="#section-6.1-1.6" class="pilcrow">¶</a>
 </li>
-          <li class="normal" id="section-6.1-1.7">Added "Canonical Addressing" section (Issue #81)<a href="#section-6.1-1.7" class="pilcrow">¶</a>
+          <li class="normal" id="section-6.1-1.7">Fixed inconsistent usage of HTTP status codes (Issue #108).<a href="#section-6.1-1.7" class="pilcrow">¶</a>
 </li>
-          <li class="normal" id="section-6.1-1.8">Added HTTP Headers to the "extension-mechanisms" section (Issue #93).<a href="#section-6.1-1.8" class="pilcrow">¶</a>
+          <li class="normal" id="section-6.1-1.8">Added "Canonical Addressing" section (Issue #81)<a href="#section-6.1-1.8" class="pilcrow">¶</a>
 </li>
-          <li class="normal" id="section-6.1-1.9">Added "Optionality" section to explicitly allow empty HTTP message body in a response (Issue #97).<a href="#section-6.1-1.9" class="pilcrow">¶</a>
+          <li class="normal" id="section-6.1-1.9">Added HTTP Headers to the "extension-mechanisms" section (Issue #93).<a href="#section-6.1-1.9" class="pilcrow">¶</a>
 </li>
-          <li class="normal" id="section-6.1-1.10">Added <a href="#server-managed-resources" class="internal xref">Server-Managed Resources</a> Section to <a href="#http-layer-details" class="internal xref">HTTP Transport Layer Details</a> and <a href="#server-managed-resource-types" class="internal xref">Server-Managed Resource Types</a> Section to Resource Definition Layer to define read-only server-managed resources (Issue #84).<a href="#section-6.1-1.10" class="pilcrow">¶</a>
+          <li class="normal" id="section-6.1-1.10">Added "Optionality" section to explicitly allow empty HTTP message body in a response (Issue #97).<a href="#section-6.1-1.10" class="pilcrow">¶</a>
 </li>
-          <li class="normal" id="section-6.1-1.11">Create "Credential management" section for updating credentials using an extension.<a href="#section-6.1-1.11" class="pilcrow">¶</a>
+          <li class="normal" id="section-6.1-1.11">Added <a href="#server-managed-resources" class="internal xref">Server-Managed Resources</a> Section to <a href="#http-layer-details" class="internal xref">HTTP Transport Layer Details</a> and <a href="#server-managed-resource-types" class="internal xref">Server-Managed Resource Types</a> Section to Resource Definition Layer to define read-only server-managed resources (Issue #84).<a href="#section-6.1-1.11" class="pilcrow">¶</a>
 </li>
-          <li class="normal" id="section-6.1-1.12">Changed default validation from lenient to strict. (Issue #82)<a href="#section-6.1-1.12" class="pilcrow">¶</a>
+          <li class="normal" id="section-6.1-1.12">Create "Credential management" section for updating credentials using an extension.<a href="#section-6.1-1.12" class="pilcrow">¶</a>
 </li>
-          <li class="normal" id="section-6.1-1.13">Added <a href="#extension-security" class="internal xref">Extension Security</a> and <a href="#extension-review" class="internal xref">Extension Review</a> Sections to <a href="#extension-mechanisms" class="auto internal xref">Section 5.4</a> (Issue #91).<a href="#section-6.1-1.13" class="pilcrow">¶</a>
+          <li class="normal" id="section-6.1-1.13">Changed default validation from lenient to strict. (Issue #82)<a href="#section-6.1-1.13" class="pilcrow">¶</a>
 </li>
-          <li class="normal" id="section-6.1-1.14">Added Advertising of maintenance notices to "Service Discovery" section. (Issue #88)<a href="#section-6.1-1.14" class="pilcrow">¶</a>
+          <li class="normal" id="section-6.1-1.14">Added <a href="#extension-security" class="internal xref">Extension Security</a> and <a href="#extension-review" class="internal xref">Extension Review</a> Sections to <a href="#extension-mechanisms" class="auto internal xref">Section 5.4</a> (Issue #91).<a href="#section-6.1-1.14" class="pilcrow">¶</a>
 </li>
-          <li class="normal" id="section-6.1-1.15">Added "Scalability" section. (Issue #92)<a href="#section-6.1-1.15" class="pilcrow">¶</a>
+          <li class="normal" id="section-6.1-1.15">Added Advertising of maintenance notices to "Service Discovery" section. (Issue #88)<a href="#section-6.1-1.15" class="pilcrow">¶</a>
 </li>
-          <li class="normal" id="section-6.1-1.16">Explicitly state that all parties involved in a process are allowed to retrieve the process status. (Issue #98)<a href="#section-6.1-1.16" class="pilcrow">¶</a>
+          <li class="normal" id="section-6.1-1.16">Added "Scalability" section. (Issue #92)<a href="#section-6.1-1.16" class="pilcrow">¶</a>
 </li>
-          <li class="normal" id="section-6.1-1.17">Added IDN to "Terminology" and "Service discovery mechanisms" sections<a href="#section-6.1-1.17" class="pilcrow">¶</a>
+          <li class="normal" id="section-6.1-1.17">Explicitly state that all parties involved in a process are allowed to retrieve the process status. (Issue #98)<a href="#section-6.1-1.17" class="pilcrow">¶</a>
 </li>
-          <li class="normal" id="section-6.1-1.18">Added "additional measures to verify the client" to <a href="#http-layer-details-security" class="auto internal xref">Section 5.1.3.4</a> (Issue #76).<a href="#section-6.1-1.18" class="pilcrow">¶</a>
+          <li class="normal" id="section-6.1-1.18">Added IDN to "Terminology" and "Service discovery mechanisms" sections<a href="#section-6.1-1.18" class="pilcrow">¶</a>
 </li>
-          <li class="normal" id="section-6.1-1.19">Added TLS mandatory to <a href="#transport-security" class="auto internal xref">Section 5.1.1</a> (Issue #78).<a href="#section-6.1-1.19" class="pilcrow">¶</a>
+          <li class="normal" id="section-6.1-1.19">Added "additional measures to verify the client" to <a href="#http-layer-details-security" class="auto internal xref">Section 5.1.3.4</a> (Issue #76).<a href="#section-6.1-1.19" class="pilcrow">¶</a>
 </li>
-          <li class="normal" id="section-6.1-1.20">Added Section <a href="#credential-lifecycle" class="auto internal xref">Section 5.1.3.5</a> for credential and token revocation/replacement mechanisms (Issue #79).<a href="#section-6.1-1.20" class="pilcrow">¶</a>
+          <li class="normal" id="section-6.1-1.20">Added TLS mandatory to <a href="#transport-security" class="auto internal xref">Section 5.1.1</a> (Issue #78).<a href="#section-6.1-1.20" class="pilcrow">¶</a>
+</li>
+          <li class="normal" id="section-6.1-1.21">Added Section <a href="#credential-lifecycle" class="auto internal xref">Section 5.1.3.5</a> for credential and token revocation/replacement mechanisms (Issue #79).<a href="#section-6.1-1.21" class="pilcrow">¶</a>
 </li>
         </ul>
 </section>

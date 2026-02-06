@@ -582,6 +582,13 @@ This part defines logical data elements for each resource type, which can also b
 
 Data elements shall be defined in IANA registry in a way that allows for automated processing of the data element definition, including constraints and references to other data elements.
 
+[[required-optional-data-elements]]
+===== Required and Optional Data Elements
+
+RPP Core specifications define only data elements that are strictly necessary for the technical provisioning and maintenance of objects as required at the protocol level. All other data elements are optional at the protocol level.
+
+Servers may designate any protocol-optional data element as mandatory according to their local server policy. Such server-specific requirements are communicated to clients through profile definitions or service discovery mechanisms.
+
 ==== Mapping
 This layer defines the mapping of Data Elements onto the Data Representation Layer. For example in case of application/rpp+json media type, the mapping layer would define how the logical data units are represented in JSON format.
 
@@ -613,7 +620,7 @@ A special class of server managed resources would represent provisioning objects
 
 RPP request and response representations may contain personal data or other sensitive information subject to privacy regulations. The architecture incorporates mechanisms that enable implementations to adhere to data privacy principles such as data minimisation and purpose limitation.
 
-Data minimisation is supported through several architectural features. Data element definitions distinguish between required and optional elements, with the required set kept as small as possible for protocol operation. Servers may further constrain which elements are required through profile definitions. The `Prefer` header mechanism (see <<prefer-header>>) allows clients to request minimal representations, and <<fine-grained-authorisation, format=title>> (see <<fine-grained-authorisation>>) and <<object-level-authorisation, format=title>> (see <<object-level-authorisation>>)enable servers to return only the data a client is authorised to access. 
+Data minimisation is supported through the protocol's design principle that only strictly necessary data elements are required at the protocol level (see <<data-elements>>). Servers may further constrain which elements are required through profile definitions. The `Prefer` header mechanism (see <<prefer-header>>) allows clients to request minimal representations, and <<fine-grained-authorisation, format=title>> (see <<fine-grained-authorisation>>) and <<object-level-authorisation, format=title>> (see <<object-level-authorisation>>)enable servers to return only the data a client is authorised to access. 
 
 Purpose limitation is supported through multiple mechanisms. Data element definitions may include purpose attributes, indicating the specific processing purposes for which each element is intended. Authorisation scopes (see <<authentication-authorization>>) can be defined to restrict access to data elements based on their declared purpose, ensuring that clients only receive data relevant to their authorised use. The service discovery document (see <<service-discovery>>) advertises data collection purposes, allowing clients to understand how their data will be used and retained before submission.
 
@@ -653,6 +660,7 @@ Before any extension is accepted by IANA, a review by an RPP expert must be perf
 
 === -00 to -01
 
+* Added Section <<required-optional-data-elements, format=title>> to <<data-elements, format=title>> to explicitly address protocol-level vs. server-policy-level data element requirements (Requirement R4.3).
 * Added text about signing messages in the "Message verification" section. (Issue #33)
 * Added reference to RFC9154 in the "Object level authorisation" section. (Issue #89)
 * Added Section <<collection-representation, format=title>> for API-level collection retrieval and expanded container element description in <<data-elements, format=title>> Section. (Issue #85)

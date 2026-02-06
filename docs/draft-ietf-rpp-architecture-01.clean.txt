@@ -1308,6 +1308,18 @@ Table of Contents
    for automated processing of the data element definition, including
    constraints and references to other data elements.
 
+5.3.1.1.  Required and Optional Data Elements
+
+   RPP Core specifications define only data elements that are strictly
+   necessary for the technical provisioning and maintenance of objects
+   as required at the protocol level.  All other data elements are
+   optional at the protocol level.
+
+   Servers may designate any protocol-optional data element as mandatory
+   according to their local server policy.  Such server-specific
+   requirements are communicated to clients through profile definitions
+   or service discovery mechanisms.
+
 5.3.2.  Mapping
 
    This layer defines the mapping of Data Elements onto the Data
@@ -1374,15 +1386,15 @@ Table of Contents
    adhere to data privacy principles such as data minimisation and
    purpose limitation.
 
-   Data minimisation is supported through several architectural
-   features.  Data element definitions distinguish between required and
-   optional elements, with the required set kept as small as possible
-   for protocol operation.  Servers may further constrain which elements
-   are required through profile definitions.  The Prefer header
-   mechanism (see Section 5.1.20) allows clients to request minimal
-   representations, and Fine-Grained Authorisation (see Section 5.1.3.2)
-   and Object level authorisation (see Section 5.1.3.6)enable servers to
-   return only the data a client is authorised to access.
+   Data minimisation is supported through the protocol's design
+   principle that only strictly necessary data elements are required at
+   the protocol level (see Section 5.3.1).  Servers may further
+   constrain which elements are required through profile definitions.
+   The Prefer header mechanism (see Section 5.1.20) allows clients to
+   request minimal representations, and Fine-Grained Authorisation (see
+   Section 5.1.3.2) and Object level authorisation (see
+   Section 5.1.3.6)enable servers to return only the data a client is
+   authorised to access.
 
    Purpose limitation is supported through multiple mechanisms.  Data
    element definitions may include purpose attributes, indicating the
@@ -1494,6 +1506,10 @@ Table of Contents
 6.  Change History
 
 6.1.  -00 to -01
+
+   *  Added Section Required and Optional Data Elements to Data Elements
+      to explicitly address protocol-level vs. server-policy-level data
+      element requirements (Requirement R4.3).
 
    *  Added text about signing messages in the "Message verification"
       section.  (Issue #33)

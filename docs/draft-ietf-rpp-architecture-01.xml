@@ -214,7 +214,7 @@
 </section>
 </section>
 </section>
-    <section anchor="_6d0111f4-fa4c-1f75-e5ed-e91f79e9d860"><name>Protocol Details</name>
+    <section anchor="_1de86de8-d0c8-a5a3-fc18-97a92d40d040"><name>Protocol Details</name>
 
 <t anchor="_258b3fe6-6525-0317-3cb7-1b42072bd9cf">This section provides further details on each layer of the RPP architecture.</t>
 
@@ -591,7 +591,7 @@
 </section>
 </section>
 
-<section anchor="_a642c080-f901-0226-0115-e86c733e241c"><name>Resource Definition Layer</name>
+<section anchor="_5ed65976-2574-0850-af2e-14fafe269d51"><name>Resource Definition Layer</name>
 
 <t anchor="_9d096003-6f94-6333-5c40-4167a231cb9b">Each resource type, no matter if on a top level, being an independent provisioning object, or a subresource, being a part of another resource, shall be well defined including data elements and possible operations. A resource definition shall on the first level of abstraction be composable out of data elements, without any reference to the media type or representation. This will allow for easy extensibility and compatibility with different media types.</t>
 
@@ -610,6 +610,13 @@
 </ul>
 
 <t anchor="_57bafeee-6d80-0e1a-9c71-2133df7e1290">Data elements shall be defined in IANA registry in a way that allows for automated processing of the data element definition, including constraints and references to other data elements.</t>
+
+<section anchor="required-optional-data-elements"><name>Required and Optional Data Elements</name>
+
+<t anchor="_7af729b9-82b7-c5d3-0d22-6caf0ed94a2c">RPP Core specifications define only data elements that are strictly necessary for the technical provisioning and maintenance of objects as required at the protocol level. All other data elements are optional at the protocol level.</t>
+
+<t anchor="_5a04abb5-2759-83a3-93f5-d8542e5bf299">Servers may designate any protocol-optional data element as mandatory according to their local server policy. Such server-specific requirements are communicated to clients through profile definitions or service discovery mechanisms.</t>
+</section>
 </section>
 
 <section anchor="_a78face8-c549-1d14-16d4-eb30d21c606c"><name>Mapping</name>
@@ -644,11 +651,11 @@
 <t anchor="_51807080-32a1-36ea-c78f-1f27a7e7c8b3">A special class of server managed resources would represent provisioning objects, which cannot be modified by any external client, but rather are managed by server operator. From the external client view those resources would be read-only, however the server might actually implement modifying operations to those objects available only to internal clients and tools, controlled by authorisation mechanisms.</t>
 </section>
 
-<section anchor="_2a5f80e9-1568-6f36-2604-fdf3270578d4"><name>Data privacy</name>
+<section anchor="_a0313528-d396-863c-41ac-fb80b28bff97"><name>Data privacy</name>
 
 <t anchor="_2806b6b5-f04a-d7bb-4081-cdf445f45c68">RPP request and response representations may contain personal data or other sensitive information subject to privacy regulations. The architecture incorporates mechanisms that enable implementations to adhere to data privacy principles such as data minimisation and purpose limitation.</t>
 
-<t anchor="_5b8d0a7f-0ee5-91df-75f3-59e17857f6d9">Data minimisation is supported through several architectural features. Data element definitions distinguish between required and optional elements, with the required set kept as small as possible for protocol operation. Servers may further constrain which elements are required through profile definitions. The <tt>Prefer</tt> header mechanism (see <xref target="prefer-header"></xref>) allows clients to request minimal representations, and <xref target="fine-grained-authorisation" format="title"></xref> (see <xref target="fine-grained-authorisation"></xref>) and <xref target="object-level-authorisation" format="title"></xref> (see <xref target="object-level-authorisation"></xref>)enable servers to return only the data a client is authorised to access.</t>
+<t anchor="_af21cdf5-d853-f4f8-08b8-51303957c405">Data minimisation is supported through the protocol's design principle that only strictly necessary data elements are required at the protocol level (see <xref target="data-elements"></xref>). Servers may further constrain which elements are required through profile definitions. The <tt>Prefer</tt> header mechanism (see <xref target="prefer-header"></xref>) allows clients to request minimal representations, and <xref target="fine-grained-authorisation" format="title"></xref> (see <xref target="fine-grained-authorisation"></xref>) and <xref target="object-level-authorisation" format="title"></xref> (see <xref target="object-level-authorisation"></xref>)enable servers to return only the data a client is authorised to access.</t>
 
 <t anchor="_6a332a43-d1d5-6d8a-70fa-26d1ac25e234">Purpose limitation is supported through multiple mechanisms. Data element definitions may include purpose attributes, indicating the specific processing purposes for which each element is intended. Authorisation scopes (see <xref target="authentication-authorization"></xref>) can be defined to restrict access to data elements based on their declared purpose, ensuring that clients only receive data relevant to their authorised use. The service discovery document (see <xref target="service-discovery"></xref>) advertises data collection purposes, allowing clients to understand how their data will be used and retained before submission.</t>
 </section>
@@ -691,11 +698,12 @@
 </section>
 </section>
 </section>
-    <section anchor="_c7febee7-4675-7986-38ea-2ef97cadf4d5"><name>Change History</name>
+    <section anchor="_4aa2f837-e064-c779-81ef-454bbabfc4e9"><name>Change History</name>
 
-<section anchor="_1791a549-ca3a-a2cd-d463-fa2c778dbe7a"><name>-00 to -01</name>
+<section anchor="_4e6659b8-3ab3-bdfa-0e24-6efde920d062"><name>-00 to -01</name>
 
-<ul anchor="_32870ca1-897b-6c69-4f3e-378a5c04ca01"><li>Added text about signing messages in the "Message verification" section. (Issue #33)</li>
+<ul anchor="_13e58693-d529-17ec-1409-b4d020a6c55c"><li>Added Section <xref target="required-optional-data-elements" format="title"></xref> to <xref target="data-elements" format="title"></xref> to explicitly address protocol-level vs. server-policy-level data element requirements (Requirement R4.3).</li>
+<li>Added text about signing messages in the "Message verification" section. (Issue #33)</li>
 <li>Added reference to RFC9154 in the "Object level authorisation" section. (Issue #89)</li>
 <li>Added Section <xref target="collection-representation" format="title"></xref> for API-level collection retrieval and expanded container element description in <xref target="data-elements" format="title"></xref> Section. (Issue #85)</li>
 <li>Editorial: updated document references</li>
