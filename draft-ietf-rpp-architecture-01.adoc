@@ -443,6 +443,10 @@ Server shall always generate own unique trasaction identifier, regardless of nat
 
 The transmission of transaction identifiers should be defined outside of the Data Representation Layer (e.g. as HTTP Headers), to assure clear separation of resource representation from performed actions. If possible existing mechanisms of HTTP shall be employed.
 
+==== Message verification
+RPP may optionally support the creation and verification of digital signatures to provide an additional layer of protection by enabling the client and server to verify message integrity and authenticity. The mechanism for signing and verification of a message is described in <<RFC9421>>.
+Clients must provide their cryptographic public key(s), used for signing requests, to the RPP server operator via an out-of-band process. The server, in turn, will publish its public keys, used for signing responses, through the RPP capabilities discovery mechanism.
+
 ==== Protocol Versioning
 RPP will define a versioning schema for the protocol itself, the extensions and other protocol elements such as profiles as appropriate. The versioning schema shall on one side allow for independent introduction of new features in a non-breaking manner on both client and server side, and on the other side allow the opposite party of the communication to determine if the version is compatible or not.
 One of potential approaches having this property might be use of Semantic Versioning <<SemVer>>, but also other versioning schema shall be possible.
@@ -490,9 +494,16 @@ In order to improve scalability it is worth considering to distribute discovery 
 
 ===== Discovery principles
 
-Service discovery shall utilise standardised methods, like URI templates <<RFC6570>>, to allow easy navigation of resources and avoid hard-coding of URLs, same time allowing clients to navigate directly to a known resource without additional server queries.
-
-As a matter of principle service discovery shall be used to bootstrap the communication between client and server, its capabilities and operational policies. The server configuration shall be considered static between reconfiguration of the server and not be used for any dynamic configuration, like load balancing etc. It would enable the right balance between discoverability and reduction of round trips between clients and servers.
+*  Potential discovery of RPP server location, like  IANA bootstrapping document or a special DNS TXT RR with location of RPP service for the tld.
+*  Potential use of well-known URIs (e.g., `/.well-known/rpp-capabilities`) for service discovery.
+*  Advertising supported protocol versions, extensions, available resource types, authentication methods, IDN policies and supported features.
+*  Advertising of maintenance notices, informing clients about future unavailability of the service due to scheduled maintenance.
+*  It may be considered for RPP to distribute service discovery for each resource type separately for better scalability and management. For example instead of having a single service discovery endpoint for the whole registry on `/.well-known/rpp-capabilities` there might be a separate discovery placed under `/{resource-type}/.well-known/rpp-capabilities` e.g. `/domains/.well-known/rpp-capabilities`.
+*  Service discovery shall utilise standardised methods, like URI templates <<RFC6570>> to allow easy navigation of resources and avoid hard-coding of URLs, same time allowing clients to navigate directly to a known resource without additional server queries.
+*  As a matter of principle service discovery shall be used to bootstrap the communication between client and server, its capabilities and operational policies. The server configuration shall be considered static between reconfiguration of the server and not be used for any dynamic configuration, like load balancing etc. It would enable the right balance between discoverability and reduction of round trips between clients and servers.
+*  Advertising of the cryptograpic key(s) used by the server for signing responses, can be used by the clients as an additional check for verification of responses.
+*  Service discovery shall utilise standardised methods, like URI templates <<RFC6570>>, to allow easy navigation of resources and avoid hard-coding of URLs, same time allowing clients to navigate directly to a known resource without additional server queries.
+*  As a matter of principle service discovery shall be used to bootstrap the communication between client and server, its capabilities and operational policies. The server configuration shall be considered static between reconfiguration of the server and not be used for any dynamic configuration, like load balancing etc. It would enable the right balance between discoverability and reduction of round trips between clients and servers.
 
 [[scalability]]
 ==== Scalability
@@ -618,6 +629,7 @@ Before any extension is accepted by IANA, a review by an RPP expert must be perf
 
 === -00 to -01
 
+* Added text about signing messages in the "Message verification" section. (Issue #33)
 * Added reference to RFC9154 in the "Object level authorisation" section. (Issue #89)
 * Added Section <<collection-representation, format=title>> for API-level collection retrieval and expanded container element description in <<data-elements, format=title>> Section. (Issue #85)
 * Editorial: updated document references
