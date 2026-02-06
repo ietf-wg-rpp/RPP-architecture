@@ -214,7 +214,7 @@
 </section>
 </section>
 </section>
-    <section anchor="_5567d728-a7a6-caf1-5ecd-4427947999be"><name>Protocol Details</name>
+    <section anchor="_6d0111f4-fa4c-1f75-e5ed-e91f79e9d860"><name>Protocol Details</name>
 
 <t anchor="_258b3fe6-6525-0317-3cb7-1b42072bd9cf">This section provides further details on each layer of the RPP architecture.</t>
 
@@ -591,7 +591,7 @@
 </section>
 </section>
 
-<section anchor="_e8d559a3-a287-e5f6-f53e-6bceffd4480d"><name>Resource Definition Layer</name>
+<section anchor="_a642c080-f901-0226-0115-e86c733e241c"><name>Resource Definition Layer</name>
 
 <t anchor="_9d096003-6f94-6333-5c40-4167a231cb9b">Each resource type, no matter if on a top level, being an independent provisioning object, or a subresource, being a part of another resource, shall be well defined including data elements and possible operations. A resource definition shall on the first level of abstraction be composable out of data elements, without any reference to the media type or representation. This will allow for easy extensibility and compatibility with different media types.</t>
 
@@ -641,7 +641,7 @@
 
 <t anchor="_976efe5a-09bb-795d-856c-00ffdb962150">Server-managed resources may expose logically associated information as sub-resources.</t>
 
-<t anchor="_a03529f0-c7e5-0847-39e9-4be00bf2e8b9">A special class of server managed resources would represent provisioning objects, which however cannot be modified by any client, but rather are managed by server operator. From the external client view those resources would be read-only, however the server might actually implement modifying operations to the same object available only to internal client and tools and controlled by authorisation mechanisms.</t>
+<t anchor="_51807080-32a1-36ea-c78f-1f27a7e7c8b3">A special class of server managed resources would represent provisioning objects, which cannot be modified by any external client, but rather are managed by server operator. From the external client view those resources would be read-only, however the server might actually implement modifying operations to those objects available only to internal clients and tools, controlled by authorisation mechanisms.</t>
 </section>
 
 <section anchor="_2a5f80e9-1568-6f36-2604-fdf3270578d4"><name>Data privacy</name>

@@ -1602,12 +1602,12 @@ Internet-Draft            ietf-rpp-architecture            November 2025
    as sub-resources.
 
    A special class of server managed resources would represent
-   provisioning objects, which however cannot be modified by any client,
-   but rather are managed by server operator.  From the external client
-   view those resources would be read-only, however the server might
-   actually implement modifying operations to the same object available
-   only to internal client and tools and controlled by authorisation
-   mechanisms.
+   provisioning objects, which cannot be modified by any external
+   client, but rather are managed by server operator.  From the external
+   client view those resources would be read-only, however the server
+   might actually implement modifying operations to those objects
+   available only to internal clients and tools, controlled by
+   authorisation mechanisms.
 
 5.3.5.  Data privacy
 
