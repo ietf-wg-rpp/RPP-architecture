@@ -429,6 +429,33 @@ The typical interaction flow facilitated by the architecture is as follows:
 
 This architectural approach to asynchronous operations allows client applications to remain responsive and manage extended processing times effectively, contributing to the overall scalability and robustness of interactions within the RPP ecosystem. Specific RPP operations intended for asynchronous execution will be designed to utilise this pattern.
 
+[[service-messages]]
+==== Service Messages
+
+RPP provides a mechanism for servers to communicate service messages to clients, offering a functional equivalent to the EPP Poll command described in <<RFC5730>>. Service messages may include notifications about events affecting client resources (such as transfer requests, expiration warnings, or administrative actions), system announcements, or other server-initiated communications.
+
+In order to enable effective and unambiguous processing of the messages, the data model of a message defines metadata fields with a type of a message and extension or a profile used to produce it.
+
+RPP defines message queue resources that clients can access to discover and retrieve pending service messages. The baseline interaction pattern follows a read-first/acknowledge-delete approach:
+
+1.  The client queries the message queue resource to retrieve the first available message.
+2.  The client processes the message content.
+3.  The client explicitly acknowledges the message through a DELETE operation, removing it from the queue. This step can optionally be optimised to execute together with step 1 for the following message.
+
+In order to assure idempotency and proper processing in case of concurrent clients, each service message carries a unique message id, which allows clients to assure the correct message is acknowledged and deleted in step 3.
+
+RPP offers separate queues per message type, so that clients may split the workload to several specialised readers, however a unified queue of all messages is offered for convenience and EPP compatibility.
+
+The baseline mechanism may be extended through message filtering, where clients may apply filters using query parameters when querying the message queue to retrieve only messages matching specific criteria. This feature might be useful to peek messages related to a certain object without need to process the whole queue.
+
+The design of message partitioning in separate queues and filters must assure processing order of related or interdependent messages, so that the client can reconstruct a consistent state of an object at all times.
+
+Information about unread messages may be delivered as a custom HTTP header with each queue response. Such header can be also added to other responses (for example with the first response after the queue state change or every n-th response or time based) in order to give a hint to the client about unread messages, however possible negative impact on server operation and performance shall be taken into account.
+
+The design of end points to retrieve/acknowledge/delete service messages shall assure further extensibility to optionally allow operation on multiple messages in a single request, reducing round trips for clients with many pending messages.
+
+The architecture does not address service message streaming or other push-based approaches to message delivery, however these solutions can be added at any time later without changes to the base mechanisms described above.
+
 [[http-layer-detail-rpp-status-codes]]
 ==== RPP specific status codes and relation to HTTP response status codes
 
@@ -673,6 +700,7 @@ Before any extension is accepted by IANA, a review by an RPP expert must be perf
 * Added "additional measures to verify the client" to <<http-layer-details-security>> (Issue #76).
 * Added TLS mandatory to <<transport-security>> (Issue #78).
 * Added Section <<credential-lifecycle>> for credential and token revocation/replacement mechanisms (Issue #79).
+* Added Section <<service-messages>> to describe poll message equivalent (Issue #87).
 
 === -03 to draft-ietf-rpp-architecture-00
 
