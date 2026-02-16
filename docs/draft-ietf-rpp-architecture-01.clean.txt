@@ -1429,9 +1429,9 @@ Table of Contents
    *  New operations on existing resources, including process sub-
       resources
 
-   *  Additional transient parameters for existing operations
+   *  Additional parameters for existing operations
 
-   *  Non-persistent result information in operation responses
+   *  Additional result information in operation responses
 
    *  New RPP status codes with their mappings to HTTP response status
       codes

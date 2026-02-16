@@ -633,8 +633,8 @@ Extensions may introduce new protocol elements at various levels of granularity:
 * New resource types and server-managed resource types with their complete definitions
 * Additional data elements that can be incorporated into existing or new resource types
 * New operations on existing resources, including process sub-resources
-* Additional transient parameters for existing operations
-* Non-persistent result information in operation responses
+* Additional parameters for existing operations
+* Additional result information in operation responses
 * New RPP status codes with their mappings to HTTP response status codes
 * New HTTP headers for conveying RPP-specific data structures or control signals
 

@@ -214,7 +214,7 @@
 </section>
 </section>
 </section>
-    <section anchor="_b9193ac3-566d-8e54-ef88-7f1da6961104"><name>Protocol Details</name>
+    <section anchor="_feb1237d-eeee-a5e5-12ea-6260deefe32c"><name>Protocol Details</name>
 
 <t anchor="_258b3fe6-6525-0317-3cb7-1b42072bd9cf">This section provides further details on each layer of the RPP architecture.</t>
 
@@ -663,15 +663,15 @@
 <t anchor="_8611bb11-0beb-b858-90d4-88ea96b0f4ab">The layered design ensures that each architectural layer (HTTP Transport, Data Representation, Resource Definition) is defined independently, allowing new features or technologies to be introduced at one layer without impacting others. This separation enables focused extension of specific protocol aspects and preserves overall coherence.</t>
 </section>
 
-<section anchor="_b7750d24-6bea-ad06-6d28-bc7fa32e698f"><name>Protocol Element Extension</name>
+<section anchor="_327b3fe4-5cd1-5912-d6a5-5c50a5505c1c"><name>Protocol Element Extension</name>
 
 <t anchor="_4170ef6b-580e-6657-eb41-c679f15da49e">Extensions may introduce new protocol elements at various levels of granularity:</t>
 
-<ul anchor="_92510329-3dc8-dc31-6d05-0b74bf6371e3"><li>New resource types and server-managed resource types with their complete definitions</li>
+<ul anchor="_4a985ea4-645e-c582-1a5c-f7b1c9189dcf"><li>New resource types and server-managed resource types with their complete definitions</li>
 <li>Additional data elements that can be incorporated into existing or new resource types</li>
 <li>New operations on existing resources, including process sub-resources</li>
-<li>Additional transient parameters for existing operations</li>
-<li>Non-persistent result information in operation responses</li>
+<li>Additional parameters for existing operations</li>
+<li>Additional result information in operation responses</li>
 <li>New RPP status codes with their mappings to HTTP response status codes</li>
 <li>New HTTP headers for conveying RPP-specific data structures or control signals</li>
 </ul>
