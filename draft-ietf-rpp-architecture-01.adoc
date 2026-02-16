@@ -542,7 +542,6 @@ Before any extension is accepted by IANA, a review by an RPP expert must be perf
 === -00 to -01
 
 * Added a "Relationships" section to describe resource type relationships. (Issue #83)
-
 * Changed default validation from lenient to strict. (Issue #82) 
 * Added <<extension-security, format=title>> and <<extension-review, format=title>> Sections to <<extension-mechanisms>> (Issue #91).
 * Added Advertising of maintenance notices to "Service Discovery" section. (Issue #88)
