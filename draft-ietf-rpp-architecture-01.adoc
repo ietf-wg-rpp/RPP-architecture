@@ -585,7 +585,7 @@ Data elements shall be defined in IANA registry in a way that allows for automat
 [[required-optional-data-elements]]
 ===== Required and Optional Data Elements
 
-RPP Core specifications define only data elements that are strictly necessary for the technical provisioning and maintenance of objects as required at the protocol level. All other data elements are optional at the protocol level.
+RPP Core specifications define the data elements that are required for the technical provisioning and maintenance of objects as required at the protocol level. Other defined data elements are optional at the protocol level.  
 
 Servers may designate any protocol-optional data element as mandatory according to their local server policy. Such server-specific requirements are communicated to clients through profile definitions or service discovery mechanisms.
 
