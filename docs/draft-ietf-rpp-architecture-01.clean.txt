@@ -92,15 +92,16 @@ Table of Contents
        5.1.12. Client Signalling for Response Verbosity
        5.1.13. Client Signalling for Request Validation
        5.1.14. Asynchronous Operation Processing
-       5.1.15. RPP specific status codes and relation to HTTP response
+       5.1.15. Service Messages
+       5.1.16. RPP specific status codes and relation to HTTP response
                status codes
-       5.1.16. Transaction tracing and idempotency
-       5.1.17. Message verification
-       5.1.18. Protocol Versioning
-       5.1.19. Profiles
-       5.1.20. Definition of special resources
-       5.1.21. Service discovery mechanisms
-       5.1.22. Scalability
+       5.1.17. Transaction tracing and idempotency
+       5.1.18. Message verification
+       5.1.19. Protocol Versioning
+       5.1.20. Profiles
+       5.1.21. Definition of special resources
+       5.1.22. Service discovery mechanisms
+       5.1.23. Scalability
      5.2.  Data Representation Layer
        5.2.1.  Data structure
        5.2.2.  Data format
@@ -815,7 +816,7 @@ Table of Contents
    only if no corresponsing specific code exists (e.g. 404 for not
    existing resource or 401 for unauthenticated request).
 
-   More specific RPP codes are elaborated in Section 5.1.15.
+   More specific RPP codes are elaborated in Section 5.1.16.
 
 5.1.9.  Content negotiation for media types
 
@@ -931,7 +932,73 @@ Table of Contents
    operations intended for asynchronous execution will be designed to
    utilise this pattern.
 
-5.1.15.  RPP specific status codes and relation to HTTP response status
+5.1.15.  Service Messages
+
+   RPP provides a mechanism for servers to communicate service messages
+   to clients, offering a functional equivalent to the EPP Poll command
+   described in [RFC5730].  Service messages may include notifications
+   about events affecting client resources (such as transfer requests,
+   expiration warnings, or administrative actions), system
+   announcements, or other server-initiated communications.
+
+   In order to enable effective and unambiguous processing of the
+   messages, the data model of a message defines metadata fields with a
+   type of a message and extension or a profile used to produce it.
+
+   RPP defines message queue resources that clients can access to
+   discover and retrieve pending service messages.  The baseline
+   interaction pattern follows a read-first/acknowledge-delete approach:
+
+   1.  The client queries the message queue resource to retrieve the
+       first available message.
+
+   2.  The client processes the message content.
+
+   3.  The client explicitly acknowledges the message through a DELETE
+       operation, removing it from the queue.  This step can optionally
+       be optimised to execute together with step 1 for the following
+       message.
+
+   In order to assure idempotency and proper processing in case of
+   concurrent clients, each service message carries a unique message id,
+   which allows clients to assure the correct message is acknowledged
+   and deleted in step 3.
+
+   RPP offers separate queues per message type, so that clients may
+   split the workload to several specialised readers, however a unified
+   queue of all messages is offered for convenience and EPP
+   compatibility.
+
+   The baseline mechanism may be extended through message filtering,
+   where clients may apply filters using query parameters when querying
+   the message queue to retrieve only messages matching specific
+   criteria.  This feature might be useful to peek messages related to a
+   certain object without need to process the whole queue.
+
+   The design of message partitioning in separate queues and filters
+   must assure processing order of related or interdependent messages,
+   so that the client can reconstruct a consistent state of an object at
+   all times.
+
+   Information about unread messages may be delivered as a custom HTTP
+   header with each queue response.  Such header can be also added to
+   other responses (for example with the first response after the queue
+   state change or every n-th response or time based) in order to give a
+   hint to the client about unread messages, however possible negative
+   impact on server operation and performance shall be taken into
+   account.
+
+   The design of end points to retrieve/acknowledge/delete service
+   messages shall assure further extensibility to optionally allow
+   operation on multiple messages in a single request, reducing round
+   trips for clients with many pending messages.
+
+   The architecture does not address service message streaming or other
+   push-based approaches to message delivery, however these solutions
+   can be added at any time later without changes to the base mechanisms
+   described above.
+
+5.1.16.  RPP specific status codes and relation to HTTP response status
          codes
 
    RPP uses a dual-layer approach for signaling operation outcomes,
@@ -981,7 +1048,7 @@ Table of Contents
    *  RPP should also use other standardised HTTP signaling mechanisms
       where appropriate, for example for rate limiting.
 
-5.1.16.  Transaction tracing and idempotency
+5.1.17.  Transaction tracing and idempotency
 
    RPP shall support identification of requests and responses on both
    client side and server side with use of client provided identifiers
@@ -1006,7 +1073,7 @@ Table of Contents
    clear separation of resource representation from performed actions.
    If possible existing mechanisms of HTTP shall be employed.
 
-5.1.17.  Message verification
+5.1.18.  Message verification
 
    RPP may optionally support the creation and verification of digital
    signatures to provide an additional layer of protection by enabling
@@ -1018,7 +1085,7 @@ Table of Contents
    keys, used for signing responses, through the RPP capabilities
    discovery mechanism.
 
-5.1.18.  Protocol Versioning
+5.1.19.  Protocol Versioning
 
    RPP will define a versioning schema for the protocol itself, the
    extensions and other protocol elements such as profiles as
@@ -1033,7 +1100,7 @@ Table of Contents
    Signalling of the versions will be preferably realised using
    parameters of the media type.
 
-5.1.19.  Profiles
+5.1.20.  Profiles
 
    In real operational conditions different RPP server operators may
    have different requirements regarding set of protocol elements and
@@ -1052,18 +1119,18 @@ Table of Contents
    Signalling of the profiles will be preferably realised using
    parameters of the media type.
 
-5.1.20.  Definition of special resources
+5.1.21.  Definition of special resources
 
    RPP may define special resources for specific purposes:
 
    *  Service Discovery endpoints to advertise protocol capabilities and
-      supported features (see Section 5.1.21).
+      supported features (see Section 5.1.22).
 
    *  Metadata endpoints to provide schema information or other
       protocol-level metadata, potentially including OpenAPI definitions
       for documentation and code generation.
 
-5.1.21.  Service discovery mechanisms
+5.1.22.  Service discovery mechanisms
 
    RPP defines mechanisms for service discovery, allowing clients to
    dynamically discover RPP service endpoints, capabilities, and
@@ -1071,14 +1138,14 @@ Table of Contents
    servers and enables clients to adapt to server configurations without
    hard-coded assumptions.
 
-5.1.21.1.  Service location bootstrapping
+5.1.22.1.  Service location bootstrapping
 
    In order to discover the location of RPP services for a given TLD or
    other kind of registry RPP may employ publishing bootstrapping
    information in IANA registry backed with an API (similar to RDAP
    bootstrapping as per [RFC9224] or special DNS TXT resource records.
 
-5.1.21.2.  Service discovery document
+5.1.22.2.  Service discovery document
 
    The service discovery document is a machine-readable resource that
    describes a server's capabilities, supported features, and
@@ -1108,7 +1175,7 @@ Table of Contents
    (e.g., /domains/.well-known/rpp-capabilities) instead of a single
    registry-wide endpoint.
 
-5.1.21.3.  Discovery principles
+5.1.22.3.  Discovery principles
 
    *  Potential discovery of RPP server location, like IANA
       bootstrapping document or a special DNS TXT RR with location of
@@ -1162,7 +1229,7 @@ Table of Contents
       etc.  It would enable the right balance between discoverability
       and reduction of round trips between clients and servers.
 
-5.1.22.  Scalability
+5.1.23.  Scalability
 
    RPP leverages HTTP, enabling the use of standard web scalability
    techniques such as load balancing, horizontal scaling, and
@@ -1310,10 +1377,10 @@ Table of Contents
 
 5.3.1.1.  Required and Optional Data Elements
 
-   RPP Core specifications define only data elements that are strictly
-   necessary for the technical provisioning and maintenance of objects
-   as required at the protocol level.  All other data elements are
-   optional at the protocol level.
+   RPP Core specifications define the data elements that are required
+   for the technical provisioning and maintenance of objects as required
+   at the protocol level.  Other defined data elements are optional at
+   the protocol level.
 
    Servers may designate any protocol-optional data element as mandatory
    according to their local server policy.  Such server-specific
@@ -1390,7 +1457,7 @@ Table of Contents
    principle that only strictly necessary data elements are required at
    the protocol level (see Section 5.3.1).  Servers may further
    constrain which elements are required through profile definitions.
-   The Prefer header mechanism (see Section 5.1.20) allows clients to
+   The Prefer header mechanism (see Section 5.1.21) allows clients to
    request minimal representations, and Fine-Grained Authorisation (see
    Section 5.1.3.2) and Object level authorisation (see
    Section 5.1.3.6)enable servers to return only the data a client is
@@ -1402,7 +1469,7 @@ Table of Contents
    Authorisation scopes (see Section 5.1.2) can be defined to restrict
    access to data elements based on their declared purpose, ensuring
    that clients only receive data relevant to their authorised use.  The
-   service discovery document (see Section 5.1.21) advertises data
+   service discovery document (see Section 5.1.22) advertises data
    collection purposes, allowing clients to understand how their data
    will be used and retained before submission.
 
@@ -1524,7 +1591,7 @@ Table of Contents
    *  Editorial: updated document references
 
    *  Added data privacy to Service discovery mechanisms and new "Data
-      privacy" section.  Refactored the whole section Section 5.1.21
+      privacy" section.  Refactored the whole section Section 5.1.22
       (Issue #100).
 
    *  Fixed inconsistent usage of HTTP status codes (Issue #108).
@@ -1569,6 +1636,9 @@ Table of Contents
    *  Added Section Section 5.1.3.5 for credential and token revocation/
       replacement mechanisms (Issue #79).
 
+   *  Added Section Section 5.1.15 to describe poll message equivalent
+      (Issue #87).
+
 6.2.  -03 to draft-ietf-rpp-architecture-00
 
    *  No changes.  Document adopted by RPP WG.
@@ -1580,7 +1650,7 @@ Table of Contents
       parts to cover all aspects.
 
    *  Clarified the relationship and mapping between HTTP response
-      status codes and RPP-specific status codes in Section 5.1.15.
+      status codes and RPP-specific status codes in Section 5.1.16.
 
    *  Added paragraph on promotion of standard extensions to
       Section 5.4.
@@ -1595,7 +1665,7 @@ Table of Contents
    *  Added responses must contain links to relevant object to
       Section 5.1.4
 
-   *  Added round trip minimisation principle to Section 5.1.21
+   *  Added round trip minimisation principle to Section 5.1.22
 
    *  Added description of lenient versus strict request validation to
       Section 4.2.3.
@@ -1621,7 +1691,7 @@ Table of Contents
       Section 5.4.
 
    *  Added Section about dereferenced related object representation to
-      Section 5.1.20.
+      Section 5.1.21.
 
 6.5.  -00 to -01
 
