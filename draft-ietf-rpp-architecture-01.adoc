@@ -491,6 +491,7 @@ Signalling of the versions will be preferably realised using parameters of the m
 
 ==== Profiles
 In real operational conditions different RPP server operators may have different requirements regarding set of protocol elements and their versions necessary to be supported by the client to enable reliable communication. Such requirements may also be defined by external policies. For this purpose RPP will define a concept of profiles, being identifiers translated into a certain minimum configuration of protocol version, extensions and their versions. The profiles themselves will be versioned in the same way as other protocol elements.
+Commonly used profiles may be published in a dedicated IANA registry to promote reuse of profiles. A client or server will use the IANA identifier for a profile to indicate support for the profile.
 
 RPP may define a machine-readable definition of profiles to allow automatic processing by the clients, but may also refer to other forms of profile specification.
 
@@ -685,6 +686,7 @@ Before any extension is accepted by IANA, a review by an RPP expert must be perf
 
 === -00 to -01
 
+* Added text about compatibility profiles to "Profiles" section. (Issue #29)
 * Added a "Relationships" section to describe resource type relationships. (Issue #83)
 * Added text about signing messages in the "Message verification" section. (Issue #33)
 * Added reference to RFC9154 in the "Object level authorisation" section. (Issue #89)
