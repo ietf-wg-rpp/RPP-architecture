@@ -214,7 +214,7 @@
 </section>
 </section>
 </section>
-    <section anchor="_07682c5d-d61c-6907-0ccd-4dff4ddd3c2a"><name>Protocol Details</name>
+    <section anchor="_0011131c-c949-b3d7-9a42-0ab5b47efd97"><name>Protocol Details</name>
 
 <t anchor="_258b3fe6-6525-0317-3cb7-1b42072bd9cf">This section provides further details on each layer of the RPP architecture.</t>
 
@@ -507,9 +507,9 @@
 <t anchor="_246da424-3640-f3c6-6023-2ad5a1318e67">Signalling of the versions will be preferably realised using parameters of the media type.</t>
 </section>
 
-<section anchor="_a9f4f447-5953-b8a1-62a8-01a8ec326585"><name>Profiles</name>
+<section anchor="_9bf5c6af-7c44-17e1-ff01-ad2d8b54c46c"><name>Profiles</name>
 
-<t anchor="_3893ab6e-df2d-b5db-edcb-8adde2de7ce9">In real operational conditions different RPP server operators may have different requirements regarding set of protocol elements and their versions necessary to be supported by the client to enable reliable communication. Such requirements may also be defined by external policies. For this purpose RPP will define a concept of profiles, being identifiers translated into a certain minimum configuration of protocol version, extensions and their versions. The profiles themselves will be versioned in the same way as other protocol elements.</t>
+<t anchor="_6c709c15-54be-bc3f-a04d-1510eee5e008">In real operational conditions different RPP server operators may have different requirements regarding set of protocol elements and their versions necessary to be supported by the client to enable reliable communication. Such requirements may also be defined by external policies. For this purpose RPP will define a concept of profiles, being identifiers translated into a certain minimum configuration of protocol version, extensions and their versions. The profiles themselves will be versioned in the same way as other protocol elements. Commonly used profiles may be published in a dedicated IANA registry to promote reuse of profiles. A client or server will use the IANA identifier for a profile to indicate support for the profile.</t>
 
 <t anchor="_00044189-2053-abc0-bd55-2ec0b6ed8f59">RPP may define a machine-readable definition of profiles to allow automatic processing by the clients, but may also refer to other forms of profile specification.</t>
 
@@ -619,7 +619,7 @@
 </section>
 </section>
 
-<section anchor="_f8038262-4fe1-b5c2-0d6a-cec7e250c589"><name>Resource Definition Layer</name>
+<section anchor="_977a00df-8970-91c8-331a-fb9b2c094ac0"><name>Resource Definition Layer</name>
 
 <t anchor="_9d096003-6f94-6333-5c40-4167a231cb9b">Each resource type, no matter if on a top level, being an independent provisioning object, or a subresource, being a part of another resource, shall be well defined including data elements and possible operations. A resource definition shall on the first level of abstraction be composable out of data elements, without any reference to the media type or representation. This will allow for easy extensibility and compatibility with different media types.</t>
 
@@ -647,45 +647,50 @@
 </section>
 </section>
 
-<section anchor="_a78face8-c549-1d14-16d4-eb30d21c606c"><name>Mapping</name>
+<section anchor="_720a1bca-f37f-f2f1-5874-b4afa7984178"><name>Relationships</name>
 
-<t anchor="_de403764-fe2b-94fa-9973-3c6c3b343c02">This layer defines the mapping of Data Elements onto the Data Representation Layer. For example in case of application/rpp+json media type, the mapping layer would define how the logical data units are represented in JSON format.</t>
-
-<t anchor="_648d0c17-cbbf-0cd6-b898-66f886ac43ce">This additional level of indirection would allow usage of data formats defined outside of rpp specifications - for example usage of Verifiable Credentials or Verifiable Presentations as first class resource types for contacts in RPP, and mapping appropriate data elements.</t>
-
-<t anchor="_428d96cb-0b40-c3c9-5804-23a392da44df">The mapping layer shall be defined in IANA registry in a way that allows for automated processing of the mapping definition, including reading and writing operations. Mechanisms, such as defined for JavaScript Object Notation (JSON) Patch <xref target="RFC6902" section="" relative=""></xref>, may be used to define the mapping.</t>
+<t anchor="_3ec4cf69-b17b-c0ab-04ab-9c6c868b7523">Resource types can define explicit relationships (links) to other resource types, supporting flexible cardinality-including one-to-one, one-to-many, and many-to-many associations. This enables robust modeling, navigation, and management of complex, interconnected resources within RPP. A relationship must also be able to define its own properties or attributes, such as type of relationship or other kind of metadata assigned to the relation link itself rather than an object on any side of relation.</t>
 </section>
 
-<section anchor="_9ba01ecc-df78-7626-7133-42c6b43f8425"><name>Operations</name>
+<section anchor="_47ea526d-8793-0af2-1201-f8e81f673712"><name>Mapping</name>
 
-<t anchor="_b5f129f8-8ea4-1a20-3fb6-2c09c4c2bc8a">Each resource type shall define operations possible on this resource type. This may encompass any of the mechanisms defined on the HTTP transport layer.</t>
+<t anchor="_1203c784-3f7d-9487-8c2b-c336a24ec2f8">This layer defines the mapping of Data Elements onto the Data Representation Layer. For example in case of application/rpp+json media type, the mapping layer would define how the logical data units are represented in JSON format.</t>
 
-<t anchor="_b1fca34d-8ac7-3d33-ca47-5e5ddda45855">Operations shall be defined in IANA registry in a way that allows for automated processing of the operation definition, including constraints and references to other resource types.</t>
+<t anchor="_ef5cc75c-f98c-0e43-5c96-dd05d11b01e5">This additional level of indirection would allow usage of data formats defined outside of rpp specifications - for example usage of Verifiable Credentials or Verifiable Presentations as first class resource types for contacts in RPP, and mapping appropriate data elements.</t>
+
+<t anchor="_b102acd9-be76-ec20-1c9a-fc5e91c6b61e">The mapping layer shall be defined in IANA registry in a way that allows for automated processing of the mapping definition, including reading and writing operations. Mechanisms, such as defined for JavaScript Object Notation (JSON) Patch <xref target="RFC6902" section="" relative=""></xref>, may be used to define the mapping.</t>
+</section>
+
+<section anchor="_460341cd-5ac4-50d4-b7e3-b495138b1a1c"><name>Operations</name>
+
+<t anchor="_27ee88e0-5fb9-80a3-74a6-ede5c9e2b2d0">Each resource type shall define operations possible on this resource type. This may encompass any of the mechanisms defined on the HTTP transport layer.</t>
+
+<t anchor="_c153c735-d19d-3e7b-5913-6db42187508d">Operations shall be defined in IANA registry in a way that allows for automated processing of the operation definition, including constraints and references to other resource types.</t>
 </section>
 
 <section anchor="server-managed-resource-types"><name>Server-Managed Resource Types</name>
 
-<t anchor="_4dc80b87-63da-553c-4eeb-1ba56130322c">As mentioned in <xref target="server-managed-resources"></xref>, RPP supports server-managed resources as first-class resource types. These resources are defined using the same mechanisms as client-provisioned resources, including data elements, mappings, and IANA registry entries. The distinction lies in the permitted operations: server-managed resource types restrict operations to read-only access (GET, HEAD).</t>
+<t anchor="_36767058-6e69-92ba-b481-f75e6c84f8b5">As mentioned in <xref target="server-managed-resources"></xref>, RPP supports server-managed resources as first-class resource types. These resources are defined using the same mechanisms as client-provisioned resources, including data elements, mappings, and IANA registry entries. The distinction lies in the permitted operations: server-managed resource types restrict operations to read-only access (GET, HEAD).</t>
 
-<t anchor="_b1b6437e-0b21-cd9f-54b9-644f6ec91418">Examples of server-managed resource types include:</t>
+<t anchor="_31c396c7-4a79-cca7-ad41-b89994a8bd1b">Examples of server-managed resource types include:</t>
 
-<ul anchor="_03ab0a2f-be9d-f0f6-0ebb-a820714ce148"><li>Registry policy information (e.g., supported TLDs, pricing, registration rules)</li>
+<ul anchor="_86f8b373-5c0b-c5e9-58e3-fcf9bb6b93ce"><li>Registry policy information (e.g., supported TLDs, pricing, registration rules)</li>
 <li>Server operational status and health information</li>
 <li>Statistics</li>
 </ul>
 
-<t anchor="_976efe5a-09bb-795d-856c-00ffdb962150">Server-managed resources may expose logically associated information as sub-resources.</t>
+<t anchor="_74567fdb-7dc8-a823-ae22-ef72a1ef5f26">Server-managed resources may expose logically associated information as sub-resources.</t>
 
-<t anchor="_51807080-32a1-36ea-c78f-1f27a7e7c8b3">A special class of server managed resources would represent provisioning objects, which cannot be modified by any external client, but rather are managed by server operator. From the external client view those resources would be read-only, however the server might actually implement modifying operations to those objects available only to internal clients and tools, controlled by authorisation mechanisms.</t>
+<t anchor="_a03fa6e0-d5ed-106b-4c14-be0daaa3647d">A special class of server managed resources would represent provisioning objects, which cannot be modified by any external client, but rather are managed by server operator. From the external client view those resources would be read-only, however the server might actually implement modifying operations to those objects available only to internal clients and tools, controlled by authorisation mechanisms.</t>
 </section>
 
-<section anchor="_a0313528-d396-863c-41ac-fb80b28bff97"><name>Data privacy</name>
+<section anchor="_a47b8ec2-f223-a3df-3e3f-824ba0db1fa5"><name>Data privacy</name>
 
-<t anchor="_2806b6b5-f04a-d7bb-4081-cdf445f45c68">RPP request and response representations may contain personal data or other sensitive information subject to privacy regulations. The architecture incorporates mechanisms that enable implementations to adhere to data privacy principles such as data minimisation and purpose limitation.</t>
+<t anchor="_64aa0bab-3975-9c44-3833-c6ecf3964cc5">RPP request and response representations may contain personal data or other sensitive information subject to privacy regulations. The architecture incorporates mechanisms that enable implementations to adhere to data privacy principles such as data minimisation and purpose limitation.</t>
 
-<t anchor="_af21cdf5-d853-f4f8-08b8-51303957c405">Data minimisation is supported through the protocol's design principle that only strictly necessary data elements are required at the protocol level (see <xref target="data-elements"></xref>). Servers may further constrain which elements are required through profile definitions. The <tt>Prefer</tt> header mechanism (see <xref target="prefer-header"></xref>) allows clients to request minimal representations, and <xref target="fine-grained-authorisation" format="title"></xref> (see <xref target="fine-grained-authorisation"></xref>) and <xref target="object-level-authorisation" format="title"></xref> (see <xref target="object-level-authorisation"></xref>)enable servers to return only the data a client is authorised to access.</t>
+<t anchor="_bcbe7a59-3eca-a438-30c2-90f5612b5b97">Data minimisation is supported through the protocol's design principle that only strictly necessary data elements are required at the protocol level (see <xref target="data-elements"></xref>). Servers may further constrain which elements are required through profile definitions. The <tt>Prefer</tt> header mechanism (see <xref target="prefer-header"></xref>) allows clients to request minimal representations, and <xref target="fine-grained-authorisation" format="title"></xref> (see <xref target="fine-grained-authorisation"></xref>) and <xref target="object-level-authorisation" format="title"></xref> (see <xref target="object-level-authorisation"></xref>)enable servers to return only the data a client is authorised to access.</t>
 
-<t anchor="_6a332a43-d1d5-6d8a-70fa-26d1ac25e234">Purpose limitation is supported through multiple mechanisms. Data element definitions may include purpose attributes, indicating the specific processing purposes for which each element is intended. Authorisation scopes (see <xref target="authentication-authorization"></xref>) can be defined to restrict access to data elements based on their declared purpose, ensuring that clients only receive data relevant to their authorised use. The service discovery document (see <xref target="service-discovery"></xref>) advertises data collection purposes, allowing clients to understand how their data will be used and retained before submission.</t>
+<t anchor="_8a28624a-d499-ec99-3311-154fa3a4b173">Purpose limitation is supported through multiple mechanisms. Data element definitions may include purpose attributes, indicating the specific processing purposes for which each element is intended. Authorisation scopes (see <xref target="authentication-authorization"></xref>) can be defined to restrict access to data elements based on their declared purpose, ensuring that clients only receive data relevant to their authorised use. The service discovery document (see <xref target="service-discovery"></xref>) advertises data collection purposes, allowing clients to understand how their data will be used and retained before submission.</t>
 </section>
 </section>
 
@@ -726,11 +731,13 @@
 </section>
 </section>
 </section>
-    <section anchor="_24b0b49a-8d54-c7c3-c389-5d6f55fd1d4f"><name>Change History</name>
+    <section anchor="_8bf374df-f0c1-8387-e030-b94b9e672159"><name>Change History</name>
 
-<section anchor="_3b6aae44-fc01-a1e8-0831-3b67463f39e8"><name>-00 to -01</name>
+<section anchor="_b44a48d5-81fe-f2ad-801b-76b0e7cdf500"><name>-00 to -01</name>
 
-<ul anchor="_6a906de1-e813-0a28-b675-1da1a832a560"><li>Added Section <xref target="required-optional-data-elements" format="title"></xref> to <xref target="data-elements" format="title"></xref> to explicitly address protocol-level vs. server-policy-level data element requirements (Requirement R4.3).</li>
+<ul anchor="_c27d3cb4-ce4e-4a71-8e93-8fff05835223"><li>Added text about compatibility profiles to "Profiles" section. (Issue #29)</li>
+<li>Added a "Relationships" section to describe resource type relationships. (Issue #83)</li>
+<li>Added Section <xref target="required-optional-data-elements" format="title"></xref> to <xref target="data-elements" format="title"></xref> to explicitly address protocol-level vs. server-policy-level data element requirements (Requirement R4.3).</li>
 <li>Added text about signing messages in the "Message verification" section. (Issue #33)</li>
 <li>Added reference to RFC9154 in the "Object level authorisation" section. (Issue #89)</li>
 <li>Added Section <xref target="collection-representation" format="title"></xref> for API-level collection retrieval and expanded container element description in <xref target="data-elements" format="title"></xref> Section. (Issue #85)</li>

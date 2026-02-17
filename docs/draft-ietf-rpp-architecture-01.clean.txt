@@ -110,10 +110,11 @@ Table of Contents
        5.2.5.  Optionality
      5.3.  Resource Definition Layer
        5.3.1.  Data Elements
-       5.3.2.  Mapping
-       5.3.3.  Operations
-       5.3.4.  Server-Managed Resource Types
-       5.3.5.  Data privacy
+       5.3.2.  Relationships
+       5.3.3.  Mapping
+       5.3.4.  Operations
+       5.3.5.  Server-Managed Resource Types
+       5.3.6.  Data privacy
      5.4.  Extension mechanisms
        5.4.1.  Name Management and Collision Avoidance
        5.4.2.  Extension Security
@@ -798,7 +799,7 @@ Table of Contents
    403 Forbidden) if a client attempts a modification operation.
 
    Further aspects of server-managed resources, including examples and
-   sub-resource relationships, are described in Section 5.3.4.
+   sub-resource relationships, are described in Section 5.3.5.
 
 5.1.8.  HTTP response status codes
 
@@ -1110,7 +1111,10 @@ Table of Contents
    profiles, being identifiers translated into a certain minimum
    configuration of protocol version, extensions and their versions.
    The profiles themselves will be versioned in the same way as other
-   protocol elements.
+   protocol elements.  Commonly used profiles may be published in a
+   dedicated IANA registry to promote reuse of profiles.  A client or
+   server will use the IANA identifier for a profile to indicate support
+   for the profile.
 
    RPP may define a machine-readable definition of profiles to allow
    automatic processing by the clients, but may also refer to other
@@ -1387,7 +1391,18 @@ Table of Contents
    requirements are communicated to clients through profile definitions
    or service discovery mechanisms.
 
-5.3.2.  Mapping
+5.3.2.  Relationships
+
+   Resource types can define explicit relationships (links) to other
+   resource types, supporting flexible cardinality-including one-to-one,
+   one-to-many, and many-to-many associations.  This enables robust
+   modeling, navigation, and management of complex, interconnected
+   resources within RPP.  A relationship must also be able to define its
+   own properties or attributes, such as type of relationship or other
+   kind of metadata assigned to the relation link itself rather than an
+   object on any side of relation.
+
+5.3.3.  Mapping
 
    This layer defines the mapping of Data Elements onto the Data
    Representation Layer.  For example in case of application/rpp+json
@@ -1406,7 +1421,7 @@ Table of Contents
    JavaScript Object Notation (JSON) Patch [RFC6902], may be used to
    define the mapping.
 
-5.3.3.  Operations
+5.3.4.  Operations
 
    Each resource type shall define operations possible on this resource
    type.  This may encompass any of the mechanisms defined on the HTTP
@@ -1416,7 +1431,7 @@ Table of Contents
    automated processing of the operation definition, including
    constraints and references to other resource types.
 
-5.3.4.  Server-Managed Resource Types
+5.3.5.  Server-Managed Resource Types
 
    As mentioned in Section 5.1.7, RPP supports server-managed resources
    as first-class resource types.  These resources are defined using the
@@ -1445,7 +1460,7 @@ Table of Contents
    available only to internal clients and tools, controlled by
    authorisation mechanisms.
 
-5.3.5.  Data privacy
+5.3.6.  Data privacy
 
    RPP request and response representations may contain personal data or
    other sensitive information subject to privacy regulations.  The
@@ -1573,6 +1588,12 @@ Table of Contents
 6.  Change History
 
 6.1.  -00 to -01
+
+   *  Added text about compatibility profiles to "Profiles" section.
+      (Issue #29)
+
+   *  Added a "Relationships" section to describe resource type
+      relationships.  (Issue #83)
 
    *  Added Section Required and Optional Data Elements to Data Elements
       to explicitly address protocol-level vs. server-policy-level data
