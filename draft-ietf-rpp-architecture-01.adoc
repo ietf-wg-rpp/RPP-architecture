@@ -609,6 +609,11 @@ This part defines logical data elements for each resource type, which can also b
 
 Data elements shall be defined in IANA registry in a way that allows for automated processing of the data element definition, including constraints and references to other data elements.
 
+==== Relationships
+Resource types can define explicit relationships (links) to other resource types, supporting flexible cardinality—including one-to-one, one-to-many, and many-to-many associations.
+This enables robust modeling, navigation, and management of complex, interconnected resources within RPP.
+A relationship must also be able to define its own properties or attributes, such as type of relationship or other kind of metadata assigned to the relation link itself rather than an object on any side of relation.
+
 ==== Mapping
 This layer defines the mapping of Data Elements onto the Data Representation Layer. For example in case of application/rpp+json media type, the mapping layer would define how the logical data units are represented in JSON format.
 
@@ -680,6 +685,7 @@ Before any extension is accepted by IANA, a review by an RPP expert must be perf
 
 === -00 to -01
 
+* Added a "Relationships" section to describe resource type relationships. (Issue #83)
 * Added text about signing messages in the "Message verification" section. (Issue #33)
 * Added reference to RFC9154 in the "Object level authorisation" section. (Issue #89)
 * Added Section <<collection-representation, format=title>> for API-level collection retrieval and expanded container element description in <<data-elements, format=title>> Section. (Issue #85)
