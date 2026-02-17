@@ -1471,13 +1471,25 @@ li > p:last-of-type:only-child {
                 <p id="section-toc.1-1.5.2.4.1"><a href="#section-5.4" class="auto internal xref">5.4</a>.  <a href="#name-extension-mechanisms" class="internal xref">Extension mechanisms</a></p>
 <ul class="compact toc ulBare ulEmpty">
 <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5.2.4.2.1">
-                    <p id="section-toc.1-1.5.2.4.2.1.1"><a href="#section-5.4.1" class="auto internal xref">5.4.1</a>.  <a href="#name-name-management-and-collisi" class="internal xref">Name Management and Collision Avoidance</a></p>
+                    <p id="section-toc.1-1.5.2.4.2.1.1"><a href="#section-5.4.1" class="auto internal xref">5.4.1</a>.  <a href="#name-layered-extensibility" class="internal xref">Layered Extensibility</a></p>
 </li>
                   <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5.2.4.2.2">
-                    <p id="section-toc.1-1.5.2.4.2.2.1"><a href="#section-5.4.2" class="auto internal xref">5.4.2</a>.  <a href="#name-extension-security" class="internal xref">Extension Security</a></p>
+                    <p id="section-toc.1-1.5.2.4.2.2.1"><a href="#section-5.4.2" class="auto internal xref">5.4.2</a>.  <a href="#name-protocol-element-extension" class="internal xref">Protocol Element Extension</a></p>
 </li>
                   <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5.2.4.2.3">
-                    <p id="section-toc.1-1.5.2.4.2.3.1"><a href="#section-5.4.3" class="auto internal xref">5.4.3</a>.  <a href="#name-extension-review" class="internal xref">Extension Review</a></p>
+                    <p id="section-toc.1-1.5.2.4.2.3.1"><a href="#section-5.4.3" class="auto internal xref">5.4.3</a>.  <a href="#name-iana-registry-based-discove" class="internal xref">IANA Registry-Based Discovery</a></p>
+</li>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5.2.4.2.4">
+                    <p id="section-toc.1-1.5.2.4.2.4.1"><a href="#section-5.4.4" class="auto internal xref">5.4.4</a>.  <a href="#name-compatibility-and-profiles" class="internal xref">Compatibility and Profiles</a></p>
+</li>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5.2.4.2.5">
+                    <p id="section-toc.1-1.5.2.4.2.5.1"><a href="#section-5.4.5" class="auto internal xref">5.4.5</a>.  <a href="#name-name-management-and-collisi" class="internal xref">Name Management and Collision Avoidance</a></p>
+</li>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5.2.4.2.6">
+                    <p id="section-toc.1-1.5.2.4.2.6.1"><a href="#section-5.4.6" class="auto internal xref">5.4.6</a>.  <a href="#name-extension-security" class="internal xref">Extension Security</a></p>
+</li>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5.2.4.2.7">
+                    <p id="section-toc.1-1.5.2.4.2.7.1"><a href="#section-5.4.7" class="auto internal xref">5.4.7</a>.  <a href="#name-extension-review" class="internal xref">Extension Review</a></p>
 </li>
                 </ul>
 </li>
@@ -1846,7 +1858,7 @@ li > p:last-of-type:only-child {
 </div>
 </section>
 </div>
-<div id="_0011131c-c949-b3d7-9a42-0ab5b47efd97">
+<div id="_c4d153b3-1df6-abe4-6909-4955106da8cf">
 <section id="section-5">
       <h2 id="name-protocol-details">
 <a href="#section-5" class="section-number selfRef">5. </a><a href="#name-protocol-details" class="section-name selfRef">Protocol Details</a>
@@ -2736,71 +2748,98 @@ li > p:last-of-type:only-child {
         <h3 id="name-extension-mechanisms">
 <a href="#section-5.4" class="section-number selfRef">5.4. </a><a href="#name-extension-mechanisms" class="section-name selfRef">Extension mechanisms</a>
         </h3>
-<div id="_db1ca414-146c-e456-b98c-0f3eef194501">
-<p id="section-5.4-1">The RPP architecture is designed to be extensible, allowing for the addition of new resource types, data elements, and operations without breaking existing implementations. This extensibility is achieved through:<a href="#section-5.4-1" class="pilcrow">¶</a></p>
+<div id="_18aa2915-f6c7-c8ad-81df-b3524c53f6b2">
+<p id="section-5.4-1">The RPP architecture is designed to be extensible, allowing for the addition of new resource types, data elements, and operations without breaking existing implementations while maintaining interoperability and stability. This enables RPP to integrate with emerging technologies and support a wide range of provisioning scenarios.<a href="#section-5.4-1" class="pilcrow">¶</a></p>
+</div>
+<div id="_ee45e179-9f0d-3d1d-c4b7-2cb12721eab8">
+<section id="section-5.4.1">
+          <h4 id="name-layered-extensibility">
+<a href="#section-5.4.1" class="section-number selfRef">5.4.1. </a><a href="#name-layered-extensibility" class="section-name selfRef">Layered Extensibility</a>
+          </h4>
+<div id="_8611bb11-0beb-b858-90d4-88ea96b0f4ab">
+<p id="section-5.4.1-1">The layered design ensures that each architectural layer (HTTP Transport, Data Representation, Resource Definition) is defined independently, allowing new features or technologies to be introduced at one layer without impacting others. This separation enables focused extension of specific protocol aspects and preserves overall coherence.<a href="#section-5.4.1-1" class="pilcrow">¶</a></p>
+</div>
+</section>
+</div>
+<div id="_327b3fe4-5cd1-5912-d6a5-5c50a5505c1c">
+<section id="section-5.4.2">
+          <h4 id="name-protocol-element-extension">
+<a href="#section-5.4.2" class="section-number selfRef">5.4.2. </a><a href="#name-protocol-element-extension" class="section-name selfRef">Protocol Element Extension</a>
+          </h4>
+<div id="_4170ef6b-580e-6657-eb41-c679f15da49e">
+<p id="section-5.4.2-1">Extensions may introduce new protocol elements at various levels of granularity:<a href="#section-5.4.2-1" class="pilcrow">¶</a></p>
 </div>
 <ul class="normal">
-<li class="normal" id="section-5.4-2.1">
-            <strong>Layered Design:</strong> Each architectural layer (HTTP Transport, Data Representation, Resource Definition) is defined independently, allowing new features or technologies to be introduced at one layer without impacting others.<a href="#section-5.4-2.1" class="pilcrow">¶</a>
+<li class="normal" id="section-5.4.2-2.1">New resource types and server-managed resource types with their complete definitions<a href="#section-5.4.2-2.1" class="pilcrow">¶</a>
 </li>
-          <li class="normal" id="section-5.4-2.2">
-            <strong>IANA Registries:</strong> Resource types, data elements, mappings, and operations are registered in IANA registries using machine-readable formats. This enables automated processing, discovery, and extension of protocol elements without requiring changes to the core specifications.<a href="#section-5.4-2.2" class="pilcrow">¶</a>
+            <li class="normal" id="section-5.4.2-2.2">Additional data elements that can be incorporated into existing or new resource types<a href="#section-5.4.2-2.2" class="pilcrow">¶</a>
 </li>
-          <li class="normal" id="section-5.4-2.3">
-            <strong>Resource and Operation Extension:</strong> New resource types and operations can be defined and registered. Existing resources can be extended with additional data elements or operations in a backward-compatible manner.<a href="#section-5.4-2.3" class="pilcrow">¶</a>
+            <li class="normal" id="section-5.4.2-2.3">New operations on existing resources, including process sub-resources<a href="#section-5.4.2-2.3" class="pilcrow">¶</a>
 </li>
-          <li class="normal" id="section-5.4-2.4">
-            <strong>Profile and Compatibility Layers:</strong> Compatibility profiles can be defined to support subsets of RPP for specific use cases (such as EPP compatibility)<a href="#section-5.4-2.4" class="pilcrow">¶</a>
+            <li class="normal" id="section-5.4.2-2.4">Additional parameters for existing operations<a href="#section-5.4.2-2.4" class="pilcrow">¶</a>
 </li>
-          <li class="normal" id="section-5.4-2.5">
-            <strong>Discovery and Negotiation:</strong> Service discovery endpoints and content negotiation mechanisms allow clients and servers to dynamically discover and utilise new capabilities, resource types, and representations as they are introduced.<a href="#section-5.4-2.5" class="pilcrow">¶</a>
+            <li class="normal" id="section-5.4.2-2.5">Additional result information in operation responses<a href="#section-5.4.2-2.5" class="pilcrow">¶</a>
 </li>
-          <li class="normal" id="section-5.4-2.6">
-            <strong>Status codes:</strong> New RPP status codes can be defined and registered including their mapping to HTTP response status codes.<a href="#section-5.4-2.6" class="pilcrow">¶</a>
+            <li class="normal" id="section-5.4.2-2.6">New RPP status codes with their mappings to HTTP response status codes<a href="#section-5.4.2-2.6" class="pilcrow">¶</a>
 </li>
-          <li class="normal" id="section-5.4-2.7">
-            <strong>HTTP Headers:</strong> New HTTP headers can be defined and used when mapping RPP data structures or control signals to requests and responses.<a href="#section-5.4-2.7" class="pilcrow">¶</a>
+            <li class="normal" id="section-5.4.2-2.7">New HTTP headers for conveying RPP-specific data structures or control signals<a href="#section-5.4.2-2.7" class="pilcrow">¶</a>
 </li>
-        </ul>
-<div id="_e4667a4e-d287-86de-3be5-f0c5dd34efb4">
-<p id="section-5.4-3">RPP shall facilitate standardisation and reuse by requiring that extensions be registered with IANA. These registration requirements shall be fine-grained, applying independently to protocol elements such as resource types, data elements, operations, and status codes. This approach promotes consistency and interoperability, avoids fragmentation from conflicting definitions, and allows protocol elements to evolve independently.<a href="#section-5.4-3" class="pilcrow">¶</a></p>
+          </ul>
+</section>
 </div>
-<div id="_debfcb2b-b50a-2c33-4a75-319386e9442e">
-<p id="section-5.4-4">These extensibility mechanisms ensure that RPP can evolve to meet future requirements, integrate with emerging technologies, and support a wide range of provisioning scenarios while maintaining interoperability and stability.<a href="#section-5.4-4" class="pilcrow">¶</a></p>
-</div>
-<div id="_b40c24b0-bd97-0f6a-e2c3-4581b40bc90b">
-<section id="section-5.4.1">
-          <h4 id="name-name-management-and-collisi">
-<a href="#section-5.4.1" class="section-number selfRef">5.4.1. </a><a href="#name-name-management-and-collisi" class="section-name selfRef">Name Management and Collision Avoidance</a>
+<div id="_5349bd0b-bd0f-1d0b-5245-26a602cf3572">
+<section id="section-5.4.3">
+          <h4 id="name-iana-registry-based-discove">
+<a href="#section-5.4.3" class="section-number selfRef">5.4.3. </a><a href="#name-iana-registry-based-discove" class="section-name selfRef">IANA Registry-Based Discovery</a>
           </h4>
-<div id="_acecdc24-c3a7-4d7e-178d-5bbb78479f44">
-<p id="section-5.4.1-1">RPP extensions MUST define unique names for all extension elements to prevent conflicts with other extensions and with core protocol elements. These names are used consistently in resource identifiers, data element identifiers, and URL path segments.<a href="#section-5.4.1-1" class="pilcrow">¶</a></p>
+<div id="_9c6aec44-9411-7a3e-328e-10de50503628">
+<p id="section-5.4.3-1">Resource types, data elements, mappings, and operations are registered in IANA registries using machine-readable formats. This enables automated processing, discovery, and extension of protocol elements without requiring changes to the core specifications. Extensions must be registered with IANA to facilitate standardisation and reuse. These registration requirements are fine-grained, applying independently to protocol elements such as resource types, data elements, operations, and status codes. This approach promotes consistency and interoperability, avoids fragmentation from conflicting definitions, and allows protocol elements to evolve independently.<a href="#section-5.4.3-1" class="pilcrow">¶</a></p>
 </div>
-<div id="_4d667800-d34a-ec5d-b7c3-8ce11d50e54e">
-<p id="section-5.4.1-2">Standardised RPP extensions MUST register their names in a dedicated IANA registry for RPP extensions to ensure global uniqueness and avoid collisions. Private (non-standardised) extensions are also required to use unique names, but are not required to register with IANA. This allows private extensions to be developed and used within specific implementations or organisations without impacting the global RPP ecosystem. Private extensions should use names that are unlikely to conflict with other extensions or with RPP core elements, for example by using reverse domain notation as a prefix (e.g., <code>org.example.rpp</code>).<a href="#section-5.4.1-2" class="pilcrow">¶</a></p>
+</section>
 </div>
-<div id="_64315132-8cb7-107d-e6d0-ad55dd956428">
-<p id="section-5.4.1-3">This naming mechanism ensures that new resource types, data elements, and operations can be introduced independently and safely, supporting the extensibility goals of the RPP architecture while maintaining interoperability and clarity across implementations.<a href="#section-5.4.1-3" class="pilcrow">¶</a></p>
+<div id="_cc0e31af-c5bb-2d36-032e-2c082fc98ce7">
+<section id="section-5.4.4">
+          <h4 id="name-compatibility-and-profiles">
+<a href="#section-5.4.4" class="section-number selfRef">5.4.4. </a><a href="#name-compatibility-and-profiles" class="section-name selfRef">Compatibility and Profiles</a>
+          </h4>
+<div id="_2333c4d5-a43d-b1cc-f4ef-f45c5b48af32">
+<p id="section-5.4.4-1">Compatibility profiles can be defined to support subsets of RPP for specific use cases, such as EPP compatibility profiles that enable gradual migration or interoperability scenarios. Service discovery endpoints and content negotiation mechanisms allow clients and servers to dynamically discover and utilise new capabilities, resource types, and representations as they are introduced.<a href="#section-5.4.4-1" class="pilcrow">¶</a></p>
+</div>
+</section>
+</div>
+<div id="_3dc1b7c2-887b-238b-971f-b383151f4722">
+<section id="section-5.4.5">
+          <h4 id="name-name-management-and-collisi">
+<a href="#section-5.4.5" class="section-number selfRef">5.4.5. </a><a href="#name-name-management-and-collisi" class="section-name selfRef">Name Management and Collision Avoidance</a>
+          </h4>
+<div id="_9fcb31e0-a010-ad2e-fb71-30fd046b2362">
+<p id="section-5.4.5-1">RPP extensions MUST define unique names for all extension elements to prevent conflicts with other extensions and with core protocol elements. These names are used consistently in resource identifiers, data element identifiers, and URL path segments.<a href="#section-5.4.5-1" class="pilcrow">¶</a></p>
+</div>
+<div id="_f822d6f1-631b-2eb7-9baa-0cf036702478">
+<p id="section-5.4.5-2">Standardised RPP extensions MUST register their names in a dedicated IANA registry for RPP extensions to ensure global uniqueness and avoid collisions. Private (non-standardised) extensions are also required to use unique names, but are not required to register with IANA. This allows private extensions to be developed and used within specific implementations or organisations without impacting the global RPP ecosystem. Private extensions should use names that are unlikely to conflict with other extensions or with RPP core elements, for example by using reverse domain notation as a prefix (e.g., <code>org.example.rpp</code>).<a href="#section-5.4.5-2" class="pilcrow">¶</a></p>
+</div>
+<div id="_462e66ba-b6bf-0113-5df6-93cf491fe4fc">
+<p id="section-5.4.5-3">This naming mechanism ensures that new resource types, data elements, and operations can be introduced independently and safely, supporting the extensibility goals of the RPP architecture while maintaining interoperability and clarity across implementations.<a href="#section-5.4.5-3" class="pilcrow">¶</a></p>
 </div>
 </section>
 </div>
 <div id="extension-security">
-<section id="section-5.4.2">
+<section id="section-5.4.6">
           <h4 id="name-extension-security">
-<a href="#section-5.4.2" class="section-number selfRef">5.4.2. </a><a href="#name-extension-security" class="section-name selfRef">Extension Security</a>
+<a href="#section-5.4.6" class="section-number selfRef">5.4.6. </a><a href="#name-extension-security" class="section-name selfRef">Extension Security</a>
           </h4>
-<div id="_a3a0ec7f-cf31-385d-31fb-d2e5353b856c">
-<p id="section-5.4.2-1">Extensions operate within the same security architecture as the core protocol. Security, authentication, and authorisation mechanisms defined at the HTTP Transport Layer (see <a href="#authentication-authorization" class="auto internal xref">Section 5.1.2</a>) apply uniformly to both core protocol operations and all extensions. This "security by design" approach is aimed to ensure that extensions cannot bypass or weaken the security posture established by the core protocol. Extensions must not introduce new authentication or authorisation mechanisms that circumvent or conflict with those defined by the core specifications.<a href="#section-5.4.2-1" class="pilcrow">¶</a></p>
+<div id="_291055ed-0b88-a474-f14a-e8a44cdaa767">
+<p id="section-5.4.6-1">Extensions operate within the same security architecture as the core protocol. Security, authentication, and authorisation mechanisms defined at the HTTP Transport Layer (see <a href="#authentication-authorization" class="auto internal xref">Section 5.1.2</a>) apply uniformly to both core protocol operations and all extensions. This "security by design" approach is aimed to ensure that extensions cannot bypass or weaken the security posture established by the core protocol. Extensions must not introduce new authentication or authorisation mechanisms that circumvent or conflict with those defined by the core specifications.<a href="#section-5.4.6-1" class="pilcrow">¶</a></p>
 </div>
 </section>
 </div>
 <div id="extension-review">
-<section id="section-5.4.3">
+<section id="section-5.4.7">
           <h4 id="name-extension-review">
-<a href="#section-5.4.3" class="section-number selfRef">5.4.3. </a><a href="#name-extension-review" class="section-name selfRef">Extension Review</a>
+<a href="#section-5.4.7" class="section-number selfRef">5.4.7. </a><a href="#name-extension-review" class="section-name selfRef">Extension Review</a>
           </h4>
-<div id="_ac60170d-9674-53ee-a195-5e4eed8b2aeb">
-<p id="section-5.4.3-1">Before any extension is accepted by IANA, a review by an RPP expert must be performed. This review includes verification that the extension does not violate any of the RPP security considerations and that it correctly integrates with the protocol's security framework. The complete review criteria will be included in the "IANA Considerations" section of any document describing RPP extension mechanisms, according to the BCP described in <span>[<a href="#RFC8126" class="cite xref">RFC8126</a>]</span>.<a href="#section-5.4.3-1" class="pilcrow">¶</a></p>
+<div id="_348675a4-c208-c407-daea-71f832068d02">
+<p id="section-5.4.7-1">Before any extension is accepted by IANA, a review by an RPP expert must be performed. This review includes verification that the extension does not violate any of the RPP security considerations and that it correctly integrates with the protocol's security framework. The complete review criteria will be included in the "IANA Considerations" section of any document describing RPP extension mechanisms, according to the BCP described in <span>[<a href="#RFC8126" class="cite xref">RFC8126</a>]</span>.<a href="#section-5.4.7-1" class="pilcrow">¶</a></p>
 </div>
 </section>
 </div>
@@ -2808,64 +2847,66 @@ li > p:last-of-type:only-child {
 </div>
 </section>
 </div>
-<div id="_8bf374df-f0c1-8387-e030-b94b9e672159">
+<div id="_0f46c683-d976-7fd6-7d5f-e0e7c2141a68">
 <section id="section-6">
       <h2 id="name-change-history">
 <a href="#section-6" class="section-number selfRef">6. </a><a href="#name-change-history" class="section-name selfRef">Change History</a>
       </h2>
-<div id="_b44a48d5-81fe-f2ad-801b-76b0e7cdf500">
+<div id="_fa937cbe-ebca-bd89-2890-5883bb9d1d72">
 <section id="section-6.1">
         <h3 id="name-00-to-01">
 <a href="#section-6.1" class="section-number selfRef">6.1. </a><a href="#name-00-to-01" class="section-name selfRef">-00 to -01</a>
         </h3>
 <ul class="normal">
-<li class="normal" id="section-6.1-1.1">Added text about compatibility profiles to "Profiles" section. (Issue #29)<a href="#section-6.1-1.1" class="pilcrow">¶</a>
+<li class="normal" id="section-6.1-1.1">Refactoring of <a href="#extension-mechanisms" class="internal xref">Extension mechanisms</a> Section and addition of extensibility with transient request parameters and responses (Issus #94 and #95)<a href="#section-6.1-1.1" class="pilcrow">¶</a>
 </li>
-          <li class="normal" id="section-6.1-1.2">Added a "Relationships" section to describe resource type relationships. (Issue #83)<a href="#section-6.1-1.2" class="pilcrow">¶</a>
+          <li class="normal" id="section-6.1-1.2">Added text about compatibility profiles to "Profiles" section. (Issue #29)<a href="#section-6.1-1.2" class="pilcrow">¶</a>
 </li>
-          <li class="normal" id="section-6.1-1.3">Added Section <a href="#required-optional-data-elements" class="internal xref">Required and Optional Data Elements</a> to <a href="#data-elements" class="internal xref">Data Elements</a> to explicitly address protocol-level vs. server-policy-level data element requirements (Requirement R4.3).<a href="#section-6.1-1.3" class="pilcrow">¶</a>
+          <li class="normal" id="section-6.1-1.3">Added a "Relationships" section to describe resource type relationships. (Issue #83)<a href="#section-6.1-1.3" class="pilcrow">¶</a>
 </li>
-          <li class="normal" id="section-6.1-1.4">Added text about signing messages in the "Message verification" section. (Issue #33)<a href="#section-6.1-1.4" class="pilcrow">¶</a>
+          <li class="normal" id="section-6.1-1.4">Added Section <a href="#required-optional-data-elements" class="internal xref">Required and Optional Data Elements</a> to <a href="#data-elements" class="internal xref">Data Elements</a> to explicitly address protocol-level vs. server-policy-level data element requirements (Requirement R4.3).<a href="#section-6.1-1.4" class="pilcrow">¶</a>
 </li>
-          <li class="normal" id="section-6.1-1.5">Added reference to RFC9154 in the "Object level authorisation" section. (Issue #89)<a href="#section-6.1-1.5" class="pilcrow">¶</a>
+          <li class="normal" id="section-6.1-1.5">Added text about signing messages in the "Message verification" section. (Issue #33)<a href="#section-6.1-1.5" class="pilcrow">¶</a>
 </li>
-          <li class="normal" id="section-6.1-1.6">Added Section <a href="#collection-representation" class="internal xref">Collection Representation</a> for API-level collection retrieval and expanded container element description in <a href="#data-elements" class="internal xref">Data Elements</a> Section. (Issue #85)<a href="#section-6.1-1.6" class="pilcrow">¶</a>
+          <li class="normal" id="section-6.1-1.6">Added reference to RFC9154 in the "Object level authorisation" section. (Issue #89)<a href="#section-6.1-1.6" class="pilcrow">¶</a>
 </li>
-          <li class="normal" id="section-6.1-1.7">Editorial: updated document references<a href="#section-6.1-1.7" class="pilcrow">¶</a>
+          <li class="normal" id="section-6.1-1.7">Added Section <a href="#collection-representation" class="internal xref">Collection Representation</a> for API-level collection retrieval and expanded container element description in <a href="#data-elements" class="internal xref">Data Elements</a> Section. (Issue #85)<a href="#section-6.1-1.7" class="pilcrow">¶</a>
 </li>
-          <li class="normal" id="section-6.1-1.8">Added data privacy to <a href="#service-discovery" class="internal xref">Service discovery mechanisms</a> and new "Data privacy" section. Refactored the whole section <a href="#service-discovery" class="auto internal xref">Section 5.1.22</a> (Issue #100).<a href="#section-6.1-1.8" class="pilcrow">¶</a>
+          <li class="normal" id="section-6.1-1.8">Editorial: updated document references<a href="#section-6.1-1.8" class="pilcrow">¶</a>
 </li>
-          <li class="normal" id="section-6.1-1.9">Fixed inconsistent usage of HTTP status codes (Issue #108).<a href="#section-6.1-1.9" class="pilcrow">¶</a>
+          <li class="normal" id="section-6.1-1.9">Added data privacy to <a href="#service-discovery" class="internal xref">Service discovery mechanisms</a> and new "Data privacy" section. Refactored the whole section <a href="#service-discovery" class="auto internal xref">Section 5.1.22</a> (Issue #100).<a href="#section-6.1-1.9" class="pilcrow">¶</a>
 </li>
-          <li class="normal" id="section-6.1-1.10">Added "Canonical Addressing" section (Issue #81)<a href="#section-6.1-1.10" class="pilcrow">¶</a>
+          <li class="normal" id="section-6.1-1.10">Fixed inconsistent usage of HTTP status codes (Issue #108).<a href="#section-6.1-1.10" class="pilcrow">¶</a>
 </li>
-          <li class="normal" id="section-6.1-1.11">Added HTTP Headers to the "extension-mechanisms" section (Issue #93).<a href="#section-6.1-1.11" class="pilcrow">¶</a>
+          <li class="normal" id="section-6.1-1.11">Added "Canonical Addressing" section (Issue #81)<a href="#section-6.1-1.11" class="pilcrow">¶</a>
 </li>
-          <li class="normal" id="section-6.1-1.12">Added "Optionality" section to explicitly allow empty HTTP message body in a response (Issue #97).<a href="#section-6.1-1.12" class="pilcrow">¶</a>
+          <li class="normal" id="section-6.1-1.12">Added HTTP Headers to the "extension-mechanisms" section (Issue #93).<a href="#section-6.1-1.12" class="pilcrow">¶</a>
 </li>
-          <li class="normal" id="section-6.1-1.13">Added <a href="#server-managed-resources" class="internal xref">Server-Managed Resources</a> Section to <a href="#http-layer-details" class="internal xref">HTTP Transport Layer Details</a> and <a href="#server-managed-resource-types" class="internal xref">Server-Managed Resource Types</a> Section to Resource Definition Layer to define read-only server-managed resources (Issue #84).<a href="#section-6.1-1.13" class="pilcrow">¶</a>
+          <li class="normal" id="section-6.1-1.13">Added "Optionality" section to explicitly allow empty HTTP message body in a response (Issue #97).<a href="#section-6.1-1.13" class="pilcrow">¶</a>
 </li>
-          <li class="normal" id="section-6.1-1.14">Create "Credential management" section for updating credentials using an extension.<a href="#section-6.1-1.14" class="pilcrow">¶</a>
+          <li class="normal" id="section-6.1-1.14">Added <a href="#server-managed-resources" class="internal xref">Server-Managed Resources</a> Section to <a href="#http-layer-details" class="internal xref">HTTP Transport Layer Details</a> and <a href="#server-managed-resource-types" class="internal xref">Server-Managed Resource Types</a> Section to Resource Definition Layer to define read-only server-managed resources (Issue #84).<a href="#section-6.1-1.14" class="pilcrow">¶</a>
 </li>
-          <li class="normal" id="section-6.1-1.15">Changed default validation from lenient to strict. (Issue #82)<a href="#section-6.1-1.15" class="pilcrow">¶</a>
+          <li class="normal" id="section-6.1-1.15">Create "Credential management" section for updating credentials using an extension.<a href="#section-6.1-1.15" class="pilcrow">¶</a>
 </li>
-          <li class="normal" id="section-6.1-1.16">Added <a href="#extension-security" class="internal xref">Extension Security</a> and <a href="#extension-review" class="internal xref">Extension Review</a> Sections to <a href="#extension-mechanisms" class="auto internal xref">Section 5.4</a> (Issue #91).<a href="#section-6.1-1.16" class="pilcrow">¶</a>
+          <li class="normal" id="section-6.1-1.16">Changed default validation from lenient to strict. (Issue #82)<a href="#section-6.1-1.16" class="pilcrow">¶</a>
 </li>
-          <li class="normal" id="section-6.1-1.17">Added Advertising of maintenance notices to "Service Discovery" section. (Issue #88)<a href="#section-6.1-1.17" class="pilcrow">¶</a>
+          <li class="normal" id="section-6.1-1.17">Added <a href="#extension-security" class="internal xref">Extension Security</a> and <a href="#extension-review" class="internal xref">Extension Review</a> Sections to <a href="#extension-mechanisms" class="auto internal xref">Section 5.4</a> (Issue #91).<a href="#section-6.1-1.17" class="pilcrow">¶</a>
 </li>
-          <li class="normal" id="section-6.1-1.18">Added "Scalability" section. (Issue #92)<a href="#section-6.1-1.18" class="pilcrow">¶</a>
+          <li class="normal" id="section-6.1-1.18">Added Advertising of maintenance notices to "Service Discovery" section. (Issue #88)<a href="#section-6.1-1.18" class="pilcrow">¶</a>
 </li>
-          <li class="normal" id="section-6.1-1.19">Explicitly state that all parties involved in a process are allowed to retrieve the process status. (Issue #98)<a href="#section-6.1-1.19" class="pilcrow">¶</a>
+          <li class="normal" id="section-6.1-1.19">Added "Scalability" section. (Issue #92)<a href="#section-6.1-1.19" class="pilcrow">¶</a>
 </li>
-          <li class="normal" id="section-6.1-1.20">Added IDN to "Terminology" and "Service discovery mechanisms" sections<a href="#section-6.1-1.20" class="pilcrow">¶</a>
+          <li class="normal" id="section-6.1-1.20">Explicitly state that all parties involved in a process are allowed to retrieve the process status. (Issue #98)<a href="#section-6.1-1.20" class="pilcrow">¶</a>
 </li>
-          <li class="normal" id="section-6.1-1.21">Added "additional measures to verify the client" to <a href="#http-layer-details-security" class="auto internal xref">Section 5.1.3.4</a> (Issue #76).<a href="#section-6.1-1.21" class="pilcrow">¶</a>
+          <li class="normal" id="section-6.1-1.21">Added IDN to "Terminology" and "Service discovery mechanisms" sections<a href="#section-6.1-1.21" class="pilcrow">¶</a>
 </li>
-          <li class="normal" id="section-6.1-1.22">Added TLS mandatory to <a href="#transport-security" class="auto internal xref">Section 5.1.1</a> (Issue #78).<a href="#section-6.1-1.22" class="pilcrow">¶</a>
+          <li class="normal" id="section-6.1-1.22">Added "additional measures to verify the client" to <a href="#http-layer-details-security" class="auto internal xref">Section 5.1.3.4</a> (Issue #76).<a href="#section-6.1-1.22" class="pilcrow">¶</a>
 </li>
-          <li class="normal" id="section-6.1-1.23">Added Section <a href="#credential-lifecycle" class="auto internal xref">Section 5.1.3.5</a> for credential and token revocation/replacement mechanisms (Issue #79).<a href="#section-6.1-1.23" class="pilcrow">¶</a>
+          <li class="normal" id="section-6.1-1.23">Added TLS mandatory to <a href="#transport-security" class="auto internal xref">Section 5.1.1</a> (Issue #78).<a href="#section-6.1-1.23" class="pilcrow">¶</a>
 </li>
-          <li class="normal" id="section-6.1-1.24">Added Section <a href="#service-messages" class="auto internal xref">Section 5.1.15</a> to describe poll message equivalent (Issue #87).<a href="#section-6.1-1.24" class="pilcrow">¶</a>
+          <li class="normal" id="section-6.1-1.24">Added Section <a href="#credential-lifecycle" class="auto internal xref">Section 5.1.3.5</a> for credential and token revocation/replacement mechanisms (Issue #79).<a href="#section-6.1-1.24" class="pilcrow">¶</a>
+</li>
+          <li class="normal" id="section-6.1-1.25">Added Section <a href="#service-messages" class="auto internal xref">Section 5.1.15</a> to describe poll message equivalent (Issue #87).<a href="#section-6.1-1.25" class="pilcrow">¶</a>
 </li>
         </ul>
 </section>

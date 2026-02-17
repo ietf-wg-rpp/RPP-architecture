@@ -214,7 +214,7 @@
 </section>
 </section>
 </section>
-    <section anchor="_0011131c-c949-b3d7-9a42-0ab5b47efd97"><name>Protocol Details</name>
+    <section anchor="_c4d153b3-1df6-abe4-6909-4955106da8cf"><name>Protocol Details</name>
 
 <t anchor="_258b3fe6-6525-0317-3cb7-1b42072bd9cf">This section provides further details on each layer of the RPP architecture.</t>
 
@@ -696,46 +696,63 @@
 
 <section anchor="extension-mechanisms"><name>Extension mechanisms</name>
 
-<t anchor="_db1ca414-146c-e456-b98c-0f3eef194501">The RPP architecture is designed to be extensible, allowing for the addition of new resource types, data elements, and operations without breaking existing implementations. This extensibility is achieved through:</t>
+<t anchor="_18aa2915-f6c7-c8ad-81df-b3524c53f6b2">The RPP architecture is designed to be extensible, allowing for the addition of new resource types, data elements, and operations without breaking existing implementations while maintaining interoperability and stability. This enables RPP to integrate with emerging technologies and support a wide range of provisioning scenarios.</t>
 
-<ul anchor="_e4eac58a-0d97-b2a8-af8f-565e2d8dd86b"><li><strong>Layered Design:</strong> Each architectural layer (HTTP Transport, Data Representation, Resource Definition) is defined independently, allowing new features or technologies to be introduced at one layer without impacting others.</li>
-<li><strong>IANA Registries:</strong> Resource types, data elements, mappings, and operations are registered in IANA registries using machine-readable formats. This enables automated processing, discovery, and extension of protocol elements without requiring changes to the core specifications.</li>
-<li><strong>Resource and Operation Extension:</strong> New resource types and operations can be defined and registered. Existing resources can be extended with additional data elements or operations in a backward-compatible manner.</li>
-<li><strong>Profile and Compatibility Layers:</strong> Compatibility profiles can be defined to support subsets of RPP for specific use cases (such as EPP compatibility)</li>
-<li><strong>Discovery and Negotiation:</strong> Service discovery endpoints and content negotiation mechanisms allow clients and servers to dynamically discover and utilise new capabilities, resource types, and representations as they are introduced.</li>
-<li><strong>Status codes:</strong> New RPP status codes can be defined and registered including their mapping to HTTP response status codes.</li>
-<li><strong>HTTP Headers:</strong> New HTTP headers can be defined and used when mapping RPP data structures or control signals to requests and responses.</li>
+<section anchor="_ee45e179-9f0d-3d1d-c4b7-2cb12721eab8"><name>Layered Extensibility</name>
+
+<t anchor="_8611bb11-0beb-b858-90d4-88ea96b0f4ab">The layered design ensures that each architectural layer (HTTP Transport, Data Representation, Resource Definition) is defined independently, allowing new features or technologies to be introduced at one layer without impacting others. This separation enables focused extension of specific protocol aspects and preserves overall coherence.</t>
+</section>
+
+<section anchor="_327b3fe4-5cd1-5912-d6a5-5c50a5505c1c"><name>Protocol Element Extension</name>
+
+<t anchor="_4170ef6b-580e-6657-eb41-c679f15da49e">Extensions may introduce new protocol elements at various levels of granularity:</t>
+
+<ul anchor="_4a985ea4-645e-c582-1a5c-f7b1c9189dcf"><li>New resource types and server-managed resource types with their complete definitions</li>
+<li>Additional data elements that can be incorporated into existing or new resource types</li>
+<li>New operations on existing resources, including process sub-resources</li>
+<li>Additional parameters for existing operations</li>
+<li>Additional result information in operation responses</li>
+<li>New RPP status codes with their mappings to HTTP response status codes</li>
+<li>New HTTP headers for conveying RPP-specific data structures or control signals</li>
 </ul>
+</section>
 
-<t anchor="_e4667a4e-d287-86de-3be5-f0c5dd34efb4">RPP shall facilitate standardisation and reuse by requiring that extensions be registered with IANA. These registration requirements shall be fine-grained, applying independently to protocol elements such as resource types, data elements, operations, and status codes. This approach promotes consistency and interoperability, avoids fragmentation from conflicting definitions, and allows protocol elements to evolve independently.</t>
+<section anchor="_5349bd0b-bd0f-1d0b-5245-26a602cf3572"><name>IANA Registry-Based Discovery</name>
 
-<t anchor="_debfcb2b-b50a-2c33-4a75-319386e9442e">These extensibility mechanisms ensure that RPP can evolve to meet future requirements, integrate with emerging technologies, and support a wide range of provisioning scenarios while maintaining interoperability and stability.</t>
+<t anchor="_9c6aec44-9411-7a3e-328e-10de50503628">Resource types, data elements, mappings, and operations are registered in IANA registries using machine-readable formats. This enables automated processing, discovery, and extension of protocol elements without requiring changes to the core specifications. Extensions must be registered with IANA to facilitate standardisation and reuse. These registration requirements are fine-grained, applying independently to protocol elements such as resource types, data elements, operations, and status codes. This approach promotes consistency and interoperability, avoids fragmentation from conflicting definitions, and allows protocol elements to evolve independently.</t>
+</section>
 
-<section anchor="_b40c24b0-bd97-0f6a-e2c3-4581b40bc90b"><name>Name Management and Collision Avoidance</name>
+<section anchor="_cc0e31af-c5bb-2d36-032e-2c082fc98ce7"><name>Compatibility and Profiles</name>
 
-<t anchor="_acecdc24-c3a7-4d7e-178d-5bbb78479f44">RPP extensions MUST define unique names for all extension elements to prevent conflicts with other extensions and with core protocol elements. These names are used consistently in resource identifiers, data element identifiers, and URL path segments.</t>
+<t anchor="_2333c4d5-a43d-b1cc-f4ef-f45c5b48af32">Compatibility profiles can be defined to support subsets of RPP for specific use cases, such as EPP compatibility profiles that enable gradual migration or interoperability scenarios. Service discovery endpoints and content negotiation mechanisms allow clients and servers to dynamically discover and utilise new capabilities, resource types, and representations as they are introduced.</t>
+</section>
 
-<t anchor="_4d667800-d34a-ec5d-b7c3-8ce11d50e54e">Standardised RPP extensions MUST register their names in a dedicated IANA registry for RPP extensions to ensure global uniqueness and avoid collisions. Private (non-standardised) extensions are also required to use unique names, but are not required to register with IANA. This allows private extensions to be developed and used within specific implementations or organisations without impacting the global RPP ecosystem. Private extensions should use names that are unlikely to conflict with other extensions or with RPP core elements, for example by using reverse domain notation as a prefix (e.g., <tt>org.example.rpp</tt>).</t>
+<section anchor="_3dc1b7c2-887b-238b-971f-b383151f4722"><name>Name Management and Collision Avoidance</name>
 
-<t anchor="_64315132-8cb7-107d-e6d0-ad55dd956428">This naming mechanism ensures that new resource types, data elements, and operations can be introduced independently and safely, supporting the extensibility goals of the RPP architecture while maintaining interoperability and clarity across implementations.</t>
+<t anchor="_9fcb31e0-a010-ad2e-fb71-30fd046b2362">RPP extensions MUST define unique names for all extension elements to prevent conflicts with other extensions and with core protocol elements. These names are used consistently in resource identifiers, data element identifiers, and URL path segments.</t>
+
+<t anchor="_f822d6f1-631b-2eb7-9baa-0cf036702478">Standardised RPP extensions MUST register their names in a dedicated IANA registry for RPP extensions to ensure global uniqueness and avoid collisions. Private (non-standardised) extensions are also required to use unique names, but are not required to register with IANA. This allows private extensions to be developed and used within specific implementations or organisations without impacting the global RPP ecosystem. Private extensions should use names that are unlikely to conflict with other extensions or with RPP core elements, for example by using reverse domain notation as a prefix (e.g., <tt>org.example.rpp</tt>).</t>
+
+<t anchor="_462e66ba-b6bf-0113-5df6-93cf491fe4fc">This naming mechanism ensures that new resource types, data elements, and operations can be introduced independently and safely, supporting the extensibility goals of the RPP architecture while maintaining interoperability and clarity across implementations.</t>
 </section>
 
 <section anchor="extension-security"><name>Extension Security</name>
 
-<t anchor="_a3a0ec7f-cf31-385d-31fb-d2e5353b856c">Extensions operate within the same security architecture as the core protocol. Security, authentication, and authorisation mechanisms defined at the HTTP Transport Layer (see <xref target="authentication-authorization"></xref>) apply uniformly to both core protocol operations and all extensions. This "security by design" approach is aimed to ensure that extensions cannot bypass or weaken the security posture established by the core protocol. Extensions must not introduce new authentication or authorisation mechanisms that circumvent or conflict with those defined by the core specifications.</t>
+<t anchor="_291055ed-0b88-a474-f14a-e8a44cdaa767">Extensions operate within the same security architecture as the core protocol. Security, authentication, and authorisation mechanisms defined at the HTTP Transport Layer (see <xref target="authentication-authorization"></xref>) apply uniformly to both core protocol operations and all extensions. This "security by design" approach is aimed to ensure that extensions cannot bypass or weaken the security posture established by the core protocol. Extensions must not introduce new authentication or authorisation mechanisms that circumvent or conflict with those defined by the core specifications.</t>
 </section>
 
 <section anchor="extension-review"><name>Extension Review</name>
 
-<t anchor="_ac60170d-9674-53ee-a195-5e4eed8b2aeb">Before any extension is accepted by IANA, a review by an RPP expert must be performed. This review includes verification that the extension does not violate any of the RPP security considerations and that it correctly integrates with the protocol's security framework. The complete review criteria will be included in the "IANA Considerations" section of any document describing RPP extension mechanisms, according to the BCP described in <xref target="RFC8126" section="" relative=""></xref>.</t>
+<t anchor="_348675a4-c208-c407-daea-71f832068d02">Before any extension is accepted by IANA, a review by an RPP expert must be performed. This review includes verification that the extension does not violate any of the RPP security considerations and that it correctly integrates with the protocol's security framework. The complete review criteria will be included in the "IANA Considerations" section of any document describing RPP extension mechanisms, according to the BCP described in <xref target="RFC8126" section="" relative=""></xref>.</t>
 </section>
 </section>
 </section>
-    <section anchor="_8bf374df-f0c1-8387-e030-b94b9e672159"><name>Change History</name>
+    <section anchor="_0f46c683-d976-7fd6-7d5f-e0e7c2141a68"><name>Change History</name>
 
-<section anchor="_b44a48d5-81fe-f2ad-801b-76b0e7cdf500"><name>-00 to -01</name>
+<section anchor="_fa937cbe-ebca-bd89-2890-5883bb9d1d72"><name>-00 to -01</name>
 
-<ul anchor="_c27d3cb4-ce4e-4a71-8e93-8fff05835223"><li>Added text about compatibility profiles to "Profiles" section. (Issue #29)</li>
+<ul anchor="_52f8c6e6-7f2f-fb42-b05d-b95f4317355c"><li>Refactoring of <xref target="extension-mechanisms" format="title"></xref> Section and addition of extensibility with transient request parameters and responses (Issus #94 and #95)</li>
+<li>Added text about compatibility profiles to "Profiles" section. (Issue #29)</li>
 <li>Added a "Relationships" section to describe resource type relationships. (Issue #83)</li>
 <li>Added Section <xref target="required-optional-data-elements" format="title"></xref> to <xref target="data-elements" format="title"></xref> to explicitly address protocol-level vs. server-policy-level data element requirements (Requirement R4.3).</li>
 <li>Added text about signing messages in the "Message verification" section. (Issue #33)</li>
