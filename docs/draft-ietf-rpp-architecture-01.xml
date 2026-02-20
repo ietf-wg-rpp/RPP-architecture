@@ -214,7 +214,7 @@
 </section>
 </section>
 </section>
-    <section anchor="_91295089-42fd-726f-d830-c5848275620d"><name>Protocol Details</name>
+    <section anchor="_2dceb8f4-20d7-922d-6537-56e22cfc4324"><name>Protocol Details</name>
 
 <t anchor="_258b3fe6-6525-0317-3cb7-1b42072bd9cf">This section provides further details on each layer of the RPP architecture.</t>
 
@@ -303,7 +303,9 @@
 
 <section anchor="collection-representation"><name>Collection Representation</name>
 
-<t anchor="_8036014a-efe0-bd5f-8fed-9bd7b5523695">RPP supports retrieval of collections of resources via dedicated collection endpoints (e.g., <tt>/domains/</tt> for listing domains). For collections that may contain large numbers of resources, RPP supports pagination using established mechanisms such as HTTP Link headers as defined in <xref target="RFC8288" section="" relative=""></xref>. Items within a collection may be returned as partial representations rather than full resource details, reducing payload size. Clients can retrieve full details by following links to individual resources. RPP may also support query parameters for filtering and sorting collection results.</t>
+<t anchor="_10b2ba1f-ac9c-0bd5-c1a2-3f5fd804d881">RPP supports retrieval of collections of resources via dedicated collection endpoints (e.g., <tt>/domains/</tt> for listing domains). For collections that may contain large numbers of resources, RPP supports pagination using established mechanisms such as HTTP Link headers as defined in <xref target="RFC8288" section="" relative=""></xref>. Items within a collection may be returned as partial representations rather than full resource details, reducing payload size. Clients can retrieve full details by following links to individual resources. RPP may also support query parameters for filtering and sorting collection results.</t>
+
+<t anchor="_bece8323-0031-83c3-821c-c103adbf9887">These capabilities are optional at the protocol level. RPP does not mandate bulk operations, resource listing, or filtering where such functionality may negatively impact server scalability or performance. Server operators may choose not to support these features, or may restrict their scope, based on their operational requirements. Supported capabilities are advertised through the service discovery mechanism (see <xref target="service-discovery"></xref>).</t>
 </section>
 
 <section anchor="_b3678762-9cd5-65be-842b-2a5a4fc46abe"><name>Internationalised Domain Names (IDN)</name>
@@ -736,11 +738,11 @@
 </section>
 </section>
 </section>
-    <section anchor="_0f46c683-d976-7fd6-7d5f-e0e7c2141a68"><name>Change History</name>
+    <section anchor="_cb5a9791-1944-54a7-6cbf-5bc79aa4b161"><name>Change History</name>
 
-<section anchor="_fa937cbe-ebca-bd89-2890-5883bb9d1d72"><name>-00 to -01</name>
+<section anchor="_7a89d300-496d-a3d7-ebd3-667fb7da10b7"><name>-00 to -01</name>
 
-<ul anchor="_52f8c6e6-7f2f-fb42-b05d-b95f4317355c"><li>Refactoring of <xref target="extension-mechanisms" format="title"></xref> Section and addition of extensibility with transient request parameters and responses (Issus #94 and #95)</li>
+<ul anchor="_db1c15eb-4ce0-dc3f-e399-d08e2b4be21c"><li>Refactoring of <xref target="extension-mechanisms" format="title"></xref> Section and addition of extensibility with transient request parameters and responses (Issus #94 and #95)</li>
 <li>Added text about compatibility profiles to "Profiles" section. (Issue #29)</li>
 <li>Added a "Relationships" section to describe resource type relationships. (Issue #83)</li>
 <li>Added Section <xref target="required-optional-data-elements" format="title"></xref> to <xref target="data-elements" format="title"></xref> to explicitly address protocol-level vs. server-policy-level data element requirements (Requirement R4.3).</li>
@@ -765,6 +767,7 @@
 <li>Added TLS mandatory to <xref target="transport-security"></xref> (Issue #78).</li>
 <li>Added Section <xref target="credential-lifecycle"></xref> for credential and token revocation/replacement mechanisms (Issue #79).</li>
 <li>Added Section <xref target="service-messages"></xref> to describe poll message equivalent (Issue #87).</li>
+<li>Extended <xref target="collection-representation" format="title"></xref> to clarify that bulk operations, listing, and filtering are optional and must not be mandated where they negatively impact scalability or performance (Issue #41).</li>
 </ul>
 </section>
 

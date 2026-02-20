@@ -635,6 +635,14 @@ Table of Contents
    to individual resources.  RPP may also support query parameters for
    filtering and sorting collection results.
 
+   These capabilities are optional at the protocol level.  RPP does not
+   mandate bulk operations, resource listing, or filtering where such
+   functionality may negatively impact server scalability or
+   performance.  Server operators may choose not to support these
+   features, or may restrict their scope, based on their operational
+   requirements.  Supported capabilities are advertised through the
+   service discovery mechanism (see Section 5.1.22).
+
 5.1.4.2.  Internationalised Domain Names (IDN)
 
    RPP will address the handling of IDNs in resource addressing.
@@ -1640,6 +1648,11 @@ Table of Contents
 
    *  Added Section Section 5.1.15 to describe poll message equivalent
       (Issue #87).
+
+   *  Extended Collection Representation to clarify that bulk
+      operations, listing, and filtering are optional and must not be
+      mandated where they negatively impact scalability or performance
+      (Issue #41).
 
 6.2.  -03 to draft-ietf-rpp-architecture-00
 
