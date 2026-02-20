@@ -1858,7 +1858,7 @@ li > p:last-of-type:only-child {
 </div>
 </section>
 </div>
-<div id="_c4d153b3-1df6-abe4-6909-4955106da8cf">
+<div id="_b074ff42-4fac-b47d-3af9-6db5b5538ba1">
 <section id="section-5">
       <h2 id="name-protocol-details">
 <a href="#section-5" class="section-number selfRef">5. </a><a href="#name-protocol-details" class="section-name selfRef">Protocol Details</a>
@@ -2022,8 +2022,11 @@ li > p:last-of-type:only-child {
             <h5 id="name-collection-representation">
 <a href="#section-5.1.4.1" class="section-number selfRef">5.1.4.1. </a><a href="#name-collection-representation" class="section-name selfRef">Collection Representation</a>
             </h5>
-<div id="_8036014a-efe0-bd5f-8fed-9bd7b5523695">
+<div id="_10b2ba1f-ac9c-0bd5-c1a2-3f5fd804d881">
 <p id="section-5.1.4.1-1">RPP supports retrieval of collections of resources via dedicated collection endpoints (e.g., <code>/domains/</code> for listing domains). For collections that may contain large numbers of resources, RPP supports pagination using established mechanisms such as HTTP Link headers as defined in <span>[<a href="#RFC8288" class="cite xref">RFC8288</a>]</span>. Items within a collection may be returned as partial representations rather than full resource details, reducing payload size. Clients can retrieve full details by following links to individual resources. RPP may also support query parameters for filtering and sorting collection results.<a href="#section-5.1.4.1-1" class="pilcrow">¶</a></p>
+</div>
+<div id="_bece8323-0031-83c3-821c-c103adbf9887">
+<p id="section-5.1.4.1-2">These capabilities are optional at the protocol level. RPP does not mandate bulk operations, resource listing, or filtering where such functionality may negatively impact server scalability or performance. Server operators may choose not to support these features, or may restrict their scope, based on their operational requirements. Supported capabilities are advertised through the service discovery mechanism (see <a href="#service-discovery" class="auto internal xref">Section 5.1.22</a>).<a href="#section-5.1.4.1-2" class="pilcrow">¶</a></p>
 </div>
 </section>
 </div>
@@ -2847,12 +2850,12 @@ li > p:last-of-type:only-child {
 </div>
 </section>
 </div>
-<div id="_0f46c683-d976-7fd6-7d5f-e0e7c2141a68">
+<div id="_cb5a9791-1944-54a7-6cbf-5bc79aa4b161">
 <section id="section-6">
       <h2 id="name-change-history">
 <a href="#section-6" class="section-number selfRef">6. </a><a href="#name-change-history" class="section-name selfRef">Change History</a>
       </h2>
-<div id="_fa937cbe-ebca-bd89-2890-5883bb9d1d72">
+<div id="_7a89d300-496d-a3d7-ebd3-667fb7da10b7">
 <section id="section-6.1">
         <h3 id="name-00-to-01">
 <a href="#section-6.1" class="section-number selfRef">6.1. </a><a href="#name-00-to-01" class="section-name selfRef">-00 to -01</a>
@@ -2907,6 +2910,8 @@ li > p:last-of-type:only-child {
           <li class="normal" id="section-6.1-1.24">Added Section <a href="#credential-lifecycle" class="auto internal xref">Section 5.1.3.5</a> for credential and token revocation/replacement mechanisms (Issue #79).<a href="#section-6.1-1.24" class="pilcrow">¶</a>
 </li>
           <li class="normal" id="section-6.1-1.25">Added Section <a href="#service-messages" class="auto internal xref">Section 5.1.15</a> to describe poll message equivalent (Issue #87).<a href="#section-6.1-1.25" class="pilcrow">¶</a>
+</li>
+          <li class="normal" id="section-6.1-1.26">Extended <a href="#collection-representation" class="internal xref">Collection Representation</a> to clarify that bulk operations, listing, and filtering are optional and must not be mandated where they negatively impact scalability or performance (Issue #41).<a href="#section-6.1-1.26" class="pilcrow">¶</a>
 </li>
         </ul>
 </section>
