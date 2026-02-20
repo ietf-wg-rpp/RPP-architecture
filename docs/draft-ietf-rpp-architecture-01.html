@@ -1858,7 +1858,7 @@ li > p:last-of-type:only-child {
 </div>
 </section>
 </div>
-<div id="_2dceb8f4-20d7-922d-6537-56e22cfc4324">
+<div id="_1d3c054e-2430-02b6-2882-a3e7de7f7be9">
 <section id="section-5">
       <h2 id="name-protocol-details">
 <a href="#section-5" class="section-number selfRef">5. </a><a href="#name-protocol-details" class="section-name selfRef">Protocol Details</a>
@@ -2431,11 +2431,8 @@ li > p:last-of-type:only-child {
           <h4 id="name-service-discovery-mechanism">
 <a href="#section-5.1.22" class="section-number selfRef">5.1.22. </a><a href="#name-service-discovery-mechanism" class="section-name selfRef">Service discovery mechanisms</a>
           </h4>
-<div id="_90ce1ba2-f5f5-c43c-cce1-e967fd2bfcb6">
-<p id="section-5.1.22-1">RPP defines mechanisms for service discovery, allowing clients to dynamically discover RPP service endpoints, capabilities, and operational policies. This reduces coupling between clients and servers and enables clients to adapt to server configurations without hard-coded assumptions.<a href="#section-5.1.22-1" class="pilcrow">¶</a></p>
-</div>
-<div id="_a05ce3c7-9a0b-230b-7a81-9b6b59d0055c">
-<p id="section-5.1.22-2">As a matter of principle, service discovery is used to bootstrap the communication between client and server, its capabilities, and operational policies. The server configuration is considered static between reconfigurations and is not used for dynamic purposes such as load balancing, striking the right balance between discoverability and minimising round trips between clients and servers.<a href="#section-5.1.22-2" class="pilcrow">¶</a></p>
+<div id="_4d5f30c9-e5d5-c737-d9b6-f2f8bc52503d">
+<p id="section-5.1.22-1">RPP defines mechanisms for service discovery, allowing clients to dynamically discover RPP service endpoints, capabilities, and operational policies. This reduces coupling between clients and servers and enables clients to adapt to server configurations without hard-coded assumptions. Service discovery is used to bootstrap the communication between client and server, its capabilities, and operational policies.<a href="#section-5.1.22-1" class="pilcrow">¶</a></p>
 </div>
 <div id="_0d770261-0a6b-4260-a8c5-00786c2ddae0">
 <section id="section-5.1.22.1">
@@ -2447,7 +2444,7 @@ li > p:last-of-type:only-child {
 </div>
 </section>
 </div>
-<div id="_7a01d84a-7818-f944-de18-3e40d4da1448">
+<div id="_98ba9771-7415-7bbc-15df-3205c8770d4c">
 <section id="section-5.1.22.2">
             <h5 id="name-service-discovery-document">
 <a href="#section-5.1.22.2" class="section-number selfRef">5.1.22.2. </a><a href="#name-service-discovery-document" class="section-name selfRef">Service discovery document</a>
@@ -2470,9 +2467,21 @@ li > p:last-of-type:only-child {
 </li>
               <li class="normal" id="section-5.1.22.2-2.7">Cryptographic key(s) used by the server for signing responses, which clients may use as an additional check for verification of response authenticity.<a href="#section-5.1.22.2-2.7" class="pilcrow">¶</a>
 </li>
+              <li class="normal" id="section-5.1.22.2-2.8">Links to external resources related to the server or its operational context, such as release notes, change logs, or policy documents.<a href="#section-5.1.22.2-2.8" class="pilcrow">¶</a>
+</li>
             </ul>
 <div id="_01beb5b7-40f4-45e0-f53d-261d72d55467">
 <p id="section-5.1.22.2-3">By default the document will be published using well-known URIs <span>[<a href="#RFC8615" class="cite xref">RFC8615</a>]</span> (e.g., <code>/.well-known/rpp-capabilities</code>) for retrieving service discovery documents. In order to improve scalability it is worth considering to distribute discovery endpoints per resource type (e.g.,  <code>/domains/.well-known/rpp-capabilities</code>) instead of a single registry-wide endpoint.<a href="#section-5.1.22.2-3" class="pilcrow">¶</a></p>
+</div>
+</section>
+</div>
+<div id="_79513dbe-b78b-dbb6-9ac8-35d3c241dc12">
+<section id="section-5.1.22.3">
+            <h5 id="name-discovery-document-freshnes">
+<a href="#section-5.1.22.3" class="section-number selfRef">5.1.22.3. </a><a href="#name-discovery-document-freshnes" class="section-name selfRef">Discovery document freshness</a>
+            </h5>
+<div id="_3ed8c679-086b-0ecf-7d56-0a6ad7a140c9">
+<p id="section-5.1.22.3-1">The server configuration is considered static between its reconfigurations and is not used for dynamic purposes such as load balancing. RPP therefore defines a versioning mechanism for the service discovery document to allow clients to detect when the document has changed. To minimise unnecessary re-fetching, both parties signal the version they are operating with: the client indicates the version of the discovery document it currently holds, and the server signals the current version in its responses. This mutual version signalling allows the server to detect when a client is operating with a stale document and prompt it to retrieve an updated version. Where a new version introduces breaking changes or deprecates features, the server may additionally warn the client in advance before the change takes effect.<a href="#section-5.1.22.3-1" class="pilcrow">¶</a></p>
 </div>
 </section>
 </div>

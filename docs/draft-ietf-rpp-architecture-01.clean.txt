@@ -1152,14 +1152,9 @@ Table of Contents
    dynamically discover RPP service endpoints, capabilities, and
    operational policies.  This reduces coupling between clients and
    servers and enables clients to adapt to server configurations without
-   hard-coded assumptions.
-
-   As a matter of principle, service discovery is used to bootstrap the
+   hard-coded assumptions.  Service discovery is used to bootstrap the
    communication between client and server, its capabilities, and
-   operational policies.  The server configuration is considered static
-   between reconfigurations and is not used for dynamic purposes such as
-   load balancing, striking the right balance between discoverability
-   and minimising round trips between clients and servers.
+   operational policies.
 
 5.1.22.1.  Service location bootstrapping
 
@@ -1199,12 +1194,32 @@ Table of Contents
       which clients may use as an additional check for verification of
       response authenticity.
 
+   *  Links to external resources related to the server or its
+      operational context, such as release notes, change logs, or policy
+      documents.
+
    By default the document will be published using well-known URIs
    [RFC8615] (e.g., /.well-known/rpp-capabilities) for retrieving
    service discovery documents.  In order to improve scalability it is
    worth considering to distribute discovery endpoints per resource type
    (e.g., /domains/.well-known/rpp-capabilities) instead of a single
    registry-wide endpoint.
+
+5.1.22.3.  Discovery document freshness
+
+   The server configuration is considered static between its
+   reconfigurations and is not used for dynamic purposes such as load
+   balancing.  RPP therefore defines a versioning mechanism for the
+   service discovery document to allow clients to detect when the
+   document has changed.  To minimise unnecessary re-fetching, both
+   parties signal the version they are operating with: the client
+   indicates the version of the discovery document it currently holds,
+   and the server signals the current version in its responses.  This
+   mutual version signalling allows the server to detect when a client
+   is operating with a stale document and prompt it to retrieve an
+   updated version.  Where a new version introduces breaking changes or
+   deprecates features, the server may additionally warn the client in
+   advance before the change takes effect.
 
 5.1.23.  Scalability
 

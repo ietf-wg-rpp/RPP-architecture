@@ -118,18 +118,18 @@ Internet-Draft            ietf-rpp-architecture            November 2025
        5.1.20. Profiles  . . . . . . . . . . . . . . . . . . . . . .  24
        5.1.21. Definition of special resources . . . . . . . . . . .  25
        5.1.22. Service discovery mechanisms  . . . . . . . . . . . .  25
-       5.1.23. Scalability . . . . . . . . . . . . . . . . . . . . .  26
+       5.1.23. Scalability . . . . . . . . . . . . . . . . . . . . .  27
      5.2.  Data Representation Layer . . . . . . . . . . . . . . . .  27
        5.2.1.  Data structure  . . . . . . . . . . . . . . . . . . .  27
        5.2.2.  Data format . . . . . . . . . . . . . . . . . . . . .  27
        5.2.3.  Data Validation . . . . . . . . . . . . . . . . . . .  28
        5.2.4.  Media Type definition . . . . . . . . . . . . . . . .  28
-       5.2.5.  Optionality . . . . . . . . . . . . . . . . . . . . .  28
+       5.2.5.  Optionality . . . . . . . . . . . . . . . . . . . . .  29
      5.3.  Resource Definition Layer . . . . . . . . . . . . . . . .  29
        5.3.1.  Data Elements . . . . . . . . . . . . . . . . . . . .  29
        5.3.2.  Relationships . . . . . . . . . . . . . . . . . . . .  30
        5.3.3.  Mapping . . . . . . . . . . . . . . . . . . . . . . .  30
-       5.3.4.  Operations  . . . . . . . . . . . . . . . . . . . . .  30
+       5.3.4.  Operations  . . . . . . . . . . . . . . . . . . . . .  31
        5.3.5.  Server-Managed Resource Types . . . . . . . . . . . .  31
        5.3.6.  Data privacy  . . . . . . . . . . . . . . . . . . . .  31
      5.4.  Extension mechanisms  . . . . . . . . . . . . . . . . . .  32
@@ -1372,14 +1372,9 @@ Internet-Draft            ietf-rpp-architecture            November 2025
    dynamically discover RPP service endpoints, capabilities, and
    operational policies.  This reduces coupling between clients and
    servers and enables clients to adapt to server configurations without
-   hard-coded assumptions.
-
-   As a matter of principle, service discovery is used to bootstrap the
+   hard-coded assumptions.  Service discovery is used to bootstrap the
    communication between client and server, its capabilities, and
-   operational policies.  The server configuration is considered static
-   between reconfigurations and is not used for dynamic purposes such as
-   load balancing, striking the right balance between discoverability
-   and minimising round trips between clients and servers.
+   operational policies.
 
 5.1.22.1.  Service location bootstrapping
 
@@ -1387,20 +1382,6 @@ Internet-Draft            ietf-rpp-architecture            November 2025
    other kind of registry RPP may employ publishing bootstrapping
    information in IANA registry backed with an API (similar to RDAP
    bootstrapping as per [RFC9224] or special DNS TXT resource records.
-
-
-
-
-
-
-
-
-
-
-Kowalik & Wullink          Expires 10 May 2026                 [Page 25]
-
-Internet-Draft            ietf-rpp-architecture            November 2025
-
 
 5.1.22.2.  Service discovery document
 
@@ -1412,6 +1393,14 @@ Internet-Draft            ietf-rpp-architecture            November 2025
 
    *  Supported protocol versions, extensions, and available resource
       types.
+
+
+
+
+Kowalik & Wullink          Expires 10 May 2026                 [Page 25]
+
+Internet-Draft            ietf-rpp-architecture            November 2025
+
 
    *  Supported authentication methods and security requirements.
 
@@ -1433,12 +1422,41 @@ Internet-Draft            ietf-rpp-architecture            November 2025
       which clients may use as an additional check for verification of
       response authenticity.
 
+   *  Links to external resources related to the server or its
+      operational context, such as release notes, change logs, or policy
+      documents.
+
    By default the document will be published using well-known URIs
    [RFC8615] (e.g., /.well-known/rpp-capabilities) for retrieving
    service discovery documents.  In order to improve scalability it is
    worth considering to distribute discovery endpoints per resource type
    (e.g., /domains/.well-known/rpp-capabilities) instead of a single
    registry-wide endpoint.
+
+5.1.22.3.  Discovery document freshness
+
+   The server configuration is considered static between its
+   reconfigurations and is not used for dynamic purposes such as load
+   balancing.  RPP therefore defines a versioning mechanism for the
+   service discovery document to allow clients to detect when the
+   document has changed.  To minimise unnecessary re-fetching, both
+   parties signal the version they are operating with: the client
+   indicates the version of the discovery document it currently holds,
+   and the server signals the current version in its responses.  This
+   mutual version signalling allows the server to detect when a client
+   is operating with a stale document and prompt it to retrieve an
+   updated version.  Where a new version introduces breaking changes or
+   deprecates features, the server may additionally warn the client in
+   advance before the change takes effect.
+
+
+
+
+
+Kowalik & Wullink          Expires 10 May 2026                 [Page 26]
+
+Internet-Draft            ietf-rpp-architecture            November 2025
+
 
 5.1.23.  Scalability
 
@@ -1449,14 +1467,6 @@ Internet-Draft            ietf-rpp-architecture            November 2025
    servers and rapid scaling in response to demand.  RPP shall enable by
    design existing web security and mitigation mechanisms to defend
    against attacks such as Denial of Service (DoS).
-
-
-
-
-Kowalik & Wullink          Expires 10 May 2026                 [Page 26]
-
-Internet-Draft            ietf-rpp-architecture            November 2025
-
 
 5.2.  Data Representation Layer
 
@@ -1497,6 +1507,13 @@ Internet-Draft            ietf-rpp-architecture            November 2025
    however RPP should be able to be extended to support other formats
    like XML, JWT, JWT-SD or CBOR.
 
+
+
+Kowalik & Wullink          Expires 10 May 2026                 [Page 27]
+
+Internet-Draft            ietf-rpp-architecture            November 2025
+
+
    *  *JSON:* Standard JSON format [RFC8259].
 
    *  *XML:* eXtensible Markup Language [XML] (considered for potential
@@ -1505,14 +1522,6 @@ Internet-Draft            ietf-rpp-architecture            November 2025
    *  *JWT:* JSON data encapsulated within a JSON Web Token [RFC7519]
       for potential use-cases when verifiable data consistency is
       required
-
-
-
-
-Kowalik & Wullink          Expires 10 May 2026                 [Page 27]
-
-Internet-Draft            ietf-rpp-architecture            November 2025
-
 
    *  *JWT-SD:* JSON data with Selective Disclosure using JWTs [RFC9901]
       for minimisation of exposed data.
@@ -1549,15 +1558,6 @@ Internet-Draft            ietf-rpp-architecture            November 2025
    "rpp" payloads in plain json format. application/epp+xml would be epp
    payload as per [RFC5730].
 
-5.2.5.  Optionality
-
-   The result of a RPP operation may result in an empty HTTP message
-   body when mapped to a representation, for example a check for
-   existence is allowed return only HTTP and RPP headers to indicate the
-   result of the executed operation.
-
-
-
 
 
 
@@ -1569,6 +1569,13 @@ Kowalik & Wullink          Expires 10 May 2026                 [Page 28]
 
 Internet-Draft            ietf-rpp-architecture            November 2025
 
+
+5.2.5.  Optionality
+
+   The result of a RPP operation may result in an empty HTTP message
+   body when mapped to a representation, for example a check for
+   existence is allowed return only HTTP and RPP headers to indicate the
+   result of the executed operation.
 
 5.3.  Resource Definition Layer
 
@@ -1612,19 +1619,16 @@ Internet-Draft            ietf-rpp-architecture            November 2025
 
    *  Mechanisms for extensibility, if applicable
 
-   Data elements shall be defined in IANA registry in a way that allows
-   for automated processing of the data element definition, including
-   constraints and references to other data elements.
-
-
-
-
 
 
 Kowalik & Wullink          Expires 10 May 2026                 [Page 29]
 
 Internet-Draft            ietf-rpp-architecture            November 2025
 
+
+   Data elements shall be defined in IANA registry in a way that allows
+   for automated processing of the data element definition, including
+   constraints and references to other data elements.
 
 5.3.1.1.  Required and Optional Data Elements
 
@@ -1668,11 +1672,7 @@ Internet-Draft            ietf-rpp-architecture            November 2025
    JavaScript Object Notation (JSON) Patch [RFC6902], may be used to
    define the mapping.
 
-5.3.4.  Operations
 
-   Each resource type shall define operations possible on this resource
-   type.  This may encompass any of the mechanisms defined on the HTTP
-   transport layer.
 
 
 
@@ -1681,6 +1681,12 @@ Kowalik & Wullink          Expires 10 May 2026                 [Page 30]
 
 Internet-Draft            ietf-rpp-architecture            November 2025
 
+
+5.3.4.  Operations
+
+   Each resource type shall define operations possible on this resource
+   type.  This may encompass any of the mechanisms defined on the HTTP
+   transport layer.
 
    Operations shall be defined in IANA registry in a way that allows for
    automated processing of the operation definition, including
@@ -1722,12 +1728,6 @@ Internet-Draft            ietf-rpp-architecture            November 2025
    architecture incorporates mechanisms that enable implementations to
    adhere to data privacy principles such as data minimisation and
    purpose limitation.
-
-
-
-
-
-
 
 
 
