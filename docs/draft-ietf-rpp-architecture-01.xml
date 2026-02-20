@@ -214,7 +214,7 @@
 </section>
 </section>
 </section>
-    <section anchor="_c4d153b3-1df6-abe4-6909-4955106da8cf"><name>Protocol Details</name>
+    <section anchor="_91295089-42fd-726f-d830-c5848275620d"><name>Protocol Details</name>
 
 <t anchor="_258b3fe6-6525-0317-3cb7-1b42072bd9cf">This section provides further details on each layer of the RPP architecture.</t>
 
@@ -527,40 +527,29 @@
 
 <section anchor="service-discovery"><name>Service discovery mechanisms</name>
 
-<t anchor="_2d296530-b0a3-0bdc-a43b-45b0d4988927">RPP defines mechanisms for service discovery, allowing clients to dynamically discover RPP service endpoints, capabilities, and operational policies. This reduces coupling between clients and servers and enables clients to adapt to server configurations without hard-coded assumptions.</t>
+<t anchor="_90ce1ba2-f5f5-c43c-cce1-e967fd2bfcb6">RPP defines mechanisms for service discovery, allowing clients to dynamically discover RPP service endpoints, capabilities, and operational policies. This reduces coupling between clients and servers and enables clients to adapt to server configurations without hard-coded assumptions.</t>
+
+<t anchor="_a05ce3c7-9a0b-230b-7a81-9b6b59d0055c">As a matter of principle, service discovery is used to bootstrap the communication between client and server, its capabilities, and operational policies. The server configuration is considered static between reconfigurations and is not used for dynamic purposes such as load balancing, striking the right balance between discoverability and minimising round trips between clients and servers.</t>
 
 <section anchor="_0d770261-0a6b-4260-a8c5-00786c2ddae0"><name>Service location bootstrapping</name>
 
 <t anchor="_dda66e63-f021-4d57-36d5-9f593e0fe163">In order to discover the location of RPP services for a given TLD or other kind of registry RPP may employ publishing bootstrapping information in IANA registry backed with an API (similar to RDAP bootstrapping as per <xref target="RFC9224" section="" relative=""></xref> or special DNS TXT resource records.</t>
 </section>
 
-<section anchor="_88ff150b-f229-c572-fbf2-7b753c81bdae"><name>Service discovery document</name>
+<section anchor="_7a01d84a-7818-f944-de18-3e40d4da1448"><name>Service discovery document</name>
 
 <t anchor="_06702468-2ccb-3706-fe2b-6c5f4a2f1703">The service discovery document is a machine-readable resource that describes a server's capabilities, supported features, and operational policies. Clients retrieve this document to understand how to interact with the server and what behaviour to expect. The document includes:</t>
 
-<ul anchor="_086ff4d8-ff0e-5b8f-e881-9fb148abe90e"><li>Supported protocol versions, extensions, and available resource types.</li>
+<ul anchor="_af30a52f-00ee-ad33-bdc2-ed9be1404355"><li>Supported protocol versions, extensions, and available resource types.</li>
 <li>Supported authentication methods and security requirements.</li>
 <li>IDN policies and handling conventions.</li>
 <li>Maintenance notices, informing clients about scheduled service unavailability.</li>
 <li>Data privacy policies, including information about data collection (what personal or sensitive data is collected and for what purposes), data retention (how long data is stored), and privacy practices (how data is protected and with whom it may be shared).</li>
+<li>URI templates <xref target="RFC6570" section="" relative=""></xref> for advertised resource endpoints, allowing clients to navigate directly to known resources without additional server queries and without hard-coding URLs.</li>
+<li>Cryptographic key(s) used by the server for signing responses, which clients may use as an additional check for verification of response authenticity.</li>
 </ul>
 
 <t anchor="_01beb5b7-40f4-45e0-f53d-261d72d55467">By default the document will be published using well-known URIs <xref target="RFC8615" section="" relative=""></xref> (e.g., <tt>/.well-known/rpp-capabilities</tt>) for retrieving service discovery documents. In order to improve scalability it is worth considering to distribute discovery endpoints per resource type (e.g.,  <tt>/domains/.well-known/rpp-capabilities</tt>) instead of a single registry-wide endpoint.</t>
-</section>
-
-<section anchor="_f39114f9-9945-f350-bbec-c6754e05f158"><name>Discovery principles</name>
-
-<ul anchor="_07d6b150-4dc9-a538-8178-203f61c39745"><li>Potential discovery of RPP server location, like  IANA bootstrapping document or a special DNS TXT RR with location of RPP service for the tld.</li>
-<li>Potential use of well-known URIs (e.g., <tt>/.well-known/rpp-capabilities</tt>) for service discovery.</li>
-<li>Advertising supported protocol versions, extensions, available resource types, authentication methods, IDN policies and supported features.</li>
-<li>Advertising of maintenance notices, informing clients about future unavailability of the service due to scheduled maintenance.</li>
-<li>It may be considered for RPP to distribute service discovery for each resource type separately for better scalability and management. For example instead of having a single service discovery endpoint for the whole registry on <tt>/.well-known/rpp-capabilities</tt> there might be a separate discovery placed under <tt>/{resource-type}/.well-known/rpp-capabilities</tt> e.g. <tt>/domains/.well-known/rpp-capabilities</tt>.</li>
-<li>Service discovery shall utilise standardised methods, like URI templates <xref target="RFC6570" section="" relative=""></xref> to allow easy navigation of resources and avoid hard-coding of URLs, same time allowing clients to navigate directly to a known resource without additional server queries.</li>
-<li>As a matter of principle service discovery shall be used to bootstrap the communication between client and server, its capabilities and operational policies. The server configuration shall be considered static between reconfiguration of the server and not be used for any dynamic configuration, like load balancing etc. It would enable the right balance between discoverability and reduction of round trips between clients and servers.</li>
-<li>Advertising of the cryptograpic key(s) used by the server for signing responses, can be used by the clients as an additional check for verification of responses.</li>
-<li>Service discovery shall utilise standardised methods, like URI templates <xref target="RFC6570" section="" relative=""></xref>, to allow easy navigation of resources and avoid hard-coding of URLs, same time allowing clients to navigate directly to a known resource without additional server queries.</li>
-<li>As a matter of principle service discovery shall be used to bootstrap the communication between client and server, its capabilities and operational policies. The server configuration shall be considered static between reconfiguration of the server and not be used for any dynamic configuration, like load balancing etc. It would enable the right balance between discoverability and reduction of round trips between clients and servers.</li>
-</ul>
 </section>
 </section>
 
