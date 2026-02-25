@@ -40,7 +40,7 @@
     <workgroup>RPP (RESTful Provisioning Protocol) Working Group</workgroup>
     <abstract>
 
-<t anchor="_ac44b653-a95e-8347-ede7-a598155b4a5c">Advancements in development, integration, deployment environments and operational paradigms have led to a desire for an alternative for the Extensible Provisioning Protocol (EPP). This document defines the architecture for the RESTful Provisioning Protocol (RPP) an HTTP based provisioning protocol leveraging the REST architectural style and JSON data-interchange format, aiming to standardize a RESTful protocol for provisioning database objects. The architecture includes support for extensibility, allowing for multiple possible use cases. RPP is intended to co-exist with EPP, offering an alternative protocol including data model compatibility with EPP core objects and the benefits associated with the REST architectural style and widely adopted HTTP-based technologies.</t>
+<t anchor="_818497e6-6545-1914-97fd-e3f2e7848718">Advancements in development, integration, deployment environments and operational paradigms have led to a desire for an alternative for the Extensible Provisioning Protocol (EPP). This document defines the architecture for the RESTful Provisioning Protocol (RPP) -  an HTTP based provisioning protocol leveraging the REST architectural style and JSON data-interchange format, aiming to standardize a RESTful protocol for provisioning database objects. The architecture includes support for extensibility, allowing for multiple possible use cases. RPP is intended to co-exist with EPP, offering an alternative protocol including data model compatibility with EPP core objects and the benefits associated with the REST architectural style and widely adopted HTTP-based technologies.</t>
 
 
 </abstract>
@@ -75,15 +75,13 @@
 <li><strong>IDN:</strong> Internationalised Domain Names as defined in <xref target="RFC5890" section="" relative=""></xref></li>
 </ul>
 </section>
-    <section anchor="_d053034f-32f8-cf4f-5258-3d7027f600f6"><name>Requirements</name>
+    <section anchor="_5c02969b-1036-1f16-3ac5-3f551b018481"><name>Requirements</name>
 
-<t anchor="_fb48cbe0-c2a3-5138-0c5e-b7198b46e882">This document is based on the requirements defined by RPP WG in state from 7.3.2025 <xref target="RPPReq" section="" relative=""></xref>.</t>
-
-<t anchor="_74299032-a584-c733-e308-f6a11281327a">The actual state of the requirements is present on WG Wiki <eref target="https://wiki.ietf.org/en/group/rpp/requirements"></eref>.</t>
+<t anchor="_68745104-7487-49dd-5da2-c06be2eb6b22">This document is based on the requirements defined by RPP WG in state from 5 December 2025 <xref target="RPPReq" section="" relative=""></xref>.</t>
 </section>
-    <section anchor="_73ddfaa7-1951-0d50-ea53-1b351e0693f7"><name>Architectural Overview</name>
+    <section anchor="_afc99417-97e7-ef2a-9e78-a9d08d494709"><name>Architectural Overview</name>
 
-<t anchor="_f1458ee3-32f1-eb6a-34f5-135b0718420f">This chapter provides an overview of the RESTful Provisioning Protocol (RPP) architecture. A key design principle is to leverage existing web standards and principles, particularly HTTP and REST principles. This allows RPP to delegate functionality and features to the well-established infrastructure and semantics of the web, focusing its own definitions on the specific domain of object provisioning. Therefore, we assume:</t>
+<t anchor="_9026ba3b-38c7-c376-4a80-1f542752182d">This chapter provides an overview of the RESTful Provisioning Protocol (RPP) architecture. A key design principle is to leverage existing web standards, particularly HTTP and REST. This allows RPP to delegate functionality and features to the well-established infrastructure and semantics of the web, focusing its own definitions on the specific domain of object provisioning. Therefore, we assume:</t>
 
 <ul anchor="_87572271-48fc-0296-0473-0a5a2650a2fa"><li><strong>HTTP and RESTful principles are foundational:</strong> RPP leverages HTTP for transport and adheres to RESTful principles for resource management.</li>
 <li><strong>Domain-specific logic resides in data representations:</strong> The specifics of resource provisioning are encoded within the data structures and semantics of the RPP message bodies.</li>
@@ -143,7 +141,7 @@
 </ul>
 </section>
 
-<section anchor="_a1eb2e53-c497-5259-9670-8aff8ebd3b37"><name>Architecture Layers</name>
+<section anchor="_cf1e0ec7-1848-ed26-2ba6-fa21ebd17c8a"><name>Architecture Layers</name>
 
 <section anchor="http-transport-layer-overview"><name>HTTP Transport Layer</name>
 
@@ -151,13 +149,13 @@
 
 <t anchor="_848fb936-c4aa-0b45-d998-a38c165070bb">The HTTP Transport Layer consists of two sub-layers:</t>
 
-<section anchor="_0b9584ef-39ef-2c87-1da5-7ec6febe415a"><name>Built-in HTTP Features</name>
+<section anchor="_0a7cc2f5-e82e-ca62-83dd-ee23212729a9"><name>Built-in HTTP Features</name>
 
-<t anchor="_e30d14d8-03b1-6c15-41a0-5bfdfa3fd755">These are features that are fully specified by the HTTP standard itself. RPP leverages these features directly, specifying their use within the protocol without redefining their behaviour.</t>
+<t anchor="_9299fddb-5fd4-11b8-4975-e7755c083334">These are features that are fully specified by the HTTP standard itself. RPP leverages these features directly, specifying their use within the protocol without a need to define their behaviour.</t>
 
 <t anchor="_ccdf8507-a0dd-793e-b450-cd299578d60f">It encompasses aspects such as:</t>
 
-<ul anchor="_47bf6f1c-0109-12de-2ddc-c9f29e1d022f"><li><strong>Transport security:</strong> Mechanisms to secure message transmission</li>
+<ul anchor="_791dc719-b503-958e-8b01-e0281eaaf50d"><li><strong>Transport security:</strong> Mechanisms to secure message transmission</li>
 <li><strong>Authentication and Authorisation:</strong> Mechanisms for verifying the identity of clients and controlling access to resources.</li>
 <li><strong>Resource Addressing using URLs:</strong> Consistent and meaningful URL structures for identifying, accessing resources and enabling request routing.</li>
 <li><strong>Mapping of basic operations to HTTP uniform interface (verbs):</strong> Mapping CRUD (Create, Read, Update, Delete) operations to POST, HEAD/GET, PUT/PATCH, and DELETE respectively.</li>
@@ -166,7 +164,7 @@
 <li><strong>Content negotiation for media types:</strong> Supporting multiple data representation formats and using content negotiation to select the appropriate format.</li>
 <li><strong>Caching:</strong> Leveraging HTTP caching mechanisms to improve performance.</li>
 <li><strong>Language negotiation for textual content:</strong> Supporting multiple languages for textual content and using language negotiation to select the appropriate language.</li>
-<li><strong>Representation preferences:</strong> The client may define whether a full representation of an object or only a limited representations is preferred as a response</li>
+<li><strong>Representation preferences:</strong> Possibility to a client to indicate whether a full representation of an object or only a limited representations is preferred as a response</li>
 <li><strong>Validation preferences:</strong> Defining the approach to the input data validation that shall be applied by the server. The server may apply lenient validation where the server makes best effort to process the understood part of the request as opposed to strict processing where the server would reject a request where part of the data is not understood</li>
 </ul>
 </section>
@@ -214,7 +212,7 @@
 </section>
 </section>
 </section>
-    <section anchor="_1d3c054e-2430-02b6-2882-a3e7de7f7be9"><name>Protocol Details</name>
+    <section anchor="_9077e5a2-9474-2c64-93b2-fb2ba9ff3b20"><name>Protocol Details</name>
 
 <t anchor="_258b3fe6-6525-0317-3cb7-1b42072bd9cf">This section provides further details on each layer of the RPP architecture.</t>
 
@@ -224,9 +222,7 @@
 
 <section anchor="transport-security"><name>Transport Security</name>
 
-<t anchor="_b0b7f9e0-265f-ff18-1b5a-3e4e3092ea3a">RPP communication relies on HTTPS with TLS to provide protection for data in transit. This addresses threats including eavesdropping, tampering, and man-in-the-middle attacks on provisioning operations, authentication credentials, and sensitive registry data exchanged between clients and servers.</t>
-
-<t anchor="_3f7f797c-7786-0500-edac-b16ebc3ad15d">The architecture leverages HTTP's built-in transport security mechanisms and delegates specific security policy details to TLS standards and best practices. This approach allows implementations to adapt to evolving security requirements without requiring changes to the protocol specifications.</t>
+<t anchor="_3d9a1261-7737-5ea9-6790-3eecf4affb51">RPP communication relies on HTTPS with TLS to provide protection for data in transit, addressing threats such as eavesdropping, tampering, and man-in-the-middle attacks. Specific security policy details are delegated to TLS standards and best practices, allowing implementations to adapt to evolving security requirements without changes to the protocol specifications.</t>
 </section>
 
 <section anchor="authentication-authorization"><name>Authentication and Authorisation</name>
@@ -308,9 +304,9 @@
 <t anchor="_bece8323-0031-83c3-821c-c103adbf9887">These capabilities are optional at the protocol level. RPP does not mandate bulk operations, resource listing, or filtering where such functionality may negatively impact server scalability or performance. Server operators may choose not to support these features, or may restrict their scope, based on their operational requirements. Supported capabilities are advertised through the service discovery mechanism (see <xref target="service-discovery"></xref>).</t>
 </section>
 
-<section anchor="_b3678762-9cd5-65be-842b-2a5a4fc46abe"><name>Internationalised Domain Names (IDN)</name>
+<section anchor="_75a75e67-94fd-dec0-5cad-26e1004a5638"><name>Internationalised Domain Names (IDN)</name>
 
-<t anchor="_f8b5c0df-dca1-f305-eab0-4dab21a9de18">RPP will address the handling of IDNs in resource addressing. Specifications will define whether to use IDN or UTF-8 encoding directly in URLs and whether to employ redirects to canonical URLs or "see-also" linking for alternative representations. For example,  a "see-also" link could point from a UTF-8 encoded URL to an IDN URL and vice versa, allowing clients to use either URL. Another way would be to always redirect to the canonical URL, which would be the IDN URL.</t>
+<t anchor="_6a233ee9-f1bb-a276-f630-3dce5f3f0a85">RPP will address the handling of IDNs in resource addressing. Specifications will define whether to use IDN or UTF-8 encoding directly in URLs and whether to employ redirects to canonical URLs or "see-also" linking for alternative representations. For example, a "see-also" link could point from a UTF-8 encoded URL to an IDN URL and vice versa, allowing clients to use either URL. Another way would be to always redirect to the canonical URL, which would be the IDN URL.</t>
 </section>
 
 <section anchor="_287863f4-c4b9-056e-2847-3961e174f033"><name>Canonical Addressing</name>
@@ -399,11 +395,11 @@
 <t anchor="_e2c60266-ccb6-71bb-e895-e48557990fe5">More specific RPP codes are elaborated in <xref target="http-layer-detail-rpp-status-codes"></xref>.</t>
 </section>
 
-<section anchor="_b7f756e5-8e16-4952-63b8-c72f57b1a639"><name>Content negotiation for media types</name>
+<section anchor="_70a7eea9-9433-84fa-7fd1-76232e0f996b"><name>Content negotiation for media types</name>
 
 <t anchor="_b3f72149-0344-a2c5-0b68-3ba1ee9e61f3">RPP supports content negotiation to allow clients to specify preferred media types for request and response payloads using the HTTP 'Accept' and 'Content-Type' headers <xref target="RFC7231" section="" relative=""></xref>.</t>
 
-<ul anchor="_9f119807-27bd-d27a-0797-cbf82452aae4"><li>'application/rpp+json' as the primary media type.</li>
+<ul anchor="_393babc6-97a2-f1d0-95ed-4953bd6fb102"><li><tt>"application/rpp+json"</tt> as the primary media type.</li>
 <li>potential media type parameters for versioning, profiles, and other protocol elements.</li>
 <li>Potential support for other media types defined in the <xref target="data-representation-layer"></xref></li>
 </ul>
@@ -414,13 +410,13 @@
 <t anchor="_dab0af33-62cc-1497-ae29-ede43e698ae0">RPP shall benefit from HTTP standard caching mechanisms to enable standard components like proxies and caches to improve performance and reduce load on servers. RPP shall define caching policies for different resources and operations, including cache-control headers and ETag support.</t>
 </section>
 
-<section anchor="_bf1e29c4-5c2a-1956-eaba-62cd1d80ea14"><name>Language negotiation for textual content</name>
+<section anchor="_1e27b996-137c-f7e0-5a36-0e6042b0867d"><name>Language negotiation for textual content</name>
 
 <t anchor="_629ac8ad-1b10-b028-de57-2e2dead778ea">RPP shall support language negotiation to enable clients to request responses in a preferred language using the HTTP 'Accept-Language' header  <xref target="RFC7231" section="" relative=""></xref>.</t>
 
-<ul anchor="_30a9ad9c-ee21-3139-a207-ad5c556aaf5d"><li>Server implementations MAY support multiple languages for textual content in responses to provide human-readable localised responses.</li>
+<ul anchor="_03d8663b-b822-6228-c650-809a016cc623"><li>Server implementations MAY support multiple languages for textual content in responses to provide human-readable localised responses.</li>
 <li>The default language and mechanisms for indicating supported languages will be defined, preferably using HTTP methods, like OPTIONS or HEAD requests.</li>
-<li>application/rpp+json media type may support multi-language representations, especially for writing operations involving user provided content. Other media types may have different mechanisms for language representation.</li>
+<li><tt>"application/rpp+json"</tt> media type may support multi-language representations, especially for writing operations involving user provided content. Other media types may have different mechanisms for language representation.</li>
 </ul>
 </section>
 
@@ -522,7 +518,7 @@
 
 <t anchor="_5e9f2f59-ff54-2506-470e-329fd02ffa54">RPP may define special resources for specific purposes:</t>
 
-<ul anchor="_c5dfb876-81c1-fd0d-254e-3233010ad02b"><li>Service Discovery endpoints to advertise protocol capabilities and supported features (see  <xref target="service-discovery"></xref>).</li>
+<ul anchor="_f6ea7903-6faa-539e-1481-33b5317dd873"><li>Service Discovery endpoints to advertise protocol capabilities and supported features (see <xref target="service-discovery"></xref>).</li>
 <li>Metadata endpoints to provide schema information or other protocol-level metadata, potentially including OpenAPI definitions for documentation and code generation.</li>
 </ul>
 </section>
@@ -603,9 +599,9 @@
 <t anchor="_08aec8e6-9d6e-76bd-705f-dfa24c83710e">Data structures and formats will be described using a schema language, such as JSON Schema, OpenAPI, CDDL or other appropriate stable and open standard for JSON data structures. It will enable data validation to be performed by both client and servers on received requests and responses. For example, JSON Schema can define the expected structure of a domain object, including required fields and data types, allowing clients to validate their requests before sending them and servers to ensure incoming data conforms to the expected format. The schemas must support both strict and lenient processing of requests and responses and support protocol extensibility.</t>
 </section>
 
-<section anchor="_d48c0adf-2bd6-e4b4-9d28-daa589168930"><name>Media Type definition</name>
+<section anchor="_5f75db09-d66c-19cb-02c8-7481d71cf220"><name>Media Type definition</name>
 
-<t anchor="_1061c333-c4ee-6fdf-b05e-dd51942ed3c9">Together data structure and data format would define the whole media type. So application/rpp+json would be the primary media type with "rpp" payloads in plain json format. application/epp+xml would be epp payload as per <xref target="RFC5730" section="" relative=""></xref>.</t>
+<t anchor="_12eaa9bd-3f93-d2c3-c3e2-6cb3f9f3f749">Together data structure and data format would define the whole media type. So <tt>"application/rpp+json"</tt> would be the primary media type with "rpp" payloads in plain json format. <tt>"application/epp+xml"</tt> would be epp payload as per <xref target="RFC5730" section="" relative=""></xref>.</t>
 </section>
 
 <section anchor="_af0a83a6-0813-eb89-69d6-f31ef20b4e5a"><name>Optionality</name>
@@ -614,7 +610,7 @@
 </section>
 </section>
 
-<section anchor="_977a00df-8970-91c8-331a-fb9b2c094ac0"><name>Resource Definition Layer</name>
+<section anchor="_61704434-11f3-7f80-250e-f013f54fd595"><name>Resource Definition Layer</name>
 
 <t anchor="_9d096003-6f94-6333-5c40-4167a231cb9b">Each resource type, no matter if on a top level, being an independent provisioning object, or a subresource, being a part of another resource, shall be well defined including data elements and possible operations. A resource definition shall on the first level of abstraction be composable out of data elements, without any reference to the media type or representation. This will allow for easy extensibility and compatibility with different media types.</t>
 
@@ -647,9 +643,9 @@
 <t anchor="_3ec4cf69-b17b-c0ab-04ab-9c6c868b7523">Resource types can define explicit relationships (links) to other resource types, supporting flexible cardinality-including one-to-one, one-to-many, and many-to-many associations. This enables robust modeling, navigation, and management of complex, interconnected resources within RPP. A relationship must also be able to define its own properties or attributes, such as type of relationship or other kind of metadata assigned to the relation link itself rather than an object on any side of relation.</t>
 </section>
 
-<section anchor="_47ea526d-8793-0af2-1201-f8e81f673712"><name>Mapping</name>
+<section anchor="_b38ee1e0-fde7-2cce-a394-fb10dfc176ae"><name>Mapping</name>
 
-<t anchor="_1203c784-3f7d-9487-8c2b-c336a24ec2f8">This layer defines the mapping of Data Elements onto the Data Representation Layer. For example in case of application/rpp+json media type, the mapping layer would define how the logical data units are represented in JSON format.</t>
+<t anchor="_01772457-2db7-bb08-0c35-0e1b6cb867e7">This layer defines the mapping of Data Elements onto the Data Representation Layer. For example in case of <tt>"application/rpp+json"</tt> media type, the mapping layer would define how the logical data units are represented in JSON format.</t>
 
 <t anchor="_ef5cc75c-f98c-0e43-5c96-dd05d11b01e5">This additional level of indirection would allow usage of data formats defined outside of rpp specifications - for example usage of Verifiable Credentials or Verifiable Presentations as first class resource types for contacts in RPP, and mapping appropriate data elements.</t>
 
@@ -679,11 +675,11 @@
 <t anchor="_a03fa6e0-d5ed-106b-4c14-be0daaa3647d">A special class of server managed resources would represent provisioning objects, which cannot be modified by any external client, but rather are managed by server operator. From the external client view those resources would be read-only, however the server might actually implement modifying operations to those objects available only to internal clients and tools, controlled by authorisation mechanisms.</t>
 </section>
 
-<section anchor="_a47b8ec2-f223-a3df-3e3f-824ba0db1fa5"><name>Data privacy</name>
+<section anchor="_ea12c8c2-f5c9-7300-6384-44b5e680fcd1"><name>Data privacy</name>
 
 <t anchor="_64aa0bab-3975-9c44-3833-c6ecf3964cc5">RPP request and response representations may contain personal data or other sensitive information subject to privacy regulations. The architecture incorporates mechanisms that enable implementations to adhere to data privacy principles such as data minimisation and purpose limitation.</t>
 
-<t anchor="_bcbe7a59-3eca-a438-30c2-90f5612b5b97">Data minimisation is supported through the protocol's design principle that only strictly necessary data elements are required at the protocol level (see <xref target="data-elements"></xref>). Servers may further constrain which elements are required through profile definitions. The <tt>Prefer</tt> header mechanism (see <xref target="prefer-header"></xref>) allows clients to request minimal representations, and <xref target="fine-grained-authorisation" format="title"></xref> (see <xref target="fine-grained-authorisation"></xref>) and <xref target="object-level-authorisation" format="title"></xref> (see <xref target="object-level-authorisation"></xref>)enable servers to return only the data a client is authorised to access.</t>
+<t anchor="_049e044d-578d-e4ba-5479-9a9687f6bff3">Data minimisation is supported through the protocol's design principle that only strictly necessary data elements are required at the protocol level (see <xref target="data-elements"></xref>). Servers may further constrain which elements are required through profile definitions. The <tt>Prefer</tt> header mechanism (see <xref target="prefer-header"></xref>) allows clients to request minimal representations, and <xref target="fine-grained-authorisation" format="title"></xref> (see <xref target="fine-grained-authorisation"></xref>) and <xref target="object-level-authorisation" format="title"></xref> (see <xref target="object-level-authorisation"></xref>) enable servers to return only the data a client is authorised to access.</t>
 
 <t anchor="_8a28624a-d499-ec99-3311-154fa3a4b173">Purpose limitation is supported through multiple mechanisms. Data element definitions may include purpose attributes, indicating the specific processing purposes for which each element is intended. Authorisation scopes (see <xref target="authentication-authorization"></xref>) can be defined to restrict access to data elements based on their declared purpose, ensuring that clients only receive data relevant to their authorised use. The service discovery document (see <xref target="service-discovery"></xref>) advertises data collection purposes, allowing clients to understand how their data will be used and retained before submission.</t>
 </section>
