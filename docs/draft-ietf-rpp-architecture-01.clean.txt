@@ -1152,7 +1152,9 @@ Table of Contents
    dynamically discover RPP service endpoints, capabilities, and
    operational policies.  This reduces coupling between clients and
    servers and enables clients to adapt to server configurations without
-   hard-coded assumptions.
+   hard-coded assumptions.  Service discovery is used to bootstrap the
+   communication between client and server, its capabilities, and
+   operational policies.
 
 5.1.22.1.  Service location bootstrapping
 
@@ -1184,6 +1186,18 @@ Table of Contents
       purposes), data retention (how long data is stored), and privacy
       practices (how data is protected and with whom it may be shared).
 
+   *  URI templates [RFC6570] for advertised resource endpoints,
+      allowing clients to navigate directly to known resources without
+      additional server queries and without hard-coding URLs.
+
+   *  Cryptographic key(s) used by the server for signing responses,
+      which clients may use as an additional check for verification of
+      response authenticity.
+
+   *  Links to external resources related to the server or its
+      operational context, such as release notes, change logs, or policy
+      documents.
+
    By default the document will be published using well-known URIs
    [RFC8615] (e.g., /.well-known/rpp-capabilities) for retrieving
    service discovery documents.  In order to improve scalability it is
@@ -1191,59 +1205,21 @@ Table of Contents
    (e.g., /domains/.well-known/rpp-capabilities) instead of a single
    registry-wide endpoint.
 
-5.1.22.3.  Discovery principles
+5.1.22.3.  Discovery document freshness
 
-   *  Potential discovery of RPP server location, like IANA
-      bootstrapping document or a special DNS TXT RR with location of
-      RPP service for the tld.
-
-   *  Potential use of well-known URIs (e.g., /.well-known/rpp-
-      capabilities) for service discovery.
-
-   *  Advertising supported protocol versions, extensions, available
-      resource types, authentication methods, IDN policies and supported
-      features.
-
-   *  Advertising of maintenance notices, informing clients about future
-      unavailability of the service due to scheduled maintenance.
-
-   *  It may be considered for RPP to distribute service discovery for
-      each resource type separately for better scalability and
-      management.  For example instead of having a single service
-      discovery endpoint for the whole registry on /.well-known/rpp-
-      capabilities there might be a separate discovery placed under
-      /{resource-type}/.well-known/rpp-capabilities e.g. /domains/.well-
-      known/rpp-capabilities.
-
-   *  Service discovery shall utilise standardised methods, like URI
-      templates [RFC6570] to allow easy navigation of resources and
-      avoid hard-coding of URLs, same time allowing clients to navigate
-      directly to a known resource without additional server queries.
-
-   *  As a matter of principle service discovery shall be used to
-      bootstrap the communication between client and server, its
-      capabilities and operational policies.  The server configuration
-      shall be considered static between reconfiguration of the server
-      and not be used for any dynamic configuration, like load balancing
-      etc.  It would enable the right balance between discoverability
-      and reduction of round trips between clients and servers.
-
-   *  Advertising of the cryptograpic key(s) used by the server for
-      signing responses, can be used by the clients as an additional
-      check for verification of responses.
-
-   *  Service discovery shall utilise standardised methods, like URI
-      templates [RFC6570], to allow easy navigation of resources and
-      avoid hard-coding of URLs, same time allowing clients to navigate
-      directly to a known resource without additional server queries.
-
-   *  As a matter of principle service discovery shall be used to
-      bootstrap the communication between client and server, its
-      capabilities and operational policies.  The server configuration
-      shall be considered static between reconfiguration of the server
-      and not be used for any dynamic configuration, like load balancing
-      etc.  It would enable the right balance between discoverability
-      and reduction of round trips between clients and servers.
+   The server configuration is considered static between its
+   reconfigurations and is not used for dynamic purposes such as load
+   balancing.  RPP therefore defines a versioning mechanism for the
+   service discovery document to allow clients to detect when the
+   document has changed.  To minimise unnecessary re-fetching, both
+   parties signal the version they are operating with: the client
+   indicates the version of the discovery document it currently holds,
+   and the server signals the current version in its responses.  This
+   mutual version signalling allows the server to detect when a client
+   is operating with a stale document and prompt it to retrieve an
+   updated version.  Where a new version introduces breaking changes or
+   deprecates features, the server may additionally warn the client in
+   advance before the change takes effect.
 
 5.1.23.  Scalability
 
