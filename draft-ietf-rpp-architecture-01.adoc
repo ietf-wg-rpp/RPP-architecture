@@ -80,12 +80,16 @@ This document uses terminology from RFC5730 <<RFC5730>> and broadly adopts the R
 
 * **IDN:** Internationalised Domain Names as defined in <<RFC5890>>
 
+* **TLS:** Transport Layer Security, as defined in <<RFC8446>> or its successors.
+
+* **HTTPS:** HTTP over TLS, as defined in <<RFC9110>> or its successors.
+
 
 == Requirements
-This document is based on the requirements defined by RPP WG in state from 5 December 2025 <<RPPReq>>.
+This document is based on the requirements defined by the RPP Working Group as of 5 December 2025 <<RPPReq>>.
 
 == Architectural Overview
-This chapter provides an overview of the RESTful Provisioning Protocol (RPP) architecture. A key design principle is to leverage existing web standards, particularly HTTP and REST. This allows RPP to delegate functionality and features to the well-established infrastructure and semantics of the web, focusing its own definitions on the specific domain of object provisioning. Therefore, we assume:
+This chapter provides an overview of the RPP architecture. A key design principle is to leverage existing web standards, particularly HTTP and REST. This allows RPP to delegate functionality and features to the well-established infrastructure and semantics of the web, focusing its own definitions on the specific domain of object provisioning. Therefore, we assume:
 
 * **HTTP and RESTful principles are foundational:** RPP leverages HTTP for transport and adheres to RESTful principles for resource management.
 * **Domain-specific logic resides in data representations:** The specifics of resource provisioning are encoded within the data structures and semantics of the RPP message bodies.
@@ -166,7 +170,7 @@ It encompasses aspects such as:
 * **Content negotiation for media types:** Supporting multiple data representation formats and using content negotiation to select the appropriate format.
 * **Caching:** Leveraging HTTP caching mechanisms to improve performance.
 * **Language negotiation for textual content:** Supporting multiple languages for textual content and using language negotiation to select the appropriate language.
-* **Representation preferences:** Possibility to a client to indicate whether a full representation of an object or only a limited representations is preferred as a response
+* **Representation preferences:** The option for a client to indicate a preference for either a full representation of an object or a limited representation.
 * **Validation preferences:** Defining the approach to the input data validation that shall be applied by the server. The server may apply lenient validation where the server makes best effort to process the understood part of the request as opposed to strict processing where the server would reject a request where part of the data is not understood
 
 ===== RPP-Specific Extensions
