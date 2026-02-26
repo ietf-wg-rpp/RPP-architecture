@@ -58,11 +58,11 @@
 
 <t anchor="_8506c5a3-b243-7444-75c6-9001d29728bc">This architecture document serves as a foundation for a series of specifications that will collectively define RPP. It details the layered approach, core components, and design considerations for building an interoperable and extensible provisioning protocol. RPP is intended to coexist with EPP, offering an alternative for implementers seeking a RESTful approach without aiming to replace EPP or define migration paths from EPP. RPP aims for data model compatibility with EPP core objects to allow automatic and mechanical mapping and conversion, especially for core objects (domain, contact, host).</t>
 </section>
-    <section anchor="_086b8c3a-4b5d-81b1-559e-9b267fb1386d"><name>Terminology</name>
+    <section anchor="_367fef53-3d79-6852-3a7c-dce519644098"><name>Terminology</name>
 
 <t anchor="_5fc8299b-18c8-f461-c422-35b49f4911d0">This document uses terminology from RFC5730 <xref target="RFC5730" section="" relative=""></xref> and broadly adopts the REST architectural principles as defined in [REST] and related RFCs.</t>
 
-<ul anchor="_384b5370-b868-ae07-cbf5-80336247c21b"><li><strong>RPP:</strong> RESTful Provisioning Protocol. The protocol being defined by the RPP working group.</li>
+<ul anchor="_3739f87a-2f3a-d94a-19ce-19e813031043"><li><strong>RPP:</strong> RESTful Provisioning Protocol. The protocol being defined by the RPP working group.</li>
 <li><strong>EPP:</strong> Extensible Provisioning Protocol as defined in <xref target="RFC5730" section="" relative=""></xref>.</li>
 <li><strong>REST:</strong> Representational State Transfer architectural style <xref target="REST" section="" relative=""></xref>.</li>
 <li><strong>JSON:</strong> JavaScript Object Notation <xref target="RFC8259" section="" relative=""></xref>.</li>
@@ -73,15 +73,17 @@
 <li><strong>Sponsoring Client:</strong> The RPP Client that currently has sponsorship of the object.</li>
 <li><strong>Gaining Client:</strong> The client seeking to gain sponsorship of the object in a Transfer Operation.</li>
 <li><strong>IDN:</strong> Internationalised Domain Names as defined in <xref target="RFC5890" section="" relative=""></xref></li>
+<li><strong>TLS:</strong> Transport Layer Security, as defined in <xref target="RFC8446" section="" relative=""></xref> or its successors.</li>
+<li><strong>HTTPS:</strong> HTTP over TLS, as defined in <xref target="RFC9110" section="" relative=""></xref> or its successors.</li>
 </ul>
 </section>
-    <section anchor="_5c02969b-1036-1f16-3ac5-3f551b018481"><name>Requirements</name>
+    <section anchor="_108b8ce0-eafd-c503-aa6f-769f4d157596"><name>Requirements</name>
 
-<t anchor="_68745104-7487-49dd-5da2-c06be2eb6b22">This document is based on the requirements defined by RPP WG in state from 5 December 2025 <xref target="RPPReq" section="" relative=""></xref>.</t>
+<t anchor="_cce47fdb-447b-782e-6b5b-7bff4f2e582c">This document is based on the requirements defined by the RPP Working Group as of 5 December 2025 <xref target="RPPReq" section="" relative=""></xref>.</t>
 </section>
-    <section anchor="_afc99417-97e7-ef2a-9e78-a9d08d494709"><name>Architectural Overview</name>
+    <section anchor="_387f13ce-846b-2736-18de-64d3209eb4d8"><name>Architectural Overview</name>
 
-<t anchor="_9026ba3b-38c7-c376-4a80-1f542752182d">This chapter provides an overview of the RESTful Provisioning Protocol (RPP) architecture. A key design principle is to leverage existing web standards, particularly HTTP and REST. This allows RPP to delegate functionality and features to the well-established infrastructure and semantics of the web, focusing its own definitions on the specific domain of object provisioning. Therefore, we assume:</t>
+<t anchor="_1efe254b-7940-9ea2-4be5-316537580db5">This chapter provides an overview of the RPP architecture. A key design principle is to leverage existing web standards, particularly HTTP and REST. This allows RPP to delegate functionality and features to the well-established infrastructure and semantics of the web, focusing its own definitions on the specific domain of object provisioning. Therefore, we assume:</t>
 
 <ul anchor="_87572271-48fc-0296-0473-0a5a2650a2fa"><li><strong>HTTP and RESTful principles are foundational:</strong> RPP leverages HTTP for transport and adheres to RESTful principles for resource management.</li>
 <li><strong>Domain-specific logic resides in data representations:</strong> The specifics of resource provisioning are encoded within the data structures and semantics of the RPP message bodies.</li>
@@ -141,7 +143,7 @@
 </ul>
 </section>
 
-<section anchor="_cf1e0ec7-1848-ed26-2ba6-fa21ebd17c8a"><name>Architecture Layers</name>
+<section anchor="_285ca2e8-92d1-d957-18db-88fcfee796ca"><name>Architecture Layers</name>
 
 <section anchor="http-transport-layer-overview"><name>HTTP Transport Layer</name>
 
@@ -149,13 +151,13 @@
 
 <t anchor="_848fb936-c4aa-0b45-d998-a38c165070bb">The HTTP Transport Layer consists of two sub-layers:</t>
 
-<section anchor="_0a7cc2f5-e82e-ca62-83dd-ee23212729a9"><name>Built-in HTTP Features</name>
+<section anchor="_6babcf87-4e14-a49a-d5ae-b8f44f90af88"><name>Built-in HTTP Features</name>
 
 <t anchor="_9299fddb-5fd4-11b8-4975-e7755c083334">These are features that are fully specified by the HTTP standard itself. RPP leverages these features directly, specifying their use within the protocol without a need to define their behaviour.</t>
 
 <t anchor="_ccdf8507-a0dd-793e-b450-cd299578d60f">It encompasses aspects such as:</t>
 
-<ul anchor="_791dc719-b503-958e-8b01-e0281eaaf50d"><li><strong>Transport security:</strong> Mechanisms to secure message transmission</li>
+<ul anchor="_f6db05ce-55ba-b57e-a896-39280dc8200f"><li><strong>Transport security:</strong> Mechanisms to secure message transmission</li>
 <li><strong>Authentication and Authorisation:</strong> Mechanisms for verifying the identity of clients and controlling access to resources.</li>
 <li><strong>Resource Addressing using URLs:</strong> Consistent and meaningful URL structures for identifying, accessing resources and enabling request routing.</li>
 <li><strong>Mapping of basic operations to HTTP uniform interface (verbs):</strong> Mapping CRUD (Create, Read, Update, Delete) operations to POST, HEAD/GET, PUT/PATCH, and DELETE respectively.</li>
@@ -164,7 +166,7 @@
 <li><strong>Content negotiation for media types:</strong> Supporting multiple data representation formats and using content negotiation to select the appropriate format.</li>
 <li><strong>Caching:</strong> Leveraging HTTP caching mechanisms to improve performance.</li>
 <li><strong>Language negotiation for textual content:</strong> Supporting multiple languages for textual content and using language negotiation to select the appropriate language.</li>
-<li><strong>Representation preferences:</strong> Possibility to a client to indicate whether a full representation of an object or only a limited representations is preferred as a response</li>
+<li><strong>Representation preferences:</strong> The option for a client to indicate a preference for either a full representation of an object or a limited representation.</li>
 <li><strong>Validation preferences:</strong> Defining the approach to the input data validation that shall be applied by the server. The server may apply lenient validation where the server makes best effort to process the understood part of the request as opposed to strict processing where the server would reject a request where part of the data is not understood</li>
 </ul>
 </section>
@@ -817,11 +819,13 @@
 </section>
   </middle>
   <back>
-    <references anchor="_85b46ae1-485f-817e-f79c-463cda890062">
+    <references anchor="_1321988e-afcb-77c7-28bf-ff0c0481866d">
       <name>References</name>
-      <references anchor="_7bebdecb-c678-bd9d-5a0d-3dc07855aabd">
+      <references anchor="_64042011-7cff-5ac3-55f5-51fbb8757a6d">
         <name>Normative References</name>
-        <reference target="https://www.rfc-editor.org/info/rfc9457" anchor="RFC9457"><stream>IETF</stream> <front> <title>Problem Details for HTTP APIs</title> <author fullname="M. Nottingham" asciiFullname="M. Nottingham"></author> <author fullname="E. Wilde" asciiFullname="E. Wilde"></author> <author fullname="S. Dalal" asciiFullname="S. Dalal"></author> <date month="July" year="2023"></date> <keyword>status</keyword><keyword>HTTP</keyword><keyword>error</keyword><keyword>problem</keyword><keyword>API</keyword><keyword>JSON</keyword><keyword>XML</keyword> <abstract>  <t anchor="_e6beef86-8395-151c-0747-d646de1942a2">This document defines a "problem detail" to carry machine-readable details of errors in HTTP response content to avoid the need to define new error response formats for HTTP APIs.</t>  <t anchor="_a9d0d5a4-6dce-d031-1eb0-7627711f0048">This document obsoletes RFC 7807.</t></abstract> </front> <seriesInfo value="10.17487/RFC9457" name="DOI"></seriesInfo> <seriesInfo value="9457" name="RFC"></seriesInfo></reference>
+        <reference target="https://www.rfc-editor.org/info/rfc9457" anchor="RFC9457"><stream>IETF</stream> <front> <title>Problem Details for HTTP APIs</title> <author fullname="M. Nottingham" asciiFullname="M. Nottingham"></author> <author fullname="E. Wilde" asciiFullname="E. Wilde"></author> <author fullname="S. Dalal" asciiFullname="S. Dalal"></author> <date month="July" year="2023"></date> <keyword>status</keyword><keyword>HTTP</keyword><keyword>error</keyword><keyword>problem</keyword><keyword>API</keyword><keyword>JSON</keyword><keyword>XML</keyword> <abstract>  <t anchor="_37418d9c-0fde-24d6-78db-ec009c547f38">This document defines a "problem detail" to carry machine-readable details of errors in HTTP response content to avoid the need to define new error response formats for HTTP APIs.</t>  <t anchor="_718376fb-67c9-2eb8-3417-11ad912ec7a2">This document obsoletes RFC 7807.</t></abstract> </front> <seriesInfo value="10.17487/RFC9457" name="DOI"></seriesInfo> <seriesInfo value="9457" name="RFC"></seriesInfo></reference>
+        <reference target="https://www.rfc-editor.org/info/rfc9110" anchor="RFC9110"><stream>IETF</stream> <front> <title>HTTP Semantics</title> <author fullname="R. Fielding" asciiFullname="R. Fielding"></author> <author fullname="M. Nottingham" asciiFullname="M. Nottingham"></author> <author fullname="J. Reschke" asciiFullname="J. Reschke"></author> <date month="June" year="2022"></date> <keyword>Hypertext Transfer Protocol</keyword><keyword>HTTP</keyword><keyword>HTTP semantics</keyword><keyword>HTTP content</keyword><keyword>HTTP method</keyword><keyword>HTTP status code</keyword> <abstract>  <t anchor="_fcb67250-c655-12f2-4611-60fb1f3a80ee">The Hypertext Transfer Protocol (HTTP) is a stateless application-level protocol for distributed, collaborative, hypertext information systems. This document describes the overall architecture of HTTP, establishes common terminology, and defines aspects of the protocol that are shared by all versions. In this definition are core protocol elements, extensibility mechanisms, and the "http" and "https" Uniform Resource Identifier (URI) schemes.</t>  <t anchor="_b8fa37a1-5cd3-5c89-f562-19875a9bb919">This document updates RFC 3864 and obsoletes RFCs 2818, 7231, 7232, 7233, 7235, 7538, 7615, 7694, and portions of 7230.</t></abstract> </front> <seriesInfo value="10.17487/RFC9110" name="DOI"></seriesInfo> <seriesInfo value="97" name="BCP"></seriesInfo> <seriesInfo value="9110" name="RFC"></seriesInfo></reference>
+        <reference target="https://www.rfc-editor.org/info/rfc8446" anchor="RFC8446"><stream>IETF</stream> <front> <title>The Transport Layer Security (TLS) Protocol Version 1.3</title> <author fullname="E. Rescorla" asciiFullname="E. Rescorla"></author> <date month="August" year="2018"></date> <keyword>international data algorithm</keyword><keyword>symmetric</keyword><keyword>transport protocol layer</keyword><keyword>authentication</keyword><keyword>privacy</keyword> <abstract>  <t anchor="_7f753512-55e0-f176-6544-7bf77a6635a6">This document specifies version 1.3 of the Transport Layer Security (TLS) protocol. TLS allows client/server applications to communicate over the Internet in a way that is designed to prevent eavesdropping, tampering, and message forgery.</t>  <t anchor="_51dc5343-f189-c299-4d78-9d2f95fac0e7">This document updates RFCs 5705 and 6066, and obsoletes RFCs 5077, 5246, and 6961. This document also specifies new requirements for TLS 1.2 implementations.</t></abstract> </front> <seriesInfo value="10.17487/RFC8446" name="DOI"></seriesInfo> <seriesInfo value="8446" name="RFC"></seriesInfo></reference>
       </references>
       <references anchor="_b9e55166-ca5d-0204-296f-89d6e818cb8c">
         <name>Informational References</name>
