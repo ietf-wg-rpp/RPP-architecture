@@ -703,33 +703,56 @@ All references to potential IANA registrations in this document, such as media t
 
 === -00 to -01
 
-* Refactoring of <<extension-mechanisms, format=title>> Section and addition of extensibility with transient request parameters and responses (Issues #94 and #95)
-* Added text about compatibility profiles to "Profiles" section. (Issue #29)
-* Added a "Relationships" section to describe resource type relationships. (Issue #83)
-* Added Section <<required-optional-data-elements, format=title>> to <<data-elements, format=title>> to explicitly address protocol-level vs. server-policy-level data element requirements (Requirement R4.3).
-* Added text about signing messages in the "Message verification" section. (Issue #33)
-* Added reference to RFC9154 in the "Object level authorisation" section. (Issue #89)
-* Added Section <<collection-representation, format=title>> for API-level collection retrieval and expanded container element description in <<data-elements, format=title>> Section. (Issue #85)
-* Editorial: updated document references
-* Added data privacy to <<service-discovery, format=title>> and new "Data privacy" section. Refactored the whole section <<service-discovery>> (Issue #100).
-* Fixed inconsistent usage of HTTP status codes (Issue #108).
-* Added "Canonical Addressing" section (Issue #81)
-* Added HTTP Headers to the "extension-mechanisms" section (Issue #93).
-* Added "Optionality" section to explicitly allow empty HTTP message body in a response (Issue #97).
-* Added <<server-managed-resources, format=title>> Section to <<http-layer-details, format=title>> and <<server-managed-resource-types, format=title>> Section to Resource Definition Layer to define read-only server-managed resources (Issue #84).
-* Create "Credential management" section for updating credentials using an extension.
-* Changed default validation from lenient to strict. (Issue #82) 
-* Added <<extension-security, format=title>> and <<extension-review, format=title>> Sections to <<extension-mechanisms>> (Issue #91).
-* Added Advertising of maintenance notices to "Service Discovery" section. (Issue #88)
-* Added "Scalability" section. (Issue #92)
-* Explicitly state that all parties involved in a process are allowed to retrieve the process status. (Issue #98)
-* Added IDN to "Terminology" and "Service discovery mechanisms" sections
-* Added "additional measures to verify the client" to <<http-layer-details-security>> (Issue #76).
-* Added TLS mandatory to <<transport-security>> (Issue #78).
-* Added Section <<credential-lifecycle>> for credential and token revocation/replacement mechanisms (Issue #79).
-* Added Section <<service-messages>> to describe poll message equivalent (Issue #87).
-* Extended <<collection-representation, format=title>> to clarify that bulk operations, listing, and filtering are optional and must not be mandated where they negatively impact scalability or performance (Issue #41).
-* Added boilerplate IANA Considerations section
+* Extension Mechanisms
+
+** Refactoring of <<extension-mechanisms, format=title>> Section and addition of extensibility with transient request parameters and responses (Issues #94 and #95)
+** Added HTTP Headers to the "extension-mechanisms" section (Issue #93).
+** Added <<extension-security, format=title>> and <<extension-review, format=title>> Sections to <<extension-mechanisms>> (Issue #91).
+
+* Service Discovery & Profiles
+
+** Added data privacy to <<service-discovery, format=title>> and new "Data privacy" section. Refactored the whole section <<service-discovery>> (Issue #100).
+** Added Advertising of maintenance notices to "Service Discovery" section. (Issue #88)
+** Added text about compatibility profiles to "Profiles" section. (Issue #29)
+
+* Collections, Bulk Operations & Filtering
+
+** Added Section <<collection-representation, format=title>> for API-level collection retrieval and expanded container element description in <<data-elements, format=title>> Section. (Issue #85)
+** Extended <<collection-representation, format=title>> to clarify that bulk operations, listing, and filtering are optional and must not be mandated where they negatively impact scalability or performance (Issue #41).
+
+* Security & Authentication*
+
+** Added "additional measures to verify the client" to <<http-layer-details-security>> (Issue #76).
+** Added TLS mandatory to <<transport-security>> (Issue #78).
+** Create "Credential management" section for updating credentials using an extension.
+** Added Section <<credential-lifecycle>> for credential and token revocation/replacement mechanisms (Issue #79).
+** Added text about signing messages in the "Message verification" section. (Issue #33)
+** Added reference to RFC9154 in the "Object level authorisation" section. (Issue #89)
+
+* HTTP Layer
+
+** Added "Canonical Addressing" section (Issue #81)
+** Added "Optionality" section to explicitly allow empty HTTP message body in a response (Issue #97).
+** Fixed inconsistent usage of HTTP status codes (Issue #108).
+
+* Resource Definition & Data Model
+
+** Added a "Relationships" section to describe resource type relationships. (Issue #83)
+** Added Section <<required-optional-data-elements, format=title>> to <<data-elements, format=title>> to explicitly address protocol-level vs. server-policy-level data element requirements (Requirement R4.3).
+** Added <<server-managed-resources, format=title>> Section to <<http-layer-details, format=title>> and <<server-managed-resource-types, format=title>> Section to Resource Definition Layer to define read-only server-managed resources (Issue #84).
+** Explicitly state that all parties involved in a process are allowed to retrieve the process status. (Issue #98)
+** Added Section <<service-messages>> to describe poll message equivalent (Issue #87).
+
+* Protocol Behaviour
+
+** Changed default validation from lenient to strict. (Issue #82) 
+** Added "Scalability" section. (Issue #92)
+
+* Editorial & Terminology
+
+** Added IDN to "Terminology" and "Service discovery mechanisms" sections
+** Added boilerplate IANA Considerations section
+** Editorial: updated document references
 
 === -03 to draft-ietf-rpp-architecture-00
 

@@ -143,14 +143,14 @@ Internet-Draft            ietf-rpp-architecture            November 2025
    6.  IANA Considerations . . . . . . . . . . . . . . . . . . . . .  34
    7.  Change History  . . . . . . . . . . . . . . . . . . . . . . .  34
      7.1.  -00 to -01  . . . . . . . . . . . . . . . . . . . . . . .  35
-     7.2.  -03 to draft-ietf-rpp-architecture-00 . . . . . . . . . .  36
-     7.3.  -02 to -03  . . . . . . . . . . . . . . . . . . . . . . .  36
+     7.2.  -03 to draft-ietf-rpp-architecture-00 . . . . . . . . . .  37
+     7.3.  -02 to -03  . . . . . . . . . . . . . . . . . . . . . . .  37
      7.4.  -01 to -02  . . . . . . . . . . . . . . . . . . . . . . .  37
-     7.5.  -00 to -01  . . . . . . . . . . . . . . . . . . . . . . .  37
+     7.5.  -00 to -01  . . . . . . . . . . . . . . . . . . . . . . .  38
    8.  References  . . . . . . . . . . . . . . . . . . . . . . . . .  38
      8.1.  Normative References  . . . . . . . . . . . . . . . . . .  38
      8.2.  Informational References  . . . . . . . . . . . . . . . .  38
-   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  41
+   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  42
 
 1.  Introduction
 
@@ -1908,50 +1908,50 @@ Internet-Draft            ietf-rpp-architecture            November 2025
 
 7.1.  -00 to -01
 
-   *  Refactoring of Extension mechanisms Section and addition of
-      extensibility with transient request parameters and responses
-      (Issues #94 and #95)
+   *  Extension Mechanisms
 
-   *  Added text about compatibility profiles to "Profiles" section.
-      (Issue #29)
+      -  Refactoring of Extension mechanisms Section and addition of
+         extensibility with transient request parameters and responses
+         (Issues #94 and #95)
 
-   *  Added a "Relationships" section to describe resource type
-      relationships.  (Issue #83)
+      -  Added HTTP Headers to the "extension-mechanisms" section (Issue
+         #93).
 
-   *  Added Section Required and Optional Data Elements to Data Elements
-      to explicitly address protocol-level vs. server-policy-level data
-      element requirements (Requirement R4.3).
+      -  Added Extension Security and Extension Review Sections to
+         Section 5.4 (Issue #91).
 
-   *  Added text about signing messages in the "Message verification"
-      section.  (Issue #33)
+   *  Service Discovery & Profiles
 
-   *  Added reference to RFC9154 in the "Object level authorisation"
-      section.  (Issue #89)
+      -  Added data privacy to Service discovery mechanisms and new
+         "Data privacy" section.  Refactored the whole section
+         Section 5.1.22 (Issue #100).
 
-   *  Added Section Collection Representation for API-level collection
-      retrieval and expanded container element description in Data
-      Elements Section.  (Issue #85)
+      -  Added Advertising of maintenance notices to "Service Discovery"
+         section.  (Issue #88)
 
-   *  Editorial: updated document references
+      -  Added text about compatibility profiles to "Profiles" section.
+         (Issue #29)
 
-   *  Added data privacy to Service discovery mechanisms and new "Data
-      privacy" section.  Refactored the whole section Section 5.1.22
-      (Issue #100).
+   *  Collections, Bulk Operations & Filtering
 
-   *  Fixed inconsistent usage of HTTP status codes (Issue #108).
+      -  Added Section Collection Representation for API-level
+         collection retrieval and expanded container element description
+         in Data Elements Section.  (Issue #85)
 
-   *  Added "Canonical Addressing" section (Issue #81)
+      -  Extended Collection Representation to clarify that bulk
+         operations, listing, and filtering are optional and must not be
+         mandated where they negatively impact scalability or
+         performance (Issue #41).
 
-   *  Added HTTP Headers to the "extension-mechanisms" section (Issue
-      #93).
+   *  Security & Authentication*
 
-   *  Added "Optionality" section to explicitly allow empty HTTP message
-      body in a response (Issue #97).
+      -  Added "additional measures to verify the client" to
+         Section 5.1.3.4 (Issue #76).
 
-   *  Added Server-Managed Resources Section to HTTP Transport Layer
-      Details and Server-Managed Resource Types Section to Resource
-      Definition Layer to define read-only server-managed resources
-      (Issue #84).
+      -  Added TLS mandatory to Section 5.1.1 (Issue #78).
+
+      -  Create "Credential management" section for updating credentials
+         using an extension.
 
 
 
@@ -1962,42 +1962,65 @@ Kowalik & Wullink          Expires 10 May 2026                 [Page 35]
 Internet-Draft            ietf-rpp-architecture            November 2025
 
 
-   *  Create "Credential management" section for updating credentials
-      using an extension.
+      -  Added Section Section 5.1.3.5 for credential and token
+         revocation/replacement mechanisms (Issue #79).
 
-   *  Changed default validation from lenient to strict.  (Issue #82)
+      -  Added text about signing messages in the "Message verification"
+         section.  (Issue #33)
 
-   *  Added Extension Security and Extension Review Sections to
-      Section 5.4 (Issue #91).
+      -  Added reference to RFC9154 in the "Object level authorisation"
+         section.  (Issue #89)
 
-   *  Added Advertising of maintenance notices to "Service Discovery"
-      section.  (Issue #88)
+   *  HTTP Layer
 
-   *  Added "Scalability" section.  (Issue #92)
+      -  Added "Canonical Addressing" section (Issue #81)
 
-   *  Explicitly state that all parties involved in a process are
-      allowed to retrieve the process status.  (Issue #98)
+      -  Added "Optionality" section to explicitly allow empty HTTP
+         message body in a response (Issue #97).
 
-   *  Added IDN to "Terminology" and "Service discovery mechanisms"
-      sections
+      -  Fixed inconsistent usage of HTTP status codes (Issue #108).
 
-   *  Added "additional measures to verify the client" to
-      Section 5.1.3.4 (Issue #76).
+   *  Resource Definition & Data Model
 
-   *  Added TLS mandatory to Section 5.1.1 (Issue #78).
+      -  Added a "Relationships" section to describe resource type
+         relationships.  (Issue #83)
 
-   *  Added Section Section 5.1.3.5 for credential and token revocation/
-      replacement mechanisms (Issue #79).
+      -  Added Section Required and Optional Data Elements to Data
+         Elements to explicitly address protocol-level vs. server-
+         policy-level data element requirements (Requirement R4.3).
 
-   *  Added Section Section 5.1.15 to describe poll message equivalent
-      (Issue #87).
+      -  Added Server-Managed Resources Section to HTTP Transport Layer
+         Details and Server-Managed Resource Types Section to Resource
+         Definition Layer to define read-only server-managed resources
+         (Issue #84).
 
-   *  Extended Collection Representation to clarify that bulk
-      operations, listing, and filtering are optional and must not be
-      mandated where they negatively impact scalability or performance
-      (Issue #41).
+      -  Explicitly state that all parties involved in a process are
+         allowed to retrieve the process status.  (Issue #98)
 
-   *  Added boilerplate IANA Considerations section
+      -  Added Section Section 5.1.15 to describe poll message
+         equivalent (Issue #87).
+
+   *  Protocol Behaviour
+
+      -  Changed default validation from lenient to strict.  (Issue #82)
+
+      -  Added "Scalability" section.  (Issue #92)
+
+   *  Editorial & Terminology
+
+      -  Added IDN to "Terminology" and "Service discovery mechanisms"
+         sections
+
+
+
+Kowalik & Wullink          Expires 10 May 2026                 [Page 36]
+
+Internet-Draft            ietf-rpp-architecture            November 2025
+
+
+      -  Added boilerplate IANA Considerations section
+
+      -  Editorial: updated document references
 
 7.2.  -03 to draft-ietf-rpp-architecture-00
 
@@ -2008,15 +2031,6 @@ Internet-Draft            ietf-rpp-architecture            November 2025
    *  split into HTTP built-ins and custom RPP in Section 4.2.1.
       Reorganised Section 5.1 to reflect that and added/rewritten some
       parts to cover all aspects.
-
-
-
-
-
-Kowalik & Wullink          Expires 10 May 2026                 [Page 36]
-
-Internet-Draft            ietf-rpp-architecture            November 2025
-
 
    *  Clarified the relationship and mapping between HTTP response
       status codes and RPP-specific status codes in Section 5.1.16.
@@ -2053,6 +2067,13 @@ Internet-Draft            ietf-rpp-architecture            November 2025
    *  Added Relationship between clients and authentication credentials
       to Section 5.1.2.
 
+
+
+Kowalik & Wullink          Expires 10 May 2026                 [Page 37]
+
+Internet-Draft            ietf-rpp-architecture            November 2025
+
+
    *  Add Data Validation (Section 5.2.3) section with schema language
       support for RPP to Section 5.2
 
@@ -2065,14 +2086,6 @@ Internet-Draft            ietf-rpp-architecture            November 2025
 7.5.  -00 to -01
 
    *  Removed requirements and replaced with a reference to RPP WG
-
-
-
-
-Kowalik & Wullink          Expires 10 May 2026                 [Page 37]
-
-Internet-Draft            ietf-rpp-architecture            November 2025
-
 
    *  Encapsulation removed as a primary extension point and part of
       architecture
@@ -2108,6 +2121,15 @@ Internet-Draft            ietf-rpp-architecture            November 2025
               IETF, DOI 10.17487/RFC5730, BCP 69, RFC 5730, August 2009,
               <https://www.rfc-editor.org/info/rfc5730>.
 
+
+
+
+
+Kowalik & Wullink          Expires 10 May 2026                 [Page 38]
+
+Internet-Draft            ietf-rpp-architecture            November 2025
+
+
    [RFC5731]  Hollenbeck, S., "Extensible Provisioning Protocol (EPP)
               Domain Name Mapping", IETF, DOI 10.17487/RFC5731, BCP 69,
               RFC 5731, August 2009,
@@ -2122,13 +2144,6 @@ Internet-Draft            ietf-rpp-architecture            November 2025
               Contact Mapping", IETF, DOI 10.17487/RFC5733, BCP 69,
               RFC 5733, August 2009,
               <https://www.rfc-editor.org/info/rfc5733>.
-
-
-
-Kowalik & Wullink          Expires 10 May 2026                 [Page 38]
-
-Internet-Draft            ietf-rpp-architecture            November 2025
-
 
    [RFC7231]  Fielding, R. and J. Reschke, "Hypertext Transfer Protocol
               (HTTP/1.1): Semantics and Content", IETF,
@@ -2162,6 +2177,15 @@ Internet-Draft            ietf-rpp-architecture            November 2025
               DOI 10.17487/RFC6750, RFC 6750, October 2012,
               <https://www.rfc-editor.org/info/rfc6750>.
 
+
+
+
+
+Kowalik & Wullink          Expires 10 May 2026                 [Page 39]
+
+Internet-Draft            ietf-rpp-architecture            November 2025
+
+
    [RFC7009]  Dronia, S., Scurtescu, M., and T. Lodderstedt, "OAuth 2.0
               Token Revocation", IETF, DOI 10.17487/RFC7009, RFC 7009,
               August 2013, <https://www.rfc-editor.org/info/rfc7009>.
@@ -2178,13 +2202,6 @@ Internet-Draft            ietf-rpp-architecture            November 2025
    [RFC6902]  Bryan, P. and M. Nottingham, "JavaScript Object Notation
               (JSON) Patch", IETF, DOI 10.17487/RFC6902, RFC 6902, April
               2013, <https://www.rfc-editor.org/info/rfc6902>.
-
-
-
-Kowalik & Wullink          Expires 10 May 2026                 [Page 39]
-
-Internet-Draft            ietf-rpp-architecture            November 2025
-
 
    [RFC9396]  Lodderstedt, T., Richer, J., and B. Campbell, "OAuth 2.0
               Rich Authorization Requests", IETF, DOI 10.17487/RFC9396,
@@ -2214,6 +2231,17 @@ Internet-Draft            ietf-rpp-architecture            November 2025
               DOI 10.17487/RFC8126, BCP 26, RFC 8126, June 2017,
               <https://www.rfc-editor.org/info/rfc8126>.
 
+
+
+
+
+
+
+Kowalik & Wullink          Expires 10 May 2026                 [Page 40]
+
+Internet-Draft            ietf-rpp-architecture            November 2025
+
+
    [RFC5890]  Klensin, J., "Internationalized Domain Names for
               Applications (IDNA): Definitions and Document Framework",
               IETF, DOI 10.17487/RFC5890, RFC 5890, August 2010,
@@ -2232,15 +2260,6 @@ Internet-Draft            ietf-rpp-architecture            November 2025
               Disclosure for JSON Web Tokens", IETF,
               DOI 10.17487/RFC9901, RFC 9901, November 2025,
               <https://www.rfc-editor.org/info/rfc9901>.
-
-
-
-
-
-Kowalik & Wullink          Expires 10 May 2026                 [Page 40]
-
-Internet-Draft            ietf-rpp-architecture            November 2025
-
 
    [RFC9154]  Gould, J. and R. Wilhelm, "Extensible Provisioning
               Protocol (EPP) Secure Authorization Information for
@@ -2269,6 +2288,16 @@ Internet-Draft            ietf-rpp-architecture            November 2025
    [SemVer]   "Semantic Versioning 2.0.0", Misc SemVer 2.0.0,
               <https://semver.org/spec/v2.0.0.html>.
 
+
+
+
+
+
+Kowalik & Wullink          Expires 10 May 2026                 [Page 41]
+
+Internet-Draft            ietf-rpp-architecture            November 2025
+
+
    [REST]     Fielding, R., "Architectural Styles and the Design of
               Network-based Software Architectures",
               Doctoral Dissertation University of California, Irvine,
@@ -2290,14 +2319,6 @@ Authors' Addresses
    Theodor-Stern-Kai 1
    Frankfurt am Main
    Germany
-
-
-
-Kowalik & Wullink          Expires 10 May 2026                 [Page 41]
-
-Internet-Draft            ietf-rpp-architecture            November 2025
-
-
    Email: pawel.kowalik@denic.de
    URI:   https://denic.de
 
@@ -2307,27 +2328,6 @@ Internet-Draft            ietf-rpp-architecture            November 2025
    Netherlands
    Email: maarten.wullink@sidn.nl
    URI:   https://sidn.nl/
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

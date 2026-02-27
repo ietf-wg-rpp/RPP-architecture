@@ -746,37 +746,61 @@
 
 <t anchor="_0c161617-9991-86a1-d826-14d8edefe068">All references to potential IANA registrations in this document, such as media types, extension registries, or other protocol artefacts, are strictly informational. They describe design considerations and anticipated future needs of the RPP protocol. Any actual IANA actions resulting from the RPP protocol will be requested in standards-track protocol specification documents that define the concrete protocol elements.</t>
 </section>
-    <section anchor="_57a62932-4ad8-3cc8-04f3-4341e2efd1b4"><name>Change History</name>
+    <section anchor="_30287751-9e29-dbaf-3e9d-f5a7b02dcad8"><name>Change History</name>
 
-<section anchor="_9c1b7722-5643-5e74-1d62-21645ac4a09d"><name>-00 to -01</name>
+<section anchor="_cf9ecc0e-f5c1-30ee-c248-6afd922a3a4e"><name>-00 to -01</name>
 
-<ul anchor="_884b893f-84ba-b26b-fea5-a75c8666da26"><li>Refactoring of <xref target="extension-mechanisms" format="title"></xref> Section and addition of extensibility with transient request parameters and responses (Issues #94 and #95)</li>
+<ul anchor="_57240768-6b7d-b6f0-61c7-1adf0b1c396e"><li><t anchor="_36effc7f-e609-43c7-9226-b59fe2fd8ac9">Extension Mechanisms</t>
+<ul anchor="_ee69ed51-58c6-6720-e05e-6885cd4f2bb7"><li>Refactoring of <xref target="extension-mechanisms" format="title"></xref> Section and addition of extensibility with transient request parameters and responses (Issues #94 and #95)</li>
+<li>Added HTTP Headers to the "extension-mechanisms" section (Issue #93).</li>
+<li>Added <xref target="extension-security" format="title"></xref> and <xref target="extension-review" format="title"></xref> Sections to <xref target="extension-mechanisms"></xref> (Issue #91).</li>
+</ul>
+</li>
+<li><t anchor="_bfc78092-5abc-7399-27e6-81c82e7bf293">Service Discovery &#x26; Profiles</t>
+<ul anchor="_818bb7f8-6594-1626-d542-b96662d07f1f"><li>Added data privacy to <xref target="service-discovery" format="title"></xref> and new "Data privacy" section. Refactored the whole section <xref target="service-discovery"></xref> (Issue #100).</li>
+<li>Added Advertising of maintenance notices to "Service Discovery" section. (Issue #88)</li>
 <li>Added text about compatibility profiles to "Profiles" section. (Issue #29)</li>
-<li>Added a "Relationships" section to describe resource type relationships. (Issue #83)</li>
-<li>Added Section <xref target="required-optional-data-elements" format="title"></xref> to <xref target="data-elements" format="title"></xref> to explicitly address protocol-level vs. server-policy-level data element requirements (Requirement R4.3).</li>
+</ul>
+</li>
+<li><t anchor="_d3dd0d02-5dcd-de7c-8996-32c102986f61">Collections, Bulk Operations &#x26; Filtering</t>
+<ul anchor="_2eabdb32-3dc6-a167-90d0-162d9b51896a"><li>Added Section <xref target="collection-representation" format="title"></xref> for API-level collection retrieval and expanded container element description in <xref target="data-elements" format="title"></xref> Section. (Issue #85)</li>
+<li>Extended <xref target="collection-representation" format="title"></xref> to clarify that bulk operations, listing, and filtering are optional and must not be mandated where they negatively impact scalability or performance (Issue #41).</li>
+</ul>
+</li>
+<li><t anchor="_7e4fd996-beb8-1714-f313-35ad5c7c5d97">Security &#x26; Authentication*</t>
+<ul anchor="_9e887f32-496e-8fc8-b241-359bbbd9d277"><li>Added "additional measures to verify the client" to <xref target="http-layer-details-security"></xref> (Issue #76).</li>
+<li>Added TLS mandatory to <xref target="transport-security"></xref> (Issue #78).</li>
+<li>Create "Credential management" section for updating credentials using an extension.</li>
+<li>Added Section <xref target="credential-lifecycle"></xref> for credential and token revocation/replacement mechanisms (Issue #79).</li>
 <li>Added text about signing messages in the "Message verification" section. (Issue #33)</li>
 <li>Added reference to RFC9154 in the "Object level authorisation" section. (Issue #89)</li>
-<li>Added Section <xref target="collection-representation" format="title"></xref> for API-level collection retrieval and expanded container element description in <xref target="data-elements" format="title"></xref> Section. (Issue #85)</li>
-<li>Editorial: updated document references</li>
-<li>Added data privacy to <xref target="service-discovery" format="title"></xref> and new "Data privacy" section. Refactored the whole section <xref target="service-discovery"></xref> (Issue #100).</li>
-<li>Fixed inconsistent usage of HTTP status codes (Issue #108).</li>
-<li>Added "Canonical Addressing" section (Issue #81)</li>
-<li>Added HTTP Headers to the "extension-mechanisms" section (Issue #93).</li>
+</ul>
+</li>
+<li><t anchor="_e2111898-9159-9511-95c7-7152c2859967">HTTP Layer</t>
+<ul anchor="_2aba346f-8ce9-0df9-89ab-88529a7b2130"><li>Added "Canonical Addressing" section (Issue #81)</li>
 <li>Added "Optionality" section to explicitly allow empty HTTP message body in a response (Issue #97).</li>
+<li>Fixed inconsistent usage of HTTP status codes (Issue #108).</li>
+</ul>
+</li>
+<li><t anchor="_57e57b04-631b-4a9e-1626-779f7e6a5b59">Resource Definition &#x26; Data Model</t>
+<ul anchor="_2e19bcb1-538b-b823-cbd8-30cd2c52767d"><li>Added a "Relationships" section to describe resource type relationships. (Issue #83)</li>
+<li>Added Section <xref target="required-optional-data-elements" format="title"></xref> to <xref target="data-elements" format="title"></xref> to explicitly address protocol-level vs. server-policy-level data element requirements (Requirement R4.3).</li>
 <li>Added <xref target="server-managed-resources" format="title"></xref> Section to <xref target="http-layer-details" format="title"></xref> and <xref target="server-managed-resource-types" format="title"></xref> Section to Resource Definition Layer to define read-only server-managed resources (Issue #84).</li>
-<li>Create "Credential management" section for updating credentials using an extension.</li>
-<li>Changed default validation from lenient to strict. (Issue #82)</li>
-<li>Added <xref target="extension-security" format="title"></xref> and <xref target="extension-review" format="title"></xref> Sections to <xref target="extension-mechanisms"></xref> (Issue #91).</li>
-<li>Added Advertising of maintenance notices to "Service Discovery" section. (Issue #88)</li>
-<li>Added "Scalability" section. (Issue #92)</li>
 <li>Explicitly state that all parties involved in a process are allowed to retrieve the process status. (Issue #98)</li>
-<li>Added IDN to "Terminology" and "Service discovery mechanisms" sections</li>
-<li>Added "additional measures to verify the client" to <xref target="http-layer-details-security"></xref> (Issue #76).</li>
-<li>Added TLS mandatory to <xref target="transport-security"></xref> (Issue #78).</li>
-<li>Added Section <xref target="credential-lifecycle"></xref> for credential and token revocation/replacement mechanisms (Issue #79).</li>
 <li>Added Section <xref target="service-messages"></xref> to describe poll message equivalent (Issue #87).</li>
-<li>Extended <xref target="collection-representation" format="title"></xref> to clarify that bulk operations, listing, and filtering are optional and must not be mandated where they negatively impact scalability or performance (Issue #41).</li>
+</ul>
+</li>
+<li><t anchor="_ca13513c-97c5-1c39-9576-e5a1b639286b">Protocol Behaviour</t>
+<ul anchor="_d2a31947-fc8d-ce6a-5a4f-3686f8814872"><li>Changed default validation from lenient to strict. (Issue #82)</li>
+<li>Added "Scalability" section. (Issue #92)</li>
+</ul>
+</li>
+<li><t anchor="_5d419501-b7fb-1edd-ebc6-37a14d31b478">Editorial &#x26; Terminology</t>
+<ul anchor="_6fca89c4-1305-d308-0a79-82f6b40b62e5"><li>Added IDN to "Terminology" and "Service discovery mechanisms" sections</li>
 <li>Added boilerplate IANA Considerations section</li>
+<li>Editorial: updated document references</li>
+</ul>
+</li>
 </ul>
 </section>
 

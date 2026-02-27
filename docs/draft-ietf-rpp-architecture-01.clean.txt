@@ -1599,87 +1599,103 @@ Table of Contents
 
 7.1.  -00 to -01
 
-   *  Refactoring of Extension mechanisms Section and addition of
-      extensibility with transient request parameters and responses
-      (Issues #94 and #95)
+   *  Extension Mechanisms
 
-   *  Added text about compatibility profiles to "Profiles" section.
-      (Issue #29)
+      -  Refactoring of Extension mechanisms Section and addition of
+         extensibility with transient request parameters and responses
+         (Issues #94 and #95)
 
-   *  Added a "Relationships" section to describe resource type
-      relationships.  (Issue #83)
+      -  Added HTTP Headers to the "extension-mechanisms" section (Issue
+         #93).
 
-   *  Added Section Required and Optional Data Elements to Data Elements
-      to explicitly address protocol-level vs. server-policy-level data
-      element requirements (Requirement R4.3).
+      -  Added Extension Security and Extension Review Sections to
+         Section 5.4 (Issue #91).
 
-   *  Added text about signing messages in the "Message verification"
-      section.  (Issue #33)
+   *  Service Discovery & Profiles
 
-   *  Added reference to RFC9154 in the "Object level authorisation"
-      section.  (Issue #89)
+      -  Added data privacy to Service discovery mechanisms and new
+         "Data privacy" section.  Refactored the whole section
+         Section 5.1.22 (Issue #100).
 
-   *  Added Section Collection Representation for API-level collection
-      retrieval and expanded container element description in Data
-      Elements Section.  (Issue #85)
+      -  Added Advertising of maintenance notices to "Service Discovery"
+         section.  (Issue #88)
 
-   *  Editorial: updated document references
+      -  Added text about compatibility profiles to "Profiles" section.
+         (Issue #29)
 
-   *  Added data privacy to Service discovery mechanisms and new "Data
-      privacy" section.  Refactored the whole section Section 5.1.22
-      (Issue #100).
+   *  Collections, Bulk Operations & Filtering
 
-   *  Fixed inconsistent usage of HTTP status codes (Issue #108).
+      -  Added Section Collection Representation for API-level
+         collection retrieval and expanded container element description
+         in Data Elements Section.  (Issue #85)
 
-   *  Added "Canonical Addressing" section (Issue #81)
+      -  Extended Collection Representation to clarify that bulk
+         operations, listing, and filtering are optional and must not be
+         mandated where they negatively impact scalability or
+         performance (Issue #41).
 
-   *  Added HTTP Headers to the "extension-mechanisms" section (Issue
-      #93).
+   *  Security & Authentication*
 
-   *  Added "Optionality" section to explicitly allow empty HTTP message
-      body in a response (Issue #97).
+      -  Added "additional measures to verify the client" to
+         Section 5.1.3.4 (Issue #76).
 
-   *  Added Server-Managed Resources Section to HTTP Transport Layer
-      Details and Server-Managed Resource Types Section to Resource
-      Definition Layer to define read-only server-managed resources
-      (Issue #84).
+      -  Added TLS mandatory to Section 5.1.1 (Issue #78).
 
-   *  Create "Credential management" section for updating credentials
-      using an extension.
+      -  Create "Credential management" section for updating credentials
+         using an extension.
 
-   *  Changed default validation from lenient to strict.  (Issue #82)
+      -  Added Section Section 5.1.3.5 for credential and token
+         revocation/replacement mechanisms (Issue #79).
 
-   *  Added Extension Security and Extension Review Sections to
-      Section 5.4 (Issue #91).
+      -  Added text about signing messages in the "Message verification"
+         section.  (Issue #33)
 
-   *  Added Advertising of maintenance notices to "Service Discovery"
-      section.  (Issue #88)
+      -  Added reference to RFC9154 in the "Object level authorisation"
+         section.  (Issue #89)
 
-   *  Added "Scalability" section.  (Issue #92)
+   *  HTTP Layer
 
-   *  Explicitly state that all parties involved in a process are
-      allowed to retrieve the process status.  (Issue #98)
+      -  Added "Canonical Addressing" section (Issue #81)
 
-   *  Added IDN to "Terminology" and "Service discovery mechanisms"
-      sections
+      -  Added "Optionality" section to explicitly allow empty HTTP
+         message body in a response (Issue #97).
 
-   *  Added "additional measures to verify the client" to
-      Section 5.1.3.4 (Issue #76).
+      -  Fixed inconsistent usage of HTTP status codes (Issue #108).
 
-   *  Added TLS mandatory to Section 5.1.1 (Issue #78).
+   *  Resource Definition & Data Model
 
-   *  Added Section Section 5.1.3.5 for credential and token revocation/
-      replacement mechanisms (Issue #79).
+      -  Added a "Relationships" section to describe resource type
+         relationships.  (Issue #83)
 
-   *  Added Section Section 5.1.15 to describe poll message equivalent
-      (Issue #87).
+      -  Added Section Required and Optional Data Elements to Data
+         Elements to explicitly address protocol-level vs. server-
+         policy-level data element requirements (Requirement R4.3).
 
-   *  Extended Collection Representation to clarify that bulk
-      operations, listing, and filtering are optional and must not be
-      mandated where they negatively impact scalability or performance
-      (Issue #41).
+      -  Added Server-Managed Resources Section to HTTP Transport Layer
+         Details and Server-Managed Resource Types Section to Resource
+         Definition Layer to define read-only server-managed resources
+         (Issue #84).
 
-   *  Added boilerplate IANA Considerations section
+      -  Explicitly state that all parties involved in a process are
+         allowed to retrieve the process status.  (Issue #98)
+
+      -  Added Section Section 5.1.15 to describe poll message
+         equivalent (Issue #87).
+
+   *  Protocol Behaviour
+
+      -  Changed default validation from lenient to strict.  (Issue #82)
+
+      -  Added "Scalability" section.  (Issue #92)
+
+   *  Editorial & Terminology
+
+      -  Added IDN to "Terminology" and "Service discovery mechanisms"
+         sections
+
+      -  Added boilerplate IANA Considerations section
+
+      -  Editorial: updated document references
 
 7.2.  -03 to draft-ietf-rpp-architecture-00
 
