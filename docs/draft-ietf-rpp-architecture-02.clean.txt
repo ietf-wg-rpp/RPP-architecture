@@ -125,11 +125,12 @@ Table of Contents
        5.4.7.  Extension Review
    6.  IANA Considerations
    7.  Change History
-     7.1.  -00 to -01
-     7.2.  -03 to draft-ietf-rpp-architecture-00
-     7.3.  -02 to -03
-     7.4.  -01 to -02
-     7.5.  -00 to -01
+     7.1.  -01 to -02
+     7.2.  -00 to -01
+     7.3.  -03 to draft-ietf-rpp-architecture-00
+     7.4.  -02 to -03
+     7.5.  -01 to -02
+     7.6.  -00 to -01
    8.  References
      8.1.  Normative References
      8.2.  Informational References
@@ -1597,7 +1598,9 @@ Table of Contents
 
 7.  Change History
 
-7.1.  -00 to -01
+7.1.  -01 to -02
+
+7.2.  -00 to -01
 
    *  Extension Mechanisms
 
@@ -1634,7 +1637,7 @@ Table of Contents
          mandated where they negatively impact scalability or
          performance (Issue #41).
 
-   *  Security & Authentication*
+   *  Security & Authentication
 
       -  Added "additional measures to verify the client" to
          Section 5.1.3.4 (Issue #76).
@@ -1697,11 +1700,11 @@ Table of Contents
 
       -  Editorial: updated document references
 
-7.2.  -03 to draft-ietf-rpp-architecture-00
+7.3.  -03 to draft-ietf-rpp-architecture-00
 
    *  No changes.  Document adopted by RPP WG.
 
-7.3.  -02 to -03
+7.4.  -02 to -03
 
    *  split into HTTP built-ins and custom RPP in Section 4.2.1.
       Reorganised Section 5.1 to reflect that and added/rewritten some
@@ -1718,7 +1721,7 @@ Table of Contents
    *  Explicitly stated that RPP SHOULD support client_id/password
       authentication for EPP compatibility in Section 5.1.2.
 
-7.4.  -01 to -02
+7.5.  -01 to -02
 
    *  Added responses must contain links to relevant object to
       Section 5.1.4
@@ -1751,7 +1754,7 @@ Table of Contents
    *  Added Section about dereferenced related object representation to
       Section 5.1.21.
 
-7.5.  -00 to -01
+7.6.  -00 to -01
 
    *  Removed requirements and replaced with a reference to RPP WG
 

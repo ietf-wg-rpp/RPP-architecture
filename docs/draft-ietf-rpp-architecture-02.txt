@@ -142,11 +142,12 @@ Internet-Draft            ietf-rpp-architecture            February 2026
        5.4.7.  Extension Review  . . . . . . . . . . . . . . . . . .  34
    6.  IANA Considerations . . . . . . . . . . . . . . . . . . . . .  34
    7.  Change History  . . . . . . . . . . . . . . . . . . . . . . .  34
-     7.1.  -00 to -01  . . . . . . . . . . . . . . . . . . . . . . .  35
-     7.2.  -03 to draft-ietf-rpp-architecture-00 . . . . . . . . . .  37
-     7.3.  -02 to -03  . . . . . . . . . . . . . . . . . . . . . . .  37
-     7.4.  -01 to -02  . . . . . . . . . . . . . . . . . . . . . . .  37
-     7.5.  -00 to -01  . . . . . . . . . . . . . . . . . . . . . . .  38
+     7.1.  -01 to -02  . . . . . . . . . . . . . . . . . . . . . . .  35
+     7.2.  -00 to -01  . . . . . . . . . . . . . . . . . . . . . . .  35
+     7.3.  -03 to draft-ietf-rpp-architecture-00 . . . . . . . . . .  37
+     7.4.  -02 to -03  . . . . . . . . . . . . . . . . . . . . . . .  37
+     7.5.  -01 to -02  . . . . . . . . . . . . . . . . . . . . . . .  37
+     7.6.  -00 to -01  . . . . . . . . . . . . . . . . . . . . . . .  38
    8.  References  . . . . . . . . . . . . . . . . . . . . . . . . .  38
      8.1.  Normative References  . . . . . . . . . . . . . . . . . .  38
      8.2.  Informational References  . . . . . . . . . . . . . . . .  38
@@ -161,7 +162,6 @@ Internet-Draft            ietf-rpp-architecture            February 2026
    equivalents of EPP object mappings for domain names [RFC5731], hosts
    [RFC5732], and contacts [RFC5733].  RPP also considers provisioning
    of other objects as a potential use case, aiming for a uniform API
-   layer for various registry operations.
 
 
 
@@ -169,6 +169,8 @@ Kowalik & Wullink        Expires 31 August 2026                 [Page 3]
 
 Internet-Draft            ietf-rpp-architecture            February 2026
 
+
+   layer for various registry operations.
 
    RPP is designed to leverage the benefits of REST (REpresentational
    State Transfer), including statelessness, ease of integration, and
@@ -216,8 +218,6 @@ Internet-Draft            ietf-rpp-architecture            February 2026
    *  *RPP client:* An entity or application that interacts with the RPP
       server to perform provisioning operations, such as creating,
       updating, or deleting resources.
-
-
 
 
 
@@ -1906,7 +1906,9 @@ Kowalik & Wullink        Expires 31 August 2026                [Page 34]
 Internet-Draft            ietf-rpp-architecture            February 2026
 
 
-7.1.  -00 to -01
+7.1.  -01 to -02
+
+7.2.  -00 to -01
 
    *  Extension Mechanisms
 
@@ -1943,7 +1945,7 @@ Internet-Draft            ietf-rpp-architecture            February 2026
          mandated where they negatively impact scalability or
          performance (Issue #41).
 
-   *  Security & Authentication*
+   *  Security & Authentication
 
       -  Added "additional measures to verify the client" to
          Section 5.1.3.4 (Issue #76).
@@ -1952,8 +1954,6 @@ Internet-Draft            ietf-rpp-architecture            February 2026
 
       -  Create "Credential management" section for updating credentials
          using an extension.
-
-
 
 
 
@@ -2022,11 +2022,11 @@ Internet-Draft            ietf-rpp-architecture            February 2026
 
       -  Editorial: updated document references
 
-7.2.  -03 to draft-ietf-rpp-architecture-00
+7.3.  -03 to draft-ietf-rpp-architecture-00
 
    *  No changes.  Document adopted by RPP WG.
 
-7.3.  -02 to -03
+7.4.  -02 to -03
 
    *  split into HTTP built-ins and custom RPP in Section 4.2.1.
       Reorganised Section 5.1 to reflect that and added/rewritten some
@@ -2043,7 +2043,7 @@ Internet-Draft            ietf-rpp-architecture            February 2026
    *  Explicitly stated that RPP SHOULD support client_id/password
       authentication for EPP compatibility in Section 5.1.2.
 
-7.4.  -01 to -02
+7.5.  -01 to -02
 
    *  Added responses must contain links to relevant object to
       Section 5.1.4
@@ -2083,7 +2083,7 @@ Internet-Draft            ietf-rpp-architecture            February 2026
    *  Added Section about dereferenced related object representation to
       Section 5.1.21.
 
-7.5.  -00 to -01
+7.6.  -00 to -01
 
    *  Removed requirements and replaced with a reference to RPP WG
 

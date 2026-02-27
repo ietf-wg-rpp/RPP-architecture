@@ -701,6 +701,9 @@ All references to potential IANA registrations in this document, such as media t
 
 == Change History
 
+=== -01 to -02
+
+
 === -00 to -01
 
 * Extension Mechanisms
@@ -720,7 +723,7 @@ All references to potential IANA registrations in this document, such as media t
 ** Added Section <<collection-representation, format=title>> for API-level collection retrieval and expanded container element description in <<data-elements, format=title>> Section. (Issue #85)
 ** Extended <<collection-representation, format=title>> to clarify that bulk operations, listing, and filtering are optional and must not be mandated where they negatively impact scalability or performance (Issue #41).
 
-* Security & Authentication*
+* Security & Authentication
 
 ** Added "additional measures to verify the client" to <<http-layer-details-security>> (Issue #76).
 ** Added TLS mandatory to <<transport-security>> (Issue #78).
