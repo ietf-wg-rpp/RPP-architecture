@@ -8,10 +8,10 @@
 <?rfc tocdepth="4"?>
 <?rfc symrefs="yes"?>
 <?rfc sortrefs="yes"?>
-<rfc xmlns:xi="http://www.w3.org/2001/XInclude" docName="draft-ietf-rpp-architecture-01" category="info" ipr="trust200902" submissionType="IETF" xml:lang="en" version="3" >
+<rfc xmlns:xi="http://www.w3.org/2001/XInclude" docName="draft-ietf-rpp-architecture-02" category="info" ipr="trust200902" submissionType="IETF" xml:lang="en" version="3" >
   <front>
     <title abbrev="ietf-rpp-architecture">RPP Architecture</title>
-    <seriesInfo value="draft-ietf-rpp-architecture-01" status="Informational" stream="IETF" name="Internet-Draft" asciiName="Internet-Draft"></seriesInfo>
+    <seriesInfo value="draft-ietf-rpp-architecture-02" status="Informational" stream="IETF" name="Internet-Draft" asciiName="Internet-Draft"></seriesInfo>
     <seriesInfo name="" value="" status="informational"></seriesInfo>
     <author initials="P" surname="Kowalik">
       <organization>DENIC eG</organization>

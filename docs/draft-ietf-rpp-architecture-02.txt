@@ -10,7 +10,7 @@ Expires: 31 August 2026                                        SIDN Labs
 
 
                             RPP Architecture
-                     draft-ietf-rpp-architecture-01
+                     draft-ietf-rpp-architecture-02
 
 Abstract
 
