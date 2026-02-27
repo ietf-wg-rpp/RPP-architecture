@@ -37,7 +37,7 @@
 :published-date: 2025-11-06
 
 Advancements in development, integration, deployment environments and operational paradigms have led to a desire for an alternative for the Extensible Provisioning Protocol (EPP). 
-This document defines the architecture for the RESTful Provisioning Protocol (RPP) an HTTP based provisioning protocol leveraging the REST architectural style and JSON data-interchange format, aiming to standardize a RESTful protocol for provisioning database objects. The architecture includes support for extensibility, allowing for multiple possible use cases. RPP is intended to co-exist with EPP, offering an alternative protocol including data model compatibility with EPP core objects and the benefits associated with the REST architectural style and widely adopted HTTP-based technologies. 
+This document defines the architecture for the RESTful Provisioning Protocol (RPP) -  an HTTP based provisioning protocol leveraging the REST architectural style and JSON data-interchange format, aiming to standardize a RESTful protocol for provisioning database objects. The architecture includes support for extensibility, allowing for multiple possible use cases. RPP is intended to co-exist with EPP, offering an alternative protocol including data model compatibility with EPP core objects and the benefits associated with the REST architectural style and widely adopted HTTP-based technologies. 
 
 [removeInRFC=true,numbered=false]
 [NOTE] 
@@ -80,15 +80,16 @@ This document uses terminology from RFC5730 <<RFC5730>> and broadly adopts the R
 
 * **IDN:** Internationalised Domain Names as defined in <<RFC5890>>
 
+* **TLS:** Transport Layer Security, as defined in <<RFC8446>> or its successors.
+
+* **HTTPS:** HTTP over TLS, as defined in <<RFC9110>> or its successors.
+
 
 == Requirements
-This document is based on the requirements defined by RPP WG in state from 7.3.2025 <<RPPReq>>.
-
-The actual state of the requirements is present on WG Wiki https://wiki.ietf.org/en/group/rpp/requirements.
-
+This document is based on the requirements defined by the RPP Working Group as of 5 December 2025 <<RPPReq>>.
 
 == Architectural Overview
-This chapter provides an overview of the RESTful Provisioning Protocol (RPP) architecture. A key design principle is to leverage existing web standards and principles, particularly HTTP and REST principles. This allows RPP to delegate functionality and features to the well-established infrastructure and semantics of the web, focusing its own definitions on the specific domain of object provisioning. Therefore, we assume:
+This chapter provides an overview of the RPP architecture. A key design principle is to leverage existing web standards, particularly HTTP and REST. This allows RPP to delegate functionality and features to the well-established infrastructure and semantics of the web, focusing its own definitions on the specific domain of object provisioning. Therefore, we assume:
 
 * **HTTP and RESTful principles are foundational:** RPP leverages HTTP for transport and adheres to RESTful principles for resource management.
 * **Domain-specific logic resides in data representations:** The specifics of resource provisioning are encoded within the data structures and semantics of the RPP message bodies.
@@ -156,7 +157,7 @@ This layer defines the transport mechanism for RPP messages, utilising HTTP as t
 The HTTP Transport Layer consists of two sub-layers:
 
 ===== Built-in HTTP Features
-These are features that are fully specified by the HTTP standard itself. RPP leverages these features directly, specifying their use within the protocol without redefining their behaviour.
+These are features that are fully specified by the HTTP standard itself. RPP leverages these features directly, specifying their use within the protocol without a need to define their behaviour.
 
 It encompasses aspects such as:
 
@@ -169,7 +170,7 @@ It encompasses aspects such as:
 * **Content negotiation for media types:** Supporting multiple data representation formats and using content negotiation to select the appropriate format.
 * **Caching:** Leveraging HTTP caching mechanisms to improve performance.
 * **Language negotiation for textual content:** Supporting multiple languages for textual content and using language negotiation to select the appropriate language.
-* **Representation preferences:** The client may define whether a full representation of an object or only a limited representations is preferred as a response
+* **Representation preferences:** The option for a client to indicate a preference for either a full representation of an object or a limited representation.
 * **Validation preferences:** Defining the approach to the input data validation that shall be applied by the server. The server may apply lenient validation where the server makes best effort to process the understood part of the request as opposed to strict processing where the server would reject a request where part of the data is not understood
 
 ===== RPP-Specific Extensions
@@ -218,9 +219,7 @@ The RPP architecture uses the best practices described in <<RFC9205>> for the HT
 [[transport-security]]
 ==== Transport Security
 
-RPP communication relies on HTTPS with TLS to provide protection for data in transit. This addresses threats including eavesdropping, tampering, and man-in-the-middle attacks on provisioning operations, authentication credentials, and sensitive registry data exchanged between clients and servers.
-
-The architecture leverages HTTP's built-in transport security mechanisms and delegates specific security policy details to TLS standards and best practices. This approach allows implementations to adapt to evolving security requirements without requiring changes to the protocol specifications.
+RPP communication relies on HTTPS with TLS to provide protection for data in transit, addressing threats such as eavesdropping, tampering, and man-in-the-middle attacks. Specific security policy details are delegated to TLS standards and best practices, allowing implementations to adapt to evolving security requirements without changes to the protocol specifications.
 
 [[authentication-authorization]]
 ==== Authentication and Authorisation
@@ -303,7 +302,7 @@ These capabilities are optional at the protocol level. RPP does not mandate bulk
 
 ===== Internationalised Domain Names (IDN)
 
-RPP will address the handling of IDNs in resource addressing. Specifications will define whether to use IDN or UTF-8 encoding directly in URLs and whether to employ redirects to canonical URLs or "see-also" linking for alternative representations. For example,  a "see-also" link could point from a UTF-8 encoded URL to an IDN URL and vice versa, allowing clients to use either URL. Another way would be to always redirect to the canonical URL, which would be the IDN URL.
+RPP will address the handling of IDNs in resource addressing. Specifications will define whether to use IDN or UTF-8 encoding directly in URLs and whether to employ redirects to canonical URLs or "see-also" linking for alternative representations. For example, a "see-also" link could point from a UTF-8 encoded URL to an IDN URL and vice versa, allowing clients to use either URL. Another way would be to always redirect to the canonical URL, which would be the IDN URL.
 
 =====  Canonical Addressing
 
@@ -391,7 +390,7 @@ More specific RPP codes are elaborated in <<http-layer-detail-rpp-status-codes>>
 
 RPP supports content negotiation to allow clients to specify preferred media types for request and response payloads using the HTTP 'Accept' and 'Content-Type' headers <<RFC7231>>.
 
-*  'application/rpp+json' as the primary media type.
+*  `"application/rpp+json"` as the primary media type.
 *  potential media type parameters for versioning, profiles, and other protocol elements.
 *  Potential support for other media types defined in the <<data-representation-layer>>
 
@@ -409,7 +408,7 @@ header <<RFC7231>>.
 textual content in responses to provide human-readable localised responses.
 * The default language and mechanisms for indicating supported
 languages will be defined, preferably using HTTP methods, like OPTIONS or HEAD requests.
-* application/rpp+json media type may support multi-language representations, especially for writing operations involving user provided content. Other media types may have different mechanisms for language representation.
+* `"application/rpp+json"` media type may support multi-language representations, especially for writing operations involving user provided content. Other media types may have different mechanisms for language representation.
 
 ==== Client Signalling for Response Verbosity
 
@@ -504,10 +503,8 @@ Signalling of the profiles will be preferably realised using parameters of the m
 
 RPP may define special resources for specific purposes:
 
-*  Service Discovery endpoints to advertise protocol capabilities
-and supported features (see <<service-discovery>>).
-*  Metadata endpoints to provide schema information or other
-protocol-level metadata, potentially including OpenAPI definitions for documentation and code generation.
+*  Service Discovery endpoints to advertise protocol capabilities and supported features (see <<service-discovery>>).
+*  Metadata endpoints to provide schema information or other protocol-level metadata, potentially including OpenAPI definitions for documentation and code generation.
 
 [[service-discovery]]
 ==== Service discovery mechanisms
@@ -551,11 +548,9 @@ RPP shall enable by design existing web security and mitigation mechanisms to de
 This layer focuses on the data representation of RPP messages. It defines the media type used to carry RPP data and supports various data representation formats.
 
 ==== Data structure
-RPP will define the overall structure of the message payload carried
-by the chosen media type. By default one data structure will be defined, however RPP should be able to support multiple data structures, especially for compatibility with EPP and other standards.
+RPP will define the overall structure of the message payload carried by the chosen media type. By default one data structure will be defined, however RPP should be able to support multiple data structures, especially for compatibility with EPP and other standards.
 
-*  **'RPP' Structure:**  Defining a new, dedicated data structure
-specifically for RPP messages. This would be the default in core specifications.
+*  **'RPP' Structure:**  Defining a new, dedicated data structure specifically for RPP messages. This would be the default in core specifications.
 
 Other future possibilities:
 
@@ -582,7 +577,7 @@ Data structures and formats will be described using a schema language, such as J
 The schemas must support both strict and lenient processing of requests and responses and support protocol extensibility.
 
 ==== Media Type definition
-Together data structure and data format would define the whole media type. So application/rpp+json would be the primary media type with "rpp" payloads in plain json format. application/epp+xml would be epp payload as per <<RFC5730>>. 
+Together data structure and data format would define the whole media type. So `"application/rpp+json"` would be the primary media type with "rpp" payloads in plain json format. `"application/epp+xml"` would be epp payload as per <<RFC5730>>. 
 
 ==== Optionality
 The result of a RPP operation may result in an empty HTTP message body when mapped to a representation, for example a check for existence is allowed return only HTTP and RPP headers to indicate the result of the executed operation.
@@ -619,7 +614,7 @@ This enables robust modeling, navigation, and management of complex, interconnec
 A relationship must also be able to define its own properties or attributes, such as type of relationship or other kind of metadata assigned to the relation link itself rather than an object on any side of relation.
 
 ==== Mapping
-This layer defines the mapping of Data Elements onto the Data Representation Layer. For example in case of application/rpp+json media type, the mapping layer would define how the logical data units are represented in JSON format.
+This layer defines the mapping of Data Elements onto the Data Representation Layer. For example in case of `"application/rpp+json"` media type, the mapping layer would define how the logical data units are represented in JSON format.
 
 This additional level of indirection would allow usage of data formats defined outside of rpp specifications - for example usage of Verifiable Credentials or Verifiable Presentations as first class resource types for contacts in RPP, and mapping appropriate data elements.
 
@@ -649,7 +644,7 @@ A special class of server managed resources would represent provisioning objects
 
 RPP request and response representations may contain personal data or other sensitive information subject to privacy regulations. The architecture incorporates mechanisms that enable implementations to adhere to data privacy principles such as data minimisation and purpose limitation.
 
-Data minimisation is supported through the protocol's design principle that only strictly necessary data elements are required at the protocol level (see <<data-elements>>). Servers may further constrain which elements are required through profile definitions. The `Prefer` header mechanism (see <<prefer-header>>) allows clients to request minimal representations, and <<fine-grained-authorisation, format=title>> (see <<fine-grained-authorisation>>) and <<object-level-authorisation, format=title>> (see <<object-level-authorisation>>)enable servers to return only the data a client is authorised to access. 
+Data minimisation is supported through the protocol's design principle that only strictly necessary data elements are required at the protocol level (see <<data-elements>>). Servers may further constrain which elements are required through profile definitions. The `Prefer` header mechanism (see <<prefer-header>>) allows clients to request minimal representations, and <<fine-grained-authorisation, format=title>> (see <<fine-grained-authorisation>>) and <<object-level-authorisation, format=title>> (see <<object-level-authorisation>>) enable servers to return only the data a client is authorised to access. 
 
 Purpose limitation is supported through multiple mechanisms. Data element definitions may include purpose attributes, indicating the specific processing purposes for which each element is intended. Authorisation scopes (see <<authentication-authorization>>) can be defined to restrict access to data elements based on their declared purpose, ensuring that clients only receive data relevant to their authorised use. The service discovery document (see <<service-discovery>>) advertises data collection purposes, allowing clients to understand how their data will be used and retained before submission.
 
@@ -771,6 +766,8 @@ Before any extension is accepted by IANA, a review by an RPP expert must be perf
 [bibliography,normative=true]
 === Normative References
 * [[[RFC9457, RFC 9457]]] Nottingham, M., Wilde, E., and S. Dalal, "Problem Details for HTTP APIs", IETF, DOI 10.17487/RFC9457, RFC 9457, July 2023, <https://www.rfc-editor.org/info/rfc9457>.
+* [[[RFC9110, RFC 9110]]] Fielding, R., Nottingham, M., and J. Reschke, "HTTP Semantics", IETF, DOI 10.17487/RFC9110, BCP 97, RFC 9110, June 2022, <https://www.rfc-editor.org/info/rfc9110>.
+* [[[RFC8446, RFC 8446]]] Rescorla, E., "The Transport Layer Security (TLS) Protocol Version 1.3", IETF, DOI 10.17487/RFC8446, RFC 8446, August 2018, <https://www.rfc-editor.org/info/rfc8446>.
 
 [bibliography,normative=false]
 === Informational References
