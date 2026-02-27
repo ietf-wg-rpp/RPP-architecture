@@ -693,6 +693,12 @@ Extensions operate within the same security architecture as the core protocol. S
 ==== Extension Review
 Before any extension is accepted by IANA, a review by an RPP expert must be performed. This review includes verification that the extension does not violate any of the RPP security considerations and that it correctly integrates with the protocol's security framework. The complete review criteria will be included in the "IANA Considerations" section of any document describing RPP extension mechanisms, according to the BCP described in <<RFC8126>>.
 
+== IANA Considerations
+
+This document defines the architecture for the RPP and requires no actions by IANA.
+
+All references to potential IANA registrations in this document, such as media types, extension registries, or other protocol artefacts, are strictly informational. They describe design considerations and anticipated future needs of the RPP protocol. Any actual IANA actions resulting from the RPP protocol will be requested in standards-track protocol specification documents that define the concrete protocol elements.
+
 == Change History
 
 === -00 to -01
@@ -723,6 +729,7 @@ Before any extension is accepted by IANA, a review by an RPP expert must be perf
 * Added Section <<credential-lifecycle>> for credential and token revocation/replacement mechanisms (Issue #79).
 * Added Section <<service-messages>> to describe poll message equivalent (Issue #87).
 * Extended <<collection-representation, format=title>> to clarify that bulk operations, listing, and filtering are optional and must not be mandated where they negatively impact scalability or performance (Issue #41).
+* Added boilerplate IANA Considerations section
 
 === -03 to draft-ietf-rpp-architecture-00
 
