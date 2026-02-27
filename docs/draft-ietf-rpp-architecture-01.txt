@@ -19,7 +19,7 @@ Abstract
    Extensible Provisioning Protocol (EPP).  This document defines the
    architecture for the RESTful Provisioning Protocol (RPP) - an HTTP
    based provisioning protocol leveraging the REST architectural style
-   and JSON data-interchange format, aiming to standardize a RESTful
+   and JSON data-interchange format, aiming to standardise a RESTful
    protocol for provisioning database objects.  The architecture
    includes support for extensibility, allowing for multiple possible
    use cases.  RPP is intended to co-exist with EPP, offering an
@@ -679,8 +679,8 @@ Internet-Draft            ietf-rpp-architecture            November 2025
    For OAuth-based deployments, standard token revocation mechanisms as
    defined in [RFC7009] should be utilised.  For HTTP Basic
    Authentication revocation must be fulfilled by off-band operational
-   practice, or using using extension as described in Section 5.1.3 to
-   rotate the credential.  Protocol specifications must emphasize, that
+   practice, or using extension as described in Section 5.1.3 to rotate
+   the credential.  Protocol specifications must emphasise, that
    implementations should ensure that revocation takes effect promptly
    and that revoked credentials are consistently rejected across all RPP
    endpoints.
@@ -705,7 +705,7 @@ Internet-Draft            ietf-rpp-architecture            November 2025
    AuthInfo used for object transfer operations.  All parties involved
    in a running or completed process, such as the Sponsoring Client and
    the Gaining Client for a transfer operation, must be allowed to query
-   the status of the proces using the same process resource.
+   the status of the process using the same process resource.
 
 5.1.4.  Resource Addressing
 
@@ -792,7 +792,7 @@ Internet-Draft            ietf-rpp-architecture            November 2025
    identifiers in a URL.  These identifiers may represent different
    alternative syntactic forms, these include, but are not limited to:
 
-   *  Internationalized identifiers (IDNs) and their ASCII/Punycode
+   *  Internationalised identifiers (IDNs) and their ASCII/Punycode
       equivalents
 
    *  Unicode identifiers and their percent-encoded representations
@@ -810,7 +810,7 @@ Internet-Draft            ietf-rpp-architecture            November 2025
 
    Any other valid address for the same resource is to be treated
    strictly as an alias.  When a resource is addressed using an alias,
-   RPP must ensure canonicalization through at least one of the
+   RPP must ensure canonicalisation through at least one of the
    following mechanisms:
 
    *  Redirecting the client to the canonical URL
@@ -819,9 +819,9 @@ Internet-Draft            ietf-rpp-architecture            November 2025
       URL
 
    *  Internally resolving the alias to the canonical identifier before
-      any authorization, or state mutation occurs
+      any authorisation, or state mutation occurs
 
-   Canonicalization shall be performed prior to any operation that
+   Canonicalisation shall be performed prior to any operation that
    depends on resource identity.
 
 5.1.5.  Mapping of basic operations to HTTP uniform interface (verbs)
@@ -850,7 +850,7 @@ Internet-Draft            ietf-rpp-architecture            November 2025
 
       -  a better equivalence of EPP check would be a POST with Expect
          header, however this header being a reserved header in browsers
-         it may not be availble to all client implementations
+         it may not be available to all client implementations
 
       The conclusion is that RPP should not overload HTTP HEAD with own
       semantics, and support HEAD as it is defined in HTTP.
@@ -987,7 +987,7 @@ Internet-Draft            ietf-rpp-architecture            November 2025
 
    RPP shall use as specific HTTP response status codes as possible,
    using generic codes like 400 Bad Request or 500 Internal Server Error
-   only if no corresponsing specific code exists (e.g. 404 for not
+   only if no corresponding specific code exists (e.g. 404 for not
    existing resource or 401 for unauthenticated request).
 
    More specific RPP codes are elaborated in Section 5.1.16.
@@ -1210,7 +1210,7 @@ Internet-Draft            ietf-rpp-architecture            November 2025
 5.1.16.  RPP specific status codes and relation to HTTP response status
          codes
 
-   RPP uses a dual-layer approach for signaling operation outcomes,
+   RPP uses a dual-layer approach for signalling operation outcomes,
    leveraging both standard HTTP response status codes and RPP-specific
    status codes.  This allows for compatibility with generic HTTP
    components while providing detailed, application-level feedback for
@@ -1290,7 +1290,7 @@ Kowalik & Wullink          Expires 10 May 2026                 [Page 23]
 Internet-Draft            ietf-rpp-architecture            November 2025
 
 
-   Server shall always generate own unique trasaction identifier,
+   Server shall always generate own unique transaction identifier,
    regardless of nature of the transaction (reading or changing).
 
    The transmission of transaction identifiers should be defined outside
@@ -1647,7 +1647,7 @@ Internet-Draft            ietf-rpp-architecture            November 2025
    Resource types can define explicit relationships (links) to other
    resource types, supporting flexible cardinality-including one-to-one,
    one-to-many, and many-to-many associations.  This enables robust
-   modeling, navigation, and management of complex, interconnected
+   modelling, navigation, and management of complex, interconnected
    resources within RPP.  A relationship must also be able to define its
    own properties or attributes, such as type of relationship or other
    kind of metadata assigned to the relation link itself rather than an
@@ -1889,7 +1889,7 @@ Internet-Draft            ietf-rpp-architecture            November 2025
 
    *  Refactoring of Extension mechanisms Section and addition of
       extensibility with transient request parameters and responses
-      (Issus #94 and #95)
+      (Issues #94 and #95)
 
    *  Added text about compatibility profiles to "Profiles" section.
       (Issue #29)

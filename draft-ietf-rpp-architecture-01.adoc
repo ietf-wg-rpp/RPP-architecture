@@ -37,7 +37,7 @@
 :published-date: 2025-11-06
 
 Advancements in development, integration, deployment environments and operational paradigms have led to a desire for an alternative for the Extensible Provisioning Protocol (EPP). 
-This document defines the architecture for the RESTful Provisioning Protocol (RPP) -  an HTTP based provisioning protocol leveraging the REST architectural style and JSON data-interchange format, aiming to standardize a RESTful protocol for provisioning database objects. The architecture includes support for extensibility, allowing for multiple possible use cases. RPP is intended to co-exist with EPP, offering an alternative protocol including data model compatibility with EPP core objects and the benefits associated with the REST architectural style and widely adopted HTTP-based technologies. 
+This document defines the architecture for the RESTful Provisioning Protocol (RPP) -  an HTTP based provisioning protocol leveraging the REST architectural style and JSON data-interchange format, aiming to standardise a RESTful protocol for provisioning database objects. The architecture includes support for extensibility, allowing for multiple possible use cases. RPP is intended to co-exist with EPP, offering an alternative protocol including data model compatibility with EPP core objects and the benefits associated with the REST architectural style and widely adopted HTTP-based technologies. 
 
 [removeInRFC=true,numbered=false]
 [NOTE] 
@@ -266,8 +266,8 @@ RPP will not explicitly define security related policies related to authenticati
 RPP will support mechanisms for revoking, rotating or deprecating credentials, tokens, or permissions when they are no longer needed or if they become compromised. 
 
 The architecture delegates revocation mechanisms to the specific authentication method in use, following their established practices. For OAuth-based deployments, standard token revocation mechanisms as defined in <<RFC7009>> should be utilised.
-For HTTP Basic Authentication revocation must be fulfilled by off-band operational practice, or using using extension as described in <<credential-management>> to rotate the credential.
-Protocol specifications must emphasize, that implementations should ensure that revocation takes effect promptly and that revoked credentials are consistently rejected across all RPP endpoints.
+For HTTP Basic Authentication revocation must be fulfilled by off-band operational practice, or using extension as described in <<credential-management>> to rotate the credential.
+Protocol specifications must emphasise, that implementations should ensure that revocation takes effect promptly and that revoked credentials are consistently rejected across all RPP endpoints.
 
 Service discovery endpoints may advertise supported revocation mechanisms, enabling clients to discover how to revoke credentials when necessary.
 
@@ -275,7 +275,7 @@ Service discovery endpoints may advertise supported revocation mechanisms, enabl
 ===== Object level authorisation
 RPP will define a mechanism for object-level authorisation, preventing unauthorised access to specific objects or resources. Each object will have an associated sponsor or owner with full control over an object, and the protocol will allow for the specification of which clients are authorised to access or modify non-sponsored/owned objects. This could be achieved through state-of-the-art standards like OAuth authorisation tokens, scopes, and resource-specific permissions but also shared secrets for backward compatibility with EPP password-based authorisation information.
 All RPP specifications shall support the operational practices described in <<RFC9154>>, such as not allowing long-term storage of plaintext EPP AuthInfo used for object transfer operations.   
-All parties involved in a running or completed process, such as the Sponsoring Client and the Gaining Client for a transfer operation, must be allowed to query the status of the proces using the same process resource. 
+All parties involved in a running or completed process, such as the Sponsoring Client and the Gaining Client for a transfer operation, must be allowed to query the status of the process using the same process resource. 
 
 [[resource-addressing]]
 ==== Resource Addressing
@@ -309,7 +309,7 @@ RPP will address the handling of IDNs in resource addressing. Specifications wil
 A single resource can be addressed using multiple alternative identifiers in a URL.
 These identifiers may represent different alternative syntactic forms, these include, but are not limited to:
 
-* Internationalized identifiers (IDNs) and their ASCII/Punycode equivalents
+* Internationalised identifiers (IDNs) and their ASCII/Punycode equivalents
 * Unicode identifiers and their percent-encoded representations
 
 The canonical address is the authoritative identifier for the resource and is the form that RPP uses for:
@@ -320,13 +320,13 @@ The canonical address is the authoritative identifier for the resource and is th
 * Equality checks
 
 Any other valid address for the same resource is to be treated strictly as an alias.
-When a resource is addressed using an alias, RPP must ensure canonicalization through at least one of the following mechanisms:
+When a resource is addressed using an alias, RPP must ensure canonicalisation through at least one of the following mechanisms:
 
 * Redirecting the client to the canonical URL
 * Returning a representation that explicitly declares the canonical URL
-* Internally resolving the alias to the canonical identifier before any authorization, or state mutation occurs
+* Internally resolving the alias to the canonical identifier before any authorisation, or state mutation occurs
 
-Canonicalization shall be performed prior to any operation that depends on resource identity.
+Canonicalisation shall be performed prior to any operation that depends on resource identity.
 
 [[http-layer-detail-mapping-basic-ops]]
 ==== Mapping of basic operations to HTTP uniform interface (verbs)
@@ -336,7 +336,7 @@ uniform interface and RESTful principles:
 
 *  **HEAD:**  Retrieve resource state (e.g., retrieving domain existence information). This may be a candidate for equivalence of EPP check command, however it may come with a few caveats to consider:
     -  EPP check is intended to check whether (future) resource provisioning is possible. This is not semantically the same as resource state. Overloading HEAD with EPP semantics may lead to confusion, especially as some frameworks implicitly implement HEAD out of GET handling.
-    -  a better equivalence of EPP check would be a POST with Expect header, however this header being a reserved header in browsers it may not be availble to all client implementations
+    -  a better equivalence of EPP check would be a POST with Expect header, however this header being a reserved header in browsers it may not be available to all client implementations
 
 +
 The conclusion is that RPP should not overload HTTP HEAD with own semantics, and support HEAD as it is defined in HTTP.
@@ -382,7 +382,7 @@ Further aspects of server-managed resources, including examples and sub-resource
 
 In general RPP shall make use of HTTP response status codes to indicate general response status categories (e.g., 2xx success responses, 4xx for client errors, 5xx for server errors) <<RFC7231>> as opposed to responding always 200 if the request was understood even if the operation itself failed. This allows clients and intermediaries to make first level of determination of the requests outcome based on the status code alone, without needing to parse the response body.
 
-RPP shall use as specific HTTP response status codes as possible, using generic codes like 400 Bad Request or 500 Internal Server Error only if no corresponsing specific code exists (e.g. 404 for not existing resource or 401 for unauthenticated request).
+RPP shall use as specific HTTP response status codes as possible, using generic codes like 400 Bad Request or 500 Internal Server Error only if no corresponding specific code exists (e.g. 404 for not existing resource or 401 for unauthenticated request).
 
 More specific RPP codes are elaborated in <<http-layer-detail-rpp-status-codes>>.
 
@@ -460,7 +460,7 @@ The architecture does not address service message streaming or other push-based 
 [[http-layer-detail-rpp-status-codes]]
 ==== RPP specific status codes and relation to HTTP response status codes
 
-RPP uses a dual-layer approach for signaling operation outcomes, leveraging both standard HTTP response status codes and RPP-specific status codes. This allows for compatibility with generic HTTP components while providing detailed, application-level feedback for RPP clients.
+RPP uses a dual-layer approach for signalling operation outcomes, leveraging both standard HTTP response status codes and RPP-specific status codes. This allows for compatibility with generic HTTP components while providing detailed, application-level feedback for RPP clients.
 
 * The HTTP response status code <<RFC7231>> must be used to convey the overall outcome of an operation. Any HTTP-aware component, such as a proxy or monitoring tool, can determine if a request was successful (2xx), resulted in a client error (4xx), or a server error (5xx) by inspecting the HTTP response status code alone.
 * RPP-specific status codes, transmitted in a dedicated HTTP header, must be used to provide granular, application-level information about the operation's result.
@@ -476,7 +476,7 @@ RPP shall support identification of requests and responses on both client side a
 
 Client provided identifier shall be returned in the corresponding synchronous response and shall be included in the asynchronous responses. This identifier shall be also used as idempotency identifier to allow clients to retry requests without risk of duplicate processing. The client provided identifier shall be unique for the client and the lifetime of the identifier shall be defined by the server, typically for a limited time after the request was processed.
 
-Server shall always generate own unique trasaction identifier, regardless of nature of the transaction (reading or changing).
+Server shall always generate own unique transaction identifier, regardless of nature of the transaction (reading or changing).
 
 The transmission of transaction identifiers should be defined outside of the Data Representation Layer (e.g. as HTTP Headers), to assure clear separation of resource representation from performed actions. If possible existing mechanisms of HTTP shall be employed.
 
@@ -610,7 +610,7 @@ Servers may designate any protocol-optional data element as mandatory according 
 
 ==== Relationships
 Resource types can define explicit relationships (links) to other resource types, supporting flexible cardinality—including one-to-one, one-to-many, and many-to-many associations.
-This enables robust modeling, navigation, and management of complex, interconnected resources within RPP.
+This enables robust modelling, navigation, and management of complex, interconnected resources within RPP.
 A relationship must also be able to define its own properties or attributes, such as type of relationship or other kind of metadata assigned to the relation link itself rather than an object on any side of relation.
 
 ==== Mapping
@@ -697,7 +697,7 @@ Before any extension is accepted by IANA, a review by an RPP expert must be perf
 
 === -00 to -01
 
-* Refactoring of <<extension-mechanisms, format=title>> Section and addition of extensibility with transient request parameters and responses (Issus #94 and #95)
+* Refactoring of <<extension-mechanisms, format=title>> Section and addition of extensibility with transient request parameters and responses (Issues #94 and #95)
 * Added text about compatibility profiles to "Profiles" section. (Issue #29)
 * Added a "Relationships" section to describe resource type relationships. (Issue #83)
 * Added Section <<required-optional-data-elements, format=title>> to <<data-elements, format=title>> to explicitly address protocol-level vs. server-policy-level data element requirements (Requirement R4.3).
